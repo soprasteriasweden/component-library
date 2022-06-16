@@ -1,0 +1,151 @@
+.form-download-button {
+
+
+
+
+
+
+
+
+
+    p.link:hover {
+
+
+
+
+        cursor: pointer;
+
+
+
+
+        text-decoration: underline;
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    p.link:focus {
+
+
+
+
+        outline: auto;
+
+
+
+
+    }
+
+
+
+
+    // TODO: Ta bort sen:
+
+
+
+
+    .form-control-plaintext {
+
+
+
+
+        outline: none;
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    .col-form-label {
+
+
+
+
+        padding-right: 0px;
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    .readonly-less-margin {
+
+
+
+
+        .form-group {
+
+
+
+
+            margin-bottom: 0;
+
+
+
+
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    .cursor-not-allowed {
+
+
+
+
+        cursor: not-allowed;
+
+
+
+
+        color: red;
+
+
+
+
+    }
+
+
+
+
+    
+
+
+
+
+}

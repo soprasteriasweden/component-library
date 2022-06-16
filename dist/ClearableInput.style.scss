@@ -1,0 +1,43 @@
+
+
+.clearable-input {
+
+    position: relative;
+
+
+
+    input, select {
+
+        padding-right: 12%;
+
+    }
+
+
+
+    .clear-btn {
+
+        position: absolute;
+
+        border: none;
+
+        background-color: transparent;
+
+        outline: none;
+
+        top: 0;
+
+        bottom: 0;
+
+        right: 8%;
+
+        margin: auto;
+
+        &:before{
+
+            content: "\2716"
+
+        }
+
+    }
+
+}

@@ -1,1 +1,2 @@
-# component-library
+# Sopra Steria komponentbibliotek
+

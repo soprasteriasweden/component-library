@@ -1,1 +1,35 @@
-@import '~@bit/alert-messagestyle/dist/AlertMessage.style.scss';
+.alert-top-of-page {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    max-width: 900px;
+    left: 0;
+    margin: auto;
+    z-index: 1000000 !important;
+    opacity: 1;
+    animation: 1s ease-out 0s 1 alert-ease-in;
+
+    .remove-alert {
+        position: absolute;
+        border: none;
+        background-color: transparent;
+        outline: none;
+        top: 0;
+        bottom: 0;
+        right: 5px;
+
+        &:before {
+            content: "\2716"
+        }
+    }
+}
+
+@keyframes alert-ease-in {
+    0% {
+        transform: opacity 0;
+    }
+
+    100% {
+        transform: opacity 1;
+    }
+}

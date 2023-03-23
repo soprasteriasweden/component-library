@@ -1,1 +1,25 @@
-@import '~@bit/soprasteria.component-library.table-style/dist/TableStyle.scss';
+.clickable-row {
+    cursor: pointer;
+
+    .table-data-link {
+        padding: 0;
+        
+        a {
+            display: block;
+            color: #212529;
+            text-decoration: none;
+            padding: 0.5em;
+        }
+    }
+}
+
+.table td,
+.table th {
+    padding: 0.5rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+.sortable-column {
+    cursor: pointer;
+}

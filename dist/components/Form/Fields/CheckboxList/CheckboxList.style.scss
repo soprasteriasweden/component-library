@@ -1,1 +1,9 @@
-@import '~@bit/checkbox-liststyle/dist/CheckboxList.style.scss';
+.checkbox-list {
+    .form-group,
+    label {
+        margin-bottom: 0;
+    }
+    label {
+        font-weight: lighter !important;
+    }
+}

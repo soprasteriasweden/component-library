@@ -1,76 +1,37 @@
-import { Form } from '@bit/soprasteria.component-library.form';
-
-export { Form };
-
-import { Checkbox } from '@bit/soprasteria.component-library.form';
-
-export { Checkbox };
-
-import { CheckboxList } from '@bit/soprasteria.component-library.form';
-
-export { CheckboxList };
-
-import { CustomDatePicker } from '@bit/soprasteria.component-library.form';
-
-export { CustomDatePicker };
-
-import { DatePickerRange } from '@bit/soprasteria.component-library.form';
-
-export { DatePickerRange };
-
-import { EmailInput } from '@bit/soprasteria.component-library.form';
-
-export { EmailInput };
-
-import { FileUpload } from '@bit/soprasteria.component-library.form';
-
-export { FileUpload };
-
-import { NumberInput } from '@bit/soprasteria.component-library.form';
-
-export { NumberInput };
-
-import { PersonalIdentityInput } from '@bit/soprasteria.component-library.form';
-
-export { PersonalIdentityInput };
-
-import { Select } from '@bit/soprasteria.component-library.form';
-
-export { Select };
-
-import { Textarea } from '@bit/soprasteria.component-library.form';
-
-export { Textarea };
-
-import { TextInput } from '@bit/soprasteria.component-library.form';
-
-export { TextInput };
-
-import { LinkArray } from '@bit/soprasteria.component-library.form';
-
-export { LinkArray };
-
-import { HiddenInput } from '@bit/soprasteria.component-library.form';
-
-export { HiddenInput };
-
-import { CustomSubmitButton } from '@bit/soprasteria.component-library.form';
-
-export { CustomSubmitButton };
-
-import { CustomSubmitButtonType } from '@bit/soprasteria.component-library.form';
-
-export { CustomSubmitButtonType };
-
-import { RadioButton } from '@bit/soprasteria.component-library.form';
-
-export { RadioButton };
-
-import { FormLink } from '@bit/soprasteria.component-library.form';
-
-export { FormLink };
-
-import { ClearFormButton } from '@bit/soprasteria.component-library.form';
-
-export { ClearFormButton };
-
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+import * as React from "react";
+import { FormContext, useForm } from "react-hook-form";
+import { Checkbox } from "./Fields/Checkbox/Checkbox";
+import { CheckboxList } from "./Fields/CheckboxList/CheckboxList";
+import { CustomDatePicker } from "./Fields/DatePicker/CustomDatePicker";
+import { DatePickerRange } from "./Fields/DatePicker/DatePickerRange";
+import { EmailInput } from "./Fields/EmailInput/EmailInput";
+import { FileUpload } from "./Fields/FileUpload/FileUpload";
+import { NumberInput } from "./Fields/NumberInput/NumberInput";
+import { PersonalIdentityInput } from "./Fields/PersonalIdentityInput/PersonalIdentityInput";
+import { Select } from "./Fields/Select/Select";
+import { Textarea } from "./Fields/Textarea/Textarea";
+import { TextInput } from "./Fields/TextInput/TextInput";
+import { LinkArray } from "./Fields/LinkArray/LinkArray";
+import { HiddenInput } from "./Fields/HiddenInput/HiddenInput";
+import { RadioButton } from "./Fields/RadioButton/RadioButton";
+import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton";
+import { ClearFormButton } from "./ClearFormButton";
+import { FormLink } from "./Fields/FormLink/FormLink";
+var Form = function (_a) {
+    var onSubmit = _a.onSubmit, children = _a.children;
+    var methods = useForm({});
+    return (React.createElement(FormContext, __assign({}, methods),
+        React.createElement("form", { onSubmit: onSubmit ? methods.handleSubmit(onSubmit) : undefined }, children)));
+};
+export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink };

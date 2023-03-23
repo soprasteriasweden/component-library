@@ -1,1 +1,13 @@
-@import '~@bit/soprasteria.component-library.date-picker-rangestyle/dist/DatePickerRange.style.scss';
+.date-connector {
+    margin-top: 4px;
+}
+
+.date-picker-range__wrapper {
+    .col:first-child {
+        padding-right: 5px;
+    }
+
+    .col:last-child {
+        padding-left: 5px;
+    }
+}

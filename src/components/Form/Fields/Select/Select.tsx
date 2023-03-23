@@ -46,7 +46,7 @@ export const Select: React.FunctionComponent<ISelect> = ({ name, label, required
     const clearValue = () => {
         setCurrentSelectedValue(undefined);
         if (onChange !== undefined) {
-            onChange(undefined);
+            onChange(undefined!);
         }
     }
 

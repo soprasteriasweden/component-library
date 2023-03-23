@@ -1,4 +1,5 @@
-import { SortOrder } from '@bit/soprasteria.component-library.i-pagination';
-
-export { SortOrder };
-
+export var SortOrder;
+(function (SortOrder) {
+    SortOrder[SortOrder["ascending"] = 0] = "ascending";
+    SortOrder[SortOrder["descending"] = 1] = "descending";
+})(SortOrder || (SortOrder = {}));

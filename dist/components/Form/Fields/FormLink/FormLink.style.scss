@@ -1,1 +1,10 @@
-@import '~@bit/form-linkstyle/dist/FormLink.style.scss';
+.form-link {
+    a:hover {
+        color: black;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    a:focus{
+        outline: auto;
+    }
+}

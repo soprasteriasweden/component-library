@@ -1,4 +1,6 @@
-import { Table } from '@bit/soprasteria.component-library.table';
-
-export { Table };
-
+import * as React from "react";
+import "./TableStyle.scss";
+export var Table = function (_a) {
+    var children = _a.children, hoverableRows = _a.hoverableRows;
+    return (React.createElement("table", { className: (hoverableRows ? "table-hover" : "") + " table table-striped" }, children));
+};

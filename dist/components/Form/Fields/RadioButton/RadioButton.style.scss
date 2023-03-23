@@ -1,1 +1,5 @@
-@import '~@bit/radio-buttonstyle/dist/RadioButton.style.scss';
+.custom-radio-button{
+    input, label{
+        cursor: pointer;
+    }
+}

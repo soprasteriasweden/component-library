@@ -1,1 +1,5 @@
-@import '~@bit/soprasteria.component-library.event-logstyle/dist/EventLog.style.scss';
+.event-log {
+    row {
+        align-items: baseline;
+    }
+}

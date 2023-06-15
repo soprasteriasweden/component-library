@@ -1,7 +1,7 @@
 import * as React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import "./FormDownloadButton.style.scss";
+import "../../assets/styles/FormDownloadButton.style.scss";
 
 
 interface IFormDownloadButton extends IColumnPlacement, IInputPosition {

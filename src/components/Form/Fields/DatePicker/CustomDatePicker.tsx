@@ -1,6 +1,6 @@
 import * as React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import './DatePicker.scss';
+import '../../../../assets/styles/DatePicker.scss';
 import { IDatePicker } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import svSE from 'date-fns/locale/sv';

@@ -3,7 +3,7 @@ import { IFormLink } from "../../../../models/IFormInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from "react-router-dom";
-import "./FormLink.style.scss";
+import "../../../../assets/styles/FormLink.style.scss";
 
 
 export const FormLink: React.FunctionComponent<IFormLink> = ({ label, linkText, name, to, className, inlineLabel, labelCol = 4, inputCol = 8 }) => {

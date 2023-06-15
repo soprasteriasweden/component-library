@@ -8,6 +8,7 @@
       "esnext"
     ],
     "allowJs": false,
+    "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -19,7 +20,7 @@
     "isolatedModules": true,
     "noEmit": false,
     "jsx": "react",
-    "outDir":"dist"
+    "outDir": "dist"
   },
   "exclude": [
     "node_modules",

@@ -3,7 +3,7 @@ import { IEvent } from '../../models/IEvent';
 import { Table } from '../Table/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import './EventLog.style.scss';
+import '../../assets/styles/EventLog.style.scss';
 
 export interface IEventLog {
     id: string;

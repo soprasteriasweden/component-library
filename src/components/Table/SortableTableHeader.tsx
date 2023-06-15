@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp, faSortDown, faSort } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { SortTableContext } from './SortTableContext';
-import "./TableStyle.scss";
+import ".../../assets/styles/TableStyle.scss";
 
 interface ISortableTableHeader {
     headerText: string;

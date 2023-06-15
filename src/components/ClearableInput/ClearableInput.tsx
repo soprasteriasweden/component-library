@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./ClearableInput.style.scss";
+import "../../assets/styles/ClearableInput.style.scss";
 
 interface IClearableInput {
     input: React.ReactChild;

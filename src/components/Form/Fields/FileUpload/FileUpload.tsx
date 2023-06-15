@@ -1,6 +1,6 @@
 import React from 'react'
 import { IFileUpload } from '../../../../models/IFormInput';
-import "./FileUpload.style.scss";
+import "../../../../assets/styles/FileUpload.style.scss";
 import { useDropzone } from 'react-dropzone'
 import { useFormContext } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

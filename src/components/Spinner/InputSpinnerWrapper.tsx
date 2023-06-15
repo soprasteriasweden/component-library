@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./Spinner.scss";
+import ".../../assets/styles/Spinner.scss";
 
 interface IInputSpinnerWrapper {
     isLoading: boolean;

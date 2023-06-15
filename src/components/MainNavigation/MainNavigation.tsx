@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NavLink } from 'react-router-dom';
-import './MainNavigation.style.scss';
+import '.../../assets/styles/MainNavigation.style.scss';
 
 interface IMainNaviagation {
     imagePath: string;

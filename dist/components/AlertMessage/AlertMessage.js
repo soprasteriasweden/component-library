@@ -30,7 +30,7 @@ export var AlertMessage = function (_a) {
         };
     }, [children]);
     return (React.createElement("div", null, showAlert ?
-        React.createElement("div", { className: "alert ".concat(renderOnTopOfPage ? "alert-top-of-page" : "", " alert-").concat(alertType), role: "alert" },
+        React.createElement("div", { className: "alert " + (renderOnTopOfPage ? "alert-top-of-page" : "") + " alert-" + alertType, role: "alert" },
             children,
             renderOnTopOfPage ?
                 React.createElement("button", { type: "button", className: "remove-alert", onClick: function () { return setShowAlert(false); } })

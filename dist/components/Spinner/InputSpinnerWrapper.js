@@ -11,7 +11,7 @@ export var InputSpinnerWrapper = function (_a) {
             myWindow.$('[data-toggle="tooltip"]').tooltip("disable");
         }
     }, [isLoading]);
-    return (React.createElement("div", { className: "spinner-wrapper ".concat(isLoading ? "loading" : ""), "data-toggle": "tooltip", "data-placement": "right", title: isLoading ? "Laddar..." : "" },
+    return (React.createElement("div", { className: "spinner-wrapper " + (isLoading ? "loading" : ""), "data-toggle": "tooltip", "data-placement": "right", title: isLoading ? "Laddar..." : "" },
         isLoading ?
             React.createElement("div", { className: "spinner-container d-flex justify-content-center" },
                 React.createElement("div", { className: "spinner-border spinner-border-sm align-self-center", role: "status" },

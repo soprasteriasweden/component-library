@@ -1,3 +1,3 @@
-import * as React from "react";
+/// <reference types="react" />
 import { IChildren } from "../../models/IChildren";
-export declare const TabContent: ({ children }: IChildren) => React.JSX.Element;
+export declare const TabContent: ({ children }: IChildren) => JSX.Element;

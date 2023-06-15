@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ModalBody } from "./ModalBody";
 import { ModalFooter } from "./ModalFooter";
-import "./Modal.style.scss";
+import "../../assets/styles/Modal.style.scss";
 var ModalSize;
 (function (ModalSize) {
     ModalSize["small"] = "modal-sm";

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import "./TableStyle.scss";
+import "../../assets/styles/TableStyle.scss";
 interface ISortableTableHeader {
     headerText: string;
     propertyToSortBy: string;

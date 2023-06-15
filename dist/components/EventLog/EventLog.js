@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Table } from '../Table/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import './EventLog.style.scss';
+import '../../assets/styles/EventLog.style.scss';
 export var EventLog = function (_a) {
     var id = _a.id, events = _a.events;
     var _b = React.useState(false), expanded = _b[0], setExpanded = _b[1];
@@ -19,7 +19,7 @@ export var EventLog = function (_a) {
         }
         var date = dateTime.toString().slice(0, 10);
         var time = dateTime.toString().slice(11, 16);
-        return date + " " + time;
+        return "".concat(date, " ").concat(time);
     };
     return (React.createElement("section", { id: id, className: "event-log" },
         React.createElement("div", { className: "row" },

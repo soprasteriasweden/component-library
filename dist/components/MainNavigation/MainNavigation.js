@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NavLink } from 'react-router-dom';
-import './MainNavigation.style.scss';
+import '../../assets/styles/MainNavigation.style.scss';
 export var MainNavigation = function (_a) {
     var imagePath = _a.imagePath, rightContent = _a.rightContent, children = _a.children, informationTopRight = _a.informationTopRight;
     return (React.createElement("div", { className: "navigation-container" },

@@ -2,7 +2,7 @@ import * as React from "react";
 import { IChildren } from "../../models/IChildren";
 import { ModalBody } from "./ModalBody";
 import { ModalFooter } from "./ModalFooter";
-import ".../../assets/styles/Modal.style.scss";
+import "../../assets/styles/Modal.style.scss";
 
 interface IModal extends IChildren {
     header: string;

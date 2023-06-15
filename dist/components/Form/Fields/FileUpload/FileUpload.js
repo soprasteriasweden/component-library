@@ -10,7 +10,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import React from 'react';
-import "./FileUpload.style.scss";
+import "../../../../assets/styles/FileUpload.style.scss";
 import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -90,7 +90,7 @@ export var FileUpload = function (_a) {
                 React.createElement("input", { type: "text", className: "form-control form-control-sm", value: file.name, readOnly: true }),
                 React.createElement("div", { className: "input-group-append" },
                     documentType && documentType.documentTypes.length > 0 ?
-                        React.createElement("select", { name: documentType.documentTypesName + "[" + index + "]", className: "form-control form-control-sm", ref: register({ required: true }), onChange: function (e) {
+                        React.createElement("select", { name: "".concat(documentType.documentTypesName, "[").concat(index, "]"), className: "form-control form-control-sm", ref: register({ required: true }), onChange: function (e) {
                                 return setSelectedDocumentTypeIds(selectedDocumentTypeIds.map(function (id, currentIndex) {
                                     return currentIndex === index ? parseInt(e.target.value) : id;
                                 }));
@@ -135,11 +135,11 @@ export var FileUpload = function (_a) {
         setNumberOfFiles(0);
     };
     return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
-        React.createElement("label", { htmlFor: name, className: inlineLabel ? "col-" + labelCol + " col-form-label" : "" },
+        React.createElement("label", { htmlFor: name, className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
             label,
             ":",
             required ? "*" : ""),
-        React.createElement("div", { className: inlineLabel ? "col-" + inputCol : "" },
+        React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
             React.createElement("div", __assign({ className: "file-upload" }, getRootProps()),
                 React.createElement("input", __assign({ name: name, id: name, title: "Filuppladdning" }, getInputProps())),
                 React.createElement("p", null,

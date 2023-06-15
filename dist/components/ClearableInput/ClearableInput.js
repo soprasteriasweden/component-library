@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./ClearableInput.style.scss";
+import "../../assets/styles/ClearableInput.style.scss";
 export var ClearableInput = function (_a) {
     var input = _a.input, onClear = _a.onClear;
     return (React.createElement("div", { className: "clearable-input" },

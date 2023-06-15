@@ -1,5 +1,5 @@
 import * as React from "react";
-import './MainNavigation.style.scss';
+import '../../assets/styles/MainNavigation.style.scss';
 interface IMainNaviagation {
     imagePath: string;
     rightContent?: React.ReactNodeArray | React.ReactNode | undefined;

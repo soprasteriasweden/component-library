@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
 };
 import * as React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import './DatePicker.scss';
+import '../../../../assets/styles/DatePicker.scss';
 import { useFormContext } from 'react-hook-form';
 import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -46,11 +46,11 @@ export var CustomDatePicker = function (_a) {
         setSelectedDate(undefined);
     };
     return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
-        React.createElement("label", { className: inlineLabel ? "col-" + labelCol + " col-form-label" : "" },
+        React.createElement("label", { className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
             label,
             ":",
             required ? "*" : ""),
-        React.createElement("div", { className: inlineLabel ? "col-" + inputCol : "" },
+        React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
             React.createElement(DatePicker, { name: name, selected: selectedDate, onChange: function (date) {
                     setSelectedDate(date);
                     setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Checkbox } from "../Checkbox/Checkbox";
-import "./CheckboxList.style.scss";
+import "../../../../assets/styles/CheckboxList.style.scss";
 export var CheckboxList = function (_a) {
     var initialCheckboxes = _a.initialCheckboxes, toggleAll = _a.toggleAll, toggleAllLabel = _a.toggleAllLabel, name = _a.name, inputCol = _a.inputCol, labelCol = _a.labelCol;
     var _b = React.useState(initialCheckboxes), checkboxes = _b[0], setCheckboxes = _b[1];

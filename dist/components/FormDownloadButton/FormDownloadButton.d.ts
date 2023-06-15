@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./FormDownloadButton.style.scss";
+import "../../assets/styles/FormDownloadButton.style.scss";
 interface IFormDownloadButton extends IColumnPlacement, IInputPosition {
     label: string;
     name: string;

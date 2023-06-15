@@ -1,9 +1,11 @@
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 import * as React from "react";
 import { Fragment } from "react";
@@ -46,23 +48,23 @@ export var PaginationNavigation = function (_a) {
                 // handle: (1) (...) {5 6} [7] {8 9} (10)
                 case (hasLeftSpill && !hasRightSpill): {
                     var extraPages = range(startPage - spillOffset, startPage - 1);
-                    pages_1 = __spreadArrays([DOTS], extraPages, pages_1);
+                    pages_1 = __spreadArray(__spreadArray([DOTS], extraPages, true), pages_1, true);
                     break;
                 }
                 // handle: (1) {2 3} [4] {5 6} (...) (10)
                 case (!hasLeftSpill && hasRightSpill): {
                     var extraPages = range(endPage + 1, endPage + spillOffset);
-                    pages_1 = __spreadArrays(pages_1, extraPages, [DOTS]);
+                    pages_1 = __spreadArray(__spreadArray(__spreadArray([], pages_1, true), extraPages, true), [DOTS], false);
                     break;
                 }
                 // handle: (1) (...) {4 5} [6] {7 8} (...) (10)
                 case (hasLeftSpill && hasRightSpill):
                 default: {
-                    pages_1 = __spreadArrays([DOTS], pages_1, [DOTS]);
+                    pages_1 = __spreadArray(__spreadArray([DOTS], pages_1, true), [DOTS], false);
                     break;
                 }
             }
-            return __spreadArrays([1], pages_1, [pagination.totalPages]);
+            return __spreadArray(__spreadArray([1], pages_1, true), [pagination.totalPages], false);
         }
         return (range(1, pagination === null || pagination === void 0 ? void 0 : pagination.totalPages));
     };
@@ -109,7 +111,7 @@ export var PaginationNavigation = function (_a) {
         if (pagination !== undefined) {
             var startItem = pagination.pageSize * (pagination.currentPage - 1) + 1;
             var endItem = Math.min(startItem + pagination.pageSize - 1, pagination.totalCount);
-            return (React.createElement("p", { className: "text-right" }, "Visar " + startItem + "-" + endItem + " av " + pagination.totalCount));
+            return (React.createElement("p", { className: "text-right" }, "Visar ".concat(startItem, "-").concat(endItem, " av ").concat(pagination.totalCount)));
         }
     };
     var renderPreviousTenButton = function () {

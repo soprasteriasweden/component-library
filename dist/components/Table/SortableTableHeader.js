@@ -3,7 +3,7 @@ import { SortOrder } from '../../models/IPagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp, faSortDown, faSort } from '@fortawesome/free-solid-svg-icons';
 import { SortTableContext } from './SortTableContext';
-import "./TableStyle.scss";
+import "../../assets/styles/TableStyle.scss";
 export var SortableTableHeader = function (_a) {
     var propertyToSortBy = _a.propertyToSortBy, headerText = _a.headerText;
     var _b = React.useContext(SortTableContext), sortOrder = _b.sortOrder, setSortOrder = _b.setSortOrder, setSelectedPropertyToSortBy = _b.setSelectedPropertyToSortBy, selectedPropertyToSortBy = _b.selectedPropertyToSortBy;

@@ -33,11 +33,11 @@ export var CustomSubmitButton = function (props) {
     var tooltipId = "a" + Math.floor(Math.random() * Math.floor(100000));
     React.useEffect(function () {
         var myWindow = window;
-        myWindow.$("#" + tooltipId).tooltip();
+        myWindow.$("#".concat(tooltipId)).tooltip();
     }, []);
     return (React.createElement(React.Fragment, null,
-        React.createElement("span", { className: "d-inline-block " + (isLoading || disabled ? "cursor-not-allowed" : ""), id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
-            React.createElement("button", __assign({}, defaultProps, { type: "submit", className: "btn btn-sm " + (buttonType ? buttonType : CustomSubmitButtonType.default), onClick: onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }), isLoading ?
+        React.createElement("span", { className: "d-inline-block ".concat(isLoading || disabled ? "cursor-not-allowed" : ""), id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
+            React.createElement("button", __assign({}, defaultProps, { type: "submit", className: "btn btn-sm ".concat(buttonType ? buttonType : CustomSubmitButtonType.default), onClick: onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }), isLoading ?
                 React.createElement(React.Fragment, null,
                     React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" }, " "),
                     " ",

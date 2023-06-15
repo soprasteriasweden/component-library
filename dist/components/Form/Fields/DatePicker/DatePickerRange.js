@@ -10,8 +10,8 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import * as React from "react";
-import './DatePicker.scss';
-import './DatePickerRange.style.scss';
+import '../../../../assets/styles/DatePicker.scss';
+import '../../../../assets/styles/DatePickerRange.style.scss';
 import { useFormContext } from 'react-hook-form';
 import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';

@@ -9,5 +9,5 @@ export var PaginationCount = function (_a) {
         setStartItem(startItem);
         setEndItem(endItem > totalCount ? totalCount : endItem);
     }, [totalCount, itemsPerPage, currentPage]);
-    return (React.createElement("p", { className: "text-right" }, "Visar " + startItem + "-" + endItem + " av " + totalCount));
+    return (React.createElement("p", { className: "text-right" }, "Visar ".concat(startItem, "-").concat(endItem, " av ").concat(totalCount)));
 };

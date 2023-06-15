@@ -44,7 +44,7 @@ export var CustomButton = function (props) {
     var tooltipId = "a" + Math.floor(Math.random() * Math.floor(100000));
     React.useEffect(function () {
         var myWindow = window;
-        myWindow.$("#".concat(tooltipId)).tooltip();
+        myWindow.$("#" + tooltipId).tooltip();
     }, []);
     var renderIcon = function () {
         if (buttonType === ButtonType.create) {
@@ -88,8 +88,8 @@ export var CustomButton = function (props) {
         }
     };
     return (React.createElement(React.Fragment, null,
-        React.createElement("span", { className: "d-inline-block ".concat(isLoading || disabled ? "cursor-not-allowed" : ""), id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
-            React.createElement("button", __assign({}, defaultProps, { type: "button", className: "btn btn-sm ".concat(buttonType), disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }),
+        React.createElement("span", { className: "d-inline-block " + (isLoading || disabled ? "cursor-not-allowed" : ""), id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
+            React.createElement("button", __assign({}, defaultProps, { type: "button", className: "btn btn-sm " + buttonType, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }),
                 isLoading ?
                     React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" })
                     : null,

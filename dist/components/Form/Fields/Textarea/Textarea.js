@@ -28,11 +28,11 @@ export var Textarea = function (_a) {
         }
     };
     return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
-        React.createElement("label", { className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
+        React.createElement("label", { className: inlineLabel ? "col-" + labelCol + " col-form-label" : "" },
             label,
             ":",
             required && (readonly === false || readonly === undefined) ? "*" : ""),
-        React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
+        React.createElement("div", { className: inlineLabel ? "col-" + inputCol : "" },
             readonly
                 ?
                     React.createElement("div", { id: name, className: "form-control-plaintext", style: { whiteSpace: "pre-line" } }, defaultValue)

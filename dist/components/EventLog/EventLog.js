@@ -19,7 +19,7 @@ export var EventLog = function (_a) {
         }
         var date = dateTime.toString().slice(0, 10);
         var time = dateTime.toString().slice(11, 16);
-        return "".concat(date, " ").concat(time);
+        return date + " " + time;
     };
     return (React.createElement("section", { id: id, className: "event-log" },
         React.createElement("div", { className: "row" },

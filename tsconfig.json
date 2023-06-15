@@ -26,6 +26,6 @@
     "dist"
   ],
   "include": [
-    "src/componentLibrary"
+    "src"
   ]
 }

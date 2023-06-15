@@ -45,10 +45,10 @@ export var Checkbox = function (_a) {
         }
     };
     return (React.createElement("div", { className: className + " custom-checkbox form-group row" },
-        React.createElement("label", { className: "col-".concat(labelCol), htmlFor: id },
+        React.createElement("label", { className: "col-" + labelCol, htmlFor: id },
             label,
             withColumn ? ":" : ""),
-        React.createElement("div", { className: "col-".concat(inputCol) },
+        React.createElement("div", { className: "col-" + inputCol },
             React.createElement("input", { type: "checkbox", name: name, id: id, disabled: disabled, checked: isChecked, onChange: function () { return toggleIsChecked(); }, value: value, ref: register({ required: required }) }),
             React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" &&
                 (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i") : ""))));

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IChildren } from "../../models/IChildren";
-import './AlertMessage.style.scss';
+import '../../assets/AlertMessage.style.scss';
 
 interface IAlertMessage extends IChildren {
     alertType: AlertType;

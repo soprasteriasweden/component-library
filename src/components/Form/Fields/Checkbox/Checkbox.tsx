@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ICheckbox } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
-import "./Checkbox.style.scss";
+import "../../../../assets/styles/Checkbox.style.scss";
 
 export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
 

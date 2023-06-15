@@ -3,7 +3,7 @@ import { TabContent } from "./TabContent";
 import { TabLink } from "./TabLink";
 import { TabPanel } from "./TabPanel";
 import { IChildren } from "../../models/IChildren";
-import "./Tabs.style.scss";
+import ".../../assets/styles/Tabs.style.scss";
 
 const Tabs = ({ children }: IChildren) => (
     <div>

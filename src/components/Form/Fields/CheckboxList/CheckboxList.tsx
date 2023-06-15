@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ICheckboxList, ICheckbox } from '../../../../models/IFormInput';
 import { Checkbox } from "../Checkbox/Checkbox";
-import "./CheckboxList.style.scss"
+import "../../../../assets/styles/CheckboxList.style.scss"
 
 export const CheckboxList: React.FunctionComponent<ICheckboxList> = ({ initialCheckboxes, toggleAll, toggleAllLabel, name, inputCol, labelCol }) => {
 

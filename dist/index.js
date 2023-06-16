@@ -15,4 +15,5 @@ import { EventLog } from "./components/EventLog/EventLog";
 import { SortTableContext, SortTableProvider } from "./components/Table/SortTableContext";
 import { SortableTableHeader } from "./components/Table/SortableTableHeader";
 import { FormDownloadButton } from "./components/FormDownloadButton/FormDownloadButton";
+import "./assets/styles/Common.scss";
 export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, FileUpload, EmailInput, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, FormLink, Modal, ModalBody, ModalFooter, ModalSize, Table, Tabs, TabContent, TabLink, TabPanel, LinkArray, MainNavigation, HiddenInput, AlertMessage, AlertType, CustomSubmitButton, CustomSubmitButtonType, RadioButton, PaginationNavigation, MenuList, SelectStyles, CustomButton, ButtonType, LoginLogoutButton, SpinnerWrapper, InputSpinnerWrapper, ClearableInput, EventLog, SortTableContext, SortableTableHeader, SortTableProvider, ClearFormButton, FormDownloadButton };

@@ -15,6 +15,7 @@ import { EventLog } from "./components/EventLog/EventLog";
 import { SortTableContext, SortTableProvider } from "./components/Table/SortTableContext";
 import { SortableTableHeader } from "./components/Table/SortableTableHeader";
 import { FormDownloadButton } from "./components/FormDownloadButton/FormDownloadButton";
+import "./assets/styles/Common.scss";
 
 export {
     Form,

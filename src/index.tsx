@@ -1,5 +1,4 @@
-﻿import * as React from "react";
-import { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, CustomSubmitButtonType, RadioButton, FormLink, ClearFormButton } from "./components/Form/Form";
+﻿import { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, CustomSubmitButtonType, RadioButton, FormLink, ClearFormButton } from "./components/Form/Form";
 import { Modal, ModalBody, ModalFooter, ModalSize } from "./components/Modal/Modal";
 import { Table } from "./components/Table/Table";
 import { MainNavigation } from "./components/MainNavigation/MainNavigation";

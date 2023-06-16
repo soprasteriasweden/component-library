@@ -18,6 +18,7 @@ import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton
 import { ClearFormButton } from "./ClearFormButton";
 import { FormLink } from "./Fields/FormLink/FormLink";
 import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
+import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -58,5 +59,6 @@ export {
     CustomSubmitButtonType,
     RadioButton,
     FormLink,
-    TooltipItem
+    TooltipItem,
+    MultiSelect
 }

@@ -17,9 +17,10 @@ import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton
 import { ClearFormButton } from "./ClearFormButton";
 import { FormLink } from "./Fields/FormLink/FormLink";
 import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
+import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
     children: React.ReactNodeArray | React.ReactNode;
 }
 declare const Form: React.FunctionComponent<IForm>;
-export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem };
+export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, MultiSelect };

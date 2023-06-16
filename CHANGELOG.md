@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.8
+* [fixed] Added: MultiSelect component
+
+## v1.0.7
+* [fixed] Added: MultiSelect component
+
+## v1.0.6
+* Added: MultiSelect component
+
 ## v1.0.5
 * Bugfix: Disc showed up as ?-mark
 

@@ -40,6 +40,21 @@ export interface ISelect extends IFormInputBase, IFormInputBaseWithValidation, I
     isClearable?: boolean;
 }
 
+export interface IMultiSelect extends IColumnPlacement {
+    label: string;
+    values: IListItem[];
+    defaultValue?: string | string[];
+    name: string;
+    onValueChange?: (selectedValue?: string | string[]) => void;
+    isLoading?: boolean;
+    isMultiple?: boolean;
+    required?: boolean;
+    placeholder?: string;
+    disabled?: boolean;
+    isClearable?: boolean;
+    resetValue?: boolean;
+}
+
 export interface IFileUpload extends IFormInputBaseWithValidation, IFormInputValidation, IColumnPlacement {
     multiple?: boolean;
     allowedFileTypes?: string[];

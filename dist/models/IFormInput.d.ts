@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export interface IFormInputBase {
     name: string;
     disabled?: boolean;
@@ -101,4 +102,5 @@ export interface IFormLink extends IColumnPlacement, IInputPosition {
     name: string;
     to: string;
     className?: string | undefined;
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }

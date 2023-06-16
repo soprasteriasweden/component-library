@@ -120,4 +120,5 @@ export interface IFormLink extends IColumnPlacement, IInputPosition {
     name: string;
     to: string;
     className?: string | undefined;
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }

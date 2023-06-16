@@ -1,0 +1,23 @@
+.tooltip-item {
+    p {
+        margin-bottom: 0;
+        vertical-align: bottom;
+        display: block;
+    }
+
+    p.show-disc::before {
+        content: '•';
+        display: inline-block;
+        margin-right: 5px;
+        text-align: left;
+    }
+
+    p:hover {
+        color: #808080;
+        cursor: default;
+    }
+}
+
+.tooltip-inner {
+    text-align: left !important;
+}

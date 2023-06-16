@@ -17,6 +17,7 @@ import { RadioButton } from "./Fields/RadioButton/RadioButton";
 import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton";
 import { ClearFormButton } from "./ClearFormButton";
 import { FormLink } from "./Fields/FormLink/FormLink";
+import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -56,5 +57,6 @@ export {
     ClearFormButton,
     CustomSubmitButtonType,
     RadioButton,
-    FormLink
+    FormLink,
+    TooltipItem
 }

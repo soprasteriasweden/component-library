@@ -28,10 +28,11 @@ import { RadioButton } from "./Fields/RadioButton/RadioButton";
 import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton";
 import { ClearFormButton } from "./ClearFormButton";
 import { FormLink } from "./Fields/FormLink/FormLink";
+import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
 var Form = function (_a) {
     var onSubmit = _a.onSubmit, children = _a.children;
     var methods = useForm({});
     return (React.createElement(FormContext, __assign({}, methods),
         React.createElement("form", { onSubmit: onSubmit ? methods.handleSubmit(onSubmit) : undefined }, children)));
 };
-export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink };
+export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem };

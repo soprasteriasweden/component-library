@@ -1,10 +1,11 @@
 {
   "name": "soprasteria-ui-library",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "private": false,
   "license": "MIT",
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "CHANGELOG.md"
   ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",

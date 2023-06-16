@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.12
+* Set index.js to main
+
+## v1.0.11
+* Bugfix: Fixed wrong className in UnorderedList component
+
+## v1.0.10
+* Added UnorderedList component
+
+## v1.0.9
+* Added tooltip support for Checkbox component
+
 ## v1.0.8
 * [fixed] Added: MultiSelect component
 

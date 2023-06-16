@@ -2,8 +2,9 @@ import * as React from "react";
 import { ICheckbox } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import "../../../../assets/styles/Checkbox.style.scss";
+import { TooltipItem } from "../TooltipItem/TooltipItem";
 
-export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
+export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tooltipDescription, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
 
     const { errors, register } = useFormContext();
     const [isChecked, setIsChecked] = React.useState<boolean>(false);
@@ -51,7 +52,11 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, clas
     return (
         <div className={className + " custom-checkbox form-group row"}>
             <label className={`col-${labelCol}`} htmlFor={id}>
-                {label}{withColumn ? ":" : ""}
+                {
+                    tooltipDescription ?
+                        <TooltipItem key={id} title={label} description={tooltipDescription} />
+                        : <>{ label }{withColumn ? ":" : ""}</>
+                }
             </label>
             <div className={`col-${inputCol}`}>
                 <input type="checkbox"

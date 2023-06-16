@@ -48,6 +48,13 @@ export interface IMultiSelect extends IColumnPlacement {
     isClearable?: boolean;
     resetValue?: boolean;
 }
+export interface IUnorderedList extends IColumnPlacement {
+    textRows: string[];
+    name: string;
+    label: string;
+    inlineLabel: boolean;
+    className?: string;
+}
 export interface IFileUpload extends IFormInputBaseWithValidation, IFormInputValidation, IColumnPlacement {
     multiple?: boolean;
     allowedFileTypes?: string[];
@@ -79,6 +86,7 @@ export interface ICheckbox extends IFormInputBaseWithValidation, IColumnPlacemen
     id?: string;
     onChange?: (isChecked: boolean) => void;
     withColumn?: boolean;
+    tooltipDescription?: string;
 }
 export interface ICheckboxList extends IColumnPlacement {
     initialCheckboxes: ICheckbox[];

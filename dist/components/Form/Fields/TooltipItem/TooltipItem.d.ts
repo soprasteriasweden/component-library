@@ -1,5 +1,5 @@
 import React from 'react';
-import './TooltipItem.scss';
+import "../../../../assets/styles/TooltipItem.style.scss";
 interface IProps {
     title: string;
     description: string;

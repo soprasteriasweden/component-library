@@ -1,5 +1,5 @@
 import React from 'react';
-import './TooltipItem.scss';
+import "../../../../assets/styles/TooltipItem.style.scss";
 export var TooltipItem = function (_a) {
     var title = _a.title, description = _a.description, showDisc = _a.showDisc;
     var tooltipId = "a".concat(Math.floor(Math.random() * 100000));

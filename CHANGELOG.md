@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.14
+* Bugfix: SelectGroup component
+
+## v1.0.13
+* Added SelectGroup component
+
 ## v1.0.12
 * Set index.js to main
 

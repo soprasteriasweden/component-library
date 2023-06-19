@@ -34,6 +34,34 @@ export interface ISelect extends IFormInputBase, IFormInputBaseWithValidation, I
     isLoading?: boolean;
     isClearable?: boolean;
 }
+export interface IPrimarySelect extends IFormInputBase, IFormInputBaseWithValidation, IColumnPlacement {
+    options: IListItem[];
+    onChange?: (val: string) => void;
+    isClearable?: boolean;
+}
+export interface ISecondarySelect extends IFormInputBase, IFormInputBaseWithValidation, IColumnPlacement {
+    options: IListItem[];
+    onChange?: (val: string) => void;
+    isClearable?: boolean;
+}
+export interface ISelectGroup extends IColumnPlacement {
+    primaryOptions: IListItem[];
+    secondaryOptions: IListItem[];
+    setPrimaryValue: React.Dispatch<React.SetStateAction<string | undefined>>;
+    setSecondaryValue: React.Dispatch<React.SetStateAction<string | undefined>>;
+    primaryDefaultValue?: string;
+    secondaryDefaultValue?: string;
+    primaryLabel: string;
+    secondaryLabel: string;
+    primaryName: string;
+    secondaryName: string;
+    primaryPlaceholder?: string;
+    secondaryPlaceholder?: string;
+    disabled?: boolean;
+    required?: boolean;
+    isClearable?: boolean;
+    shouldEnableSecondary?: (val: string) => boolean;
+}
 export interface IMultiSelect extends IColumnPlacement {
     label: string;
     values: IListItem[];

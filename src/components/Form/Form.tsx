@@ -20,6 +20,7 @@ import { FormLink } from "./Fields/FormLink/FormLink";
 import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
 import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
 import { UnorderedList } from "./Fields/UnorderedList/UnorderedList";
+import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -62,5 +63,6 @@ export {
     FormLink,
     TooltipItem,
     MultiSelect,
-    UnorderedList
+    UnorderedList,
+    SelectGroup
 }

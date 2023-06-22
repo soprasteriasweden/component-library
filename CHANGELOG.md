@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.17
+* Bugfixes
+
+## v1.0.16
+* Added ConditionalCheckboxList component
+
 ## v1.0.15
 * Bugfixes
 

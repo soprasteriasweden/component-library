@@ -122,6 +122,20 @@ export interface ICheckboxList extends IColumnPlacement {
     toggleAllLabel?: string;
     name: string;
 }
+export interface ICheckboxListItem {
+    id: number;
+    name: string;
+    description: string;
+    invalidCombinationIds: string[];
+}
+export interface IConditionalCheckboxList extends IColumnPlacement {
+    items: ICheckboxListItem[];
+    existingItemIds: number[] | undefined;
+    name: string;
+    required: boolean;
+    label: string;
+    onSelect?: (selectedIds: string[]) => void;
+}
 export interface IInputPosition {
     inlineLabel?: boolean;
 }

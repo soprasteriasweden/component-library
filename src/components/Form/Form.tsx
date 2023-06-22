@@ -21,6 +21,7 @@ import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
 import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
 import { UnorderedList } from "./Fields/UnorderedList/UnorderedList";
 import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
+import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckboxList";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -64,5 +65,6 @@ export {
     TooltipItem,
     MultiSelect,
     UnorderedList,
-    SelectGroup
+    SelectGroup,
+    ConditionalCheckboxList
 }

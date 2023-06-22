@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.15
+* Bugfixes
+
 ## v1.0.14
 * Bugfix: SelectGroup component
 

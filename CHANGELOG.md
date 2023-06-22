@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.20
+* Bugfixes
+
+## v1.0.19
+* Added noOptionsMessage to Dropdown component
+
+## v1.0.18
+* Added Dropdown component
+
 ## v1.0.17
 * Bugfixes
 

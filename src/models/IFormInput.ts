@@ -40,6 +40,26 @@ export interface ISelect extends IFormInputBase, IFormInputBaseWithValidation, I
     isClearable?: boolean;
 }
 
+export interface IDropDownOption {
+    value: string;
+    label: string;
+    selected?: boolean;
+}
+
+export interface IDropdown extends IFormInputBase, IFormInputBaseWithValidation, IColumnPlacement {
+    items: any[] | undefined;
+    label: string;
+    isLoading?: boolean;
+    onValueChange?: (newValue: string) => void;
+    useFixedListItemHeight?: boolean;
+    isClearable?: boolean;
+    resetValue?: boolean;
+    clearValueIfNoInitalValue?: boolean;
+    errorMessage?: string;
+    noOptionsMessage?: string;
+    getItemLabel: (item: any) => string; 
+}
+
 export interface IPrimarySelect extends IFormInputBase, IFormInputBaseWithValidation, IColumnPlacement {
     options: IListItem[];
     onChange?: (val: string) => void;

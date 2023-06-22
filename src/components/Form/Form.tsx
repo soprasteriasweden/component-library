@@ -22,6 +22,7 @@ import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
 import { UnorderedList } from "./Fields/UnorderedList/UnorderedList";
 import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
 import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckboxList";
+import { Dropdown } from "./Fields/Dropdown/Dropdown";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -66,5 +67,6 @@ export {
     MultiSelect,
     UnorderedList,
     SelectGroup,
-    ConditionalCheckboxList
+    ConditionalCheckboxList,
+    Dropdown
 }

@@ -1,3 +1,3 @@
 # Sopra Steria komponentbibliotek
 
-Import common.scss in index for full experience.
+React 16 ui components. Upgrades are coming...

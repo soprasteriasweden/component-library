@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import * as React from "react";
 import { IChildren } from "../../models/IChildren";
 import { ModalBody } from "./ModalBody";
 import { ModalFooter } from "./ModalFooter";
@@ -15,5 +15,5 @@ declare enum ModalSize {
     large = "modal-lg",
     extraLarge = "modal-xl"
 }
-declare const Modal: ({ header, children, id, modalSize, preventCloseOnOutsideClick }: IModal) => JSX.Element;
+declare const Modal: ({ header, children, id, modalSize, preventCloseOnOutsideClick }: IModal) => React.JSX.Element;
 export { Modal, ModalBody, ModalFooter, ModalSize };

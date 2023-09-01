@@ -41,15 +41,6 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         else if (buttonType === ButtonType.edit) {
             return <span> <FontAwesomeIcon icon={faPen} /> </span>
         }
-        else if (buttonType === ButtonType.editAlt) {
-            return <span>Ändra</span>
-        }
-        else if (buttonType === ButtonType.delete) {
-            return <span>Ta bort</span>
-        }
-        else if (buttonType === ButtonType.credit) {
-            return <span>Kreditera</span>
-        }
         else if (buttonType === ButtonType.download) {
             return <span> <FontAwesomeIcon icon={faDownload} /> </span>
         }
@@ -58,6 +49,20 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         }
         else if (buttonType === ButtonType.excel) {
             return <span> <FontAwesomeIcon icon={faFileExcel} /> </span>
+        }
+    }
+
+    const getButtonText = () => {
+        if (buttonText && buttonText !== "") {
+            return buttonText;
+        } else {
+            if (buttonType === ButtonType.editAlt) {
+                return "Ändra";
+            } else if (buttonType === ButtonType.delete) {
+                return "Ta bort";
+            } else if (buttonType === ButtonType.credit) {
+                return "Kreditera";
+            }
         }
     }
 
@@ -84,7 +89,9 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
                     {
                         renderIcon()
                     }
-                    {buttonText}
+                    {
+                        getButtonText()
+                    }
                 </button>
             </span>
         </>

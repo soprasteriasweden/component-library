@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.21
+* Minor tweaks in CustomButton
+
 ## v1.0.20
 * Bugfixes
 

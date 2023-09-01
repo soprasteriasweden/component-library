@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import * as React from "react";
 interface ITabLink {
     selected?: boolean;
     id: string;
@@ -6,5 +6,5 @@ interface ITabLink {
     href: string;
     render?: boolean;
 }
-export declare const TabLink: ({ selected, href, id, text, render }: ITabLink) => JSX.Element | null;
+export declare const TabLink: ({ selected, href, id, text, render }: ITabLink) => React.JSX.Element | null;
 export {};

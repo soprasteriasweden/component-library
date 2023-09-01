@@ -59,15 +59,6 @@ export var CustomButton = function (props) {
                 React.createElement(FontAwesomeIcon, { icon: faPen }),
                 " ");
         }
-        else if (buttonType === ButtonType.editAlt) {
-            return React.createElement("span", null, "\u00C4ndra");
-        }
-        else if (buttonType === ButtonType.delete) {
-            return React.createElement("span", null, "Ta bort");
-        }
-        else if (buttonType === ButtonType.credit) {
-            return React.createElement("span", null, "Kreditera");
-        }
         else if (buttonType === ButtonType.download) {
             return React.createElement("span", null,
                 " ",
@@ -87,6 +78,22 @@ export var CustomButton = function (props) {
                 " ");
         }
     };
+    var getButtonText = function () {
+        if (buttonText && buttonText !== "") {
+            return buttonText;
+        }
+        else {
+            if (buttonType === ButtonType.editAlt) {
+                return "Ändra";
+            }
+            else if (buttonType === ButtonType.delete) {
+                return "Ta bort";
+            }
+            else if (buttonType === ButtonType.credit) {
+                return "Kreditera";
+            }
+        }
+    };
     return (React.createElement(React.Fragment, null,
         React.createElement("span", { className: "d-inline-block ".concat(isLoading || disabled ? "cursor-not-allowed" : ""), id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
             React.createElement("button", __assign({}, defaultProps, { type: "button", className: "btn btn-sm ".concat(buttonType), disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }),
@@ -94,5 +101,5 @@ export var CustomButton = function (props) {
                     React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" })
                     : null,
                 renderIcon(),
-                buttonText))));
+                getButtonText()))));
 };

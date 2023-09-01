@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IChildren } from "../../models/IChildren";
 import '../../assets/styles/AlertMessage.style.scss';
-interface IAlertMessage extends IChildren {
+export interface IAlertMessage extends IChildren {
     alertType: AlertType;
     duration?: number;
     alwaysShow?: boolean;
@@ -14,4 +14,3 @@ export declare enum AlertType {
     warning = "warning"
 }
 export declare const AlertMessage: React.FunctionComponent<IAlertMessage>;
-export {};

@@ -3,8 +3,10 @@ import { ISelect } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import { InputSpinnerWrapper } from "../../../Spinner/InputSpinnerWrapper";
 import { ClearableInput } from "../../../ClearableInput/ClearableInput";
+import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
-export const Select: React.FunctionComponent<ISelect> = ({ name, label, required, className, inlineLabel, disabled, placeholder, options, requiredValidationMessage, selectedValue, onChange, isLoading, labelCol = 4, inputCol = 8, isClearable }) => {
+export const Select: React.FunctionComponent<ISelect> = ({ name, label, required, className, inlineLabel, disabled, placeholder, options, requiredValidationMessage, selectedValue, onChange, isLoading, tooltipDescription, labelCol = 4, inputCol = 8, isClearable }) => {
 
     const [currentSelectedValue, setCurrentSelectedValue] = React.useState<string | undefined>(selectedValue);
     const readonlyValues = {
@@ -52,24 +54,31 @@ export const Select: React.FunctionComponent<ISelect> = ({ name, label, required
 
     const renderSelect = () => {
         return (
-            <select name={name}
-                id={name}
-                className="form-control form-control-sm"
-                disabled={disabled}
-                ref={typeof register !== "string" ? register({ required: required }) : ""}
-                onChange={handleChange}
-            >
-                <option value="" selected={currentSelectedValue ? false : true} disabled hidden>{placeholder}</option>
+            <div className="input-group">
+                <select name={name}
+                    id={name}
+                    className="form-control form-control-sm"
+                    disabled={disabled}
+                    ref={typeof register !== "string" ? register({ required: required }) : ""}
+                    onChange={handleChange}
+                >
+                    <option value="" selected={currentSelectedValue ? false : true} disabled hidden>{placeholder}</option>
+                    {
+                        options.map((option, index) => {
+                            return <option value={option.value}
+                                key={index}
+                                selected={currentSelectedValue == option.value}
+                                disabled={option.disabled}
+                            >{option.text}</option>
+                        })
+                    }
+                </select>
                 {
-                    options.map((option, index) => {
-                        return <option value={option.value}
-                            key={index}
-                            selected={currentSelectedValue == option.value}
-                            disabled={option.disabled}
-                        >{option.text}</option>
-                    })
+                    tooltipDescription ?
+                        <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
+                        : null
                 }
-            </select>
+            </div>
         )
     }
 
@@ -85,6 +94,7 @@ export const Select: React.FunctionComponent<ISelect> = ({ name, label, required
                             : renderSelect()
                     }
                 </InputSpinnerWrapper>
+
                 <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
                     (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
             </div>

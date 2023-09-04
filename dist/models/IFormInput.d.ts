@@ -5,6 +5,7 @@ export interface IFormInputBase {
     className?: string;
     label: string;
     defaultValue?: string;
+    tooltipDescription?: string;
 }
 export interface IFormInputBaseWithValidation extends IFormInputBase, IFormInputValidation, IInputPosition {
     placeholder?: string;

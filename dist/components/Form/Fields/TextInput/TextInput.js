@@ -1,8 +1,10 @@
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import * as React from "react";
 import { useFormContext } from 'react-hook-form';
+import { InputIconTooltip } from '../TooltipItem/InputIconTooltip';
 export var TextInput = function (_a) {
     var _b, _c, _d, _e;
-    var label = _a.label, name = _a.name, className = _a.className, disabled = _a.disabled, inlineLabel = _a.inlineLabel, required = _a.required, placeholder = _a.placeholder, defaultValue = _a.defaultValue, requiredValidationMessage = _a.requiredValidationMessage, readonly = _a.readonly, minLength = _a.minLength, maxLength = _a.maxLength, pattern = _a.pattern, patternValidationMessage = _a.patternValidationMessage, _f = _a.labelCol, labelCol = _f === void 0 ? 4 : _f, _g = _a.inputCol, inputCol = _g === void 0 ? 8 : _g;
+    var label = _a.label, name = _a.name, className = _a.className, disabled = _a.disabled, inlineLabel = _a.inlineLabel, required = _a.required, placeholder = _a.placeholder, defaultValue = _a.defaultValue, requiredValidationMessage = _a.requiredValidationMessage, readonly = _a.readonly, minLength = _a.minLength, maxLength = _a.maxLength, pattern = _a.pattern, patternValidationMessage = _a.patternValidationMessage, tooltipDescription = _a.tooltipDescription, _f = _a.labelCol, labelCol = _f === void 0 ? 4 : _f, _g = _a.inputCol, inputCol = _g === void 0 ? 8 : _g;
     var readonlyValues = {
         errors: "",
         register: "",
@@ -30,11 +32,15 @@ export var TextInput = function (_a) {
             ":",
             required && (readonly === false || readonly === undefined) ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
-            readonly
+            React.createElement("div", { className: "input-group" }, readonly
                 ?
                     React.createElement("p", { id: name, className: "form-control-plaintext" }, defaultValue)
                 :
-                    React.createElement("input", { type: "text", name: name, id: name, className: "form-control form-control-sm", ref: typeof register !== "string" ? register({ required: required, pattern: pattern, validate: required ? function (value) { return !!value.trim(); } : undefined }) : "", placeholder: placeholder, defaultValue: defaultValue, disabled: disabled, minLength: minLength, maxLength: maxLength }),
+                    React.createElement(React.Fragment, null,
+                        React.createElement("input", { type: "text", name: name, id: name, className: "form-control form-control-sm", ref: typeof register !== "string" ? register({ required: required, pattern: pattern, validate: required ? function (value) { return !!value.trim(); } : undefined }) : "", placeholder: placeholder, defaultValue: defaultValue, disabled: disabled, minLength: minLength, maxLength: maxLength }),
+                        tooltipDescription ?
+                            React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
+                            : null)),
             React.createElement("span", { className: "text-danger" }, errors ? [name] && (((_c = errors[name]) === null || _c === void 0 ? void 0 : _c.type) === "required" || ((_d = errors[name]) === null || _d === void 0 ? void 0 : _d.type) === "validate") &&
                 (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""),
             React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_e = errors[name]) === null || _e === void 0 ? void 0 : _e.type) === "pattern" &&

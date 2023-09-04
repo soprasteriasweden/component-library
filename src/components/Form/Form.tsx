@@ -18,6 +18,7 @@ import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton
 import { ClearFormButton } from "./ClearFormButton";
 import { FormLink } from "./Fields/FormLink/FormLink";
 import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
+import { InputIconTooltip } from "./Fields/TooltipItem/InputIconTooltip";
 import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
 import { UnorderedList } from "./Fields/UnorderedList/UnorderedList";
 import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
@@ -64,6 +65,7 @@ export {
     RadioButton,
     FormLink,
     TooltipItem,
+    InputIconTooltip,
     MultiSelect,
     UnorderedList,
     SelectGroup,

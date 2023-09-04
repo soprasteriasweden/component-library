@@ -2,9 +2,11 @@ import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import { InputSpinnerWrapper } from "../../../Spinner/InputSpinnerWrapper";
 import { ClearableInput } from "../../../ClearableInput/ClearableInput";
+import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 export var Select = function (_a) {
     var _b, _c;
-    var name = _a.name, label = _a.label, required = _a.required, className = _a.className, inlineLabel = _a.inlineLabel, disabled = _a.disabled, placeholder = _a.placeholder, options = _a.options, requiredValidationMessage = _a.requiredValidationMessage, selectedValue = _a.selectedValue, onChange = _a.onChange, isLoading = _a.isLoading, _d = _a.labelCol, labelCol = _d === void 0 ? 4 : _d, _e = _a.inputCol, inputCol = _e === void 0 ? 8 : _e, isClearable = _a.isClearable;
+    var name = _a.name, label = _a.label, required = _a.required, className = _a.className, inlineLabel = _a.inlineLabel, disabled = _a.disabled, placeholder = _a.placeholder, options = _a.options, requiredValidationMessage = _a.requiredValidationMessage, selectedValue = _a.selectedValue, onChange = _a.onChange, isLoading = _a.isLoading, tooltipDescription = _a.tooltipDescription, _d = _a.labelCol, labelCol = _d === void 0 ? 4 : _d, _e = _a.inputCol, inputCol = _e === void 0 ? 8 : _e, isClearable = _a.isClearable;
     var _f = React.useState(selectedValue), currentSelectedValue = _f[0], setCurrentSelectedValue = _f[1];
     var readonlyValues = {
         errors: "",
@@ -45,11 +47,15 @@ export var Select = function (_a) {
         }
     };
     var renderSelect = function () {
-        return (React.createElement("select", { name: name, id: name, className: "form-control form-control-sm", disabled: disabled, ref: typeof register !== "string" ? register({ required: required }) : "", onChange: handleChange },
-            React.createElement("option", { value: "", selected: currentSelectedValue ? false : true, disabled: true, hidden: true }, placeholder),
-            options.map(function (option, index) {
-                return React.createElement("option", { value: option.value, key: index, selected: currentSelectedValue == option.value, disabled: option.disabled }, option.text);
-            })));
+        return (React.createElement("div", { className: "input-group" },
+            React.createElement("select", { name: name, id: name, className: "form-control form-control-sm", disabled: disabled, ref: typeof register !== "string" ? register({ required: required }) : "", onChange: handleChange },
+                React.createElement("option", { value: "", selected: currentSelectedValue ? false : true, disabled: true, hidden: true }, placeholder),
+                options.map(function (option, index) {
+                    return React.createElement("option", { value: option.value, key: index, selected: currentSelectedValue == option.value, disabled: option.disabled }, option.text);
+                })),
+            tooltipDescription ?
+                React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
+                : null));
     };
     return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
         React.createElement("label", { className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },

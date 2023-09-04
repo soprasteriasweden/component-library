@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.22
+* Added tooltip icon support to TextInput and Select
+
 ## v1.0.21
 * Minor tweaks in CustomButton
 

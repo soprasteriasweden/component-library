@@ -32,7 +32,7 @@ export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, cl
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
-            <label htmlFor={name} className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>{label}:{required && (readonly === false || readonly === undefined) ? "*" : ""}</label>
+            <label htmlFor={name} className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>{label}{label && label !== "" ? ":" : ""}{required && (readonly === false || readonly === undefined) ? "*" : ""}</label>
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     {

@@ -13,7 +13,7 @@ export var PersonalIdentityInput = function (_a) {
             required ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? "col-8" : "" },
             React.createElement("div", { className: "input-group" },
-                React.createElement("input", { type: "text", name: name, id: name, className: "form-control form-control-sm ", placeholder: placeholder, defaultValue: defaultValue, ref: register({ required: required, pattern: /^(19|20)?\d\d(0[1-9]|1[0-2])([0-2]\d|3[0-1]|6[0-9]|7[0-2])[-+]\d{2}[\d|A-Fa-f](\d|[\d|A-Fa-f])$/ }), disabled: disabled }),
+                React.createElement("input", { type: "text", name: name, id: name, className: "form-control form-control-sm ", placeholder: placeholder, defaultValue: defaultValue, ref: register({ required: required, pattern: /^(19|20)?\d{2}(0[1-9]|1[0-2])([0-2]\d|3[0-1]|6[0-9]|7[0-2])[-]?\d{4}$/ }), disabled: disabled }),
                 tooltipDescription ?
                     React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
                     : null),

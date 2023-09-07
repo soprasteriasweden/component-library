@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.25
+* Made label optional in TextInput
+
+## v1.0.24
+* Changed regexp for PersonalIdentityInput
+
+## v1.0.23
+* Bugfixes
+
 ## v1.0.22
 * Added tooltip icon support to TextInput and Select
 

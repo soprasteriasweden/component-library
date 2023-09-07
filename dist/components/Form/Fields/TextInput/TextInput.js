@@ -29,7 +29,7 @@ export var TextInput = function (_a) {
     return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
         React.createElement("label", { htmlFor: name, className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
             label,
-            ":",
+            label && label !== "" ? ":" : "",
             required && (readonly === false || readonly === undefined) ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
             React.createElement("div", { className: "input-group" }, readonly

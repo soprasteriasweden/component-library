@@ -1,6 +1,6 @@
 {
   "name": "soprasteria-ui-library",
-  "version": "1.0.23",
+  "version": "1.0.25",
   "main": "dist/index.js",
   "private": false,
   "license": "MIT",
@@ -53,7 +53,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "tsc && npm run copy-assets",
+    "build": "del /q /s dist && tsc && npm run copy-assets",
     "copy-assets": "ncp src/assets dist/assets",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

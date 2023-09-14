@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.26
+* Changed regexp for PersonalIdentityInput regex to enforce 12-digit Swedish personal and coordination numbers
+
 ## v1.0.25
 * Made label optional in TextInput
 

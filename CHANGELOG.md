@@ -1,4 +1,6 @@
 # Changelog
+## v1.0.22
+* Added tooltip icon support to DatePickerRange
 
 ## v1.0.26
 * Changed regexp for PersonalIdentityInput regex to enforce 12-digit Swedish personal and coordination numbers

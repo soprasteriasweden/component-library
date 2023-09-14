@@ -15,10 +15,12 @@ import '../../../../assets/styles/DatePickerRange.style.scss';
 import { useFormContext } from 'react-hook-form';
 import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
+import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 registerLocale('sv-se', __assign(__assign({}, svSE), { options: __assign(__assign({}, svSE.options), { weekStartsOn: 1 }) }));
 export var DatePickerRange = function (_a) {
     var _b, _c;
-    var name = _a.name, nameSecondary = _a.nameSecondary, label = _a.label, className = _a.className, inlineLabel = _a.inlineLabel, disabled = _a.disabled, requiredFrom = _a.requiredFrom, requiredTo = _a.requiredTo, value = _a.value, valueSecondary = _a.valueSecondary;
+    var name = _a.name, nameSecondary = _a.nameSecondary, label = _a.label, className = _a.className, inlineLabel = _a.inlineLabel, disabled = _a.disabled, requiredFrom = _a.requiredFrom, requiredTo = _a.requiredTo, value = _a.value, valueSecondary = _a.valueSecondary, tooltipDescription = _a.tooltipDescription;
     var _d = React.useState(value), fromDate = _d[0], setFromDate = _d[1];
     var _e = React.useState(valueSecondary), toDate = _e[0], setToDate = _e[1];
     var _f = useFormContext(), errors = _f.errors, register = _f.register, setValue = _f.setValue;
@@ -59,19 +61,23 @@ export var DatePickerRange = function (_a) {
             label,
             ":",
             requiredFrom || requiredTo ? "*" : ""),
-        React.createElement("div", { className: (inlineLabel ? "col-8" : "") },
-            React.createElement("div", { className: "row date-picker-range__wrapper" },
-                React.createElement("div", { className: "col" },
-                    React.createElement(DatePicker, { name: name, id: name, selected: fromDate, onChange: function (date) {
-                            setFromDate(date);
-                            setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
-                        }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), maxDate: toDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
-                    React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" && "Välj ett datum" : "")),
-                React.createElement("span", { className: "date-connector" }, "-"),
-                React.createElement("div", { className: "col" },
-                    React.createElement(DatePicker, { name: nameSecondary, id: nameSecondary, selected: toDate, onChange: function (date) {
-                            setToDate(date);
-                            setValue(nameSecondary, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
-                        }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), minDate: fromDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
-                    React.createElement("span", { className: "text-danger" }, errors ? [nameSecondary] && ((_c = errors[nameSecondary]) === null || _c === void 0 ? void 0 : _c.type) === "required" && "Välj ett datum" : ""))))));
+        React.createElement("div", { className: "input-group" },
+            React.createElement("div", { className: (inlineLabel ? "col-8" : "") },
+                React.createElement("div", { className: "row date-picker-range__wrapper" },
+                    React.createElement("div", { className: "col" },
+                        React.createElement(DatePicker, { name: name, id: name, selected: fromDate, onChange: function (date) {
+                                setFromDate(date);
+                                setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
+                            }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), maxDate: toDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
+                        React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" && "Välj ett datum" : "")),
+                    React.createElement("span", { className: "date-connector" }, "-"),
+                    React.createElement("div", { className: "col" },
+                        React.createElement(DatePicker, { name: nameSecondary, id: nameSecondary, selected: toDate, onChange: function (date) {
+                                setToDate(date);
+                                setValue(nameSecondary, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
+                            }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), minDate: fromDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
+                        React.createElement("span", { className: "text-danger" }, errors ? [nameSecondary] && ((_c = errors[nameSecondary]) === null || _c === void 0 ? void 0 : _c.type) === "required" && "Välj ett datum" : "")),
+                    tooltipDescription ?
+                        React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
+                        : null)))));
 };

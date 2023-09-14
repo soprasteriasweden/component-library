@@ -5,9 +5,11 @@ import { IDatePickerRange } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
+import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 registerLocale('sv-se', { ...svSE, options: { ...svSE.options, weekStartsOn: 1 } });
 
-export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabled, requiredFrom, requiredTo, value, valueSecondary }) => {
+export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabled, requiredFrom, requiredTo, value, valueSecondary, tooltipDescription }) => {
 
     const [fromDate, setFromDate] = React.useState<Date | undefined | null>(value);
     const [toDate, setToDate] = React.useState<Date | undefined | null>(valueSecondary);
@@ -52,53 +54,59 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
             <label className={inlineLabel ? "col-4 col-form-label" : ""}>{label}:{requiredFrom || requiredTo ? "*" : ""}</label>
-
-            <div className={(inlineLabel ? "col-8" : "")}>
-                <div className="row date-picker-range__wrapper">
-                    <div className="col">
-                        <DatePicker
-                            name={name}
-                            id={name}
-                            selected={fromDate}
-                            onChange={date => {
-                                setFromDate(date);
-                                setValue(name, date?.toLocaleDateString("sv-se"));
-                            }
-                            }
-                            dateFormat="yyyy-MM-dd"
-                            className={"form-control form-control-sm " + (disabled ? "disabled " : "")}
-                            maxDate={toDate}
-                            autoComplete="off"
-                            locale="sv-se"
-                            showYearDropdown
-                            showMonthDropdown
-                            onChangeRaw={e => e.preventDefault()}
-                            isClearable
-                        />
-                        <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" && "Välj ett datum" : ""}</span>
-                    </div>
-                    <span className="date-connector">-</span>
-                    <div className="col">
-                        <DatePicker
-                            name={nameSecondary}
-                            id={nameSecondary}
-                            selected={toDate}
-                            onChange={date => {
-                                setToDate(date);
-                                setValue(nameSecondary, date?.toLocaleDateString("sv-se"));
-                            }
-                            }
-                            dateFormat="yyyy-MM-dd"
-                            className={"form-control form-control-sm " + (disabled ? "disabled " : "")}
-                            minDate={fromDate}
-                            autoComplete="off"
-                            locale="sv-se"
-                            showYearDropdown
-                            showMonthDropdown
-                            onChangeRaw={e => e.preventDefault()}
-                            isClearable
-                        />
-                        <span className="text-danger">{errors ? [nameSecondary] && (errors[nameSecondary] as any)?.type === "required" && "Välj ett datum" : ""}</span>
+            <div className="input-group">
+                <div className={(inlineLabel ? "col-8" : "")}>
+                    <div className="row date-picker-range__wrapper">
+                        <div className="col">
+                            <DatePicker
+                                name={name}
+                                id={name}
+                                selected={fromDate}
+                                onChange={date => {
+                                    setFromDate(date);
+                                    setValue(name, date?.toLocaleDateString("sv-se"));
+                                }
+                                }
+                                dateFormat="yyyy-MM-dd"
+                                className={"form-control form-control-sm " + (disabled ? "disabled " : "")}
+                                maxDate={toDate}
+                                autoComplete="off"
+                                locale="sv-se"
+                                showYearDropdown
+                                showMonthDropdown
+                                onChangeRaw={e => e.preventDefault()}
+                                isClearable
+                            />
+                            <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" && "Välj ett datum" : ""}</span>
+                        </div>
+                        <span className="date-connector">-</span>
+                        <div className="col">
+                            <DatePicker
+                                name={nameSecondary}
+                                id={nameSecondary}
+                                selected={toDate}
+                                onChange={date => {
+                                    setToDate(date);
+                                    setValue(nameSecondary, date?.toLocaleDateString("sv-se"));
+                                }
+                                }
+                                dateFormat="yyyy-MM-dd"
+                                className={"form-control form-control-sm " + (disabled ? "disabled " : "")}
+                                minDate={fromDate}
+                                autoComplete="off"
+                                locale="sv-se"
+                                showYearDropdown
+                                showMonthDropdown
+                                onChangeRaw={e => e.preventDefault()}
+                                isClearable
+                            />
+                            <span className="text-danger">{errors ? [nameSecondary] && (errors[nameSecondary] as any)?.type === "required" && "Välj ett datum" : ""}</span>
+                        </div>
+                        {
+                            tooltipDescription ?
+                                <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
+                                : null
+                        }
                     </div>
                 </div>
             </div>

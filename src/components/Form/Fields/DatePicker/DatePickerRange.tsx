@@ -54,8 +54,8 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
             <label className={inlineLabel ? "col-4 col-form-label" : ""}>{label}:{requiredFrom || requiredTo ? "*" : ""}</label>
-            <div className="input-group">
-                <div className={(inlineLabel ? "col-8" : "")}>
+            <div className={(inlineLabel ? "col-8" : "")}>
+                <div className="input-group">
                     <div className="row date-picker-range__wrapper">
                         <div className="col">
                             <DatePicker
@@ -104,6 +104,7 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                         </div>
                         {
                             tooltipDescription ?
+
                                 <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
                                 : null
                         }

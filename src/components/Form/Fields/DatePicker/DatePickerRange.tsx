@@ -102,13 +102,12 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                             />
                             <span className="text-danger">{errors ? [nameSecondary] && (errors[nameSecondary] as any)?.type === "required" && "Välj ett datum" : ""}</span>
                         </div>
-                        {
-                            tooltipDescription ?
-
-                                <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
-                                : null
-                        }
                     </div>
+                    {
+                        tooltipDescription ?
+                            <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
+                            : null
+                    }
                 </div>
             </div>
         </div>

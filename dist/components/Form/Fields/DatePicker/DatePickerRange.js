@@ -61,8 +61,8 @@ export var DatePickerRange = function (_a) {
             label,
             ":",
             requiredFrom || requiredTo ? "*" : ""),
-        React.createElement("div", { className: "input-group" },
-            React.createElement("div", { className: (inlineLabel ? "col-8" : "") },
+        React.createElement("div", { className: (inlineLabel ? "col-8" : "") },
+            React.createElement("div", { className: "input-group" },
                 React.createElement("div", { className: "row date-picker-range__wrapper" },
                     React.createElement("div", { className: "col" },
                         React.createElement(DatePicker, { name: name, id: name, selected: fromDate, onChange: function (date) {

@@ -1,5 +1,5 @@
 # Changelog
-## v1.0.22
+## v1.0.30
 * Added tooltip icon support to DatePickerRange
 
 ## v1.0.26

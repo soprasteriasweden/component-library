@@ -26,7 +26,7 @@ export interface IDatePicker extends IFormInputBase, IFormInputValidation, IInpu
     onChange?: (val: Date | null) => void;
 }
 
-export interface IDatePickerRange extends IDatePicker, IColumnPlacement {
+export interface IDatePickerRange extends IDatePicker {
     nameSecondary: string;
     valueSecondary?: Date;
     requiredFrom?: boolean;

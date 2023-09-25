@@ -1,4 +1,8 @@
 # Changelog
+
+## v1.0.31
+* Added IColumnPlacement to DatePickerRange
+
 ## v1.0.30
 * Added tooltip icon support to DatePickerRange
 

@@ -9,7 +9,7 @@ import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 registerLocale('sv-se', { ...svSE, options: { ...svSE.options, weekStartsOn: 1 } });
 
-export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabled, requiredFrom, requiredTo, value, valueSecondary, tooltipDescription }) => {
+export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabled, requiredFrom, requiredTo, value, valueSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
 
     const [fromDate, setFromDate] = React.useState<Date | undefined | null>(value);
     const [toDate, setToDate] = React.useState<Date | undefined | null>(valueSecondary);
@@ -53,8 +53,8 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
-            <label className={inlineLabel ? "col-4 col-form-label" : ""}>{label}:{requiredFrom || requiredTo ? "*" : ""}</label>
-            <div className={(inlineLabel ? "col-8" : "")}>
+            <label className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>{label}:{requiredFrom || requiredTo ? "*" : ""}</label>
+            <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     <div className="row date-picker-range__wrapper">
                         <div className="col">

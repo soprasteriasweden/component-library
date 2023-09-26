@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.32
+* Added optional close button to Modal
+
 ## v1.0.31
 * Added IColumnPlacement to DatePickerRange
 

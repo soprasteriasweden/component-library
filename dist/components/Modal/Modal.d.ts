@@ -8,6 +8,7 @@ interface IModal extends IChildren {
     id: string;
     modalSize?: ModalSize;
     preventCloseOnOutsideClick?: boolean;
+    showCloseButton?: boolean;
 }
 declare enum ModalSize {
     small = "modal-sm",
@@ -15,5 +16,5 @@ declare enum ModalSize {
     large = "modal-lg",
     extraLarge = "modal-xl"
 }
-declare const Modal: ({ header, children, id, modalSize, preventCloseOnOutsideClick }: IModal) => React.JSX.Element;
+declare const Modal: ({ header, children, id, modalSize, preventCloseOnOutsideClick, showCloseButton }: IModal) => React.JSX.Element;
 export { Modal, ModalBody, ModalFooter, ModalSize };

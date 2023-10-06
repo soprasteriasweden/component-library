@@ -3,7 +3,8 @@ import { Meta, Story } from '@storybook/react';
 import { useForm, FormContext } from 'react-hook-form';
 
 import { PersonalIdentityInput } from './PersonalIdentityInput';
-import { IFormInputBaseWithValidation } from '../../../../models/IFormInputBaseWithValidation';
+import { Form } from '../../../Form/Form';
+import { IFormInputBaseWithValidation } from '../../../models/IFormInputBaseWithValidation';
 import { CustomSubmitButton, CustomSubmitButtonType } from '../../CustomSubmitButton'
 
 // Extend ITextInput to include formMethods for Storybook.
@@ -24,15 +25,16 @@ const Template: Story<IFormInputBaseWithValidation> = (args) => {
     };
 
     return (
-        <FormContext {...methods}>
+        <Form {...methods} onSubmit={onSubmit}>
             <PersonalIdentityInput {...args} />
-        </FormContext>
+            <CustomSubmitButton>Test</CustomSubmitButton>
+        </Form>
     );
 };
 
 export const FirstExample = Template.bind({});
 FirstExample.args = {
-    label: 'Tooltip example',
+    label: 'Personnummer/Samordningsnummer',
     inlineLabel: true,
     tooltipDescription: "Testar lite",
     required: true,

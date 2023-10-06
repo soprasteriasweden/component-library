@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.33
+* Fixed regex for PersonalIdentityInput to enforce 12-digit Swedish personal and coordination numbers
+
 ## v1.0.32
 * Added optional close button to Modal
 

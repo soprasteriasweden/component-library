@@ -1,45 +1,57 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { useForm, FormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { Checkbox } from './Checkbox';
+import { Form } from '../../../Form/Form';
 import { ICheckbox } from '../../../../models/IFormInput';
-
-// Extend ITextInput to include formMethods for Storybook.
-interface StorybookICheckbox extends ICheckbox {
-    formMethods: any; // Replace 'any' with the actual type if you know it
-}
+import { CustomSubmitButton } from '../../CustomSubmitButton'
 
 export default {
     title: 'Form/Fields/Checkbox',
     component: Checkbox,
 } as Meta;
 
-const Template: Story<StorybookICheckbox> = (args) => {
+const Template: Story<ICheckbox> = (args) => {
     const methods = useForm();
 
+    const onSubmit = (data: any) => {
+        console.log('Form Submitted:', data);
+    };
+
     return (
-        <FormContext {...methods}>
+        <Form {...methods} onSubmit={onSubmit}>
             <Checkbox {...args} />
-        </FormContext>
+            <CustomSubmitButton>Test</CustomSubmitButton>
+        </Form>
     );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-    id: 'test',
     label: 'Default Label',
+    name: 'default'
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
     label: 'Disabled Label',
+    name: 'disabled',
     disabled: true,
 };
 
 export const WithTooltip = Template.bind({});
 WithTooltip.args = {
     label: 'Checkbox',
+    name: 'test2',
     id: 'test2',
     tooltipDescription: 'test'
+};
+
+export const Required = Template.bind({});
+Required.args = {
+    label: 'Checkbox',
+    name: 'test3',
+    tooltipDescription: 'test',
+    required: true
 };

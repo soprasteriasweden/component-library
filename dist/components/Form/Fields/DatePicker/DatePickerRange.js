@@ -17,6 +17,7 @@ import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { getNestedObjectValue } from "../../../../utils/utils";
 registerLocale('sv-se', __assign(__assign({}, svSE), { options: __assign(__assign({}, svSE.options), { weekStartsOn: 1 }) }));
 export var DatePickerRange = function (_a) {
     var _b, _c;
@@ -56,6 +57,8 @@ export var DatePickerRange = function (_a) {
         setValue(nameSecondary, undefined);
         setToDate(undefined);
     };
+    var errorType = (_b = getNestedObjectValue(errors, name)) === null || _b === void 0 ? void 0 : _b.type;
+    var errorTypeSecondary = (_c = getNestedObjectValue(errors, nameSecondary)) === null || _c === void 0 ? void 0 : _c.type;
     return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
         React.createElement("label", { className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
             label,
@@ -69,14 +72,14 @@ export var DatePickerRange = function (_a) {
                                 setFromDate(date);
                                 setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
                             }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), maxDate: toDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
-                        React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" && "Välj ett datum" : "")),
+                        React.createElement("span", { className: "text-danger" }, errorType === "required" && "Välj ett datum")),
                     React.createElement("span", { className: "date-connector" }, "-"),
                     React.createElement("div", { className: "col" },
                         React.createElement(DatePicker, { name: nameSecondary, id: nameSecondary, selected: toDate, onChange: function (date) {
                                 setToDate(date);
                                 setValue(nameSecondary, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
                             }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), minDate: fromDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
-                        React.createElement("span", { className: "text-danger" }, errors ? [nameSecondary] && ((_c = errors[nameSecondary]) === null || _c === void 0 ? void 0 : _c.type) === "required" && "Välj ett datum" : ""))),
+                        React.createElement("span", { className: "text-danger" }, errorTypeSecondary === "required" && "Välj ett datum"))),
                 tooltipDescription ?
                     React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
                     : null))));

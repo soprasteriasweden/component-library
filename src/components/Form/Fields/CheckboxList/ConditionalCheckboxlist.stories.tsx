@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { useForm, FormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
+import { CustomSubmitButton, Form } from '../../../Form/Form';
 import { ConditionalCheckboxList } from './ConditionalCheckboxList';
 import { ICheckboxListItem, IConditionalCheckboxList } from '../../../../models/IFormInput';
 
@@ -17,10 +18,15 @@ export default {
 const Template: Story<StorybookIConditionalCheckboxList> = (args) => {
     const methods = useForm();
 
+    const onSubmit = (data: any) => {
+        console.log('Form Submitted:', data);
+    };
+
     return (
-        <FormContext {...methods}>
+        <Form {...methods} onSubmit={onSubmit}>
             <ConditionalCheckboxList {...args} />
-        </FormContext>
+            <CustomSubmitButton>Test</CustomSubmitButton>
+        </Form>
     );
 };
 
@@ -60,6 +66,7 @@ const mockListItems: ICheckboxListItem[] = [
 export const Example1 = Template.bind({});
 Example1.args = {
     id: 'example1',
+    name: 'example1',
     label: 'Example 1',
     required: true,
     items: mockListItems,
@@ -69,6 +76,7 @@ Example1.args = {
 export const Example2 = Template.bind({});
 Example2.args = {
     id: 'example2',
+    name: 'example2',
     label: 'Example 2',
     required: false,
     items: mockListItems,

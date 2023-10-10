@@ -3,6 +3,7 @@ import { ICheckbox } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import "../../../../assets/styles/Checkbox.style.scss";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
+import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tooltipDescription, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
 
@@ -49,6 +50,8 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tool
         }
     }
 
+    const errorType = getNestedObjectValue(errors, name)?.type;
+
     return (
         <div className={className + " custom-checkbox form-group row"}>
             <label className={`col-${labelCol}`} htmlFor={id}>
@@ -68,8 +71,7 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tool
                     value={value}
                     ref={register({ required: required })}
                 />
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
-                    (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i") : ""}</span>
+                <span className="text-danger">{errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")}</span>
             </div>
         </div >
     )

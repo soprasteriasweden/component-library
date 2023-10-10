@@ -1,12 +1,14 @@
 import * as React from "react";
-import { IPersonalIdentityInput } from '../../../../models/IFormInput';
+import { IHsaIdInput } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { getNestedObjectValue } from "../../../../utils/utils";
 
-export const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInput> = ({ name, tooltipDescription, label, required, className, inlineLabel, disabled, placeholder, defaultValue, requiredValidationMessage, labelCol = 4, inputCol = 8 }) => {
+export const HsaIdInput: React.FunctionComponent<IHsaIdInput> = ({ name, tooltipDescription, label, required, className, inlineLabel, disabled, placeholder, defaultValue, requiredValidationMessage, labelCol = 4, inputCol = 8 }) => {
 
     const { errors, register } = useFormContext();
+    const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -19,7 +21,7 @@ export const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInp
                         className="form-control form-control-sm "
                         placeholder={placeholder}
                         defaultValue={defaultValue}
-                        ref={register({ required: required, pattern: /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]|6[1-9]|7[0-9]|8[0-9]|9[0-1])[-+]\d{4}$/ })}
+                        ref={register({ required: required, pattern: /^(?=.{1,31}$)SE\d{10,12}-[a-zA-Z0-9]+$/ })}
                         disabled={disabled} />
                     {
                         tooltipDescription ?
@@ -27,9 +29,8 @@ export const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInp
                             : null
                     }
                 </div>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
-                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "pattern" && label + " i fel format" : ""}</span>
+                <span className="text-danger">{errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
+                <span className="text-danger">{errorType === "pattern" && label + " i fel format"}</span>
             </div>
         </div>
     )

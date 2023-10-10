@@ -1,9 +1,10 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { useForm, FormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { DatePickerRange } from './DatePickerRange';
 import { IDatePickerRange } from '../../../../models/IFormInput';
 import 'react-datepicker/dist/react-datepicker.css';
+import { CustomSubmitButton, Form } from '../../Form';
 
 interface StorybookIDatePickerRange extends IDatePickerRange {
     formMethods: any;
@@ -18,10 +19,15 @@ const Template: Story<StorybookIDatePickerRange> = (args) => {
 
     const methods = useForm();
 
+    const onSubmit = (data: any) => {
+        console.log('Form Submitted:', data);
+    };
+
     return (
-        <FormContext {...methods}>
+        <Form {...methods} onSubmit={onSubmit}>
             <DatePickerRange {...args} />
-        </FormContext>
+            <CustomSubmitButton>Test</CustomSubmitButton>
+        </Form>
     );
 };
 

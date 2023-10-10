@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.0.38
+* Fixed encoding for HsaIdInput
+
+## v1.0.37
+* Added support for validation for nested name for components: Checkbox, DatePickerRange, EmailInput, HsaIdInput, TextInput
+
+## v1.0.36
+* Export HsaIdInput component
+
+## v1.0.35
+* Added HsaIdInput component.
+* Added IColumnPlacement for EmailInput and PersonalIdentityInput
+
 ## v1.0.34
 * Removed optional close button to Modal
 

@@ -11,6 +11,18 @@ export interface IFormInputBaseWithValidation extends IFormInputBase, IFormInput
     placeholder?: string;
 }
 
+export interface IHsaIdInput extends IFormInputBaseWithValidation, IColumnPlacement {
+
+}
+
+export interface IPersonalIdentityInput extends IFormInputBaseWithValidation, IColumnPlacement {
+
+}
+
+export interface IEmailInput extends IFormInputBaseWithValidation, IColumnPlacement {
+
+}
+
 export interface ITextInput extends IFormInputBaseWithValidation, IFormInputBase, IFormInputValidation, IInputPosition, IPlainInput, IColumnPlacement {
 }
 

@@ -2,17 +2,17 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 
-import { PersonalIdentityInput } from './PersonalIdentityInput';
+import { HsaIdInput } from './HsaIdInput';
 import { Form } from '../../../Form/Form';
-import { IPersonalIdentityInput } from '../../../../models/IFormInput';
+import { IHsaIdInput } from '../../../../models/IFormInput';
 import { CustomSubmitButton } from '../../CustomSubmitButton'
 
 export default {
-    title: 'Form/Fields/PersonalIdentityInput',
-    component: PersonalIdentityInput,
+    title: 'Form/Fields/HsaIdInput',
+    component: HsaIdInput,
 } as Meta;
 
-const Template: Story<IPersonalIdentityInput> = (args) => {
+const Template: Story<IHsaIdInput> = (args) => {
     const methods = useForm();
 
     const onSubmit = (data: any) => {
@@ -21,25 +21,25 @@ const Template: Story<IPersonalIdentityInput> = (args) => {
 
     return (
         <Form {...methods} onSubmit={onSubmit}>
-            <PersonalIdentityInput {...args} />
+            <HsaIdInput {...args} />
             <CustomSubmitButton>Test</CustomSubmitButton>
         </Form>
     );
 };
 
-export const FirstExample = Template.bind({});
-FirstExample.args = {
-    label: 'Personnummer/Samordningsnummer',
+export const HsaWithTooltip = Template.bind({});
+HsaWithTooltip.args = {
+    label: 'HSA-ID med tooltip',
     inlineLabel: true,
     tooltipDescription: "Testar lite",
     required: true,
     name: "test"
 };
 
-export const SecondExample = Template.bind({});
-SecondExample.args = {
-    label: 'Personnummer/Samordningsnummer',
+export const HsaWithoutTooltip = Template.bind({});
+HsaWithoutTooltip.args = {
+    label: 'HSA-ID utan tooltip',
     inlineLabel: true,
     required: true,
-    name: "test"
+    name: "newUser.userHsaId"
 };

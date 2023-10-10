@@ -2,6 +2,7 @@ import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import "../../../../assets/styles/Checkbox.style.scss";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
+import { getNestedObjectValue } from "../../../../utils/utils";
 export var Checkbox = function (_a) {
     var _b;
     var label = _a.label, name = _a.name, tooltipDescription = _a.tooltipDescription, className = _a.className, disabled = _a.disabled, required = _a.required, checked = _a.checked, value = _a.value, requiredValidationMessage = _a.requiredValidationMessage, id = _a.id, _c = _a.labelCol, labelCol = _c === void 0 ? 4 : _c, _d = _a.inputCol, inputCol = _d === void 0 ? 8 : _d, onChange = _a.onChange, withColumn = _a.withColumn;
@@ -45,6 +46,7 @@ export var Checkbox = function (_a) {
             }
         }
     };
+    var errorType = (_b = getNestedObjectValue(errors, name)) === null || _b === void 0 ? void 0 : _b.type;
     return (React.createElement("div", { className: className + " custom-checkbox form-group row" },
         React.createElement("label", { className: "col-".concat(labelCol), htmlFor: id }, tooltipDescription ?
             React.createElement(TooltipItem, { key: id, title: label, description: tooltipDescription })
@@ -53,6 +55,5 @@ export var Checkbox = function (_a) {
                 withColumn ? ":" : "")),
         React.createElement("div", { className: "col-".concat(inputCol) },
             React.createElement("input", { type: "checkbox", name: name, id: id, disabled: disabled, checked: isChecked, onChange: function () { return toggleIsChecked(); }, value: value, ref: register({ required: required }) }),
-            React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" &&
-                (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i") : ""))));
+            React.createElement("span", { className: "text-danger" }, errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")))));
 };

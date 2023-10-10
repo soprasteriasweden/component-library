@@ -1,3 +1,3 @@
 import * as React from "react";
-import { IFormInputBaseWithValidation } from '../../../../models/IFormInput';
-export declare const EmailInput: React.FunctionComponent<IFormInputBaseWithValidation>;
+import { IEmailInput } from '../../../../models/IFormInput';
+export declare const EmailInput: React.FunctionComponent<IEmailInput>;

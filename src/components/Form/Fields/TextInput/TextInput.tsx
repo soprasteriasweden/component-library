@@ -3,6 +3,7 @@ import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import { ITextInput } from '../../../../models/IFormInput';
 import { InputIconTooltip } from '../TooltipItem/InputIconTooltip';
+import { getNestedObjectValue } from '../../../../utils/utils';
 
 export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, className, disabled, inlineLabel, required, placeholder, defaultValue, requiredValidationMessage, readonly, minLength, maxLength, pattern, patternValidationMessage, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
 
@@ -29,6 +30,8 @@ export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, cl
             setValue(name, undefined);
         }
     }
+
+    const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -61,10 +64,8 @@ export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, cl
                             </>
                     }
                 </div>
-                <span className="text-danger">{errors ? [name] && ((errors[name] as any)?.type === "required" || (errors[name] as any)?.type === "validate") &&
-                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "pattern" &&
-                    (patternValidationMessage ? patternValidationMessage : label + " i fel format") : ""}</span>
+                <span className="text-danger">{(errorType === "required" || errorType === "validate") && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
+                <span className="text-danger">{errorType === "pattern" && (patternValidationMessage ? patternValidationMessage : label + " i fel format")}</span>
             </div>
         </div>
     )

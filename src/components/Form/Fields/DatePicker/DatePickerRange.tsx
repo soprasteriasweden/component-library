@@ -7,6 +7,7 @@ import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { getNestedObjectValue } from "../../../../utils/utils";
 registerLocale('sv-se', { ...svSE, options: { ...svSE.options, weekStartsOn: 1 } });
 
 export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabled, requiredFrom, requiredTo, value, valueSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
@@ -51,6 +52,9 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
         setToDate(undefined);
     }
 
+    const errorType = getNestedObjectValue(errors, name)?.type;
+    const errorTypeSecondary = getNestedObjectValue(errors, nameSecondary)?.type;
+
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
             <label className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>{label}:{requiredFrom || requiredTo ? "*" : ""}</label>
@@ -77,7 +81,7 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 onChangeRaw={e => e.preventDefault()}
                                 isClearable
                             />
-                            <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" && "Välj ett datum" : ""}</span>
+                            <span className="text-danger">{errorType === "required" && "Välj ett datum"}</span>
                         </div>
                         <span className="date-connector">-</span>
                         <div className="col">
@@ -100,7 +104,7 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 onChangeRaw={e => e.preventDefault()}
                                 isClearable
                             />
-                            <span className="text-danger">{errors ? [nameSecondary] && (errors[nameSecondary] as any)?.type === "required" && "Välj ett datum" : ""}</span>
+                            <span className="text-danger">{errorTypeSecondary === "required" && "Välj ett datum"}</span>
                         </div>
                     </div>
                     {

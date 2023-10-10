@@ -24,6 +24,7 @@ import { UnorderedList } from "./Fields/UnorderedList/UnorderedList";
 import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
 import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckboxList";
 import { Dropdown } from "./Fields/Dropdown/Dropdown";
+import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -70,5 +71,6 @@ export {
     UnorderedList,
     SelectGroup,
     ConditionalCheckboxList,
-    Dropdown
+    Dropdown,
+    HsaIdInput
 }

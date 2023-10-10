@@ -1,3 +1,3 @@
 import * as React from "react";
-import { IFormInputBaseWithValidation } from '../../../../models/IFormInput';
-export declare const PersonalIdentityInput: React.FunctionComponent<IFormInputBaseWithValidation>;
+import { IPersonalIdentityInput } from '../../../../models/IFormInput';
+export declare const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInput>;

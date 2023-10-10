@@ -10,14 +10,11 @@ var ModalSize;
     ModalSize["extraLarge"] = "modal-xl";
 })(ModalSize || (ModalSize = {}));
 var Modal = function (_a) {
-    var header = _a.header, children = _a.children, id = _a.id, _b = _a.modalSize, modalSize = _b === void 0 ? ModalSize.normal : _b, preventCloseOnOutsideClick = _a.preventCloseOnOutsideClick, showCloseButton = _a.showCloseButton;
+    var header = _a.header, children = _a.children, id = _a.id, _b = _a.modalSize, modalSize = _b === void 0 ? ModalSize.normal : _b, preventCloseOnOutsideClick = _a.preventCloseOnOutsideClick;
     return (React.createElement("div", { className: "modal", "data-backdrop": preventCloseOnOutsideClick ? "static" : "", role: "dialog", id: id },
         React.createElement("div", { className: "modal-dialog modal-dialog-centered " + modalSize, role: "document" },
             React.createElement("div", { className: "modal-content" },
                 React.createElement("div", { className: "modal-header" },
-                    showCloseButton ?
-                        React.createElement("button", { type: "button", className: "close", "data-dismiss": "modal" }, "\uFFFD")
-                        : null,
                     React.createElement("h4", { className: "modal-title" }, header)),
                 children))));
 };

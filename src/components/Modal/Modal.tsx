@@ -9,7 +9,6 @@ interface IModal extends IChildren {
     id: string;
     modalSize?: ModalSize;
     preventCloseOnOutsideClick?: boolean;
-    showCloseButton?: boolean;
 }
 
 enum ModalSize {
@@ -19,16 +18,11 @@ enum ModalSize {
     extraLarge = "modal-xl"
 }
 
-const Modal = ({ header, children, id, modalSize = ModalSize.normal, preventCloseOnOutsideClick, showCloseButton }: IModal) => (
+const Modal = ({ header, children, id, modalSize = ModalSize.normal, preventCloseOnOutsideClick }: IModal) => (
     <div className="modal" data-backdrop={preventCloseOnOutsideClick ? "static" : ""} role="dialog" id={id}>
         <div className={"modal-dialog modal-dialog-centered " + modalSize} role="document">
             <div className="modal-content">
                 <div className="modal-header">
-                    {
-                        showCloseButton ?
-                            <button type="button" className="close" data-dismiss="modal">×</button>
-                            : null
-                    }
                     <h4 className="modal-title">{header}</h4>
                 </div>
                 {children}

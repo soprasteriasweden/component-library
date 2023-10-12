@@ -7,7 +7,7 @@ import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue }) => {
 
-    const { register, setValue, errors } = useFormContext();
+    const { register, unregister, setValue, errors } = useFormContext();
     const [selectedValue, setSelectedValue] = React.useState<IOption | IOption[]>();
     const [options, setOptions] = React.useState<IOption[]>([])
     var selectRef = React.useRef<any>();
@@ -20,6 +20,10 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
 
     React.useEffect(() => {
         register({ name: name }, { required: required });
+
+        return () => {
+            unregister(name);
+        };
     }, []);
 
     React.useEffect(() => {

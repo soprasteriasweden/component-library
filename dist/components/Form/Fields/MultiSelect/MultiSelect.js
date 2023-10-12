@@ -6,12 +6,15 @@ import { getNestedObjectValue } from "../../../../utils/utils";
 export var MultiSelect = function (_a) {
     var _b;
     var values = _a.values, defaultValue = _a.defaultValue, labelCol = _a.labelCol, inputCol = _a.inputCol, name = _a.name, onValueChange = _a.onValueChange, isLoading = _a.isLoading, isMultiple = _a.isMultiple, label = _a.label, required = _a.required, placeholder = _a.placeholder, disabled = _a.disabled, isClearable = _a.isClearable, resetValue = _a.resetValue;
-    var _c = useFormContext(), register = _c.register, setValue = _c.setValue, errors = _c.errors;
+    var _c = useFormContext(), register = _c.register, unregister = _c.unregister, setValue = _c.setValue, errors = _c.errors;
     var _d = React.useState(), selectedValue = _d[0], setSelectedValue = _d[1];
     var _e = React.useState([]), options = _e[0], setOptions = _e[1];
     var selectRef = React.useRef();
     React.useEffect(function () {
         register({ name: name }, { required: required });
+        return function () {
+            unregister(name);
+        };
     }, []);
     React.useEffect(function () {
         var _a, _b;

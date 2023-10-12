@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.41
+* Fixed unregister bug in MultiSelect
+
 ## v1.0.40
 * Removed console.log from MultiSelect
  

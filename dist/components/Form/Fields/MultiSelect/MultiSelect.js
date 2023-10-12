@@ -2,6 +2,7 @@ import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import Select, { createFilter } from 'react-select';
 import { SelectStyles } from "../../../MenuList/MenuList";
+import { getNestedObjectValue } from "../../../../utils/utils";
 export var MultiSelect = function (_a) {
     var _b;
     var values = _a.values, defaultValue = _a.defaultValue, labelCol = _a.labelCol, inputCol = _a.inputCol, name = _a.name, onValueChange = _a.onValueChange, isLoading = _a.isLoading, isMultiple = _a.isMultiple, label = _a.label, required = _a.required, placeholder = _a.placeholder, disabled = _a.disabled, isClearable = _a.isClearable, resetValue = _a.resetValue;
@@ -70,13 +71,14 @@ export var MultiSelect = function (_a) {
             }
         }
         else {
-            setValue(name, isMultiple ? [] : undefined);
-            setSelectedValue(isMultiple ? [] : undefined);
+            setValue(name, isMultiple ? undefined : undefined);
+            setSelectedValue(isMultiple ? undefined : undefined);
             if (onValueChange) {
-                onValueChange(isMultiple ? [] : undefined);
+                onValueChange(isMultiple ? undefined : undefined);
             }
         }
     };
+    var errorType = (_b = getNestedObjectValue(errors, name)) === null || _b === void 0 ? void 0 : _b.type;
     return (React.createElement("div", { className: "form-group row" },
         React.createElement("label", { className: "col-".concat(labelCol !== null && labelCol !== void 0 ? labelCol : 4, " col-form-label") },
             label,
@@ -88,5 +90,5 @@ export var MultiSelect = function (_a) {
                     matchFrom: 'any',
                     stringify: function (option) { return "".concat(option.label); }
                 }), styles: SelectStyles, options: options, value: selectedValue, onChange: function (selectedOption) { return onChange(selectedOption); }, isLoading: isLoading, loadingMessage: function () { return "Laddar"; }, isMulti: isMultiple, isDisabled: disabled === true }),
-            React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" && "V�lj minst ett v�rde" : ""))));
+            React.createElement("span", { className: "text-danger" }, errorType === "required" && "Välj minst ett värde"))));
 };

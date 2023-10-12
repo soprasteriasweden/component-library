@@ -61,8 +61,8 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
     const handleResetValue = () => {
         if (selectRef?.current) {
             selectRef.current.select.clearValue();
-            setValue(name, undefined)
-            setSelectedValue(undefined)
+            setValue(name, undefined);
+            setSelectedValue(undefined);
         }
     }
 
@@ -85,10 +85,10 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
             }
         }
         else {
-            setValue(name, isMultiple ? [] : undefined);
-            setSelectedValue(isMultiple ? [] : undefined);
+            setValue(name, isMultiple ? undefined : undefined);
+            setSelectedValue(isMultiple ? undefined : undefined);
             if (onValueChange) {
-                onValueChange(isMultiple ? [] : undefined);
+                onValueChange(isMultiple ? undefined : undefined);
             }
         }
     }

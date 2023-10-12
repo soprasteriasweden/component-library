@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.40
+* Removed console.log from MultiSelect
+ 
+## v1.0.39
+* Fixed validation i MultiSelect when something been selected but then removed
+
 ## v1.0.38
 * Fixed encoding for HsaIdInput
 

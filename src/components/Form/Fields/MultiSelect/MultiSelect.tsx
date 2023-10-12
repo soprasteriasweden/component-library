@@ -3,6 +3,7 @@ import { IMultiSelect } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import Select, { createFilter, ValueType } from 'react-select';
 import { SelectStyles } from "../../../MenuList/MenuList";
+import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue }) => {
 
@@ -92,6 +93,8 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
         }
     }
 
+    const errorType = getNestedObjectValue(errors, name)?.type;
+
     return (
         <div className="form-group row">
             <label className={`col-${labelCol ?? 4} col-form-label`}>{label}:{required ? "*" : ""}</label>
@@ -113,8 +116,7 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
                     isMulti={isMultiple}
                     isDisabled={disabled === true}
                 />
-
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" && "V‰lj minst ett v‰rde" : ""}</span>
+                <span className="text-danger">{errorType === "required" && "V√§lj minst ett v√§rde"}</span>
             </div>
         </div>
     )

@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { ButtonType, CustomButton } from '../../../CustomButton/CustomButton';
 export var FileUpload = function (_a) {
-    var _b = _a.maxSizeBytes, maxSizeBytes = _b === void 0 ? (5 * Math.pow(2, 20)) : _b, label = _a.label, allowedFileTypes = _a.allowedFileTypes, name = _a.name, disabled = _a.disabled, _c = _a.multiple, multiple = _c === void 0 ? false : _c, inlineLabel = _a.inlineLabel, className = _a.className, required = _a.required, requiredValidationMessage = _a.requiredValidationMessage, _d = _a.labelCol, labelCol = _d === void 0 ? 4 : _d, _e = _a.inputCol, inputCol = _e === void 0 ? 8 : _e, documentType = _a.documentType, numOfFiles = _a.numOfFiles;
+    var _b = _a.maxSizeBytes, maxSizeBytes = _b === void 0 ? (5 * Math.pow(2, 20)) : _b, label = _a.label, allowedFileTypes = _a.allowedFileTypes, name = _a.name, disabled = _a.disabled, _c = _a.multiple, multiple = _c === void 0 ? false : _c, inlineLabel = _a.inlineLabel, className = _a.className, required = _a.required, requiredValidationMessage = _a.requiredValidationMessage, _d = _a.labelCol, labelCol = _d === void 0 ? 4 : _d, _e = _a.inputCol, inputCol = _e === void 0 ? 8 : _e, documentType = _a.documentType, numOfFiles = _a.numOfFiles, maxFiles = _a.maxFiles;
     var _f = useFormContext(), errors = _f.errors, register = _f.register, setValue = _f.setValue, unregister = _f.unregister;
     var _g = React.useState([]), selectedFiles = _g[0], setSelectedFiles = _g[1];
     var _h = React.useState([]), selectedDocumentTypeIds = _h[0], setSelectedDocumentTypeIds = _h[1];
@@ -26,8 +26,9 @@ export var FileUpload = function (_a) {
         accept: allowedFileTypes,
         multiple: multiple,
         disabled: disabled,
-        maxSize: maxSizeBytes
-    }), getRootProps = _k.getRootProps, getInputProps = _k.getInputProps, acceptedFiles = _k.acceptedFiles, rejectedFiles = _k.rejectedFiles;
+        maxSize: maxSizeBytes,
+        maxFiles: maxFiles
+    }), getRootProps = _k.getRootProps, getInputProps = _k.getInputProps, acceptedFiles = _k.acceptedFiles, fileRejections = _k.fileRejections;
     React.useEffect(function () {
         return function () {
             unregister(name);
@@ -108,13 +109,13 @@ export var FileUpload = function (_a) {
                     "En dokumenttyp måste anges" : "")
                 : null));
     });
-    var renderInvalidFiles = rejectedFiles.map(function (file, key) { return (React.createElement("li", { key: key, className: "text-danger" },
-        file.name,
+    var renderInvalidFiles = fileRejections.map(function (fileRejection, key) { return (React.createElement("li", { key: key, className: "text-danger" },
+        fileRejection.file.name,
         " -  ",
-        formatBytes(file.size))); });
+        formatBytes(fileRejection.file.size))); });
     var renderFileErrorMessage = function () {
         var _a;
-        if (rejectedFiles.length <= 0) {
+        if (fileRejections.length <= 0) {
             return React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" &&
                 (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : "");
         }
@@ -157,6 +158,6 @@ export var FileUpload = function (_a) {
                             React.createElement(CustomButton, { buttonType: ButtonType.deleteAlt, buttonText: "Rensa", onClick: clearFiles })))
                     : "",
                 renderSelectedFiles,
-                rejectedFiles.length > 0 ? React.createElement("label", null, "Ej giltiga filer (kommer ej att laddas upp)") : "",
+                fileRejections.length > 0 ? React.createElement("label", null, "Ej giltiga filer (kommer ej att laddas upp)") : "",
                 renderInvalidFiles))));
 };

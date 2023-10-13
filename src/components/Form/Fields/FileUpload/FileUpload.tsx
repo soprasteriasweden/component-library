@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { ButtonType, CustomButton } from '../../../CustomButton/CustomButton';
 
-export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes = (5 * Math.pow(2, 20)), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles }) => {
+export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes = (5 * Math.pow(2, 20)), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles, maxFiles }) => {
 
     const { errors, register, setValue, unregister } = useFormContext();
     const [selectedFiles, setSelectedFiles] = React.useState<File[]>([]);
@@ -17,12 +17,13 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
         getRootProps,
         getInputProps,
         acceptedFiles,
-        rejectedFiles
+        fileRejections
     } = useDropzone({
         accept: allowedFileTypes,
         multiple: multiple,
         disabled: disabled,
-        maxSize: maxSizeBytes
+        maxSize: maxSizeBytes,
+        maxFiles: maxFiles
     });
 
     React.useEffect(() => {
@@ -128,14 +129,14 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
         </div>
     ));
 
-    const renderInvalidFiles = rejectedFiles.map((file, key) => (
+    const renderInvalidFiles = fileRejections.map((fileRejection, key) => (
         <li key={key} className="text-danger">
-            {file.name} -  {formatBytes(file.size)}
+            {fileRejection.file.name} -  {formatBytes(fileRejection.file.size)}
         </li>
     ));
 
     const renderFileErrorMessage = () => {
-        if (rejectedFiles.length <= 0) {
+        if (fileRejections.length <= 0) {
             return <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
                 (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>;
         }
@@ -187,7 +188,7 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
                         </div>
                         : ""}
                     {renderSelectedFiles}
-                    {rejectedFiles.length > 0 ? <label>Ej giltiga filer (kommer ej att laddas upp)</label> : ""}
+                    {fileRejections.length > 0 ? <label>Ej giltiga filer (kommer ej att laddas upp)</label> : ""}
                     {renderInvalidFiles}
                 </div>
             </div>

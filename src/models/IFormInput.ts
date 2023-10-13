@@ -135,6 +135,7 @@ export interface IFileUpload extends IFormInputBaseWithValidation, IFormInputVal
     initialFiles?: File[];
     documentType?: IDocumentType;
     numOfFiles?: (num: number) => void;
+    maxFiles?: number;
 }
 
 export interface IDocumentType {

@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.43
+* Added support for maxFiles in FileUpload
+
+## v1.0.42
+* Updated react-dropzone to version v11.7.1
+
 ## v1.0.41
 * Fixed unregister bug in MultiSelect
 

@@ -10,7 +10,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { getNestedObjectValue } from "../../../../utils/utils";
 registerLocale('sv-se', { ...svSE, options: { ...svSE.options, weekStartsOn: 1 } });
 
-export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
+export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
 
     const [fromDate, setFromDate] = React.useState<Date | undefined | null>(value);
     const [toDate, setToDate] = React.useState<Date | undefined | null>(valueSecondary);
@@ -99,7 +99,7 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 dateFormat="yyyy-MM-dd"
                                 className={"form-control form-control-sm " + (disabledTo ? "disabled " : "")}
                                 disabled={disabledTo}
-                                minDate={fromDate}
+                                minDate={minSecondary ? minSecondary : fromDate}
                                 autoComplete="off"
                                 locale="sv-se"
                                 showYearDropdown

@@ -35,6 +35,7 @@ export interface IDatePickerRange extends IDatePicker {
     requiredTo?: boolean;
     disabledFrom?: boolean;
     disabledTo?: boolean;
+    minSecondary?: Date;
     tooltipDescription?: string;
 }
 export interface ISelect extends IFormInputBase, IFormInputBaseWithValidation, IColumnPlacement {

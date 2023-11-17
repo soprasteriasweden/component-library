@@ -21,7 +21,7 @@ import { getNestedObjectValue } from "../../../../utils/utils";
 registerLocale('sv-se', __assign(__assign({}, svSE), { options: __assign(__assign({}, svSE.options), { weekStartsOn: 1 }) }));
 export var DatePickerRange = function (_a) {
     var _b, _c;
-    var name = _a.name, nameSecondary = _a.nameSecondary, label = _a.label, className = _a.className, inlineLabel = _a.inlineLabel, disabledFrom = _a.disabledFrom, disabledTo = _a.disabledTo, requiredFrom = _a.requiredFrom, requiredTo = _a.requiredTo, value = _a.value, valueSecondary = _a.valueSecondary, min = _a.min, tooltipDescription = _a.tooltipDescription, _d = _a.labelCol, labelCol = _d === void 0 ? 4 : _d, _e = _a.inputCol, inputCol = _e === void 0 ? 8 : _e;
+    var name = _a.name, nameSecondary = _a.nameSecondary, label = _a.label, className = _a.className, inlineLabel = _a.inlineLabel, disabledFrom = _a.disabledFrom, disabledTo = _a.disabledTo, requiredFrom = _a.requiredFrom, requiredTo = _a.requiredTo, value = _a.value, valueSecondary = _a.valueSecondary, min = _a.min, minSecondary = _a.minSecondary, tooltipDescription = _a.tooltipDescription, _d = _a.labelCol, labelCol = _d === void 0 ? 4 : _d, _e = _a.inputCol, inputCol = _e === void 0 ? 8 : _e;
     var _f = React.useState(value), fromDate = _f[0], setFromDate = _f[1];
     var _g = React.useState(valueSecondary), toDate = _g[0], setToDate = _g[1];
     var _h = useFormContext(), errors = _h.errors, register = _h.register, setValue = _h.setValue;
@@ -78,7 +78,7 @@ export var DatePickerRange = function (_a) {
                         React.createElement(DatePicker, { name: nameSecondary, id: nameSecondary, selected: toDate, onChange: function (date) {
                                 setToDate(date);
                                 setValue(nameSecondary, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
-                            }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabledTo ? "disabled " : ""), disabled: disabledTo, minDate: fromDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: !disabledTo }),
+                            }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabledTo ? "disabled " : ""), disabled: disabledTo, minDate: minSecondary ? minSecondary : fromDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: !disabledTo }),
                         React.createElement("span", { className: "text-danger" }, errorTypeSecondary === "required" && "Välj ett datum"))),
                 tooltipDescription ?
                     React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })

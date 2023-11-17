@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.45
+* Added minSecondary for to-date in DatePickerRange for customized minimum date
+
 ## v1.0.44
 * Added min (minDate), disabledFrom and disabledTo in DatePickerRange
 

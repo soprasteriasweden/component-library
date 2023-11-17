@@ -10,7 +10,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { getNestedObjectValue } from "../../../../utils/utils";
 registerLocale('sv-se', { ...svSE, options: { ...svSE.options, weekStartsOn: 1 } });
 
-export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabled, requiredFrom, requiredTo, value, valueSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
+export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
 
     const [fromDate, setFromDate] = React.useState<Date | undefined | null>(value);
     const [toDate, setToDate] = React.useState<Date | undefined | null>(valueSecondary);
@@ -21,7 +21,7 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
         register({ name: nameSecondary }, { required: requiredTo });
         setValue(name, value?.toLocaleDateString("sv-se"));
         setValue(nameSecondary, valueSecondary?.toLocaleDateString("sv-se"));
-        if (!disabled) {
+        if (!disabledFrom) {
             document.getElementById("clear-form")?.addEventListener("click", resetValue);
         }
 
@@ -72,14 +72,16 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 }
                                 }
                                 dateFormat="yyyy-MM-dd"
-                                className={"form-control form-control-sm " + (disabled ? "disabled " : "")}
+                                className={"form-control form-control-sm " + (disabledFrom ? "disabled " : "")}
+                                disabled={disabledFrom}
+                                minDate={min}
                                 maxDate={toDate}
                                 autoComplete="off"
                                 locale="sv-se"
                                 showYearDropdown
                                 showMonthDropdown
                                 onChangeRaw={e => e.preventDefault()}
-                                isClearable
+                                isClearable={!disabledFrom}
                             />
                             <span className="text-danger">{errorType === "required" && "Välj ett datum"}</span>
                         </div>
@@ -95,14 +97,15 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 }
                                 }
                                 dateFormat="yyyy-MM-dd"
-                                className={"form-control form-control-sm " + (disabled ? "disabled " : "")}
+                                className={"form-control form-control-sm " + (disabledTo ? "disabled " : "")}
+                                disabled={disabledTo}
                                 minDate={fromDate}
                                 autoComplete="off"
                                 locale="sv-se"
                                 showYearDropdown
                                 showMonthDropdown
                                 onChangeRaw={e => e.preventDefault()}
-                                isClearable
+                                isClearable={!disabledTo}
                             />
                             <span className="text-danger">{errorTypeSecondary === "required" && "Välj ett datum"}</span>
                         </div>

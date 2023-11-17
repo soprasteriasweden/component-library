@@ -1,6 +1,6 @@
 {
   "name": "soprasteria-ui-library",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "main": "dist/index.js",
   "private": false,
   "license": "MIT",

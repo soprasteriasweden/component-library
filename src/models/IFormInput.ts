@@ -43,6 +43,8 @@ export interface IDatePickerRange extends IDatePicker {
     valueSecondary?: Date;
     requiredFrom?: boolean;
     requiredTo?: boolean;
+    disabledFrom?: boolean;
+    disabledTo?: boolean;
     tooltipDescription?: string;
 }
 

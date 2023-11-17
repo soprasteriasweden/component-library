@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.44
+* Added min (minDate), disabledFrom and disabledTo in DatePickerRange
+
 ## v1.0.43
 * Added support for maxFiles in FileUpload
 

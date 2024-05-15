@@ -15,10 +15,12 @@ import '../../../../assets/styles/DatePicker.scss';
 import { useFormContext } from 'react-hook-form';
 import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
+import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 registerLocale('sv-se', __assign(__assign({}, svSE), { options: __assign(__assign({}, svSE.options), { weekStartsOn: 1 }) }));
 export var CustomDatePicker = function (_a) {
     var _b;
-    var name = _a.name, label = _a.label, className = _a.className, value = _a.value, inlineLabel = _a.inlineLabel, disabled = _a.disabled, required = _a.required, requiredValidationMessage = _a.requiredValidationMessage, max = _a.max, min = _a.min, onChange = _a.onChange, _c = _a.labelCol, labelCol = _c === void 0 ? 4 : _c, _d = _a.inputCol, inputCol = _d === void 0 ? 8 : _d;
+    var name = _a.name, label = _a.label, className = _a.className, value = _a.value, inlineLabel = _a.inlineLabel, disabled = _a.disabled, required = _a.required, requiredValidationMessage = _a.requiredValidationMessage, max = _a.max, min = _a.min, onChange = _a.onChange, tooltipDescription = _a.tooltipDescription, _c = _a.labelCol, labelCol = _c === void 0 ? 4 : _c, _d = _a.inputCol, inputCol = _d === void 0 ? 8 : _d;
     var _e = React.useState(value), selectedDate = _e[0], setSelectedDate = _e[1];
     var _f = useFormContext(), errors = _f.errors, register = _f.register, setValue = _f.setValue, clearError = _f.clearError, unregister = _f.unregister;
     React.useEffect(function () {
@@ -51,13 +53,15 @@ export var CustomDatePicker = function (_a) {
             ":",
             required ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
-            React.createElement(DatePicker, { name: name, selected: selectedDate, onChange: function (date) {
-                    setSelectedDate(date);
-                    setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
-                    if (onChange) {
-                        onChange(date);
-                    }
-                }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), disabled: disabled, minDate: min, maxDate: max, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
-            React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" &&
-                (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""))));
+            React.createElement("div", { className: "input-group-datepicker align-items-center" },
+                React.createElement(DatePicker, { name: name, selected: selectedDate, onChange: function (date) {
+                        setSelectedDate(date);
+                        setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
+                        if (onChange) {
+                            onChange(date);
+                        }
+                    }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), disabled: disabled, minDate: min, maxDate: max, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
+                tooltipDescription &&
+                    React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })),
+            React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""))));
 };

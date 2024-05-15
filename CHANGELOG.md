@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.46
+* Added tooltip icon support for CustomDatePicker
+
 ## v1.0.45
 * Added minSecondary for to-date in DatePickerRange for customized minimum date
 

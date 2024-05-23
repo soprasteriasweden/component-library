@@ -2,11 +2,12 @@ import * as React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import '../../../../assets/styles/DatePicker.scss';
 import { IDatePicker } from '../../../../models/IFormInput';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, FieldErrors } from 'react-hook-form';
 import svSE from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+
 registerLocale('sv-se', { ...svSE, options: { ...svSE.options, weekStartsOn: 1 } });
 
 export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({ name, label, className, value, inlineLabel, disabled, required, requiredValidationMessage, max, min, onChange, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
@@ -15,7 +16,7 @@ export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({ name, l
     const { errors, register, setValue, clearError, unregister } = useFormContext();
 
     React.useEffect(() => {
-        register({ name: name }, { required: required });
+        register({ name }, { required });
         setValue(name, value?.toLocaleDateString("sv-se"));
         if (!disabled) {
             document.getElementById("clear-form")?.addEventListener("click", resetValue);
@@ -24,7 +25,7 @@ export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({ name, l
             clearError(name);
             unregister(name);
             document.getElementById("clear-form")?.removeEventListener("click", resetValue);
-        }
+        };
     }, []);
 
     React.useEffect(() => {
@@ -32,12 +33,28 @@ export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({ name, l
             setSelectedDate(value);
             setValue(name, value?.toLocaleDateString("sv-se"));
         }
-    }, [value])
+    }, [value]);
 
     const resetValue = () => {
         setValue(name, undefined);
-        setSelectedDate(undefined)
-    }
+        setSelectedDate(undefined);
+    };
+
+    const getErrorMessage = (): string | null => {
+        let error: any = errors;
+        const keys = name.split('.');
+        for (let key of keys) {
+            if (error && error[key]) {
+                error = error[key];
+            } else {
+                return null;
+            }
+        }
+        if (error?.type === "required") {
+            return requiredValidationMessage ? requiredValidationMessage : `${label} måste anges`;
+        }
+        return null;
+    };
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -71,8 +88,8 @@ export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({ name, l
                         <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
                     }
                 </div>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
+                <span className="text-danger">{getErrorMessage()}</span>
             </div>
         </div>
-    )
-}
+    );
+};

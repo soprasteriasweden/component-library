@@ -19,10 +19,9 @@ import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 registerLocale('sv-se', __assign(__assign({}, svSE), { options: __assign(__assign({}, svSE.options), { weekStartsOn: 1 }) }));
 export var CustomDatePicker = function (_a) {
-    var _b;
-    var name = _a.name, label = _a.label, className = _a.className, value = _a.value, inlineLabel = _a.inlineLabel, disabled = _a.disabled, required = _a.required, requiredValidationMessage = _a.requiredValidationMessage, max = _a.max, min = _a.min, onChange = _a.onChange, tooltipDescription = _a.tooltipDescription, _c = _a.labelCol, labelCol = _c === void 0 ? 4 : _c, _d = _a.inputCol, inputCol = _d === void 0 ? 8 : _d;
-    var _e = React.useState(value), selectedDate = _e[0], setSelectedDate = _e[1];
-    var _f = useFormContext(), errors = _f.errors, register = _f.register, setValue = _f.setValue, clearError = _f.clearError, unregister = _f.unregister;
+    var name = _a.name, label = _a.label, className = _a.className, value = _a.value, inlineLabel = _a.inlineLabel, disabled = _a.disabled, required = _a.required, requiredValidationMessage = _a.requiredValidationMessage, max = _a.max, min = _a.min, onChange = _a.onChange, tooltipDescription = _a.tooltipDescription, _b = _a.labelCol, labelCol = _b === void 0 ? 4 : _b, _c = _a.inputCol, inputCol = _c === void 0 ? 8 : _c;
+    var _d = React.useState(value), selectedDate = _d[0], setSelectedDate = _d[1];
+    var _e = useFormContext(), errors = _e.errors, register = _e.register, setValue = _e.setValue, clearError = _e.clearError, unregister = _e.unregister;
     React.useEffect(function () {
         var _a;
         register({ name: name }, { required: required });
@@ -47,6 +46,23 @@ export var CustomDatePicker = function (_a) {
         setValue(name, undefined);
         setSelectedDate(undefined);
     };
+    var getErrorMessage = function () {
+        var error = errors;
+        var keys = name.split('.');
+        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+            var key = keys_1[_i];
+            if (error && error[key]) {
+                error = error[key];
+            }
+            else {
+                return null;
+            }
+        }
+        if ((error === null || error === void 0 ? void 0 : error.type) === "required") {
+            return requiredValidationMessage ? requiredValidationMessage : "".concat(label, " m\u00E5ste anges");
+        }
+        return null;
+    };
     return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
         React.createElement("label", { className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
             label,
@@ -63,5 +79,5 @@ export var CustomDatePicker = function (_a) {
                     }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabled ? "disabled " : ""), disabled: disabled, minDate: min, maxDate: max, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: function (e) { return e.preventDefault(); }, isClearable: true }),
                 tooltipDescription &&
                     React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })),
-            React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""))));
+            React.createElement("span", { className: "text-danger" }, getErrorMessage()))));
 };

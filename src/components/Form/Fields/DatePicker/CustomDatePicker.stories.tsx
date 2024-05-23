@@ -31,6 +31,17 @@ const Template: Story<StorybookICustomDatePicker> = (args) => {
     );
 };
 
+export const CustomDatePickerWithTooltipWithNestedName = Template.bind({});
+CustomDatePickerWithTooltipWithNestedName.args = {
+    name: 'test.startDate',
+    label: 'CustomDatePicker with tooltip with nested name',
+    inlineLabel: true,
+    required: true,
+    value: new Date(),
+    valueSecondary: new Date(),
+    tooltipDescription: "Select a date"
+};
+
 export const CustomDatePickerWithTooltip = Template.bind({});
 CustomDatePickerWithTooltip.args = {
     name: 'startDate',

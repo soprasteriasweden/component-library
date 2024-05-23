@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.49
+* Fixed bug in Select component
+
+## v1.0.48
+* Added support for displaying error message in Select using nested name
+
+## v1.0.47
+* Added support for displaying error message in CustomDatePicker using nested name
+
 ## v1.0.46
 * Added tooltip icon support for CustomDatePicker
 

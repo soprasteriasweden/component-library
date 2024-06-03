@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.53
+* Fixed bug for selectedValue in Select component
+
+## v1.0.52
+* Fixed bug for selectedValue in Select component
+
+## v1.0.51
+* Fixed bug for selectedValue in Select component
+
+## v1.0.50
+* Fixed bug for selectedValue in Select component
+
 ## v1.0.49
 * Fixed bug in Select component
 

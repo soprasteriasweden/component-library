@@ -72,6 +72,7 @@ ToolTip.args = {
     inlineLabel: true,
     options: mockListItems,
     tooltipDescription: "Testar",
+    selectedValue: "item1",
     isClearable: true,
     required: false
 };

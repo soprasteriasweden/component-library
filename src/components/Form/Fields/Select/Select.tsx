@@ -42,12 +42,11 @@ export const Select: React.FunctionComponent<ISelect> = ({
                 document.getElementById("clear-form")?.removeEventListener("click", resetValue);
             }
         }
-    }, [unregister, name])
+    }, [])
 
     const resetValue = () => {
         if (typeof setValue !== "string") {
             setValue(name, undefined);
-            setCurrentSelectedValue(undefined);
         }
     }
 
@@ -55,7 +54,7 @@ export const Select: React.FunctionComponent<ISelect> = ({
         setCurrentSelectedValue(selectedValue);
     }, [selectedValue]);
 
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setCurrentSelectedValue(event.target.value as string);
         if (onChange !== undefined) {
             onChange(event.target.value as string);
@@ -72,30 +71,32 @@ export const Select: React.FunctionComponent<ISelect> = ({
     const renderSelect = () => {
         return (
             <div className="input-group">
-                <select
-                    name={name}
+                <select name={name}
                     id={name}
                     className="form-control form-control-sm"
                     disabled={disabled}
-                    ref={typeof register !== "string" ? register({ required }) : ""}
+                    ref={typeof register !== "string" ? register({ required: required }) : ""}
                     onChange={handleChange}
-                    value={currentSelectedValue || ""}
                 >
-                    <option value="" disabled hidden>{placeholder}</option>
-                    {options.map((option, index) => (
-                        <option
-                            value={option.value}
-                            key={index}
-                            disabled={option.disabled}
-                        >
-                            {option.text}
-                        </option>
-                    ))}
+                    <option value="" selected={currentSelectedValue ? false : true} disabled hidden>{placeholder}</option>
+                    {
+                        options.map((option, index) => {
+                            return <option value={option.value}
+                                key={index}
+                                selected={currentSelectedValue == option.value}
+                                disabled={option.disabled}
+                            >{option.text}</option>
+                        })
+                    }
                 </select>
-                {tooltipDescription && <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />}
+                {
+                    tooltipDescription ?
+                        <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
+                        : null
+                }
             </div>
         )
-    };
+    }
 
     const getErrorMessage = (): string | null => {
         let error: any = errors;
@@ -117,13 +118,17 @@ export const Select: React.FunctionComponent<ISelect> = ({
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
             <label className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>{label}:{required ? "*" : ""}</label>
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
-                <InputSpinnerWrapper isLoading={isLoading ?? false}>
-                    {isClearable
-                        ? <ClearableInput onClear={clearValue} input={renderSelect()} />
-                        : renderSelect()}
+                <InputSpinnerWrapper isLoading={isLoading ?? false} >
+                    {
+                        isClearable
+                            ?
+                            <ClearableInput onClear={clearValue} input={renderSelect()} />
+                            : renderSelect()
+                    }
                 </InputSpinnerWrapper>
+
                 <span className="text-danger">{getErrorMessage()}</span>
             </div>
         </div>
-    );
+    )
 };

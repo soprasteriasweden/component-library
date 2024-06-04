@@ -74,7 +74,7 @@ ToolTip.args = {
     tooltipDescription: "Testar",
     selectedValue: "item1",
     isClearable: true,
-    required: false
+    required: true
 };
 
 export const ToolTipWithNestedName = Template.bind({});

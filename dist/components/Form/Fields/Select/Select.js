@@ -25,11 +25,10 @@ export var Select = function (_a) {
                 (_a = document.getElementById("clear-form")) === null || _a === void 0 ? void 0 : _a.removeEventListener("click", resetValue);
             };
         }
-    }, [unregister, name]);
+    }, []);
     var resetValue = function () {
         if (typeof setValue !== "string") {
             setValue(name, undefined);
-            setCurrentSelectedValue(undefined);
         }
     };
     React.useEffect(function () {
@@ -49,10 +48,14 @@ export var Select = function (_a) {
     };
     var renderSelect = function () {
         return (React.createElement("div", { className: "input-group" },
-            React.createElement("select", { name: name, id: name, className: "form-control form-control-sm", disabled: disabled, ref: typeof register !== "string" ? register({ required: required }) : "", onChange: handleChange, value: currentSelectedValue || "" },
-                React.createElement("option", { value: "", disabled: true, hidden: true }, placeholder),
-                options.map(function (option, index) { return (React.createElement("option", { value: option.value, key: index, disabled: option.disabled }, option.text)); })),
-            tooltipDescription && React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })));
+            React.createElement("select", { name: name, id: name, className: "form-control form-control-sm", disabled: disabled, ref: typeof register !== "string" ? register({ required: required }) : "", onChange: handleChange },
+                React.createElement("option", { value: "", selected: currentSelectedValue ? false : true, disabled: true, hidden: true }, placeholder),
+                options.map(function (option, index) {
+                    return React.createElement("option", { value: option.value, key: index, selected: currentSelectedValue == option.value, disabled: option.disabled }, option.text);
+                })),
+            tooltipDescription ?
+                React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
+                : null));
     };
     var getErrorMessage = function () {
         var error = errors;
@@ -78,7 +81,8 @@ export var Select = function (_a) {
             required ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
             React.createElement(InputSpinnerWrapper, { isLoading: isLoading !== null && isLoading !== void 0 ? isLoading : false }, isClearable
-                ? React.createElement(ClearableInput, { onClear: clearValue, input: renderSelect() })
+                ?
+                    React.createElement(ClearableInput, { onClear: clearValue, input: renderSelect() })
                 : renderSelect()),
             React.createElement("span", { className: "text-danger" }, getErrorMessage()))));
 };

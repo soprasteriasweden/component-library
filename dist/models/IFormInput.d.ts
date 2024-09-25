@@ -16,6 +16,8 @@ export interface IPersonalIdentityInput extends IFormInputBaseWithValidation, IC
 }
 export interface IEmailInput extends IFormInputBaseWithValidation, IColumnPlacement {
 }
+export interface IZipCodeInput extends IFormInputBaseWithValidation, IColumnPlacement {
+}
 export interface ITextInput extends IFormInputBaseWithValidation, IFormInputBase, IFormInputValidation, IInputPosition, IPlainInput, IColumnPlacement {
 }
 export interface INumberInput extends IFormInputBaseWithValidation, IPlainInput, IColumnPlacement {

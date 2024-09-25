@@ -26,6 +26,10 @@ export interface IEmailInput extends IFormInputBaseWithValidation, IColumnPlacem
 export interface ITextInput extends IFormInputBaseWithValidation, IFormInputBase, IFormInputValidation, IInputPosition, IPlainInput, IColumnPlacement {
 }
 
+export interface IZipCodeInput extends IFormInputBaseWithValidation, IColumnPlacement {
+
+}
+
 export interface INumberInput extends IFormInputBaseWithValidation, IPlainInput, IColumnPlacement {
     maxValue?: number;
     minValue?: number;

@@ -25,6 +25,7 @@ import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
 import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckboxList";
 import { Dropdown } from "./Fields/Dropdown/Dropdown";
 import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
+import { ZipCodeInput } from "./Fields/ZipCodeInput/ZipCodeInput";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -72,5 +73,6 @@ export {
     SelectGroup,
     ConditionalCheckboxList,
     Dropdown,
-    HsaIdInput
+    HsaIdInput,
+    ZipCodeInput
 }

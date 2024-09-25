@@ -24,9 +24,10 @@ import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
 import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckboxList";
 import { Dropdown } from "./Fields/Dropdown/Dropdown";
 import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
+import { ZipCodeInput } from "./Fields/ZipCodeInput/ZipCodeInput";
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
     children: React.ReactNodeArray | React.ReactNode;
 }
 declare const Form: React.FunctionComponent<IForm>;
-export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput };
+export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput };

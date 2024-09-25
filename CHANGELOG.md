@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.55
+* Added a ZipCode component
+
 ## v1.0.54
 * Fixed bug in Select component
 

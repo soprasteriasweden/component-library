@@ -43,3 +43,13 @@ SecondExample.args = {
     required: true,
     name: "test"
 };
+
+export const ThirdExample = Template.bind({});
+ThirdExample.args = {
+    label: 'Postnummer',
+    inlineLabel: true,
+    required: true,
+    labelCol: 5,
+    inputCol: 7,
+    name: "test"
+};

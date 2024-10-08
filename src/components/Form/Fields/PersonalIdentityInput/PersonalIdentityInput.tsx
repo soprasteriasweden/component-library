@@ -3,10 +3,13 @@ import { IPersonalIdentityInput } from '../../../../models/IFormInput';
 import { useFormContext } from 'react-hook-form';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInput> = ({ name, tooltipDescription, label, required, className, inlineLabel, disabled, placeholder, defaultValue, requiredValidationMessage, labelCol = 4, inputCol = 8 }) => {
 
     const { errors, register } = useFormContext();
+
+    const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -27,9 +30,8 @@ export const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInp
                             : null
                     }
                 </div>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
-                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "pattern" && label + " i fel format" : ""}</span>
+                <span className="text-danger">{(errorType === "required" || errorType === "validate") && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
+                <span className="text-danger">{errorType === "pattern" && label + " i fel format"}</span>
             </div>
         </div>
     )

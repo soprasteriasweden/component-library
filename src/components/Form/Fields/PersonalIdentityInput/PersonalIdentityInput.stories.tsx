@@ -41,5 +41,5 @@ SecondExample.args = {
     label: 'Personnummer/Samordningsnummer',
     inlineLabel: true,
     required: true,
-    name: "test"
+    name: "nested.test"
 };

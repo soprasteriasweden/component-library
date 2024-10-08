@@ -37,7 +37,6 @@ import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckb
 import { Dropdown } from "./Fields/Dropdown/Dropdown";
 import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
 import { ZipCodeInput } from "./Fields/ZipCodeInput/ZipCodeInput";
-
 var Form = function (_a) {
     var onSubmit = _a.onSubmit, children = _a.children;
     var methods = useForm({});

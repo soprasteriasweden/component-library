@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.59
+* Fix capitalized letters in HSA-ID
+
 ## v1.0.58
 * Added support for displaying error message in PersonalIdentityInput using nested name
 

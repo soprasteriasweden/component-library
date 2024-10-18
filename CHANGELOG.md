@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.60
+* Update HSA-ID component
+
 ## v1.0.59
 * Fix capitalized letters in HSA-ID
 

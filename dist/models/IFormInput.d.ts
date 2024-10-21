@@ -20,6 +20,8 @@ export interface ITextInput extends IFormInputBaseWithValidation, IFormInputBase
 }
 export interface IZipCodeInput extends IFormInputBaseWithValidation, IColumnPlacement {
 }
+export interface IPhoneNumberInput extends IFormInputBaseWithValidation, IColumnPlacement {
+}
 export interface INumberInput extends IFormInputBaseWithValidation, IPlainInput, IColumnPlacement {
     maxValue?: number;
     minValue?: number;

@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.61
+* Add a phone number component with validation
+
 ## v1.0.60
 * Update HSA-ID component
 

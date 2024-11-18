@@ -1,5 +1,8 @@
 # Changelog
 
+## v.1.0.63
+* Fix bug for HSA-ID in js-file
+
 ## v.1.0.62
 * Fix HSA-ID component onChange event for capitalized letters
 

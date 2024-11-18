@@ -1,5 +1,8 @@
 # Changelog
 
+## v.1.0.62
+* Fix HSA-ID component onChange event for capitalized letters
+
 ## v1.0.61
 * Add a phone number component with validation
 

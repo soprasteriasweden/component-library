@@ -19,11 +19,11 @@ export const HsaIdInput: React.FunctionComponent<IHsaIdInput> = ({ name, tooltip
                         name={name}
                         id={name}
                         className="form-control form-control-sm "
-                        style={{textTransform: "uppercase"}}
                         placeholder={placeholder}
                         defaultValue={defaultValue}
                         ref={register({ required: required, pattern: /^(?=.{1,31}$)SE\d{10,12}-[A-Z0-9]+$/ })}
-                        disabled={disabled} />
+                        disabled={disabled} 
+                        onChange={ (e) => e.target.value = e.target.value.toUpperCase() }/>
                     {
                         tooltipDescription ?
                             <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />

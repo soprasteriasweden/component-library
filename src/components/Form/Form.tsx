@@ -27,6 +27,7 @@ import { Dropdown } from "./Fields/Dropdown/Dropdown";
 import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
 import { ZipCodeInput } from "./Fields/ZipCodeInput/ZipCodeInput";
 import { PhoneNumberInput } from "./Fields/PhoneNumberInput/PhoneNumberInput";
+import { NameInput } from "./Fields/NameInput/NameInput";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
@@ -76,5 +77,6 @@ export {
     Dropdown,
     HsaIdInput,
     ZipCodeInput,
-    PhoneNumberInput
+    PhoneNumberInput,
+    NameInput
 }

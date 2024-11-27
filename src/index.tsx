@@ -1,4 +1,4 @@
-﻿import { Form, Dropdown, ConditionalCheckboxList, HsaIdInput, SelectGroup, UnorderedList, TooltipItem, InputIconTooltip, MultiSelect, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, ZipCodeInput, PhoneNumberInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, CustomSubmitButtonType, RadioButton, FormLink, ClearFormButton } from "./components/Form/Form";
+﻿import { Form, Dropdown, ConditionalCheckboxList, HsaIdInput, SelectGroup, UnorderedList, TooltipItem, InputIconTooltip, MultiSelect, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, ZipCodeInput, PhoneNumberInput, NameInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, CustomSubmitButtonType, RadioButton, FormLink, ClearFormButton } from "./components/Form/Form";
 import { Modal, ModalBody, ModalFooter, ModalSize } from "./components/Modal/Modal";
 import { Table } from "./components/Table/Table";
 import { MainNavigation } from "./components/MainNavigation/MainNavigation";
@@ -72,5 +72,6 @@ export {
     Dropdown,
     HsaIdInput,
     ZipCodeInput,
-    PhoneNumberInput
+    PhoneNumberInput,
+    NameInput
 }

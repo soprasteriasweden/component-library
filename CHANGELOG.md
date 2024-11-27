@@ -1,5 +1,8 @@
 # Changelog
 
+## v.1.0.64
+* Add a name input component with validation only allowing letters to be used in input field
+
 ## v.1.0.63
 * Fix bug for HSA-ID in js-file
 

@@ -34,6 +34,10 @@ export interface IPhoneNumberInput extends IFormInputBaseWithValidation, IColumn
     
 }
 
+export interface INameInput extends IFormInputBaseWithValidation, IColumnPlacement {
+    
+}
+
 export interface INumberInput extends IFormInputBaseWithValidation, IPlainInput, IColumnPlacement {
     maxValue?: number;
     minValue?: number;

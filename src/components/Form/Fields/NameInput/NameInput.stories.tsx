@@ -42,3 +42,11 @@ SecondExample.args = {
     required: true,
     name: "Namnsson"
 };
+
+export const ThirdExample = Template.bind({});
+ThirdExample.args = {
+    label: 'Efternamn',
+    inlineLabel: true,
+    required: true,
+    name: "Test"
+};

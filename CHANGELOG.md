@@ -1,5 +1,8 @@
 # Changelog
 
+## v.1.0.66
+* Fix that error message not showing on NameInput component
+
 ## v.1.0.65
 * Potential fix by updating regex in js file NameInput
 

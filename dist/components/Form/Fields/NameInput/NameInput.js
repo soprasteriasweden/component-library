@@ -13,7 +13,7 @@ export var NameInput = function (_a) {
             required ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
             React.createElement("div", { className: "input-group" },
-                React.createElement("input", { type: "text", name: name, id: name, className: "form-control form-control-sm ", placeholder: placeholder, defaultValue: defaultValue, ref: register({ required: required, pattern: /^\p{L}+$/u }), disabled: disabled }),
+                React.createElement("input", { type: "text", name: name, id: name, className: "form-control form-control-sm ", placeholder: placeholder, defaultValue: defaultValue, ref: register({ required: required, pattern:/^[^\d\s]*$/ }), disabled: disabled }),
                 tooltipDescription ?
                     React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
                     : null),

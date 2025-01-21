@@ -12,10 +12,9 @@ export const HiddenInput: React.FunctionComponent<IHiddenInput> = ({ name, value
     return (
         <input
             type="hidden"
-            name={name}
             id={name}
             value={value}
-            ref={register}
+            {...register(name)}
         />
     )
 }

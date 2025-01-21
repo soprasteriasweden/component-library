@@ -1,17 +1,14 @@
-import React from 'react';
+import { jsx as _jsx } from "react/jsx-runtime";
 import "../../../../assets/styles/TooltipItem.style.scss";
-export var TooltipItem = function (_a) {
-    var title = _a.title, description = _a.description, showDisc = _a.showDisc;
-    var tooltipId = "a".concat(Math.floor(Math.random() * 100000));
-    var myWindow = window;
-    var onTooltipMouseOver = function () {
-        myWindow.$("#".concat(tooltipId)).tooltip("enable");
-        myWindow.$("#".concat(tooltipId)).tooltip("show");
+export const TooltipItem = ({ title, description, showDisc }) => {
+    const tooltipId = `a${Math.floor(Math.random() * 100000)}`;
+    const myWindow = window;
+    const onTooltipMouseOver = () => {
+        myWindow.$(`#${tooltipId}`).tooltip("enable");
+        myWindow.$(`#${tooltipId}`).tooltip("show");
     };
-    var onTooltipClick = function () {
-        myWindow.$("#".concat(tooltipId)).tooltip("hide");
+    const onTooltipClick = () => {
+        myWindow.$(`#${tooltipId}`).tooltip("hide");
     };
-    return (React.createElement("div", { className: "tooltip-item" },
-        React.createElement("p", { className: showDisc ? "show-disc" : "" },
-            React.createElement("span", { id: tooltipId, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": description, onMouseOver: onTooltipMouseOver, onClick: onTooltipClick }, title))));
+    return (_jsx("div", { className: "tooltip-item", children: _jsx("p", { className: showDisc ? "show-disc" : "", children: _jsx("span", { id: tooltipId, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": description, onMouseOver: onTooltipMouseOver, onClick: onTooltipClick, children: title }) }) }));
 };

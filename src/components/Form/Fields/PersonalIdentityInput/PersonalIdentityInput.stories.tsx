@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 
 import { PersonalIdentityInput } from './PersonalIdentityInput';
@@ -12,7 +12,7 @@ export default {
     component: PersonalIdentityInput,
 } as Meta;
 
-const Template: Story<IPersonalIdentityInput> = (args) => {
+const Template: StoryFn<IPersonalIdentityInput> = (args) => {
     const methods = useForm();
 
     const onSubmit = (data: any) => {

@@ -31,7 +31,7 @@ export const Select: React.FunctionComponent<ISelect> = ({
         unregister: "",
         setValue: ""
     }
-    const { errors, register, unregister, setValue } = useFormContext() ?? readonlyValues;
+    const { formState: { errors }, register, unregister, setValue } = useFormContext() ?? readonlyValues;
 
     React.useEffect(() => {
         if (typeof unregister !== "string") {
@@ -71,11 +71,11 @@ export const Select: React.FunctionComponent<ISelect> = ({
     const renderSelect = () => {
         return (
             <div className="input-group">
-                <select name={name}
+                <select
                     id={name}
                     className="form-control form-control-sm"
                     disabled={disabled}
-                    ref={typeof register !== "string" ? register({ required: required }) : ""}
+                    {...(typeof register !== "string" ? register(name, { required: required }) : {})}
                     onChange={handleChange}
                 >
                     <option value="" selected={currentSelectedValue ? false : true} disabled hidden>{placeholder}</option>
@@ -118,7 +118,7 @@ export const Select: React.FunctionComponent<ISelect> = ({
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
             <label className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>{label}:{required ? "*" : ""}</label>
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
-                <InputSpinnerWrapper isLoading={isLoading ?? false} >
+                <InputSpinnerWrapper isLoading={isLoading ?? false}>
                     {
                         isClearable
                             ?

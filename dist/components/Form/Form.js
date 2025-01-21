@@ -1,19 +1,8 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-import * as React from "react";
-import { FormContext, useForm } from "react-hook-form";
+import { jsx as _jsx } from "react/jsx-runtime";
+import { FormProvider, useForm } from "react-hook-form";
 import { Checkbox } from "./Fields/Checkbox/Checkbox";
 import { CheckboxList } from "./Fields/CheckboxList/CheckboxList";
-import { CustomDatePicker } from "./Fields/DatePicker/CustomDatePicker";
+import CustomDatePicker from "./Fields/DatePicker/CustomDatePicker";
 import { DatePickerRange } from "./Fields/DatePicker/DatePickerRange";
 import { EmailInput } from "./Fields/EmailInput/EmailInput";
 import { FileUpload } from "./Fields/FileUpload/FileUpload";
@@ -39,11 +28,8 @@ import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
 import { ZipCodeInput } from "./Fields/ZipCodeInput/ZipCodeInput";
 import { PhoneNumberInput } from "./Fields/PhoneNumberInput/PhoneNumberInput";
 import { NameInput } from "./Fields/NameInput/NameInput";
-
-var Form = function (_a) {
-    var onSubmit = _a.onSubmit, children = _a.children;
-    var methods = useForm({});
-    return (React.createElement(FormContext, __assign({}, methods),
-        React.createElement("form", { onSubmit: onSubmit ? methods.handleSubmit(onSubmit) : undefined }, children)));
+const Form = ({ onSubmit, children }) => {
+    const methods = useForm({});
+    return (_jsx(FormProvider, Object.assign({}, methods, { children: _jsx("form", { onSubmit: onSubmit ? methods.handleSubmit(onSubmit) : undefined, children: children }) })));
 };
 export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput };

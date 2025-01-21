@@ -3,6 +3,7 @@ import "../../assets/styles/Spinner.scss";
 
 interface IInputSpinnerWrapper {
     isLoading: boolean;
+    children?: React.ReactNode;
 }
 
 export const InputSpinnerWrapper: React.FunctionComponent<IInputSpinnerWrapper> = ({ isLoading, children }) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 
 import { CustomSubmitButton, Form } from '../../../Form/Form';
@@ -15,7 +15,7 @@ export default {
     component: ConditionalCheckboxList,
 } as Meta;
 
-const Template: Story<StorybookIConditionalCheckboxList> = (args) => {
+const Template: StoryFn<StorybookIConditionalCheckboxList> = (args) => {
     const methods = useForm();
 
     const onSubmit = (data: any) => {

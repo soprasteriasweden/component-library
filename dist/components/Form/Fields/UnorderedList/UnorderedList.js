@@ -1,14 +1,8 @@
-import * as React from "react";
+import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import "../../../../assets/styles/UnorderedList.style.scss";
-export var UnorderedList = function (_a) {
-    var name = _a.name, textRows = _a.textRows, label = _a.label, inlineLabel = _a.inlineLabel, _b = _a.className, className = _b === void 0 ? "unordered-list" : _b, _c = _a.labelCol, labelCol = _c === void 0 ? 4 : _c, _d = _a.inputCol, inputCol = _d === void 0 ? 8 : _d;
-    return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
-        React.createElement("label", { htmlFor: name, className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
-            label,
-            ":"),
-        React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
-            React.createElement("ul", { id: name }, textRows.length > 0 ?
-                textRows.map(function (textRow, key) {
-                    return (React.createElement("li", { key: key }, textRow));
-                }) : null))));
+export const UnorderedList = ({ name, textRows, label, inlineLabel, className = "unordered-list", labelCol = 4, inputCol = 8 }) => {
+    return (_jsxs("div", { className: className + " form-group " + (inlineLabel ? "row" : ""), children: [_jsxs("label", { htmlFor: name, className: inlineLabel ? `col-${labelCol} col-form-label` : "", children: [label, ":"] }), _jsx("div", { className: inlineLabel ? `col-${inputCol}` : "", children: _jsx("ul", { id: name, children: textRows.length > 0 ?
+                        textRows.map((textRow, key) => {
+                            return (_jsx("li", { children: textRow }, key));
+                        }) : null }) })] }));
 };

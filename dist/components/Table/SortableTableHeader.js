@@ -1,14 +1,14 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from 'react';
 import { SortOrder } from '../../models/IPagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp, faSortDown, faSort } from '@fortawesome/free-solid-svg-icons';
 import { SortTableContext } from './SortTableContext';
 import "../../assets/styles/TableStyle.scss";
-export var SortableTableHeader = function (_a) {
-    var propertyToSortBy = _a.propertyToSortBy, headerText = _a.headerText;
-    var _b = React.useContext(SortTableContext), sortOrder = _b.sortOrder, setSortOrder = _b.setSortOrder, setSelectedPropertyToSortBy = _b.setSelectedPropertyToSortBy, selectedPropertyToSortBy = _b.selectedPropertyToSortBy;
-    var _c = React.useState(faSort), icon = _c[0], setIcon = _c[1];
-    React.useEffect(function () {
+export const SortableTableHeader = ({ propertyToSortBy, headerText }) => {
+    const { sortOrder, setSortOrder, setSelectedPropertyToSortBy, selectedPropertyToSortBy } = React.useContext(SortTableContext);
+    const [icon, setIcon] = React.useState(faSort);
+    React.useEffect(() => {
         if (propertyToSortBy === selectedPropertyToSortBy) {
             if (sortOrder === SortOrder.ascending) {
                 setIcon(faSortUp);
@@ -21,7 +21,7 @@ export var SortableTableHeader = function (_a) {
             setIcon(faSort);
         }
     }, [sortOrder, selectedPropertyToSortBy]);
-    var onSortClick = function () {
+    const onSortClick = () => {
         if (setSortOrder && setSelectedPropertyToSortBy) {
             if (propertyToSortBy === selectedPropertyToSortBy) {
                 setSortOrder(sortOrder === SortOrder.ascending ? SortOrder.descending : SortOrder.ascending);
@@ -32,8 +32,5 @@ export var SortableTableHeader = function (_a) {
             setSelectedPropertyToSortBy(propertyToSortBy);
         }
     };
-    return (React.createElement("th", { className: "sortable-column text-nowrap", onClick: onSortClick },
-        headerText,
-        " ",
-        React.createElement(FontAwesomeIcon, { icon: icon })));
+    return (_jsxs("th", { className: `sortable-column text-nowrap`, onClick: onSortClick, children: [headerText, " ", _jsx(FontAwesomeIcon, { icon: icon })] }));
 };

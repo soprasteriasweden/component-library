@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Checkbox } from "./Fields/Checkbox/Checkbox";
 import { CheckboxList } from "./Fields/CheckboxList/CheckboxList";
-import { CustomDatePicker } from "./Fields/DatePicker/CustomDatePicker";
+import CustomDatePicker from "./Fields/DatePicker/CustomDatePicker";
 import { DatePickerRange } from "./Fields/DatePicker/DatePickerRange";
 import { EmailInput } from "./Fields/EmailInput/EmailInput";
 import { FileUpload } from "./Fields/FileUpload/FileUpload";
@@ -27,7 +27,6 @@ import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
 import { ZipCodeInput } from "./Fields/ZipCodeInput/ZipCodeInput";
 import { PhoneNumberInput } from "./Fields/PhoneNumberInput/PhoneNumberInput";
 import { NameInput } from "./Fields/NameInput/NameInput";
-
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
     children: React.ReactNodeArray | React.ReactNode;

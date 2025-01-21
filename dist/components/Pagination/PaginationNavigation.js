@@ -1,74 +1,64 @@
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { Fragment } from "react";
-var DOTS = '...';
+const DOTS = '...';
 // Helper method for creating a range of numbers
 // range (1, 5) => [1, 2, 3, 4, 5]
-var range = function (from, to, step) {
-    if (step === void 0) { step = 1; }
-    var i = from;
-    var range = [];
+const range = (from, to, step = 1) => {
+    let i = from;
+    const range = [];
     while (i <= to) {
         range.push(i);
         i += step;
     }
     return range;
 };
-export var PaginationNavigation = function (_a) {
-    var pagination = _a.pagination, ariaLabel = _a.ariaLabel, pageNeighbours = _a.pageNeighbours, selectedPage = _a.selectedPage, _b = _a.showCount, showCount = _b === void 0 ? true : _b;
-    var _c = React.useState([]), pages = _c[0], setPages = _c[1];
-    var fetchPageNumbers = function () {
+export const PaginationNavigation = ({ pagination, ariaLabel, pageNeighbours, selectedPage, showCount = true }) => {
+    const [pages, setPages] = React.useState([]);
+    const fetchPageNumbers = () => {
         /**
          * totalNumbers: the total page numbers to show on the control
          * totalBlocks: totalNumbers + 2 to cover for the (...) controls
          */
-        var totalNumbers = (pageNeighbours * 2) + 3;
-        var totalBlocks = totalNumbers + 2;
+        const totalNumbers = (pageNeighbours * 2) + 3;
+        const totalBlocks = totalNumbers + 2;
         if (pagination !== undefined && pagination.totalPages > totalBlocks) {
-            var startPage = Math.max(2, pagination.currentPage - pageNeighbours);
-            var endPage = Math.min(pagination.totalPages - 1, pagination.currentPage + pageNeighbours);
-            var pages_1 = range(startPage, endPage);
+            const startPage = Math.max(2, pagination.currentPage - pageNeighbours);
+            const endPage = Math.min(pagination.totalPages - 1, pagination.currentPage + pageNeighbours);
+            let pages = range(startPage, endPage);
             /**
              * hasLeftSpill: has hidden pages to the left
              * hasRightSpill: has hidden pages to the right
              * spillOffset: number of hidden pages either to the left or to the right
              */
-            var hasLeftSpill = startPage > 2;
-            var hasRightSpill = (pagination.totalPages - endPage) > 1;
-            var spillOffset = totalNumbers - (pages_1.length + 1);
+            const hasLeftSpill = startPage > 2;
+            const hasRightSpill = (pagination.totalPages - endPage) > 1;
+            const spillOffset = totalNumbers - (pages.length + 1);
             switch (true) {
                 // handle: (1) (...) {5 6} [7] {8 9} (10)
                 case (hasLeftSpill && !hasRightSpill): {
-                    var extraPages = range(startPage - spillOffset, startPage - 1);
-                    pages_1 = __spreadArray(__spreadArray([DOTS], extraPages, true), pages_1, true);
+                    const extraPages = range(startPage - spillOffset, startPage - 1);
+                    pages = [DOTS, ...extraPages, ...pages];
                     break;
                 }
                 // handle: (1) {2 3} [4] {5 6} (...) (10)
                 case (!hasLeftSpill && hasRightSpill): {
-                    var extraPages = range(endPage + 1, endPage + spillOffset);
-                    pages_1 = __spreadArray(__spreadArray(__spreadArray([], pages_1, true), extraPages, true), [DOTS], false);
+                    const extraPages = range(endPage + 1, endPage + spillOffset);
+                    pages = [...pages, ...extraPages, DOTS];
                     break;
                 }
                 // handle: (1) (...) {4 5} [6] {7 8} (...) (10)
                 case (hasLeftSpill && hasRightSpill):
                 default: {
-                    pages_1 = __spreadArray(__spreadArray([DOTS], pages_1, true), [DOTS], false);
+                    pages = [DOTS, ...pages, DOTS];
                     break;
                 }
             }
-            return __spreadArray(__spreadArray([1], pages_1, true), [pagination.totalPages], false);
+            return [1, ...pages, pagination.totalPages];
         }
         return (range(1, pagination === null || pagination === void 0 ? void 0 : pagination.totalPages));
     };
-    React.useEffect(function () {
+    React.useEffect(() => {
         if (pagination !== undefined && pagination.totalPages > 1) {
             setPages(fetchPageNumbers());
         }
@@ -76,75 +66,55 @@ export var PaginationNavigation = function (_a) {
             setPages([]);
         }
     }, [pagination]);
-    var handleClick = function (clickedPage) {
+    const handleClick = (clickedPage) => {
         selectedPage(clickedPage);
     };
-    var handleClickPrevious = function () {
+    const handleClickPrevious = () => {
         if (pagination !== undefined && pagination.currentPage > 1) {
             selectedPage(pagination.currentPage - 1);
         }
     };
-    var handleClickNext = function () {
+    const handleClickNext = () => {
         if (pagination !== undefined && pagination.currentPage < pagination.totalPages) {
             selectedPage(pagination.currentPage + 1);
         }
     };
-    var handleClickPreviousTen = function () {
+    const handleClickPreviousTen = () => {
         if (pagination !== undefined && pagination.currentPage - 10 > 0) {
             selectedPage(pagination.currentPage - 10);
         }
     };
-    var handleClickNextTen = function () {
+    const handleClickNextTen = () => {
         if (pagination !== undefined && pagination.currentPage + 9 < pagination.totalPages) {
             selectedPage(pagination.currentPage + 10);
         }
     };
-    var renderPreviousButton = function () {
-        return (React.createElement("li", { key: "previousPage", className: "page-item", onClick: handleClickPrevious },
-            React.createElement("button", { type: "button", className: "page-link" }, "F\u00F6reg\u00E5ende")));
+    const renderPreviousButton = () => {
+        return (_jsx("li", { className: "page-item", onClick: handleClickPrevious, children: _jsx("button", { type: "button", className: "page-link", children: "F\u00F6reg\u00E5ende" }) }, "previousPage"));
     };
-    var renderNextButton = function () {
-        return (React.createElement("li", { key: "nextPage", className: "page-item", onClick: handleClickNext },
-            React.createElement("button", { type: "button", className: "page-link" }, "N\u00E4sta")));
+    const renderNextButton = () => {
+        return (_jsx("li", { className: "page-item", onClick: handleClickNext, children: _jsx("button", { type: "button", className: "page-link", children: "N\u00E4sta" }) }, "nextPage"));
     };
-    var renderItemCount = function () {
+    const renderItemCount = () => {
         if (pagination !== undefined) {
-            var startItem = pagination.pageSize * (pagination.currentPage - 1) + 1;
-            var endItem = Math.min(startItem + pagination.pageSize - 1, pagination.totalCount);
-            return (React.createElement("p", { className: "text-right" }, "Visar ".concat(startItem, "-").concat(endItem, " av ").concat(pagination.totalCount)));
+            const startItem = pagination.pageSize * (pagination.currentPage - 1) + 1;
+            const endItem = Math.min(startItem + pagination.pageSize - 1, pagination.totalCount);
+            return (_jsx("p", { className: "text-right", children: `Visar ${startItem}-${endItem} av ${pagination.totalCount}` }));
         }
     };
-    var renderPreviousTenButton = function () {
-        return (React.createElement("li", { key: "previousTenPage", className: "page-item", onClick: handleClickPreviousTen },
-            React.createElement("button", { type: "button", className: "page-link" }, '<<')));
+    const renderPreviousTenButton = () => {
+        return (_jsx("li", { className: "page-item", onClick: handleClickPreviousTen, children: _jsx("button", { type: "button", className: "page-link", children: '<<' }) }, "previousTenPage"));
     };
-    var renderNextTenButton = function () {
-        return (React.createElement("li", { key: "nextTenPage", className: "page-item", onClick: handleClickNextTen },
-            React.createElement("button", { type: "button", className: "page-link" }, '>>')));
+    const renderNextTenButton = () => {
+        return (_jsx("li", { className: "page-item", onClick: handleClickNextTen, children: _jsx("button", { type: "button", className: "page-link", children: '>>' }) }, "nextTenPage"));
     };
-    return (React.createElement(Fragment, null, pagination !== undefined ?
-        React.createElement("nav", { "aria-label": ariaLabel },
-            React.createElement("div", { className: "row" },
-                React.createElement("div", { className: "col" },
-                    React.createElement("ul", { className: "pagination pagination-sm" },
-                        pagination.currentPage - 10 > 0 ? renderPreviousTenButton() : null,
-                        pagination.currentPage > 1 ? renderPreviousButton() : null,
-                        pages.map(function (page, index) {
-                            if (page === DOTS)
-                                return (React.createElement("li", { key: index, className: "page-item disabled" },
-                                    React.createElement("span", { className: "page-link" },
-                                        DOTS,
-                                        React.createElement("span", { className: "sr-only" }))));
-                            if (page === pagination.currentPage)
-                                return (React.createElement("li", { key: index, className: "page-item active" },
-                                    React.createElement("span", { className: "page-link" },
-                                        page,
-                                        React.createElement("span", { className: "sr-only" }))));
-                            return (React.createElement("li", { key: index, className: "page-item", onClick: function () { return handleClick(Number(page)); } },
-                                React.createElement("button", { type: "button", className: "page-link" }, page)));
-                        }),
-                        pagination.currentPage < pagination.totalPages ? renderNextButton() : null,
-                        pagination.currentPage + 9 < pagination.totalPages ? renderNextTenButton() : null)),
-                React.createElement("div", { className: "col-md-auto" }, showCount ? renderItemCount() : null)))
-        : null));
+    return (_jsx(Fragment, { children: pagination !== undefined ?
+            _jsx("nav", { "aria-label": ariaLabel, children: _jsxs("div", { className: "row", children: [_jsx("div", { className: "col", children: _jsxs("ul", { className: "pagination pagination-sm", children: [pagination.currentPage - 10 > 0 ? renderPreviousTenButton() : null, pagination.currentPage > 1 ? renderPreviousButton() : null, pages.map((page, index) => {
+                                        if (page === DOTS)
+                                            return (_jsx("li", { className: "page-item disabled", children: _jsxs("span", { className: "page-link", children: [DOTS, _jsx("span", { className: "sr-only" })] }) }, index));
+                                        if (page === pagination.currentPage)
+                                            return (_jsx("li", { className: "page-item active", children: _jsxs("span", { className: "page-link", children: [page, _jsx("span", { className: "sr-only" })] }) }, index));
+                                        return (_jsx("li", { className: "page-item", onClick: () => handleClick(Number(page)), children: _jsx("button", { type: "button", className: "page-link", children: page }) }, index));
+                                    }), pagination.currentPage < pagination.totalPages ? renderNextButton() : null, pagination.currentPage + 9 < pagination.totalPages ? renderNextTenButton() : null] }) }), _jsx("div", { className: "col-md-auto", children: showCount ? renderItemCount() : null })] }) })
+            : null }));
 };

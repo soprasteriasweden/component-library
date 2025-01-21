@@ -1,24 +1,24 @@
+import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import Select, { createFilter } from 'react-select';
 import { SelectStyles } from "../../../MenuList/MenuList";
 import { getNestedObjectValue } from "../../../../utils/utils";
-export var MultiSelect = function (_a) {
-    var _b;
-    var values = _a.values, defaultValue = _a.defaultValue, labelCol = _a.labelCol, inputCol = _a.inputCol, name = _a.name, onValueChange = _a.onValueChange, isLoading = _a.isLoading, isMultiple = _a.isMultiple, label = _a.label, required = _a.required, placeholder = _a.placeholder, disabled = _a.disabled, isClearable = _a.isClearable, resetValue = _a.resetValue;
-    var _c = useFormContext(), register = _c.register, unregister = _c.unregister, setValue = _c.setValue, errors = _c.errors;
-    var _d = React.useState(), selectedValue = _d[0], setSelectedValue = _d[1];
-    var _e = React.useState([]), options = _e[0], setOptions = _e[1];
+export const MultiSelect = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue }) => {
+    var _a;
+    const { register, unregister, setValue, formState: { errors } } = useFormContext();
+    const [selectedValue, setSelectedValue] = React.useState();
+    const [options, setOptions] = React.useState([]);
     var selectRef = React.useRef();
-    React.useEffect(function () {
-        register({ name: name }, { required: required });
-        return function () {
+    React.useEffect(() => {
+        register(name, { required: required });
+        return () => {
             unregister(name);
         };
     }, []);
-    React.useEffect(function () {
+    React.useEffect(() => {
         var _a, _b;
-        var options = values.map(function (listItem) {
+        const options = values.map((listItem) => {
             return {
                 value: listItem.value,
                 label: listItem.text,
@@ -28,37 +28,37 @@ export var MultiSelect = function (_a) {
             };
         });
         setOptions(options);
-        var initalValue = options.filter(function (option) { return option.selected; });
+        const initalValue = options.filter((option) => option.selected);
         setSelectedValue(initalValue);
         if (!isMultiple && initalValue.length === 1) {
             setValue(name, initalValue[0].value);
         }
         else if (isMultiple) {
-            setValue(name, initalValue.map(function (val) { return val.value; }));
+            setValue(name, initalValue.map((val) => val.value));
         }
         (_a = document.getElementById("clear-form")) === null || _a === void 0 ? void 0 : _a.removeEventListener("click", handleResetValue);
         if (!disabled && values && (isClearable || values.length > 1)) {
             (_b = document.getElementById("clear-form")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", handleResetValue);
         }
-        return function () {
+        return () => {
             var _a;
             (_a = document.getElementById("clear-form")) === null || _a === void 0 ? void 0 : _a.removeEventListener("click", handleResetValue);
         };
     }, [values, defaultValue]);
-    React.useEffect(function () {
+    React.useEffect(() => {
         handleResetValue();
     }, [resetValue]);
-    var handleResetValue = function () {
+    const handleResetValue = () => {
         if (selectRef === null || selectRef === void 0 ? void 0 : selectRef.current) {
             selectRef.current.select.clearValue();
             setValue(name, undefined);
             setSelectedValue(undefined);
         }
     };
-    var onChange = function (selectedOption) {
+    const onChange = (selectedOption) => {
         if (selectedOption) {
             if (isMultiple) {
-                var values = selectedOption.map(function (option) { return option.value; });
+                var values = selectedOption.map((option) => { return option.value; });
                 setValue(name, values);
                 setSelectedValue(selectedOption);
                 if (onValueChange) {
@@ -81,17 +81,10 @@ export var MultiSelect = function (_a) {
             }
         }
     };
-    var errorType = (_b = getNestedObjectValue(errors, name)) === null || _b === void 0 ? void 0 : _b.type;
-    return (React.createElement("div", { className: "form-group row" },
-        React.createElement("label", { className: "col-".concat(labelCol !== null && labelCol !== void 0 ? labelCol : 4, " col-form-label") },
-            label,
-            ":",
-            required ? "*" : ""),
-        React.createElement("div", { className: "col-".concat(inputCol !== null && inputCol !== void 0 ? inputCol : 8) },
-            React.createElement(Select, { ref: selectRef, placeholder: placeholder, filterOption: createFilter({
-                    ignoreAccents: false,
-                    matchFrom: 'any',
-                    stringify: function (option) { return "".concat(option.label); }
-                }), styles: SelectStyles, options: options, value: selectedValue, onChange: function (selectedOption) { return onChange(selectedOption); }, isLoading: isLoading, loadingMessage: function () { return "Laddar"; }, isMulti: isMultiple, isDisabled: disabled === true }),
-            React.createElement("span", { className: "text-danger" }, errorType === "required" && "Välj minst ett värde"))));
+    const errorType = (_a = getNestedObjectValue(errors, name)) === null || _a === void 0 ? void 0 : _a.type;
+    return (_jsxs("div", { className: "form-group row", children: [_jsxs("label", { className: `col-${labelCol !== null && labelCol !== void 0 ? labelCol : 4} col-form-label`, children: [label, ":", required ? "*" : ""] }), _jsxs("div", { className: `col-${inputCol !== null && inputCol !== void 0 ? inputCol : 8}`, children: [_jsx(Select, { ref: selectRef, placeholder: placeholder, filterOption: createFilter({
+                            ignoreAccents: false,
+                            matchFrom: 'any',
+                            stringify: (option) => `${option.label}`
+                        }), styles: SelectStyles, options: options, value: selectedValue, onChange: (selectedOption) => onChange(selectedOption), isLoading: isLoading, loadingMessage: () => "Laddar", isMulti: isMultiple, isDisabled: disabled === true }), _jsx("span", { className: "text-danger", children: errorType === "required" && "Välj minst ett värde" })] })] }));
 };

@@ -1,3 +1,2 @@
-import * as React from "react";
 import { IChildren } from "../../models/IChildren";
-export declare const ModalFooter: ({ children }: IChildren) => React.JSX.Element;
+export declare const ModalFooter: ({ children }: IChildren) => import("react/jsx-runtime").JSX.Element;

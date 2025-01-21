@@ -7,4 +7,4 @@ export interface ISortTableContext {
     setSortOrder?: React.Dispatch<React.SetStateAction<SortOrder>>;
 }
 export declare const SortTableContext: React.Context<ISortTableContext>;
-export declare const SortTableProvider: React.FunctionComponent<{}>;
+export declare const SortTableProvider: React.FunctionComponent<React.PropsWithChildren<{}>>;

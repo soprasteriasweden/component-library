@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useFormContext } from 'react-hook-form';
-import Select, { createFilter, ValueType } from 'react-select';
+import Select, { createFilter } from 'react-select';
 import "../../../../assets/styles/Dropdown.style.scss";
 import { IDropdown } from "../../../../models/IFormInput";
 import { SelectStyles, MenuList } from "../../../MenuList/MenuList";
@@ -32,7 +32,7 @@ export const Dropdown: React.FC<IDropdown> = ({
     getItemLabel
 }) => {
 
-    const { register, setValue, errors, unregister } = useFormContext();
+    const { register, setValue, formState: { errors }, unregister } = useFormContext();
     const [selectedValue, setSelectedValue] = React.useState<IOption>();
     const [options, setOptions] = React.useState<IOption[]>()
     var selectRef = React.useRef<any>();
@@ -61,7 +61,7 @@ export const Dropdown: React.FC<IDropdown> = ({
     }
 
     React.useEffect(() => {
-        register({ name: name }, { required: required });
+        register(name, { required: required });
         if (items) {
             const mappedOptions = items.map<IOption>((item) => {
                 return {
@@ -141,7 +141,7 @@ export const Dropdown: React.FC<IDropdown> = ({
                     classNamePrefix="custom-dropdown-styling"
                 />
 
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" && showErrorMessage() : ""}</span>
+                <span className="text-danger">{errors[name]?.type === "required" && showErrorMessage()}</span>
             </div>
         </div>
     )

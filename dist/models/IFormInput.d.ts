@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export interface IFormInputBase {
     name: string;
     disabled?: boolean;

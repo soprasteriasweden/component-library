@@ -9,7 +9,7 @@ export const RadioButton: React.FunctionComponent<ICheckbox> = ({ required, inli
 
     return (
         <div className={`custom-radio-button form-check ${inlineLabel ? "form-check-inline" : ""}`}>
-            <input className="form-check-input" type="radio" name={name} ref={register({ required: required })} id={id} value={value} required={required} />
+            <input className="form-check-input" type="radio" {...register(name, { required: required })} id={id} value={value} required={required} />
             <label className="form-check-label" htmlFor={id}>
                 {label}
             </label>

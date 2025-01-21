@@ -1,20 +1,15 @@
+import { jsx as _jsx } from "react/jsx-runtime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 import "../../../../assets/styles/TooltipItem.style.scss";
-export var InputIconTooltip = function (_a) {
-    var description = _a.description, icon = _a.icon;
-    var tooltipId = "a".concat(Math.floor(Math.random() * 100000));
-    var myWindow = window;
-    var onTooltipMouseOver = function () {
-        myWindow.$("#".concat(tooltipId)).tooltip("enable");
-        myWindow.$("#".concat(tooltipId)).tooltip("show");
+export const InputIconTooltip = ({ description, icon }) => {
+    const tooltipId = `a${Math.floor(Math.random() * 100000)}`;
+    const myWindow = window;
+    const onTooltipMouseOver = () => {
+        myWindow.$(`#${tooltipId}`).tooltip("enable");
+        myWindow.$(`#${tooltipId}`).tooltip("show");
     };
-    var onTooltipClick = function () {
-        myWindow.$("#".concat(tooltipId)).tooltip("hide");
+    const onTooltipClick = () => {
+        myWindow.$(`#${tooltipId}`).tooltip("hide");
     };
-    return (React.createElement("div", { className: "tooltip-item" },
-        React.createElement("p", null,
-            React.createElement("span", { id: tooltipId, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": description, onMouseOver: onTooltipMouseOver, onClick: onTooltipClick },
-                React.createElement("span", { className: "input-group-text", style: { backgroundColor: 'transparent', border: 'none' } },
-                    React.createElement(FontAwesomeIcon, { icon: icon }))))));
+    return (_jsx("div", { className: "tooltip-item", children: _jsx("p", { children: _jsx("span", { id: tooltipId, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": description, onMouseOver: onTooltipMouseOver, onClick: onTooltipClick, children: _jsx("span", { className: "input-group-text", style: { backgroundColor: 'transparent', border: 'none' }, children: _jsx(FontAwesomeIcon, { icon: icon }) }) }) }) }));
 };

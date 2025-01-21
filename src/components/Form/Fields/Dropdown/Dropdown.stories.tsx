@@ -1,6 +1,6 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { useForm, FormContext } from 'react-hook-form';
+import { Meta, StoryFn } from '@storybook/react';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import { Dropdown } from './Dropdown';
 import { IDropdown, IListItem } from '../../../../models/IFormInput';
@@ -15,13 +15,13 @@ export default {
     component: Dropdown,
 } as Meta;
 
-const Template: Story<StorybookIDropdown> = (args) => {
+const Template: StoryFn<StorybookIDropdown> = (args) => {
     const methods = useForm();
 
     return (
-        <FormContext {...methods}>
+        <FormProvider {...methods}>
             <Dropdown {...args} />
-        </FormContext>
+        </FormProvider>
     );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { useForm, FormContext } from 'react-hook-form';
+import { Meta, StoryFn } from '@storybook/react';
+import { useForm, useFormContext } from 'react-hook-form';
 
 import { Select } from './Select';
 import { IListItem, ISelect } from '../../../../models/IFormInput';
@@ -16,7 +16,7 @@ export default {
     component: Select,
 } as Meta;
 
-const Template: Story<StorybookISelect> = (args) => {
+const Template: StoryFn<StorybookISelect> = (args) => {
     const methods = useForm();
 
     const onSubmit = (data: any) => {

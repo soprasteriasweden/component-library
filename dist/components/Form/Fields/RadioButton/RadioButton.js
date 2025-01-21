@@ -1,10 +1,7 @@
-import * as React from "react";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useFormContext } from 'react-hook-form';
 import "../../../../assets/styles/RadioButton.style.scss";
-export var RadioButton = function (_a) {
-    var required = _a.required, inlineLabel = _a.inlineLabel, name = _a.name, value = _a.value, label = _a.label, id = _a.id;
-    var register = useFormContext().register;
-    return (React.createElement("div", { className: "custom-radio-button form-check ".concat(inlineLabel ? "form-check-inline" : "") },
-        React.createElement("input", { className: "form-check-input", type: "radio", name: name, ref: register({ required: required }), id: id, value: value, required: required }),
-        React.createElement("label", { className: "form-check-label", htmlFor: id }, label)));
+export const RadioButton = ({ required, inlineLabel, name, value, label, id }) => {
+    const { register } = useFormContext();
+    return (_jsxs("div", { className: `custom-radio-button form-check ${inlineLabel ? "form-check-inline" : ""}`, children: [_jsx("input", Object.assign({ className: "form-check-input", type: "radio" }, register(name, { required: required }), { id: id, value: value, required: required })), _jsx("label", { className: "form-check-label", htmlFor: id, children: label })] }));
 };

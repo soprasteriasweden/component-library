@@ -6,7 +6,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 export const PhoneNumberInput: React.FunctionComponent<IPhoneNumberInput> = ({ name, tooltipDescription, label, required, className, inlineLabel, disabled, placeholder, defaultValue, requiredValidationMessage, labelCol = 4, inputCol = 8 }) => {
 
-    const { errors, register } = useFormContext();
+    const { register, formState: { errors } } = useFormContext();
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -14,12 +14,11 @@ export const PhoneNumberInput: React.FunctionComponent<IPhoneNumberInput> = ({ n
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     <input type="text"
-                        name={name}
                         id={name}
                         className="form-control form-control-sm "
                         placeholder={placeholder}
                         defaultValue={defaultValue}
-                        ref={register({ required: required, pattern: /^(\+46|0)[\s\-]?(\d{1,4})[\s\-]?(\d{2,4})[\s\-]?(\d{2,4})$/ })}
+                        {...register(name, { required: required, pattern: /^(\+46|0)[\s\-]?(\d{1,4})[\s\-]?(\d{2,4})[\s\-]?(\d{2,4})$/ })}
                         disabled={disabled} />
                     {
                         tooltipDescription ?
@@ -27,9 +26,9 @@ export const PhoneNumberInput: React.FunctionComponent<IPhoneNumberInput> = ({ n
                             : null
                     }
                 </div>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
-                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "pattern" && label + " i fel format" : ""}</span>
+                <span className="text-danger">{errors[name]?.type === "required" &&
+                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
+                <span className="text-danger">{errors[name]?.type === "pattern" && label + " i fel format"}</span>
             </div>
         </div>
     )

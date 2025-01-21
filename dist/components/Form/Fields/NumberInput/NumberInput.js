@@ -1,20 +1,12 @@
-import * as React from "react";
+import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import { useFormContext } from 'react-hook-form';
-export var NumberInput = function (_a) {
-    var _b;
-    var name = _a.name, label = _a.label, required = _a.required, className = _a.className, inlineLabel = _a.inlineLabel, disabled = _a.disabled, placeholder = _a.placeholder, maxValue = _a.maxValue, minValue = _a.minValue, defaultValue = _a.defaultValue, requiredValidationMessage = _a.requiredValidationMessage, maxLength = _a.maxLength, minLength = _a.minLength, readonly = _a.readonly, _c = _a.labelCol, labelCol = _c === void 0 ? 4 : _c, _d = _a.inputCol, inputCol = _d === void 0 ? 8 : _d;
-    var _e = useFormContext(), errors = _e.errors, register = _e.register;
-    return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
-        React.createElement("label", { className: inlineLabel ? "col-".concat(labelCol, " col-form-label") : "" },
-            label,
-            ":",
-            required && (readonly === false || readonly === undefined) ? "*" : ""),
-        React.createElement("div", { className: inlineLabel ? "col-".concat(inputCol) : "" },
-            readonly
-                ?
-                    React.createElement("input", { type: "number", readOnly: true, name: name, id: name, className: "form-control-plaintext ", ref: register(), value: defaultValue })
-                :
-                    React.createElement("input", { type: "number", min: minValue, max: maxValue, name: name, id: name, className: "form-control form-control-sm ", placeholder: placeholder, ref: register({ required: required }), defaultValue: defaultValue, disabled: disabled, minLength: minLength, maxLength: maxLength }),
-            React.createElement("span", { className: "text-danger" }, errors ? [name] && ((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" &&
-                (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""))));
+export const NumberInput = ({ name, label, required, className, inlineLabel, disabled, placeholder, maxValue, minValue, defaultValue, requiredValidationMessage, maxLength, minLength, readonly, labelCol = 4, inputCol = 8 }) => {
+    var _a;
+    const { formState: { errors }, register } = useFormContext();
+    return (_jsxs("div", { className: className + " form-group " + (inlineLabel ? "row" : ""), children: [_jsxs("label", { className: inlineLabel ? `col-${labelCol} col-form-label` : "", children: [label, ":", required && (readonly === false || readonly === undefined) ? "*" : ""] }), _jsxs("div", { className: inlineLabel ? `col-${inputCol}` : "", children: [readonly
+                        ?
+                            _jsx("input", Object.assign({ type: "number", readOnly: true, id: name, className: "form-control-plaintext " }, register(name), { value: defaultValue }))
+                        :
+                            _jsx("input", Object.assign({ type: "number", min: minValue, max: maxValue, id: name, className: "form-control form-control-sm ", placeholder: placeholder }, register(name, { required }), { defaultValue: defaultValue, disabled: disabled, minLength: minLength, maxLength: maxLength })), _jsx("span", { className: "text-danger", children: ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" ?
+                            (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : "" })] })] }));
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 
 import { Checkbox } from './Checkbox';
@@ -12,7 +12,7 @@ export default {
     component: Checkbox,
 } as Meta;
 
-const Template: Story<ICheckbox> = (args) => {
+const Template: StoryFn<ICheckbox> = (args) => {
     const methods = useForm();
 
     const onSubmit = (data: any) => {

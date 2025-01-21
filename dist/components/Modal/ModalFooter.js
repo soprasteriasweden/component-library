@@ -1,5 +1,2 @@
-import * as React from "react";
-export var ModalFooter = function (_a) {
-    var children = _a.children;
-    return (React.createElement("div", { className: "modal-footer" }, children));
-};
+import { jsx as _jsx } from "react/jsx-runtime";
+export const ModalFooter = ({ children }) => (_jsx("div", { className: "modal-footer", children: children }));

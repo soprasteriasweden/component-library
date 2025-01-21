@@ -6,6 +6,7 @@ interface IMainNaviagation {
     imagePath: string;
     rightContent?: React.ReactNodeArray | React.ReactNode | undefined;
     informationTopRight?: string;
+    children?: React.ReactNode;
 }
 
 export const MainNavigation: React.FunctionComponent<IMainNaviagation> = ({ imagePath, rightContent, children, informationTopRight }) => {

@@ -6,7 +6,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 export const NameInput: React.FunctionComponent<INameInput> = ({ name, tooltipDescription, label, required, className, inlineLabel, disabled, placeholder, defaultValue, requiredValidationMessage, labelCol = 4, inputCol = 8 }) => {
 
-    const { errors, register } = useFormContext();
+    const { formState: { errors }, register } = useFormContext();
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -14,12 +14,11 @@ export const NameInput: React.FunctionComponent<INameInput> = ({ name, tooltipDe
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     <input type="text"
-                        name={name}
                         id={name}
                         className="form-control form-control-sm "
                         placeholder={placeholder}
                         defaultValue={defaultValue}
-                        ref={register({ required: required, pattern: /^\p{L}+$/u })}
+                        {...register(name, { required: required, pattern: /^[\p{L}]+$/u })}
                         disabled={disabled} />
                     {
                         tooltipDescription ?
@@ -27,9 +26,9 @@ export const NameInput: React.FunctionComponent<INameInput> = ({ name, tooltipDe
                             : null
                     }
                 </div>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
-                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "pattern" && label + " i fel format" : ""}</span>
+                <span className="text-danger">{errors[name]?.type === "required" &&
+                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
+                <span className="text-danger">{errors[name]?.type === "pattern" && label + " i fel format"}</span>
             </div>
         </div>
     )

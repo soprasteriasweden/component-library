@@ -1,3 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import '../../assets/styles/AlertMessage.style.scss';
 export var AlertType;
@@ -7,15 +8,14 @@ export var AlertType;
     AlertType["primary"] = "primary";
     AlertType["warning"] = "warning";
 })(AlertType || (AlertType = {}));
-export var AlertMessage = function (_a) {
-    var duration = _a.duration, alertType = _a.alertType, alwaysShow = _a.alwaysShow, children = _a.children, _b = _a.renderOnTopOfPage, renderOnTopOfPage = _b === void 0 ? true : _b;
-    var _c = React.useState(false), showAlert = _c[0], setShowAlert = _c[1];
-    React.useEffect(function () {
-        var timeout;
+export const AlertMessage = ({ duration, alertType, alwaysShow, children, renderOnTopOfPage = true }) => {
+    const [showAlert, setShowAlert] = React.useState(false);
+    React.useEffect(() => {
+        let timeout;
         if (children) {
             setShowAlert(true);
             if (!alwaysShow) {
-                timeout = setTimeout(function () {
+                timeout = setTimeout(() => {
                     setShowAlert(false);
                 }, duration);
             }
@@ -23,17 +23,15 @@ export var AlertMessage = function (_a) {
         else {
             setShowAlert(false);
         }
-        return function () {
+        return () => {
             if (timeout) {
                 clearTimeout(timeout);
             }
         };
     }, [children]);
-    return (React.createElement("div", null, showAlert ?
-        React.createElement("div", { className: "alert ".concat(renderOnTopOfPage ? "alert-top-of-page" : "", " alert-").concat(alertType), role: "alert" },
-            children,
-            renderOnTopOfPage ?
-                React.createElement("button", { type: "button", className: "remove-alert", onClick: function () { return setShowAlert(false); } })
-                : null)
-        : ""));
+    return (_jsx("div", { children: showAlert ?
+            _jsxs("div", { className: `alert ${renderOnTopOfPage ? "alert-top-of-page" : ""} alert-${alertType}`, role: "alert", children: [children, renderOnTopOfPage ?
+                        _jsx("button", { type: "button", className: "remove-alert", onClick: () => setShowAlert(false) })
+                        : null] })
+            : "" }));
 };

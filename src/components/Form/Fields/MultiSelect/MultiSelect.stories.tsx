@@ -1,6 +1,6 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { useForm, FormContext } from 'react-hook-form';
+import { Meta, StoryFn } from '@storybook/react';
+import { useForm, useFormContext } from 'react-hook-form';
 
 import { MultiSelect } from './MultiSelect';
 import { IMultiSelect, IListItem } from '../../../../models/IFormInput';
@@ -16,7 +16,7 @@ export default {
   component: MultiSelect,
 } as Meta;
 
-const Template: Story<StorybookIMultiSelect> = (args) => {
+const Template: StoryFn<StorybookIMultiSelect> = (args) => {
   const methods = useForm();
 
   const onSubmit = (data: any) => {

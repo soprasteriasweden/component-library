@@ -7,7 +7,7 @@ import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const HsaIdInput: React.FunctionComponent<IHsaIdInput> = ({ name, tooltipDescription, label, required, className, inlineLabel, disabled, placeholder, defaultValue, requiredValidationMessage, labelCol = 4, inputCol = 8 }) => {
 
-    const { errors, register } = useFormContext();
+    const { register, formState: { errors } } = useFormContext();
     const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
@@ -16,12 +16,11 @@ export const HsaIdInput: React.FunctionComponent<IHsaIdInput> = ({ name, tooltip
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     <input type="text"
-                        name={name}
                         id={name}
                         className="form-control form-control-sm "
                         placeholder={placeholder}
                         defaultValue={defaultValue}
-                        ref={register({ required: required, pattern: /^(?=.{1,31}$)SE\d{10,12}-[A-Z0-9]+$/ })}
+                        {...register(name, { required: required, pattern: /^(?=.{1,31}$)SE\d{10,12}-[A-Z0-9]+$/ })}
                         disabled={disabled} 
                         onChange={ (e) => e.target.value = e.target.value.toUpperCase() }/>
                     {

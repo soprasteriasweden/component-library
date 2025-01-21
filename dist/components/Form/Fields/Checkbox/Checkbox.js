@@ -1,14 +1,14 @@
+import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import "../../../../assets/styles/Checkbox.style.scss";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
 import { getNestedObjectValue } from "../../../../utils/utils";
-export var Checkbox = function (_a) {
-    var _b;
-    var label = _a.label, name = _a.name, tooltipDescription = _a.tooltipDescription, className = _a.className, disabled = _a.disabled, required = _a.required, checked = _a.checked, value = _a.value, requiredValidationMessage = _a.requiredValidationMessage, id = _a.id, _c = _a.labelCol, labelCol = _c === void 0 ? 4 : _c, _d = _a.inputCol, inputCol = _d === void 0 ? 8 : _d, onChange = _a.onChange, withColumn = _a.withColumn;
-    var _e = useFormContext(), errors = _e.errors, register = _e.register;
-    var _f = React.useState(false), isChecked = _f[0], setIsChecked = _f[1];
-    React.useEffect(function () {
+export const Checkbox = ({ label, name, tooltipDescription, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
+    var _a;
+    const { formState: { errors }, register } = useFormContext();
+    const [isChecked, setIsChecked] = React.useState(false);
+    React.useEffect(() => {
         if (checked !== undefined) {
             setIsChecked(checked);
         }
@@ -16,23 +16,23 @@ export var Checkbox = function (_a) {
             setIsChecked(false);
         }
     }, [checked]);
-    React.useEffect(function () {
+    React.useEffect(() => {
         var _a;
         if (!disabled) {
             (_a = document.getElementById("clear-form")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", resetValue);
         }
-        return function () {
+        return () => {
             var _a;
             (_a = document.getElementById("clear-form")) === null || _a === void 0 ? void 0 : _a.removeEventListener("click", resetValue);
         };
     }, []);
-    var resetValue = function () {
+    const resetValue = () => {
         setIsChecked(false);
         if (onChange) {
             onChange(false);
         }
     };
-    var toggleIsChecked = function () {
+    const toggleIsChecked = () => {
         if (isChecked) {
             setIsChecked(false);
             if (onChange) {
@@ -46,14 +46,8 @@ export var Checkbox = function (_a) {
             }
         }
     };
-    var errorType = (_b = getNestedObjectValue(errors, name)) === null || _b === void 0 ? void 0 : _b.type;
-    return (React.createElement("div", { className: className + " custom-checkbox form-group row" },
-        React.createElement("label", { className: "col-".concat(labelCol), htmlFor: id }, tooltipDescription ?
-            React.createElement(TooltipItem, { key: id, title: label, description: tooltipDescription })
-            : React.createElement(React.Fragment, null,
-                label,
-                withColumn ? ":" : "")),
-        React.createElement("div", { className: "col-".concat(inputCol) },
-            React.createElement("input", { type: "checkbox", name: name, id: id, disabled: disabled, checked: isChecked, onChange: function () { return toggleIsChecked(); }, value: value, ref: register({ required: required }) }),
-            React.createElement("span", { className: "text-danger" }, errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")))));
+    const errorType = (_a = getNestedObjectValue(errors, name)) === null || _a === void 0 ? void 0 : _a.type;
+    return (_jsxs("div", { className: className + " custom-checkbox form-group row", children: [_jsx("label", { className: `col-${labelCol}`, htmlFor: id, children: tooltipDescription ?
+                    _jsx(TooltipItem, { title: label, description: tooltipDescription }, id)
+                    : _jsxs(_Fragment, { children: [label, withColumn ? ":" : ""] }) }), _jsxs("div", { className: `col-${inputCol}`, children: [_jsx("input", Object.assign({ type: "checkbox", id: id, disabled: disabled, checked: isChecked, value: value }, register(name, { required: required, onChange: () => toggleIsChecked() }))), _jsx("span", { className: "text-danger", children: errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i") })] })] }));
 };

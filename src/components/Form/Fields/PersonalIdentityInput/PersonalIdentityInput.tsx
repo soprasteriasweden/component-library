@@ -7,7 +7,7 @@ import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInput> = ({ name, tooltipDescription, label, required, className, inlineLabel, disabled, placeholder, defaultValue, requiredValidationMessage, labelCol = 4, inputCol = 8 }) => {
 
-    const { errors, register } = useFormContext();
+    const { register, formState: { errors } } = useFormContext();
 
     const errorType = getNestedObjectValue(errors, name)?.type;
 
@@ -17,12 +17,11 @@ export const PersonalIdentityInput: React.FunctionComponent<IPersonalIdentityInp
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     <input type="text"
-                        name={name}
                         id={name}
                         className="form-control form-control-sm "
                         placeholder={placeholder}
                         defaultValue={defaultValue}
-                        ref={register({ required: required, pattern: /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]|6[1-9]|7[0-9]|8[0-9]|9[0-1])[-+]\d{4}$/ })}
+                        {...register(name, { required: required, pattern: /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]|6[1-9]|7[0-9]|8[0-9]|9[0-1])[-+]\d{4}$/ })}
                         disabled={disabled} />
                     {
                         tooltipDescription ?

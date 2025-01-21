@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 
 export const NumberInput: React.FunctionComponent<INumberInput> = ({ name, label, required, className, inlineLabel, disabled, placeholder, maxValue, minValue, defaultValue, requiredValidationMessage, maxLength, minLength, readonly, labelCol = 4, inputCol = 8 }) => {
 
-    const { errors, register } = useFormContext();
+    const { formState: { errors }, register } = useFormContext();
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -16,21 +16,19 @@ export const NumberInput: React.FunctionComponent<INumberInput> = ({ name, label
                         ?
                         <input type="number"
                         readOnly
-                        name={name}
                         id={name}
                         className="form-control-plaintext "
-                        ref={register()}
+                        {...register(name)}
                         value={defaultValue}
                     />
                         :
                         <input type="number"
                             min={minValue}
                             max={maxValue}
-                            name={name}
                             id={name}
                             className="form-control form-control-sm "
                             placeholder={placeholder}
-                            ref={register({ required: required })}
+                            {...register(name, { required })}
                             defaultValue={defaultValue}
                             disabled={disabled}
                             minLength={minLength}
@@ -39,7 +37,7 @@ export const NumberInput: React.FunctionComponent<INumberInput> = ({ name, label
                 }
 
 
-                <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
+                <span className="text-danger">{errors[name]?.type === "required" ?
                     (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
             </div>
         </div>

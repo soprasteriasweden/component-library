@@ -13,7 +13,7 @@ export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, cl
         setValue: ""
     }
 
-    const { errors, register, setValue } = useFormContext() ?? readonlyValues;
+    const { formState: { errors }, register, setValue } = useFormContext() ?? readonlyValues;
 
     React.useEffect(() => {
         if (typeof setValue !== "string") {
@@ -45,10 +45,9 @@ export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, cl
                             :
                             <>
                                 <input type="text"
-                                    name={name}
                                     id={name}
                                     className="form-control form-control-sm"
-                                    ref={typeof register !== "string" ? register({ required: required, pattern: pattern, validate: required ? (value) => { return !!value.trim() } : undefined }) : ""}
+                                    {...register(name, { required: required, pattern: pattern, validate: required ? (value: string) => { return !!value.trim() } : undefined })}
                                     placeholder={placeholder}
                                     defaultValue={defaultValue}
                                     disabled={disabled}

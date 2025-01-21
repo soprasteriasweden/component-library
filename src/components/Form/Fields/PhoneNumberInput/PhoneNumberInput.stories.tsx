@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 
 import { PhoneNumberInput } from './PhoneNumberInput';
@@ -12,7 +12,7 @@ export default {
     component: PhoneNumberInput,
 } as Meta;
 
-const Template: Story<IPhoneNumberInput> = (args) => {
+const Template: StoryFn<IPhoneNumberInput> = (args) => {
     const methods = useForm();
 
     const onSubmit = (data: any) => {

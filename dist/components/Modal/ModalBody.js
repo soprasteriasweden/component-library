@@ -1,5 +1,2 @@
-import * as React from "react";
-export var ModalBody = function (_a) {
-    var children = _a.children;
-    return (React.createElement("div", { className: "modal-body" }, children));
-};
+import { jsx as _jsx } from "react/jsx-runtime";
+export const ModalBody = ({ children }) => (_jsx("div", { className: "modal-body", children: children }));

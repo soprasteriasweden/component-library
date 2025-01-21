@@ -30,7 +30,7 @@ export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLi
     }, [existingLinks])
 
     const remove = (index: number) => {
-        const { links } = getValues({ nest: true });
+        const { links } = getValues();
 
         const newLinks = [...links];
 

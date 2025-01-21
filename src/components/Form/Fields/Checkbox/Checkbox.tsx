@@ -7,7 +7,7 @@ import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tooltipDescription, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
 
-    const { errors, register } = useFormContext();
+    const { formState: { errors }, register } = useFormContext();
     const [isChecked, setIsChecked] = React.useState<boolean>(false);
 
     React.useEffect(() => {
@@ -63,13 +63,11 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tool
             </label>
             <div className={`col-${inputCol}`}>
                 <input type="checkbox"
-                    name={name}
                     id={id}
                     disabled={disabled}
                     checked={isChecked}
-                    onChange={() => toggleIsChecked()}
                     value={value}
-                    ref={register({ required: required })}
+                    {...register(name, { required: required, onChange: () => toggleIsChecked() })}
                 />
                 <span className="text-danger">{errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")}</span>
             </div>

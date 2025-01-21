@@ -10,7 +10,7 @@ export interface ISortTableContext {
 
 export const SortTableContext = React.createContext<ISortTableContext>({ sortOrder: SortOrder.ascending });
 
-export const SortTableProvider: React.FunctionComponent<{}> = ({ children }) => {
+export const SortTableProvider: React.FunctionComponent<React.PropsWithChildren<{}>> = ({ children }) => {
 
     const [selectedPropertyToSortBy, setSelectedPropertyToSortBy] = React.useState<string>();
     const [sortOrder, setSortOrder] = React.useState<SortOrder>(SortOrder.ascending);

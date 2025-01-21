@@ -9,7 +9,7 @@ import { ButtonType, CustomButton } from '../../../CustomButton/CustomButton';
 
 export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes = (5 * Math.pow(2, 20)), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles, maxFiles }) => {
 
-    const { errors, register, setValue, unregister } = useFormContext();
+    const { formState: { errors }, register, setValue, unregister } = useFormContext();
     const [selectedFiles, setSelectedFiles] = React.useState<File[]>([]);
     const [selectedDocumentTypeIds, setSelectedDocumentTypeIds] = React.useState<number[]>([]);
     const [numberOfFiles, setNumberOfFiles] = React.useState<number>(0);
@@ -19,7 +19,7 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
         acceptedFiles,
         fileRejections
     } = useDropzone({
-        accept: allowedFileTypes,
+        accept: allowedFileTypes?.reduce((acc, type) => ({ ...acc, [type]: [] }), {}),
         multiple: multiple,
         disabled: disabled,
         maxSize: maxSizeBytes,
@@ -33,7 +33,7 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
     }, [])
 
     React.useEffect(() => {
-        register({ name: name }, { required: required });
+        register(name, { required: required });
     }, []);
 
     React.useEffect(() => {
@@ -48,7 +48,7 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
         const newFiles = multiple ?
             selectedFiles.concat(acceptedFiles)
             : acceptedFiles;
-        setSelectedFiles(newFiles);
+        setSelectedFiles(newFiles as File[]);
         if (newFiles.length > 0) {
             setValue(name, newFiles);
         }
@@ -95,9 +95,8 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
                     {
                         documentType && documentType.documentTypes.length > 0 ?
                             <select
-                                name={`${documentType.documentTypesName}[${index}]`}
                                 className="form-control form-control-sm"
-                                ref={register({ required: true })}
+                                {...register(`${documentType.documentTypesName}[${index}]`, { required: true })}
                                 onChange={(e) =>
                                     setSelectedDocumentTypeIds(selectedDocumentTypeIds.map((id, currentIndex) => {
                                         return currentIndex === index ? parseInt(e.target.value) : id;
@@ -137,8 +136,8 @@ export const FileUpload: React.FunctionComponent<IFileUpload> = ({ maxSizeBytes 
 
     const renderFileErrorMessage = () => {
         if (fileRejections.length <= 0) {
-            return <span className="text-danger">{errors ? [name] && (errors[name] as any)?.type === "required" &&
-                (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>;
+            return <span className="text-danger">{errors[name] && (errors[name] as any)?.type === "required" &&
+                (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
         }
     };
 

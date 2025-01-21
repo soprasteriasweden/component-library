@@ -10,7 +10,7 @@ export const Textarea: React.FunctionComponent<ITextarea> = ({ name, label, requ
         setValue: ""
     }
 
-    const { errors, register, setValue } = useFormContext() ?? readonlyValues;
+    const { formState: { errors }, register, setValue } = useFormContext() ?? readonlyValues;
     const [displayValue, setDisplayValue] = React.useState<string>();
 
     React.useEffect(() => {
@@ -43,13 +43,16 @@ export const Textarea: React.FunctionComponent<ITextarea> = ({ name, label, requ
                             {defaultValue}
                         </div>
                         :
-                        <textarea name={name}
+                        <textarea
                             id={name}
                             rows={rows}
                             className="form-control form-control-sm "
                             placeholder={placeholder}
-                            onChange={handleChange}
-                            ref={typeof register !== "string" ? register({ required: required, validate: required ? (value) => { return !!value.trim() } : undefined }) : ""}
+                            {...register(name, {
+                                required: required,
+                                validate: required ? (value: any) => !!value.trim() : undefined,
+                                onChange: handleChange
+                            })}
                             disabled={disabled}
                             maxLength={maxLength}
                             minLength={minLength}
@@ -57,7 +60,7 @@ export const Textarea: React.FunctionComponent<ITextarea> = ({ name, label, requ
                             {displayValue}
                         </textarea>
                 }
-                <span className="text-danger">{errors ? [name] && ((errors[name] as any)?.type === "required" || (errors[name] as any)?.type === "validate") && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") : ""}</span>
+                <span className="text-danger">{errors[name] && ((errors[name] as any)?.type === "required" || (errors[name] as any)?.type === "validate") && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
             </div>
         </div>
     )

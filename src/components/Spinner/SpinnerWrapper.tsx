@@ -9,6 +9,7 @@ export enum SpinnerSize {
 interface ISpinnerWrapper {
     isLoading: boolean;
     spinnerSize?: SpinnerSize;
+    children?: React.ReactNode;
 }
 
 export const SpinnerWrapper: React.FunctionComponent<ISpinnerWrapper> = ({ isLoading, spinnerSize = SpinnerSize.large, children }) => {

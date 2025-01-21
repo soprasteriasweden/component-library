@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 
 import { ZipCodeInput } from './ZipCodeInput';
@@ -12,7 +12,7 @@ export default {
     component: ZipCodeInput,
 } as Meta;
 
-const Template: Story<IZipCodeInput> = (args) => {
+const Template: StoryFn<IZipCodeInput> = (args) => {
     const methods = useForm();
 
     const onSubmit = (data: any) => {

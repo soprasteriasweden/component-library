@@ -1,4 +1,3 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React from 'react';
 import "../../../../assets/styles/FileUpload.style.scss";
 import { useDropzone } from 'react-dropzone';
@@ -66,7 +65,8 @@ export const FileUpload = ({ maxSizeBytes = (5 * Math.pow(2, 20)), label, allowe
         const selectedDocumentTypeId = selectedDocumentTypeIds[index];
         const selectedDocumentType = documentType === null || documentType === void 0 ? void 0 : documentType.documentTypes.filter(type => type.value === selectedDocumentTypeId.toString())[0];
         if (selectedDocumentType === null || selectedDocumentType === void 0 ? void 0 : selectedDocumentType.informationText) {
-            return _jsx("button", { className: "btn btn-warning btn-sm file-tooltip", id: "less", type: "button", "data-toggle": "tooltip", "data-placement": "right", "data-original-title": selectedDocumentType === null || selectedDocumentType === void 0 ? void 0 : selectedDocumentType.informationText, children: _jsx(FontAwesomeIcon, { icon: faExclamation }) });
+            return React.createElement("button", { className: "btn btn-warning btn-sm file-tooltip", id: "less", type: "button", "data-toggle": "tooltip", "data-placement": "right", "data-original-title": selectedDocumentType === null || selectedDocumentType === void 0 ? void 0 : selectedDocumentType.informationText },
+                React.createElement(FontAwesomeIcon, { icon: faExclamation }));
         }
         else {
             return "";
@@ -74,28 +74,41 @@ export const FileUpload = ({ maxSizeBytes = (5 * Math.pow(2, 20)), label, allowe
     };
     const renderSelectedFiles = selectedFiles.map((file, index) => {
         var _a;
-        return (_jsxs("div", { className: "mb-3", children: [_jsxs("div", { className: "input-group", children: [_jsx("input", { type: "text", className: "form-control form-control-sm", value: file.name, readOnly: true }), _jsxs("div", { className: "input-group-append", children: [documentType && documentType.documentTypes.length > 0 ?
-                                    _jsxs("select", Object.assign({ className: "form-control form-control-sm" }, register(`${documentType.documentTypesName}[${index}]`, { required: true }), { onChange: (e) => setSelectedDocumentTypeIds(selectedDocumentTypeIds.map((id, currentIndex) => {
-                                            return currentIndex === index ? parseInt(e.target.value) : id;
-                                        })), children: [_jsx("option", { value: "", disabled: true, selected: selectedDocumentTypeIds[index].toString() === "0", hidden: true, children: "V\u00E4lj typ av bilaga*" }), documentType.documentTypes.map((docType, key) => _jsx("option", { value: docType.value, selected: selectedDocumentTypeIds[index].toString() === docType.value, children: docType.text }, key))] }))
-                                    : null, documentType ?
-                                    renderWarning(index)
-                                    : null] })] }), (documentType === null || documentType === void 0 ? void 0 : documentType.documentTypesName) ?
-                    _jsx("span", { className: "text-danger", children: errors ? errors[documentType.documentTypesName] && ((_a = errors[documentType.documentTypesName][index]) === null || _a === void 0 ? void 0 : _a.type) === "required" &&
-                            "En dokumenttyp måste anges" : "" })
-                    : null] }, index));
+        return (React.createElement("div", { key: index, className: "mb-3" },
+            React.createElement("div", { className: "input-group" },
+                React.createElement("input", { type: "text", className: "form-control form-control-sm", value: file.name, readOnly: true }),
+                React.createElement("div", { className: "input-group-append" },
+                    documentType && documentType.documentTypes.length > 0 ?
+                        React.createElement("select", Object.assign({ className: "form-control form-control-sm" }, register(`${documentType.documentTypesName}[${index}]`, { required: true }), { onChange: (e) => setSelectedDocumentTypeIds(selectedDocumentTypeIds.map((id, currentIndex) => {
+                                return currentIndex === index ? parseInt(e.target.value) : id;
+                            })) }),
+                            React.createElement("option", { value: "", disabled: true, selected: selectedDocumentTypeIds[index].toString() === "0", hidden: true }, "V\u00E4lj typ av bilaga*"),
+                            documentType.documentTypes.map((docType, key) => React.createElement("option", { key: key, value: docType.value, selected: selectedDocumentTypeIds[index].toString() === docType.value }, docType.text)))
+                        : null,
+                    documentType ?
+                        renderWarning(index)
+                        : null)),
+            (documentType === null || documentType === void 0 ? void 0 : documentType.documentTypesName) ?
+                React.createElement("span", { className: "text-danger" }, errors ? errors[documentType.documentTypesName] && ((_a = errors[documentType.documentTypesName][index]) === null || _a === void 0 ? void 0 : _a.type) === "required" &&
+                    "En dokumenttyp måste anges" : "")
+                : null));
     });
-    const renderInvalidFiles = fileRejections.map((fileRejection, key) => (_jsxs("li", { className: "text-danger", children: [fileRejection.file.name, " -  ", formatBytes(fileRejection.file.size)] }, key)));
+    const renderInvalidFiles = fileRejections.map((fileRejection, key) => (React.createElement("li", { key: key, className: "text-danger" },
+        fileRejection.file.name,
+        " -  ",
+        formatBytes(fileRejection.file.size))));
     const renderFileErrorMessage = () => {
         var _a;
         if (fileRejections.length <= 0) {
-            return _jsx("span", { className: "text-danger", children: errors[name] && ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" &&
-                    (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") });
+            return React.createElement("span", { className: "text-danger" }, errors[name] && ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" &&
+                (requiredValidationMessage ? requiredValidationMessage : label + " måste anges"));
         }
     };
     const renderAllowedFileTypes = () => {
         if (allowedFileTypes && (allowedFileTypes === null || allowedFileTypes === void 0 ? void 0 : allowedFileTypes.length) > 0) {
-            return (_jsxs("p", { children: ["Till\u00E5tna filtyper \u00E4r ", allowedFileTypes.join(", ")] }));
+            return (React.createElement("p", null,
+                "Till\u00E5tna filtyper \u00E4r ",
+                allowedFileTypes.join(", ")));
         }
     };
     const clearFiles = () => {
@@ -106,9 +119,29 @@ export const FileUpload = ({ maxSizeBytes = (5 * Math.pow(2, 20)), label, allowe
         setValue(name, undefined);
         setNumberOfFiles(0);
     };
-    return (_jsxs("div", { className: className + " form-group " + (inlineLabel ? "row" : ""), children: [_jsxs("label", { htmlFor: name, className: inlineLabel ? `col-${labelCol} col-form-label` : "", children: [label, ":", required ? "*" : ""] }), _jsxs("div", { className: inlineLabel ? `col-${inputCol}` : "", children: [_jsxs("div", Object.assign({ className: "file-upload" }, getRootProps(), { children: [_jsx("input", Object.assign({ name: name, id: name, title: "Filuppladdning" }, getInputProps())), _jsxs("p", { children: [multiple
-                                        ? "Dra filer hit eller klicka här för att välja filer"
-                                        : "Dra en fil hit eller klicka här för att välja en fil", maxSizeBytes ? " (max " + formatBytes(maxSizeBytes) + ")" : ""] }), renderAllowedFileTypes()] })), renderFileErrorMessage(), _jsxs("div", { children: [selectedFiles.length > 0 ?
-                                _jsxs("div", { className: "mb-2", children: [_jsx("label", { children: "Valda dokument" }), _jsx("span", { className: "float-right", children: _jsx(CustomButton, { buttonType: ButtonType.deleteAlt, buttonText: "Rensa", onClick: clearFiles }) })] })
-                                : "", renderSelectedFiles, fileRejections.length > 0 ? _jsx("label", { children: "Ej giltiga filer (kommer ej att laddas upp)" }) : "", renderInvalidFiles] })] })] }));
+    return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
+        React.createElement("label", { htmlFor: name, className: inlineLabel ? `col-${labelCol} col-form-label` : "" },
+            label,
+            ":",
+            required ? "*" : ""),
+        React.createElement("div", { className: inlineLabel ? `col-${inputCol}` : "" },
+            React.createElement("div", Object.assign({ className: "file-upload" }, getRootProps()),
+                React.createElement("input", Object.assign({ name: name, id: name, title: "Filuppladdning" }, getInputProps())),
+                React.createElement("p", null,
+                    multiple
+                        ? "Dra filer hit eller klicka här för att välja filer"
+                        : "Dra en fil hit eller klicka här för att välja en fil",
+                    maxSizeBytes ? " (max " + formatBytes(maxSizeBytes) + ")" : ""),
+                renderAllowedFileTypes()),
+            renderFileErrorMessage(),
+            React.createElement("div", null,
+                selectedFiles.length > 0 ?
+                    React.createElement("div", { className: "mb-2" },
+                        React.createElement("label", null, "Valda dokument"),
+                        React.createElement("span", { className: "float-right" },
+                            React.createElement(CustomButton, { buttonType: ButtonType.deleteAlt, buttonText: "Rensa", onClick: clearFiles })))
+                    : "",
+                renderSelectedFiles,
+                fileRejections.length > 0 ? React.createElement("label", null, "Ej giltiga filer (kommer ej att laddas upp)") : "",
+                renderInvalidFiles))));
 };

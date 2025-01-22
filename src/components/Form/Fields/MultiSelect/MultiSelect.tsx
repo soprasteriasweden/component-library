@@ -64,7 +64,7 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
 
     const handleResetValue = () => {
         if (selectRef?.current) {
-            selectRef.current.select.clearValue();
+            selectRef.current.clearValue();
             setValue(name, undefined);
             setSelectedValue(undefined);
         }

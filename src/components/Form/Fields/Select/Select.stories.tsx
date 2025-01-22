@@ -5,6 +5,7 @@ import { useForm, useFormContext } from 'react-hook-form';
 import { Select } from './Select';
 import { IListItem, ISelect } from '../../../../models/IFormInput';
 import { CustomSubmitButton, Form } from '../../Form';
+import { ClearFormButton } from '../../ClearFormButton';
 
 // Extend ITextInput to include formMethods for Storybook.
 interface StorybookISelect extends ISelect {
@@ -26,7 +27,8 @@ const Template: StoryFn<StorybookISelect> = (args) => {
     return (
         <Form {...methods} onSubmit={onSubmit}>
             <Select {...args} />
-            <CustomSubmitButton>Test</CustomSubmitButton>
+            <CustomSubmitButton>Submit</CustomSubmitButton>
+            <ClearFormButton buttonText="Rensa" />
         </Form>
     );
 };
@@ -84,6 +86,7 @@ ToolTipWithNestedName.args = {
     inlineLabel: true,
     options: mockListItems,
     tooltipDescription: "Testar",
+    placeholder: "Välj en från listan",
     isClearable: true,
     required: true
 };

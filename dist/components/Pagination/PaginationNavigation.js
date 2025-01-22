@@ -1,4 +1,3 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { Fragment } from "react";
 const DOTS = '...';
@@ -90,31 +89,51 @@ export const PaginationNavigation = ({ pagination, ariaLabel, pageNeighbours, se
         }
     };
     const renderPreviousButton = () => {
-        return (_jsx("li", { className: "page-item", onClick: handleClickPrevious, children: _jsx("button", { type: "button", className: "page-link", children: "F\u00F6reg\u00E5ende" }) }, "previousPage"));
+        return (React.createElement("li", { key: "previousPage", className: "page-item", onClick: handleClickPrevious },
+            React.createElement("button", { type: "button", className: "page-link" }, "F\u00F6reg\u00E5ende")));
     };
     const renderNextButton = () => {
-        return (_jsx("li", { className: "page-item", onClick: handleClickNext, children: _jsx("button", { type: "button", className: "page-link", children: "N\u00E4sta" }) }, "nextPage"));
+        return (React.createElement("li", { key: "nextPage", className: "page-item", onClick: handleClickNext },
+            React.createElement("button", { type: "button", className: "page-link" }, "N\u00E4sta")));
     };
     const renderItemCount = () => {
         if (pagination !== undefined) {
             const startItem = pagination.pageSize * (pagination.currentPage - 1) + 1;
             const endItem = Math.min(startItem + pagination.pageSize - 1, pagination.totalCount);
-            return (_jsx("p", { className: "text-right", children: `Visar ${startItem}-${endItem} av ${pagination.totalCount}` }));
+            return (React.createElement("p", { className: "text-right" }, `Visar ${startItem}-${endItem} av ${pagination.totalCount}`));
         }
     };
     const renderPreviousTenButton = () => {
-        return (_jsx("li", { className: "page-item", onClick: handleClickPreviousTen, children: _jsx("button", { type: "button", className: "page-link", children: '<<' }) }, "previousTenPage"));
+        return (React.createElement("li", { key: "previousTenPage", className: "page-item", onClick: handleClickPreviousTen },
+            React.createElement("button", { type: "button", className: "page-link" }, '<<')));
     };
     const renderNextTenButton = () => {
-        return (_jsx("li", { className: "page-item", onClick: handleClickNextTen, children: _jsx("button", { type: "button", className: "page-link", children: '>>' }) }, "nextTenPage"));
+        return (React.createElement("li", { key: "nextTenPage", className: "page-item", onClick: handleClickNextTen },
+            React.createElement("button", { type: "button", className: "page-link" }, '>>')));
     };
-    return (_jsx(Fragment, { children: pagination !== undefined ?
-            _jsx("nav", { "aria-label": ariaLabel, children: _jsxs("div", { className: "row", children: [_jsx("div", { className: "col", children: _jsxs("ul", { className: "pagination pagination-sm", children: [pagination.currentPage - 10 > 0 ? renderPreviousTenButton() : null, pagination.currentPage > 1 ? renderPreviousButton() : null, pages.map((page, index) => {
-                                        if (page === DOTS)
-                                            return (_jsx("li", { className: "page-item disabled", children: _jsxs("span", { className: "page-link", children: [DOTS, _jsx("span", { className: "sr-only" })] }) }, index));
-                                        if (page === pagination.currentPage)
-                                            return (_jsx("li", { className: "page-item active", children: _jsxs("span", { className: "page-link", children: [page, _jsx("span", { className: "sr-only" })] }) }, index));
-                                        return (_jsx("li", { className: "page-item", onClick: () => handleClick(Number(page)), children: _jsx("button", { type: "button", className: "page-link", children: page }) }, index));
-                                    }), pagination.currentPage < pagination.totalPages ? renderNextButton() : null, pagination.currentPage + 9 < pagination.totalPages ? renderNextTenButton() : null] }) }), _jsx("div", { className: "col-md-auto", children: showCount ? renderItemCount() : null })] }) })
-            : null }));
+    return (React.createElement(Fragment, null, pagination !== undefined ?
+        React.createElement("nav", { "aria-label": ariaLabel },
+            React.createElement("div", { className: "row" },
+                React.createElement("div", { className: "col" },
+                    React.createElement("ul", { className: "pagination pagination-sm" },
+                        pagination.currentPage - 10 > 0 ? renderPreviousTenButton() : null,
+                        pagination.currentPage > 1 ? renderPreviousButton() : null,
+                        pages.map((page, index) => {
+                            if (page === DOTS)
+                                return (React.createElement("li", { key: index, className: "page-item disabled" },
+                                    React.createElement("span", { className: "page-link" },
+                                        DOTS,
+                                        React.createElement("span", { className: "sr-only" }))));
+                            if (page === pagination.currentPage)
+                                return (React.createElement("li", { key: index, className: "page-item active" },
+                                    React.createElement("span", { className: "page-link" },
+                                        page,
+                                        React.createElement("span", { className: "sr-only" }))));
+                            return (React.createElement("li", { key: index, className: "page-item", onClick: () => handleClick(Number(page)) },
+                                React.createElement("button", { type: "button", className: "page-link" }, page)));
+                        }),
+                        pagination.currentPage < pagination.totalPages ? renderNextButton() : null,
+                        pagination.currentPage + 9 < pagination.totalPages ? renderNextTenButton() : null)),
+                React.createElement("div", { className: "col-md-auto" }, showCount ? renderItemCount() : null)))
+        : null));
 };

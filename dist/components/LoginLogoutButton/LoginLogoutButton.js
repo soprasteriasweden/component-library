@@ -1,10 +1,10 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import { NavLink } from "react-router-dom";
+import * as React from "react";
+import { NavLink } from "react-router";
 export const LoginLogoutButton = ({ AuthConsumer }) => {
-    return (_jsx(AuthConsumer, { children: ({ isAuthenticated, login, logout }) => {
-            if (isAuthenticated) {
-                return _jsx(NavLink, { to: "Logga ut", className: "nav-link", onClick: logout, children: "Logga ut" });
-            }
-            return _jsx(NavLink, { to: "Logga in", className: "nav-link", onClick: login, children: "Logga in" });
-        } }));
+    return (React.createElement(AuthConsumer, null, ({ isAuthenticated, login, logout }) => {
+        if (isAuthenticated) {
+            return React.createElement(NavLink, { to: "Logga ut", className: "nav-link", onClick: logout }, "Logga ut");
+        }
+        return React.createElement(NavLink, { to: "Logga in", className: "nav-link", onClick: login }, "Logga in");
+    }));
 };

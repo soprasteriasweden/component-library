@@ -1,3 +1,4 @@
+import * as React from "react";
 import { IChildren } from "../../models/IChildren";
 interface ITabPanel extends IChildren {
     selected?: boolean;
@@ -5,5 +6,5 @@ interface ITabPanel extends IChildren {
     ariaLabelledBy: string;
     render?: boolean;
 }
-export declare const TabPanel: ({ selected, id, ariaLabelledBy, children, render }: ITabPanel) => import("react/jsx-runtime").JSX.Element | null;
+export declare const TabPanel: ({ selected, id, ariaLabelledBy, children, render }: ITabPanel) => React.JSX.Element | null;
 export {};

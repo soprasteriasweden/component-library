@@ -4,6 +4,7 @@ import Select, { createFilter } from 'react-select';
 import "../../../../assets/styles/Dropdown.style.scss";
 import { IDropdown } from "../../../../models/IFormInput";
 import { SelectStyles, MenuList } from "../../../MenuList/MenuList";
+import { getNestedObjectValue } from "../../../../utils/utils";
 
 interface IOption {
     value: string;
@@ -54,9 +55,9 @@ export const Dropdown: React.FC<IDropdown> = ({
 
     const handleResetValue = () => {
         if (selectRef?.current) {
-            selectRef.current.select.clearValue();
-            setValue(name, undefined)
-            setSelectedValue(undefined)
+            selectRef.current.clearValue();
+            setValue(name, undefined);
+            setSelectedValue(undefined);
         }
     }
 
@@ -78,7 +79,7 @@ export const Dropdown: React.FC<IDropdown> = ({
             }
             else {
                 if (clearValueIfNoInitalValue) {
-                    selectRef.current.select.clearValue();
+                    selectRef.current.clearValue();
                 }
                 setValue(name, undefined);
                 setSelectedValue(undefined);
@@ -107,13 +108,7 @@ export const Dropdown: React.FC<IDropdown> = ({
         }
     }
 
-    const showErrorMessage = () => {
-        if (errorMessage) {
-            return errorMessage;
-        } else {
-            return "Please select an option";
-        }
-    }
+    const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
         <div className="form-group row">
@@ -140,8 +135,7 @@ export const Dropdown: React.FC<IDropdown> = ({
                     isClearable={isClearable !== undefined ? isClearable : true}
                     classNamePrefix="custom-dropdown-styling"
                 />
-
-                <span className="text-danger">{errors[name]?.type === "required" && showErrorMessage()}</span>
+                <span className="text-danger">{errorType === "required" && (errorMessage ? errorMessage : label + " måste anges")}</span>
             </div>
         </div>
     )

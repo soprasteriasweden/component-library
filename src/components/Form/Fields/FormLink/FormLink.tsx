@@ -2,7 +2,7 @@ import * as React from "react";
 import { IFormLink } from "../../../../models/IFormInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import "../../../../assets/styles/FormLink.style.scss";
 
 

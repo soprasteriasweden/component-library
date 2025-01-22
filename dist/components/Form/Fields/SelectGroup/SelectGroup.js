@@ -1,4 +1,3 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { PrimarySelect } from "./PrimarySelect";
 import { SecondarySelect } from "./SecondarySelect";
@@ -24,6 +23,8 @@ export const SelectGroup = ({ primaryOptions, secondaryOptions, setPrimaryValue,
             setSecondaryValue(val);
         }
     };
-    return (_jsxs(_Fragment, { children: [_jsx(PrimarySelect, { label: primaryLabel, name: primaryName, labelCol: labelCol, inputCol: inputCol, disabled: disabled, defaultValue: primaryDefaultValue, onChange: handlePrimaryChange, isClearable: isClearable, required: required, options: primaryOptions, placeholder: primaryPlaceholder }), !isSecondaryDisabled &&
-                _jsx(SecondarySelect, { label: secondaryLabel, name: secondaryName, labelCol: labelCol, inputCol: inputCol, disabled: disabled, defaultValue: secondaryDefaultValue, onChange: handleSecondaryChange, isClearable: isClearable, required: required, options: secondaryOptions, placeholder: secondaryPlaceholder })] }));
+    return (React.createElement(React.Fragment, null,
+        React.createElement(PrimarySelect, { label: primaryLabel, name: primaryName, labelCol: labelCol, inputCol: inputCol, disabled: disabled, defaultValue: primaryDefaultValue, onChange: handlePrimaryChange, isClearable: isClearable, required: required, options: primaryOptions, placeholder: primaryPlaceholder }),
+        !isSecondaryDisabled &&
+            React.createElement(SecondarySelect, { label: secondaryLabel, name: secondaryName, labelCol: labelCol, inputCol: inputCol, disabled: disabled, defaultValue: secondaryDefaultValue, onChange: handleSecondaryChange, isClearable: isClearable, required: required, options: secondaryOptions, placeholder: secondaryPlaceholder })));
 };

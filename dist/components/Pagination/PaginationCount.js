@@ -1,4 +1,3 @@
-import { jsx as _jsx } from "react/jsx-runtime";
 import * as React from "react";
 export const PaginationCount = ({ totalCount = 0, itemsPerPage = 0, currentPage = 0 }) => {
     const [startItem, setStartItem] = React.useState(0);
@@ -9,5 +8,5 @@ export const PaginationCount = ({ totalCount = 0, itemsPerPage = 0, currentPage 
         setStartItem(startItem);
         setEndItem(endItem > totalCount ? totalCount : endItem);
     }, [totalCount, itemsPerPage, currentPage]);
-    return (_jsx("p", { className: "text-right", children: `Visar ${startItem}-${endItem} av ${totalCount}` }));
+    return (React.createElement("p", { className: "text-right" }, `Visar ${startItem}-${endItem} av ${totalCount}`));
 };

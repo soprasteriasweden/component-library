@@ -6,8 +6,13 @@ import { TooltipItem } from "../TooltipItem/TooltipItem";
 import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tooltipDescription, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
-
-    const { formState: { errors }, register } = useFormContext();
+    const readonlyValues = {
+        errors: "",
+        register: "",
+        unregister: "",
+        setValue: ""
+    }
+    const { formState: { errors }, register } = useFormContext() ?? readonlyValues;
     const [isChecked, setIsChecked] = React.useState<boolean>(false);
 
     React.useEffect(() => {
@@ -67,7 +72,7 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tool
                     disabled={disabled}
                     checked={isChecked}
                     value={value}
-                    {...register(name, { required: required, onChange: () => toggleIsChecked() })}
+                    {...register(id, { name: name, required: required, onChange: () => toggleIsChecked() })}
                 />
                 <span className="text-danger">{errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")}</span>
             </div>

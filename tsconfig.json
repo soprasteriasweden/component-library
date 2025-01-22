@@ -20,7 +20,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "jsx": "react-jsx", // Updated for React 17+
+    "jsx": "react", // Updated for React 17+
     "outDir": "dist"
   },
   "exclude": [

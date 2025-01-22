@@ -1,4 +1,3 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { Checkbox } from "../Checkbox/Checkbox";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
@@ -22,10 +21,13 @@ export const ConditionalCheckboxList = ({ items, existingItemIds, name, required
             setDisabledItemIds([...disabledItemIds, ...invalidItemIds]);
         }
     };
-    return (_jsxs("fieldset", { className: "checkbox-list", children: [_jsx("h6", { children: `${label}${required ? "*" : ""}` }), existingItemIds ?
-                existingItemIds.map((existingItemId) => {
-                    const item = items.find((item) => item.id === existingItemId);
-                    return (_jsx(TooltipItem, { title: item.name, description: item.description, showDisc: true }, item === null || item === void 0 ? void 0 : item.id));
-                })
-                : (items.map((item) => (_jsx("div", { children: _jsx(Checkbox, { label: item.name, tooltipDescription: item.description, id: item.id.toString(), value: item.id.toString(), name: name, checked: selectedItemIds.includes(item.id.toString()), disabled: disabledItemIds.includes(item.id.toString()), onChange: () => handleItemClick(item.id.toString(), item.invalidCombinationIds), labelCol: labelCol, inputCol: inputCol, inlineLabel: true }) }, item.id.toString()))))] }));
+    return (React.createElement("fieldset", { className: "checkbox-list" },
+        React.createElement("h6", null, `${label}${required ? "*" : ""}`),
+        existingItemIds ?
+            existingItemIds.map((existingItemId) => {
+                const item = items.find((item) => item.id === existingItemId);
+                return (React.createElement(TooltipItem, { key: item === null || item === void 0 ? void 0 : item.id, title: item.name, description: item.description, showDisc: true }));
+            })
+            : (items.map((item) => (React.createElement("div", { key: item.id.toString() },
+                React.createElement(Checkbox, { label: item.name, tooltipDescription: item.description, id: item.id.toString(), value: item.id.toString(), name: name, checked: selectedItemIds.includes(item.id.toString()), disabled: disabledItemIds.includes(item.id.toString()), onChange: () => handleItemClick(item.id.toString(), item.invalidCombinationIds), labelCol: labelCol, inputCol: inputCol, inlineLabel: true })))))));
 };

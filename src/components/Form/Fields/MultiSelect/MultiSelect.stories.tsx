@@ -4,6 +4,7 @@ import { useForm, useFormContext } from 'react-hook-form';
 
 import { MultiSelect } from './MultiSelect';
 import { IMultiSelect, IListItem } from '../../../../models/IFormInput';
+import { ClearFormButton } from '../../ClearFormButton';
 import { CustomSubmitButton, Form } from '../../Form';
 
 // Extend ITextInput to include formMethods for Storybook.
@@ -27,6 +28,7 @@ const Template: StoryFn<StorybookIMultiSelect> = (args) => {
         <Form {...methods} onSubmit={onSubmit}>
             <MultiSelect {...args} />
             <CustomSubmitButton>Test</CustomSubmitButton>
+            <ClearFormButton buttonText='Rensa' />
         </Form>
     );
 };

@@ -1,4 +1,3 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import "../../../../assets/styles/Checkbox.style.scss";
@@ -47,7 +46,13 @@ export const Checkbox = ({ label, name, tooltipDescription, className, disabled,
         }
     };
     const errorType = (_a = getNestedObjectValue(errors, name)) === null || _a === void 0 ? void 0 : _a.type;
-    return (_jsxs("div", { className: className + " custom-checkbox form-group row", children: [_jsx("label", { className: `col-${labelCol}`, htmlFor: id, children: tooltipDescription ?
-                    _jsx(TooltipItem, { title: label, description: tooltipDescription }, id)
-                    : _jsxs(_Fragment, { children: [label, withColumn ? ":" : ""] }) }), _jsxs("div", { className: `col-${inputCol}`, children: [_jsx("input", Object.assign({ type: "checkbox", id: id, disabled: disabled, checked: isChecked, value: value }, register(name, { required: required, onChange: () => toggleIsChecked() }))), _jsx("span", { className: "text-danger", children: errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i") })] })] }));
+    return (React.createElement("div", { className: className + " custom-checkbox form-group row" },
+        React.createElement("label", { className: `col-${labelCol}`, htmlFor: id }, tooltipDescription ?
+            React.createElement(TooltipItem, { key: id, title: label, description: tooltipDescription })
+            : React.createElement(React.Fragment, null,
+                label,
+                withColumn ? ":" : "")),
+        React.createElement("div", { className: `col-${inputCol}` },
+            React.createElement("input", Object.assign({ type: "checkbox", id: id, disabled: disabled, checked: isChecked, value: value }, register(name, { required: required, onChange: () => toggleIsChecked() }))),
+            React.createElement("span", { className: "text-danger" }, errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")))));
 };

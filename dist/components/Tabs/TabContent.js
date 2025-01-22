@@ -1,2 +1,2 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-export const TabContent = ({ children }) => (_jsx("div", { className: "tab-content", id: "nav-tabContent", children: children }));
+import * as React from "react";
+export const TabContent = ({ children }) => (React.createElement("div", { className: "tab-content", id: "nav-tabContent" }, children));

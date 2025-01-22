@@ -1,7 +1,7 @@
-import { jsx as _jsx } from "react/jsx-runtime";
 import { FixedSizeList as List } from "react-window";
+import * as React from "react";
 export const MenuList = ({ children, maxHeight }) => {
-    return (_jsx(List, { height: maxHeight, itemCount: children.length, itemSize: 35, width: "100%", children: ({ index, style }) => _jsx("div", { style: style, children: children[index] }) }));
+    return (React.createElement(List, { height: maxHeight, itemCount: children.length, itemSize: 35, width: "100%" }, ({ index, style }) => React.createElement("div", { style: style }, children[index])));
 };
 export const SelectStyles = {
     control: (provided) => (Object.assign(Object.assign({}, provided), { minHeight: "35px" })),

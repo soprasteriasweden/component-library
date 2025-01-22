@@ -1,9 +1,9 @@
-import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 import Select, { createFilter } from 'react-select';
 import "../../../../assets/styles/Dropdown.style.scss";
 import { SelectStyles, MenuList } from "../../../MenuList/MenuList";
+import { getNestedObjectValue } from "../../../../utils/utils";
 export const Dropdown = ({ items, defaultValue, labelCol, inputCol, name, isLoading, onValueChange, required, label, useFixedListItemHeight, disabled, isClearable, placeholder, resetValue, clearValueIfNoInitalValue, errorMessage, noOptionsMessage, getItemLabel }) => {
     var _a;
     const { register, setValue, formState: { errors }, unregister } = useFormContext();
@@ -26,7 +26,7 @@ export const Dropdown = ({ items, defaultValue, labelCol, inputCol, name, isLoad
     }, [resetValue]);
     const handleResetValue = () => {
         if (selectRef === null || selectRef === void 0 ? void 0 : selectRef.current) {
-            selectRef.current.select.clearValue();
+            selectRef.current.clearValue();
             setValue(name, undefined);
             setSelectedValue(undefined);
         }
@@ -49,7 +49,7 @@ export const Dropdown = ({ items, defaultValue, labelCol, inputCol, name, isLoad
             }
             else {
                 if (clearValueIfNoInitalValue) {
-                    selectRef.current.select.clearValue();
+                    selectRef.current.clearValue();
                 }
                 setValue(name, undefined);
                 setSelectedValue(undefined);
@@ -74,17 +74,17 @@ export const Dropdown = ({ items, defaultValue, labelCol, inputCol, name, isLoad
             onValueChange((_a = selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) !== null && _a !== void 0 ? _a : "");
         }
     };
-    const showErrorMessage = () => {
-        if (errorMessage) {
-            return errorMessage;
-        }
-        else {
-            return "Please select an option";
-        }
-    };
-    return (_jsxs("div", { className: "form-group row", children: [_jsxs("label", { className: `col-${labelCol !== null && labelCol !== void 0 ? labelCol : 4} col-form-label`, children: [label, ":", required ? "*" : ""] }), _jsxs("div", { className: `col-${inputCol !== null && inputCol !== void 0 ? inputCol : 8}`, children: [_jsx(Select, { ref: selectRef, isLoading: isLoading, loadingMessage: () => "Laddar...", noOptionsMessage: () => { return noOptionsMessage ? noOptionsMessage : "No options available"; }, placeholder: placeholder, filterOption: createFilter({
-                            ignoreAccents: false,
-                            matchFrom: 'any',
-                            stringify: option => `${option.label}`
-                        }), options: options, isOptionSelected: (option) => option.selected === true, value: selectedValue, onChange: (selectedOption) => onChange(selectedOption), components: useFixedListItemHeight ? { MenuList } : undefined, styles: useFixedListItemHeight ? SelectStyles : undefined, isDisabled: disabled === true || (disabled === undefined && defaultValue !== undefined && (options === null || options === void 0 ? void 0 : options.length) === 0), isClearable: isClearable !== undefined ? isClearable : true, classNamePrefix: "custom-dropdown-styling" }), _jsx("span", { className: "text-danger", children: ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" && showErrorMessage() })] })] }));
+    const errorType = (_a = getNestedObjectValue(errors, name)) === null || _a === void 0 ? void 0 : _a.type;
+    return (React.createElement("div", { className: "form-group row" },
+        React.createElement("label", { className: `col-${labelCol !== null && labelCol !== void 0 ? labelCol : 4} col-form-label` },
+            label,
+            ":",
+            required ? "*" : ""),
+        React.createElement("div", { className: `col-${inputCol !== null && inputCol !== void 0 ? inputCol : 8}` },
+            React.createElement(Select, { ref: selectRef, isLoading: isLoading, loadingMessage: () => "Laddar...", noOptionsMessage: () => { return noOptionsMessage ? noOptionsMessage : "No options available"; }, placeholder: placeholder, filterOption: createFilter({
+                    ignoreAccents: false,
+                    matchFrom: 'any',
+                    stringify: option => `${option.label}`
+                }), options: options, isOptionSelected: (option) => option.selected === true, value: selectedValue, onChange: (selectedOption) => onChange(selectedOption), components: useFixedListItemHeight ? { MenuList } : undefined, styles: useFixedListItemHeight ? SelectStyles : undefined, isDisabled: disabled === true || (disabled === undefined && defaultValue !== undefined && (options === null || options === void 0 ? void 0 : options.length) === 0), isClearable: isClearable !== undefined ? isClearable : true, classNamePrefix: "custom-dropdown-styling" }),
+            React.createElement("span", { className: "text-danger" }, errorType === "required" && (errorMessage ? errorMessage : label + " måste anges")))));
 };

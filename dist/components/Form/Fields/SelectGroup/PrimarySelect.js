@@ -1,4 +1,3 @@
-import { jsx as _jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { Select } from "../Select/Select";
 import { TextInput } from "../TextInput/TextInput";
@@ -10,5 +9,5 @@ export const PrimarySelect = ({ onChange, name, label, labelCol, inputCol, defau
         }
         return '';
     }, [options, defaultValue]);
-    return (disabled && defaultValue ? (_jsx(TextInput, { labelCol: labelCol, inputCol: inputCol, label: label, name: name, defaultValue: selectedOptionName, readonly: true, inlineLabel: true })) : (_jsx(Select, { label: label, name: name, options: options, placeholder: placeholder, selectedValue: defaultValue ? defaultValue : undefined, inlineLabel: true, onChange: onChange, required: required, disabled: disabled, isClearable: isClearable, inputCol: inputCol, labelCol: labelCol })));
+    return (disabled && defaultValue ? (React.createElement(TextInput, { labelCol: labelCol, inputCol: inputCol, label: label, name: name, defaultValue: selectedOptionName, readonly: true, inlineLabel: true })) : (React.createElement(Select, { label: label, name: name, options: options, placeholder: placeholder, selectedValue: defaultValue ? defaultValue : undefined, inlineLabel: true, onChange: onChange, required: required, disabled: disabled, isClearable: isClearable, inputCol: inputCol, labelCol: labelCol })));
 };

@@ -9,7 +9,6 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import * as React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faDownload, faFilePdf, faFileExcel } from '@fortawesome/free-solid-svg-icons';
@@ -38,19 +37,34 @@ export const CustomButton = (props) => {
     }, []);
     const renderIcon = () => {
         if (buttonType === ButtonType.create) {
-            return _jsxs("span", { children: [" ", _jsx(FontAwesomeIcon, { icon: faPlus }), " "] });
+            return React.createElement("span", null,
+                " ",
+                React.createElement(FontAwesomeIcon, { icon: faPlus }),
+                " ");
         }
         else if (buttonType === ButtonType.edit) {
-            return _jsxs("span", { children: [" ", _jsx(FontAwesomeIcon, { icon: faPen }), " "] });
+            return React.createElement("span", null,
+                " ",
+                React.createElement(FontAwesomeIcon, { icon: faPen }),
+                " ");
         }
         else if (buttonType === ButtonType.download) {
-            return _jsxs("span", { children: [" ", _jsx(FontAwesomeIcon, { icon: faDownload }), " "] });
+            return React.createElement("span", null,
+                " ",
+                React.createElement(FontAwesomeIcon, { icon: faDownload }),
+                " ");
         }
         else if (buttonType === ButtonType.pdf) {
-            return _jsxs("span", { children: [" ", _jsx(FontAwesomeIcon, { icon: faFilePdf }), " "] });
+            return React.createElement("span", null,
+                " ",
+                React.createElement(FontAwesomeIcon, { icon: faFilePdf }),
+                " ");
         }
         else if (buttonType === ButtonType.excel) {
-            return _jsxs("span", { children: [" ", _jsx(FontAwesomeIcon, { icon: faFileExcel }), " "] });
+            return React.createElement("span", null,
+                " ",
+                React.createElement(FontAwesomeIcon, { icon: faFileExcel }),
+                " ");
         }
     };
     const getButtonText = () => {
@@ -69,7 +83,12 @@ export const CustomButton = (props) => {
             }
         }
     };
-    return (_jsx(_Fragment, { children: _jsx("span", { className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title, children: _jsxs("button", Object.assign({}, defaultProps, { type: "button", className: `btn btn-sm ${buttonType}`, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" }, children: [isLoading ?
-                        _jsx("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" })
-                        : null, renderIcon(), getButtonText()] })) }) }));
+    return (React.createElement(React.Fragment, null,
+        React.createElement("span", { className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
+            React.createElement("button", Object.assign({}, defaultProps, { type: "button", className: `btn btn-sm ${buttonType}`, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }),
+                isLoading ?
+                    React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" })
+                    : null,
+                renderIcon(),
+                getButtonText()))));
 };

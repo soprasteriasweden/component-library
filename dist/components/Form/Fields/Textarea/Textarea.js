@@ -1,4 +1,3 @@
-import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { useFormContext } from "react-hook-form";
 export const Textarea = ({ name, label, required, className, inlineLabel, disabled, placeholder, rows, defaultValue, requiredValidationMessage, maxLength, minLength, labelCol = 4, inputCol = 8, readonly, onChange }) => {
@@ -27,13 +26,20 @@ export const Textarea = ({ name, label, required, className, inlineLabel, disabl
             onChange(event.target.value);
         }
     };
-    return (_jsxs("div", { className: className + " form-group " + (inlineLabel ? "row" : ""), children: [_jsxs("label", { className: inlineLabel ? `col-${labelCol} col-form-label` : "", children: [label, ":", required && (readonly === false || readonly === undefined) ? "*" : ""] }), _jsxs("div", { className: inlineLabel ? `col-${inputCol}` : "", children: [readonly
-                        ?
-                            _jsx("div", { id: name, className: "form-control-plaintext", style: { whiteSpace: "pre-line" }, children: defaultValue })
-                        :
-                            _jsx("textarea", Object.assign({ id: name, rows: rows, className: "form-control form-control-sm ", placeholder: placeholder }, register(name, {
-                                required: required,
-                                validate: required ? (value) => !!value.trim() : undefined,
-                                onChange: handleChange
-                            }), { disabled: disabled, maxLength: maxLength, minLength: minLength, children: displayValue })), _jsx("span", { className: "text-danger", children: errors[name] && (((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" || ((_c = errors[name]) === null || _c === void 0 ? void 0 : _c.type) === "validate") && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges") })] })] }));
+    return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
+        React.createElement("label", { className: inlineLabel ? `col-${labelCol} col-form-label` : "" },
+            label,
+            ":",
+            required && (readonly === false || readonly === undefined) ? "*" : ""),
+        React.createElement("div", { className: inlineLabel ? `col-${inputCol}` : "" },
+            readonly
+                ?
+                    React.createElement("div", { id: name, className: "form-control-plaintext", style: { whiteSpace: "pre-line" } }, defaultValue)
+                :
+                    React.createElement("textarea", Object.assign({ id: name, rows: rows, className: "form-control form-control-sm ", placeholder: placeholder }, register(name, {
+                        required: required,
+                        validate: required ? (value) => !!value.trim() : undefined,
+                        onChange: handleChange
+                    }), { disabled: disabled, maxLength: maxLength, minLength: minLength }), displayValue),
+            React.createElement("span", { className: "text-danger" }, errors[name] && (((_b = errors[name]) === null || _b === void 0 ? void 0 : _b.type) === "required" || ((_c = errors[name]) === null || _c === void 0 ? void 0 : _c.type) === "validate") && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")))));
 };

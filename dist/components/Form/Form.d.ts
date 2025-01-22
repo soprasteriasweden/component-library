@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Checkbox } from "./Fields/Checkbox/Checkbox";
 import { CheckboxList } from "./Fields/CheckboxList/CheckboxList";
-import CustomDatePicker from "./Fields/DatePicker/CustomDatePicker";
-import { DatePickerRange } from "./Fields/DatePicker/DatePickerRange";
 import { EmailInput } from "./Fields/EmailInput/EmailInput";
 import { FileUpload } from "./Fields/FileUpload/FileUpload";
 import { NumberInput } from "./Fields/NumberInput/NumberInput";
@@ -32,4 +30,4 @@ interface IForm {
     children: React.ReactNodeArray | React.ReactNode;
 }
 declare const Form: React.FunctionComponent<IForm>;
-export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput };
+export { Form, Checkbox, CheckboxList, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput };

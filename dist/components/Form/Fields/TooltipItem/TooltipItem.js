@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import React from 'react';
 import "../../../../assets/styles/TooltipItem.style.scss";
 export const TooltipItem = ({ title, description, showDisc }) => {
     const tooltipId = `a${Math.floor(Math.random() * 100000)}`;
@@ -10,5 +10,7 @@ export const TooltipItem = ({ title, description, showDisc }) => {
     const onTooltipClick = () => {
         myWindow.$(`#${tooltipId}`).tooltip("hide");
     };
-    return (_jsx("div", { className: "tooltip-item", children: _jsx("p", { className: showDisc ? "show-disc" : "", children: _jsx("span", { id: tooltipId, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": description, onMouseOver: onTooltipMouseOver, onClick: onTooltipClick, children: title }) }) }));
+    return (React.createElement("div", { className: "tooltip-item" },
+        React.createElement("p", { className: showDisc ? "show-disc" : "" },
+            React.createElement("span", { id: tooltipId, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": description, onMouseOver: onTooltipMouseOver, onClick: onTooltipClick }, title))));
 };

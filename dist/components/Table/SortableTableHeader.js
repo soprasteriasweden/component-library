@@ -1,4 +1,3 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from 'react';
 import { SortOrder } from '../../models/IPagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,5 +31,8 @@ export const SortableTableHeader = ({ propertyToSortBy, headerText }) => {
             setSelectedPropertyToSortBy(propertyToSortBy);
         }
     };
-    return (_jsxs("th", { className: `sortable-column text-nowrap`, onClick: onSortClick, children: [headerText, " ", _jsx(FontAwesomeIcon, { icon: icon })] }));
+    return (React.createElement("th", { className: `sortable-column text-nowrap`, onClick: onSortClick },
+        headerText,
+        " ",
+        React.createElement(FontAwesomeIcon, { icon: icon })));
 };

@@ -1,4 +1,3 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import '../../assets/styles/AlertMessage.style.scss';
 export var AlertType;
@@ -29,9 +28,11 @@ export const AlertMessage = ({ duration, alertType, alwaysShow, children, render
             }
         };
     }, [children]);
-    return (_jsx("div", { children: showAlert ?
-            _jsxs("div", { className: `alert ${renderOnTopOfPage ? "alert-top-of-page" : ""} alert-${alertType}`, role: "alert", children: [children, renderOnTopOfPage ?
-                        _jsx("button", { type: "button", className: "remove-alert", onClick: () => setShowAlert(false) })
-                        : null] })
-            : "" }));
+    return (React.createElement("div", null, showAlert ?
+        React.createElement("div", { className: `alert ${renderOnTopOfPage ? "alert-top-of-page" : ""} alert-${alertType}`, role: "alert" },
+            children,
+            renderOnTopOfPage ?
+                React.createElement("button", { type: "button", className: "remove-alert", onClick: () => setShowAlert(false) })
+                : null)
+        : ""));
 };

@@ -1,3 +1,3 @@
 # Sopra Steria komponentbibliotek
 
-React 16 ui components.
+React 18 ui components.

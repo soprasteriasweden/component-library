@@ -1,5 +1,5 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import * as React from "react";
 import { ButtonType, CustomButton } from '../CustomButton/CustomButton';
 export const ClearFormButton = ({ buttonText = "Rensa" }) => {
-    return (_jsx(CustomButton, { id: "clear-form", buttonType: ButtonType.general, buttonText: buttonText }));
+    return (React.createElement(CustomButton, { id: "clear-form", buttonType: ButtonType.general, buttonText: buttonText }));
 };

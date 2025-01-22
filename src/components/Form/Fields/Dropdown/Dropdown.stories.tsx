@@ -3,6 +3,8 @@ import { Meta, StoryFn } from '@storybook/react';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { Dropdown } from './Dropdown';
+import { CustomSubmitButton, Form } from '../../Form';
+import { ClearFormButton } from '../../ClearFormButton';
 import { IDropdown, IListItem } from '../../../../models/IFormInput';
 
 // Extend ITextInput to include formMethods for Storybook.
@@ -18,38 +20,44 @@ export default {
 const Template: StoryFn<StorybookIDropdown> = (args) => {
     const methods = useForm();
 
+    const onSubmit = (data: any) => {
+        console.log('Form Submitted:', data);
+    };
+
     return (
-        <FormProvider {...methods}>
+        <Form {...methods} onSubmit={onSubmit}>
             <Dropdown {...args} />
-        </FormProvider>
+            <CustomSubmitButton>Submit</CustomSubmitButton>
+            <ClearFormButton buttonText="Rensa" />
+        </Form>
     );
 };
 
-const mockListItems: IListItem[] = [
+interface IItem {
+    id: string;
+    text: string;
+}
+
+const mockListItems: IItem[] = [
     {
-        value: "item1",
-        text: "Item 1",
-        informationText: "This is Item 1"
+        id: "item1",
+        text: "Item 1"
     },
     {
-        value: "item2",
-        text: "Item 2",
-        informationText: "This is Item 2"
+        id: "item2",
+        text: "Item 2"
     },
     {
-        value: "item3",
-        text: "Item 3",
-        informationText: "This is Item 3"
+        id: "item3",
+        text: "Item 3"
     },
     {
-        value: "item4",
-        text: "Item 4",
-        informationText: "This is Item 4"
+        id: "item4",
+        text: "Item 4"
     },
     {
-        value: "item5",
-        text: "Item 5",
-        informationText: "This is Item 5"
+        id: "item5",
+        text: "Item 5"
     }
 ];
 
@@ -60,12 +68,12 @@ const getItemLabel = (item: IListItem) => {
 
 export const Example1 = Template.bind({});
 Example1.args = {
-    name: "example1",
+    name: "test.example1",
     label: 'Dropdown',
     items: mockListItems,
     getItemLabel: getItemLabel,
-    placeholder: "Choose an item",
-    errorMessage: "Please choose an item",
+    placeholder: "Välj från listan",
     isClearable: true,
-    useFixedListItemHeight: false
+    useFixedListItemHeight: false,
+    required: true,
 };

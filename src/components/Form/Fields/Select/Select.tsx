@@ -1,10 +1,11 @@
 import * as React from "react";
 import { ISelect } from '../../../../models/IFormInput';
-import { useFormContext, FieldErrors } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { InputSpinnerWrapper } from "../../../Spinner/InputSpinnerWrapper";
 import { ClearableInput } from "../../../ClearableInput/ClearableInput";
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { getNestedObjectValue } from "../../../../utils/utils";
 
 export const Select: React.FunctionComponent<ISelect> = ({
     name,
@@ -36,23 +37,37 @@ export const Select: React.FunctionComponent<ISelect> = ({
     React.useEffect(() => {
         if (typeof unregister !== "string") {
             document.getElementById("clear-form")?.addEventListener("click", resetValue);
+            if (!disabled && options && (isClearable || options.length > 1)) {
+                document.getElementById("clear-form")?.addEventListener("click", resetValue);
+            }
 
             return () => {
                 unregister(name);
                 document.getElementById("clear-form")?.removeEventListener("click", resetValue);
             }
         }
-    }, [])
+    }, [options]);
+
+    React.useEffect(() => {
+        setCurrentSelectedValue(selectedValue ?? "default");
+    }, [selectedValue]);
 
     const resetValue = () => {
         if (typeof setValue !== "string") {
-            setValue(name, undefined);
+            setValue(name, undefined); 
+            setCurrentSelectedValue("default"); 
         }
-    }
+    };
 
-    React.useEffect(() => {
-        setCurrentSelectedValue(selectedValue);
-    }, [selectedValue]);
+    const clearValue = () => {
+        if (typeof setValue !== "string") {
+            setValue(name, undefined); 
+            setCurrentSelectedValue("default"); 
+        }
+        if (onChange) {
+            onChange(undefined!);
+        }
+    };
 
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setCurrentSelectedValue(event.target.value as string);
@@ -61,58 +76,35 @@ export const Select: React.FunctionComponent<ISelect> = ({
         }
     };
 
-    const clearValue = () => {
-        setCurrentSelectedValue(undefined);
-        if (onChange !== undefined) {
-            onChange(undefined!);
-        }
-    }
-
     const renderSelect = () => {
         return (
             <div className="input-group">
                 <select
                     id={name}
                     className="form-control form-control-sm"
+                    value={currentSelectedValue ?? "default"}
                     disabled={disabled}
-                    {...(typeof register !== "string" ? register(name, { required: required }) : {})}
+                    {...(typeof register !== "string" ? register(name, { required }) : {})}
                     onChange={handleChange}
                 >
-                    <option value="" selected={currentSelectedValue ? false : true} disabled hidden>{placeholder}</option>
-                    {
-                        options.map((option, index) => {
-                            return <option value={option.value}
-                                key={index}
-                                selected={currentSelectedValue == option.value}
-                                disabled={option.disabled}
-                            >{option.text}</option>
-                        })
-                    }
+                    <option value="default" disabled hidden>
+                        {placeholder}
+                    </option>
+                    {options.map((option, index) => (
+                        <option value={option.value} key={index} disabled={option.disabled}>{option.text}</option>
+                    ))}
                 </select>
-                {
-                    tooltipDescription ?
-                        <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
-                        : null
-                }
+                {tooltipDescription ? (
+                    <InputIconTooltip
+                        description={tooltipDescription}
+                        icon={faQuestionCircle}
+                    />
+                ) : null}
             </div>
-        )
-    }
-
-    const getErrorMessage = (): string | null => {
-        let error: any = errors;
-        const keys = name.split('.');
-        for (let key of keys) {
-            if (error && error[key]) {
-                error = error[key];
-            } else {
-                return null;
-            }
-        }
-        if (error?.type === "required") {
-            return requiredValidationMessage ? requiredValidationMessage : `${label} måste anges`;
-        }
-        return null;
+        );
     };
+
+    const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
         <div className={className + " form-group " + (inlineLabel ? "row" : "")}>
@@ -121,13 +113,12 @@ export const Select: React.FunctionComponent<ISelect> = ({
                 <InputSpinnerWrapper isLoading={isLoading ?? false}>
                     {
                         isClearable
-                            ?
-                            <ClearableInput onClear={clearValue} input={renderSelect()} />
+                            ? <ClearableInput onClear={clearValue} input={renderSelect()} />
                             : renderSelect()
                     }
                 </InputSpinnerWrapper>
 
-                <span className="text-danger">{getErrorMessage()}</span>
+                <span className="text-danger">{errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : label + " måste anges")}</span>
             </div>
         </div>
     )

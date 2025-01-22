@@ -9,7 +9,6 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import * as React from "react";
 import { useFormContext } from 'react-hook-form';
 export var CustomSubmitButtonType;
@@ -25,7 +24,12 @@ export const CustomSubmitButton = (props) => {
         var myWindow = window;
         myWindow.$(`#${tooltipId}`).tooltip();
     }, []);
-    return (_jsx(_Fragment, { children: _jsx("span", { className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title, children: _jsx("button", Object.assign({}, defaultProps, { type: "submit", className: `btn btn-sm ${buttonType ? buttonType : CustomSubmitButtonType.default}`, onClick: onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" }, children: isLoading ?
-                    _jsxs(_Fragment, { children: [_jsx("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true", children: " " }), " ", children] })
-                    : children })) }) }));
+    return (React.createElement(React.Fragment, null,
+        React.createElement("span", { className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-html": "true", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
+            React.createElement("button", Object.assign({}, defaultProps, { type: "submit", className: `btn btn-sm ${buttonType ? buttonType : CustomSubmitButtonType.default}`, onClick: onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }), isLoading ?
+                React.createElement(React.Fragment, null,
+                    React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" }, " "),
+                    " ",
+                    children)
+                : children))));
 };

@@ -2,57 +2,45 @@ import * as React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import '../../../../assets/styles/DatePicker.scss';
 import { IDatePicker } from '../../../../models/IFormInput';
-import { useFormContext, FieldErrors } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import { sv } from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { getNestedObjectValue } from "../../../../utils/utils";
 
 registerLocale('sv-se', sv);
 
-export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({
-    name,
-    label,
-    className = "",
-    value,
-    inlineLabel = false,
-    disabled = false,
-    required = false,
-    requiredValidationMessage,
-    max,
-    min,
-    onChange,
-    tooltipDescription,
-    labelCol = 4,
-    inputCol = 8,
-}) => {
-    const [selectedDate, setSelectedDate] = React.useState<Date | null>(value || null);
-    const { setValue, unregister, formState: { errors } } = useFormContext();
-
-    React.useEffect(() => {
-        setValue(name, value?.toLocaleDateString("sv-se") || null);
-        return () => {
-            unregister(name);
-        };
-    }, [name, setValue, unregister, value]);
-
-    React.useEffect(() => {
-        setSelectedDate(value || null);
-        setValue(name, value?.toLocaleDateString("sv-se") || null);
-    }, [value, name, setValue]);
-
-    const resetValue = React.useCallback(() => {
-        setValue(name, null);
-        setSelectedDate(null);
-    }, [name, setValue]);
-
-    const getErrorMessage = (): string | null => {
-        const fieldError = errors[name as keyof typeof errors];
-        if (fieldError?.type === "required") {
-            return requiredValidationMessage || `${label} måste anges`;
+export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({ name, label, className, value, inlineLabel, disabled, required, requiredValidationMessage, max, min, onChange, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
+    const {  register, unregister, setValue, clearErrors, formState: { errors } } = useFormContext();
+    const [selectedDate, setSelectedDate] = React.useState<Date | null | undefined>(value);
+    
+     React.useEffect(() => {
+        register(name, { required });
+        setValue(name, value?.toLocaleDateString("sv-se"));
+        if (!disabled) {
+            document.getElementById("clear-form")?.addEventListener("click", resetValue);
         }
-        return null;
+        return () => {
+            clearErrors(name);
+            unregister(name);
+            document.getElementById("clear-form")?.removeEventListener("click", resetValue);
+        };
+    }, []);
+
+    React.useEffect(() => {
+        if (selectedDate !== undefined) {
+            setSelectedDate(value);
+            setValue(name, value?.toLocaleDateString("sv-se"));
+        }
+    }, [value]);
+
+    const resetValue = () => {
+        setValue(name, undefined);
+        setSelectedDate(undefined);
     };
+
+    const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
         <div className={`${className} form-group ${inlineLabel ? "row" : ""}`}>
@@ -60,14 +48,16 @@ export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({
                 {label}:{required ? "*" : ""}
             </label>
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
-                <div className="input-group-datepicker align-items-center">
+                <div className="input-group-datepicker align-items-center">  
                     <DatePicker
                         name={name}
                         selected={selectedDate}
-                        onChange={(date) => {
+                        onChange={date => {
                             setSelectedDate(date);
-                            setValue(name, date?.toLocaleDateString("sv-se") || null);
-                            if (onChange) onChange(date);
+                            setValue(name, date?.toLocaleDateString("sv-se"));
+                            if (onChange) {
+                                onChange(date);
+                            }
                         }}
                         dateFormat="yyyy-MM-dd"
                         className={`form-control form-control-sm ${disabled ? "disabled" : ""}`}
@@ -86,7 +76,9 @@ export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({
                         <InputIconTooltip description={tooltipDescription} icon={faQuestionCircle} />
                     )}
                 </div>
-                <span className="text-danger">{getErrorMessage()}</span>
+                <span className="text-danger">
+                    {errorType === "required" && (requiredValidationMessage || `${label} mÃ¥ste anges`)}
+                </span>
             </div>
         </div>
     );

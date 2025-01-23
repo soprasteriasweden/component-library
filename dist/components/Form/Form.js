@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Checkbox } from "./Fields/Checkbox/Checkbox";
 import { CheckboxList } from "./Fields/CheckboxList/CheckboxList";
 import { CustomDatePicker } from "./Fields/DatePicker/CustomDatePicker";
-// import { DatePickerRange } from "./Fields/DatePicker/DatePickerRange";
+import { DatePickerRange } from "./Fields/DatePicker/DatePickerRange";
 import { EmailInput } from "./Fields/EmailInput/EmailInput";
 import { FileUpload } from "./Fields/FileUpload/FileUpload";
 import { NumberInput } from "./Fields/NumberInput/NumberInput";
@@ -33,6 +33,4 @@ const Form = ({ onSubmit, children }) => {
     return (React.createElement(FormProvider, Object.assign({}, methods),
         React.createElement("form", { onSubmit: onSubmit ? methods.handleSubmit(onSubmit) : undefined }, children)));
 };
-export { Form, Checkbox, CheckboxList, CustomDatePicker, 
-//DatePickerRange,
-EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput };
+export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput };

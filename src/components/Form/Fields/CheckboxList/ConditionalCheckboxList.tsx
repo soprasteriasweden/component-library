@@ -2,8 +2,10 @@ import * as React from "react";
 import { IConditionalCheckboxList } from "../../../../models/IFormInput";
 import { Checkbox } from "../Checkbox/Checkbox";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
+import { useFormContext } from "react-hook-form";
 
 export const ConditionalCheckboxList: React.FC<IConditionalCheckboxList> = ({ items, existingItemIds, name, required, inputCol, labelCol, label, onSelect }) => {
+    const { setValue, unregister } = useFormContext();
     const [selectedItemIds, setSelectedItemIds] = React.useState<string[]>([]);
     const [disabledItemIds, setDisabledItemIds] = React.useState<string[]>([]);
 
@@ -11,22 +13,43 @@ export const ConditionalCheckboxList: React.FC<IConditionalCheckboxList> = ({ it
         const isItemSelected = selectedItemIds.includes(itemId);
 
         const updatedSelectedItemIds = isItemSelected
-            ? selectedItemIds.filter((id) => id !== itemId)
+            ? selectedItemIds.filter((id) => id !== itemId) 
             : [...selectedItemIds, itemId];
 
-        setSelectedItemIds(updatedSelectedItemIds);
+        const filteredSelectedItemIds = updatedSelectedItemIds.filter(
+            (id) => !disabledItemIds.includes(id)
+        );
+
+        setSelectedItemIds(filteredSelectedItemIds);
+
+        if (isItemSelected) {
+            setValue(`${name}[${itemId}]`, undefined);
+        } else {
+            setValue(`${name}[${itemId}]`, itemId);
+        }
+
+        [...disabledItemIds, ...invalidItemIds].forEach((id) => {
+            setValue(`${name}[${id}]`, undefined);
+            unregister(`${name}[${id}]`);
+        });
 
         if (onSelect) {
-            onSelect(updatedSelectedItemIds);
+            onSelect(filteredSelectedItemIds);
         }
 
         if (isItemSelected) {
             const itemsToEnable = invalidItemIds.filter(
-                (invalidId) => !updatedSelectedItemIds.some((selectedId) => items.find((item) => item.id.toString() === selectedId)?.invalidCombinationIds.includes(invalidId))
+                (invalidId) =>
+                    !filteredSelectedItemIds.some((selectedId) =>
+                        items.find((item) => item.id.toString() === selectedId)?.invalidCombinationIds.includes(invalidId)
+                    )
             );
             setDisabledItemIds(disabledItemIds.filter((id) => !itemsToEnable.includes(id)));
         } else {
-            setDisabledItemIds([...disabledItemIds, ...invalidItemIds]);
+            setDisabledItemIds([...new Set([...disabledItemIds, ...invalidItemIds])]);
+            setSelectedItemIds((current) =>
+                current.filter((id) => !invalidItemIds.includes(id))
+            );
         }
     };
 
@@ -49,7 +72,7 @@ export const ConditionalCheckboxList: React.FC<IConditionalCheckboxList> = ({ it
                                     tooltipDescription={item.description}
                                     id={item.id.toString()}
                                     value={item.id.toString()}
-                                    name={name}
+                                    name={`${name}[${item.id}]`}
                                     checked={selectedItemIds.includes(item.id.toString())}
                                     disabled={disabledItemIds.includes(item.id.toString())}
                                     onChange={() => handleItemClick(item.id.toString(), item.invalidCombinationIds)}

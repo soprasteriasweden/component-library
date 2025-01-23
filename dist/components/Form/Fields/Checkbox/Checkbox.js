@@ -4,8 +4,14 @@ import "../../../../assets/styles/Checkbox.style.scss";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
 import { getNestedObjectValue } from "../../../../utils/utils";
 export const Checkbox = ({ label, name, tooltipDescription, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
-    var _a;
-    const { formState: { errors }, register } = useFormContext();
+    var _a, _b;
+    const readonlyValues = {
+        errors: "",
+        register: "",
+        unregister: "",
+        setValue: ""
+    };
+    const { formState: { errors }, register } = (_a = useFormContext()) !== null && _a !== void 0 ? _a : readonlyValues;
     const [isChecked, setIsChecked] = React.useState(false);
     React.useEffect(() => {
         if (checked !== undefined) {
@@ -32,6 +38,7 @@ export const Checkbox = ({ label, name, tooltipDescription, className, disabled,
         }
     };
     const toggleIsChecked = () => {
+        console.log("hej");
         if (isChecked) {
             setIsChecked(false);
             if (onChange) {
@@ -45,7 +52,7 @@ export const Checkbox = ({ label, name, tooltipDescription, className, disabled,
             }
         }
     };
-    const errorType = (_a = getNestedObjectValue(errors, name)) === null || _a === void 0 ? void 0 : _a.type;
+    const errorType = (_b = getNestedObjectValue(errors, name)) === null || _b === void 0 ? void 0 : _b.type;
     return (React.createElement("div", { className: className + " custom-checkbox form-group row" },
         React.createElement("label", { className: `col-${labelCol}`, htmlFor: id }, tooltipDescription ?
             React.createElement(TooltipItem, { key: id, title: label, description: tooltipDescription })
@@ -53,6 +60,6 @@ export const Checkbox = ({ label, name, tooltipDescription, className, disabled,
                 label,
                 withColumn ? ":" : "")),
         React.createElement("div", { className: `col-${inputCol}` },
-            React.createElement("input", Object.assign({ type: "checkbox", id: id, disabled: disabled, checked: isChecked, value: value }, register(name, { required: required, onChange: () => toggleIsChecked() }))),
+            React.createElement("input", Object.assign({ type: "checkbox", id: id, disabled: disabled, value: value, checked: isChecked }, register(name, { required: required, onChange: () => toggleIsChecked() }))),
             React.createElement("span", { className: "text-danger" }, errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")))));
 };

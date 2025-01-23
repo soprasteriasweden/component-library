@@ -33,21 +33,21 @@ const Template: StoryFn<StorybookICheckboxList> = (args) => {
 const mockListItems: ICheckbox[] = [
 {
     id: "1",
-    name: "mockItems",
+    name: "mockItems1",
     value: "1",
     label: "Item 1",
     checked: false
 },
 {
   id: "2",
-  name: "mockItems",
+  name: "mockItems2",
   value: "2",
   label: "Item 2",
   checked: false
 },
 {
   id: "3",
-  name: "mockItems",
+  name: "mockItems3",
   value: "3",
   label: "Item 3",
   checked: false

@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form"
 import { Checkbox } from "./Fields/Checkbox/Checkbox";
 import { CheckboxList } from "./Fields/CheckboxList/CheckboxList";
-// import CustomDatePicker from "./Fields/DatePicker/CustomDatePicker";
+import { CustomDatePicker } from "./Fields/DatePicker/CustomDatePicker";
 // import { DatePickerRange } from "./Fields/DatePicker/DatePickerRange";
 import { EmailInput } from "./Fields/EmailInput/EmailInput";
 import { FileUpload } from "./Fields/FileUpload/FileUpload";
@@ -52,8 +52,8 @@ export {
     Form,
     Checkbox,
     CheckboxList,
-    // CustomDatePicker,
-    // DatePickerRange,
+    CustomDatePicker,
+    //DatePickerRange,
     EmailInput,
     FileUpload,
     NumberInput,

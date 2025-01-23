@@ -37,7 +37,7 @@ export const CheckboxList: React.FunctionComponent<ICheckboxList> = ({ initialCh
                 checkboxes.map((checkbox, index) => {
                     return <Checkbox
                         key={index}
-                        name={name}
+                        name={`${name}[${checkbox.id}]`}
                         value={checkbox.value}
                         label={checkbox.label}
                         checked={checkAll || checkbox.checked}

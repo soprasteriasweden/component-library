@@ -41,6 +41,7 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tool
     }
 
     const toggleIsChecked = () => {
+        console.log("hej");
         if (isChecked) {
             setIsChecked(false);
             if (onChange) {
@@ -70,9 +71,9 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tool
                 <input type="checkbox"
                     id={id}
                     disabled={disabled}
-                    checked={isChecked}
                     value={value}
-                    {...register(id, { name: name, required: required, onChange: () => toggleIsChecked() })}
+                    checked={isChecked}
+                    {...register(name, { required: required, onChange: () => toggleIsChecked() })}
                 />
                 <span className="text-danger">{errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")}</span>
             </div>

@@ -17,6 +17,6 @@ export const CheckboxList = ({ initialCheckboxes, toggleAll, toggleAllLabel, nam
                     React.createElement(Checkbox, { name: "toggleCheckboxes", id: "toggleAll", label: toggleAllLabel == undefined ? "Välj alla" : toggleAllLabel, value: "all", labelCol: labelCol, inputCol: inputCol, onChange: (isChecked) => toggleAllCheckboxes(isChecked) }))
             : null,
         checkboxes.map((checkbox, index) => {
-            return React.createElement(Checkbox, { key: index, name: name, value: checkbox.value, label: checkbox.label, checked: checkAll || checkbox.checked, disabled: checkAll, labelCol: labelCol, inputCol: inputCol, id: checkbox.id });
+            return React.createElement(Checkbox, { key: index, name: `${name}[${checkbox.id}]`, value: checkbox.value, label: checkbox.label, checked: checkAll || checkbox.checked, disabled: checkAll, labelCol: labelCol, inputCol: inputCol, id: checkbox.id });
         })));
 };

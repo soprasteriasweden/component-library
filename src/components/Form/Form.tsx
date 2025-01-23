@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormProvider, useForm, useFormContext } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form"
 import { Checkbox } from "./Fields/Checkbox/Checkbox";
 import { CheckboxList } from "./Fields/CheckboxList/CheckboxList";
 import { CustomDatePicker } from "./Fields/DatePicker/CustomDatePicker";
@@ -31,7 +31,7 @@ import { NameInput } from "./Fields/NameInput/NameInput";
 
 interface IForm {
     onSubmit?: (data: any, e?: React.BaseSyntheticEvent<object, any, any>) => any;
-    children: React.ReactNodeArray | React.ReactNode;
+    children: React.ReactNode[] | React.ReactNode;
 }
 
 const Form: React.FunctionComponent<IForm> = ({ onSubmit, children }) => {
@@ -46,7 +46,6 @@ const Form: React.FunctionComponent<IForm> = ({ onSubmit, children }) => {
         </FormProvider>
     )
 }
-
 
 export {
     Form,

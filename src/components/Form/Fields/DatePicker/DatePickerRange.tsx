@@ -2,7 +2,7 @@ import * as React from "react";
 import '../../../../assets/styles/DatePicker.scss';
 import '../../../../assets/styles/DatePickerRange.style.scss';
 import { IDatePickerRange } from '../../../../models/IFormInput';
-import { useFormContext, Controller } from 'react-hook-form'; // Updated hook usage
+import { useFormContext } from 'react-hook-form'; // Updated hook usage
 import { sv } from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";

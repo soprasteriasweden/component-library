@@ -30,8 +30,8 @@ const Template: StoryFn<StorybookICustomDatePicker> = (args) => {
     );
 };
 
-export const CustomDatePickerWithTooltipWithNestedName = Template.bind({});
-CustomDatePickerWithTooltipWithNestedName.args = {
+export const CustomDatePickerWithTooltipWithNestedNames = Template.bind({});
+CustomDatePickerWithTooltipWithNestedNames.args = {
     name: 'test.startDate',
     label: 'CustomDatePicker with tooltip with nested name',
     inlineLabel: true,

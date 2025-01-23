@@ -15,11 +15,11 @@ const config: StorybookConfig = {
   },
   webpackFinal: async (config) => {
     if (config.module && config.module.rules) {
-      config.module.rules.push({
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-        include: path.resolve(__dirname, '../src'),
-      });
+      //config.module.rules.push({
+      //  test: /\.css$/,
+      //  use: ['style-loader', 'css-loader'],
+      //  include: path.resolve(__dirname, '../src'),
+      //});
       config.module.rules.push({
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],

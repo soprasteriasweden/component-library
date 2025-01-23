@@ -2,7 +2,7 @@ import * as React from "react";
 import '../../assets/styles/MainNavigation.style.scss';
 interface IMainNaviagation {
     imagePath: string;
-    rightContent?: React.ReactNodeArray | React.ReactNode | undefined;
+    rightContent?: React.ReactNode[] | React.ReactNode | undefined;
     informationTopRight?: string;
     children?: React.ReactNode;
 }

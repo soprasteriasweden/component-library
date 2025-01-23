@@ -41,7 +41,6 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tool
     }
 
     const toggleIsChecked = () => {
-        console.log("hej");
         if (isChecked) {
             setIsChecked(false);
             if (onChange) {

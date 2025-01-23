@@ -38,7 +38,6 @@ export const Checkbox = ({ label, name, tooltipDescription, className, disabled,
         }
     };
     const toggleIsChecked = () => {
-        console.log("hej");
         if (isChecked) {
             setIsChecked(false);
             if (onChange) {

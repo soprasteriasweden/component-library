@@ -66,7 +66,6 @@ export const CustomDatePicker: React.FunctionComponent<IDatePicker> = ({ name, l
                         maxDate={max}
                         autoComplete="off"
                         locale="sv-se"
-                        calendarStartDay={1}
                         showYearDropdown
                         showMonthDropdown
                         onChangeRaw={(e: any) => e.preventDefault()}

@@ -1,5 +1,14 @@
 # Changelog
 
+## v.2.0.2
+* Small css changes
+
+## v.2.0.1
+* @import is depracated
+
+## v.2.0.0
+* Component library now supports React 18!
+
 ## v.1.0.66
 * Fix that error message not showing on NameInput component
 

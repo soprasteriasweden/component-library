@@ -1,7 +1,7 @@
-@import "Card.scss";
-@import "Text.scss";
-@import "Dropdown.scss";
-@import "Buttons.scss";
+@use "Card.scss";
+@use "Text.scss";
+@use "Dropdown.scss";
+@use "Buttons.scss";
 
 body {
     background-color: #f5f5f5;

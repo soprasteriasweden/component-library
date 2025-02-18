@@ -1,6 +1,7 @@
-import * as React from "react";
+﻿import * as React from "react";
 import { IChildren } from "../../models/IChildren";
-import { useFormContext } from 'react-hook-form';
+import { useFormContext } from "react-hook-form";
+import * as bootstrap from "bootstrap";
 
 export enum CustomSubmitButtonType {
     default = "btn-primary",
@@ -12,42 +13,54 @@ export interface ICustomSubmitButton extends IChildren {
     buttonType?: CustomSubmitButtonType;
     isLoading?: boolean;
 }
-export const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & React.HTMLProps<HTMLButtonElement>> = (props) => {
 
+export const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
+    onButtonSubmit,
+    buttonType = CustomSubmitButtonType.default,
+    isLoading,
+    children,
+    disabled,
+    title = "",
+    ...buttonProps
+}) => {
     const { handleSubmit } = useFormContext();
+    const tooltipRef = React.useRef<HTMLSpanElement>(null);
 
-    const { onButtonSubmit, buttonType, isLoading, children, disabled, title, onClick, ...defaultProps } = props;
-
-    const tooltipId = "a" + Math.floor(Math.random() * Math.floor(100000));
     React.useEffect(() => {
-        var myWindow: any = window;
-        myWindow.$(`#${tooltipId}`).tooltip();
-    }, [])
+        if (tooltipRef.current) {
+            const tooltip = new bootstrap.Tooltip(tooltipRef.current, {
+                title: isLoading ? "Laddar..." : title,
+                placement: "right",
+                html: true
+            });
+
+            return () => {
+                tooltip.dispose();  // ✅ Cleanup tooltip on unmount
+            };
+        }
+    }, [isLoading, title]);
 
     return (
-        <>
-            <span className={`d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`}
-                id={tooltipId}
-                style={{ cursor: "not-allowed" }}
-                data-toggle="tooltip"
-                data-html="true"
-                data-placement="right"
-                data-original-title={isLoading ? "Laddar..." : title}>
-                <button
-                    {...defaultProps}
-                    type="submit"
-                    className={`btn btn-sm ${buttonType ? buttonType : CustomSubmitButtonType.default}`}
-                    onClick={onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined}
-                    disabled={isLoading || disabled}
-                    style={{ pointerEvents: isLoading || disabled ? "none" : "initial" }}
-                >
-                    {
-                        isLoading ?
-                            <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"> </span> {children}</>
-                            : children
-                    }
-                </button>
-            </span>
-        </>
-    )
-}
+        <span 
+            ref={tooltipRef} 
+            className={`d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`}
+            data-bs-toggle="tooltip"
+        >
+            <button
+                {...buttonProps}
+                type="submit"
+                className={`btn btn-sm ${buttonType}`}
+                onClick={onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined}  // ✅ Properly calls handleSubmit
+                disabled={isLoading || disabled}
+            >
+                {isLoading ? (
+                    <>
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {children}
+                    </>
+                ) : (
+                    children
+                )}
+            </button>
+        </span>
+    );
+};

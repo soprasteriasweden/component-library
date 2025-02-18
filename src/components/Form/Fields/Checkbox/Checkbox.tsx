@@ -1,81 +1,75 @@
 import * as React from "react";
-import { ICheckbox } from '../../../../models/IFormInput';
-import { useFormContext } from 'react-hook-form';
+import { ICheckbox } from "../../../../models/IFormInput";
+import { useFormContext } from "react-hook-form";
 import "../../../../assets/styles/Checkbox.style.scss";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
 import { getNestedObjectValue } from "../../../../utils/utils";
 
-export const Checkbox: React.FunctionComponent<ICheckbox> = ({ label, name, tooltipDescription, className, disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
-    const readonlyValues = {
-        errors: "",
-        register: "",
-        unregister: "",
-        setValue: ""
-    }
-    const { formState: { errors }, register } = useFormContext() ?? readonlyValues;
-    const [isChecked, setIsChecked] = React.useState<boolean>(false);
+export const Checkbox: React.FunctionComponent<ICheckbox> = ({ 
+    label, 
+    name, 
+    tooltipDescription, 
+    className = "", 
+    disabled, 
+    required, 
+    checked, 
+    value, 
+    requiredValidationMessage, 
+    id, 
+    labelCol = 4, 
+    inputCol = 8, 
+    onChange, 
+    withColumn 
+}) => {
+    const {
+        formState: { errors },
+        register,
+        watch,
+        setValue
+    } = useFormContext() ?? { errors: "" };
 
-    React.useEffect(() => {
-        if (checked !== undefined) {
-            setIsChecked(checked);
-        }
-        else {
-            setIsChecked(false);
-        }
-    }, [checked])
+    // ✅ Get the current checkbox state from react-hook-form
+    const isChecked = watch(name) ?? checked ?? false;
 
-    React.useEffect(() => {
-        if (!disabled) {
-            document.getElementById("clear-form")?.addEventListener("click", resetValue);
-        }
-        return () => {
-            document.getElementById("clear-form")?.removeEventListener("click", resetValue);
-        }
-    }, []);
-
-    const resetValue = () => {
-        setIsChecked(false);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.checked;
+        setValue(name, newValue); // ✅ Update react-hook-form state
         if (onChange) {
-            onChange(false);
+            onChange(newValue); // ✅ Call external `onChange` if provided
         }
-    }
-
-    const toggleIsChecked = () => {
-        if (isChecked) {
-            setIsChecked(false);
-            if (onChange) {
-                onChange(false);
-            }
-        }
-        else {
-            setIsChecked(true);
-            if (onChange) {
-                onChange(true);
-            }
-        }
-    }
+    };
 
     const errorType = getNestedObjectValue(errors, name)?.type;
 
     return (
-        <div className={className + " custom-checkbox form-group row"}>
-            <label className={`col-${labelCol}`} htmlFor={id}>
-                {
-                    tooltipDescription ?
+        <div className={`form-group ${className}`}>
+            <div className="row">
+                <label className={`col-md-${labelCol} col-form-label`} htmlFor={id}>
+                    {tooltipDescription ? (
                         <TooltipItem key={id} title={label} description={tooltipDescription} />
-                        : <>{ label }{withColumn ? ":" : ""}</>
-                }
-            </label>
-            <div className={`col-${inputCol}`}>
-                <input type="checkbox"
-                    id={id}
-                    disabled={disabled}
-                    value={value}
-                    checked={isChecked}
-                    {...register(name, { required: required, onChange: () => toggleIsChecked() })}
-                />
-                <span className="text-danger">{errorType === "required" && (requiredValidationMessage ? requiredValidationMessage : "Måste kryssas i")}</span>
+                    ) : (
+                        <>
+                            {label} {withColumn ? ":" : ""}
+                        </>
+                    )}
+                </label>
+                <div className={`col-md-${inputCol}`}>
+                    <div className="form-check">
+                        <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id={id}
+                            disabled={disabled}
+                            value={value}
+                            checked={isChecked}  // ✅ Now syncs properly with react-hook-form
+                            {...register(name, { required, onChange: handleChange })} // ✅ Let react-hook-form handle `onChange`
+                        />
+                        <span className="text-danger">
+                            {errorType === "required" && (requiredValidationMessage || "Måste kryssas i")}
+                        </span>
+                    </div>
+                </div>
             </div>
-        </div >
-    )
-}
+        </div>
+    );
+};

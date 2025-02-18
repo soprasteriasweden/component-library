@@ -1,6 +1,7 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+﻿import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useRef } from "react";
+import * as bootstrap from "bootstrap";  // ✅ Import Bootstrap JS API
 import "../../../../assets/styles/TooltipItem.style.scss";
 
 interface IProps {
@@ -9,41 +10,35 @@ interface IProps {
 }
 
 export const InputIconTooltip: React.FC<IProps> = ({ description, icon }) => {
-    const tooltipId = `a${Math.floor(Math.random() * 100000)}`;
+    const tooltipRef = useRef<HTMLSpanElement>(null);
+    let tooltipInstance: bootstrap.Tooltip | null = null;
 
-    const myWindow: any = window;
+    useEffect(() => {
+        if (tooltipRef.current) {
+            tooltipInstance = new bootstrap.Tooltip(tooltipRef.current, {
+                title: description, // ✅ Bootstrap 5 uses `title`
+                placement: "right",
+                trigger: "hover",
+                html: true,
+            });
+        }
 
-    const onTooltipMouseOver = () => {
-        myWindow.$(`#${tooltipId}`).tooltip("enable");
-        myWindow.$(`#${tooltipId}`).tooltip("show");
-    }
-
-    const onTooltipClick = () => {
-        myWindow.$(`#${tooltipId}`).tooltip("hide");
-    }
+        return () => {
+            if (tooltipInstance) {
+                tooltipInstance.dispose(); // ✅ Clean up tooltip on unmount
+            }
+        };
+    }, [description]);
 
     return (
         <div className="tooltip-item">
             <p>
-                <span
-                    id={tooltipId}
-                    data-toggle="tooltip"
-                    data-html="true"
-                    data-placement="right"
-                    data-original-title={description}
-                    onMouseOver={onTooltipMouseOver}
-                    onClick={onTooltipClick}
-                >
-
-                    <span className="input-group-text" style={{ backgroundColor: 'transparent', border: 'none' }}>
+                <span ref={tooltipRef} className="tooltip-trigger">
+                    <span className="input-group-text" style={{ backgroundColor: "transparent", border: "none" }}>
                         <FontAwesomeIcon icon={icon} />
                     </span>
-
                 </span>
             </p>
         </div>
     );
 };
-
-
-

@@ -30,7 +30,7 @@ const Modal = ({
     children, 
     id, 
     modalSize = ModalSize.normal, 
-    preventCloseOnOutsideClick, 
+    preventCloseOnOutsideClick = true, 
     animate = true, 
     scrollable = false
 }: IModal) => {

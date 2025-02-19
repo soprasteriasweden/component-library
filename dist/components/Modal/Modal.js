@@ -8,12 +8,21 @@ var ModalSize;
     ModalSize["normal"] = "";
     ModalSize["large"] = "modal-lg";
     ModalSize["extraLarge"] = "modal-xl";
+    ModalSize["full"] = "modal-fullscreen";
+    ModalSize["fullSm"] = "modal-fullscreen-sm-down";
+    ModalSize["fullMd"] = "modal-fullscreen-md-down";
+    ModalSize["fullLg"] = "modal-fullscreen-lg-down";
+    ModalSize["fullXl"] = "modal-fullscreen-xl-down";
 })(ModalSize || (ModalSize = {}));
-const Modal = ({ header, children, id, modalSize = ModalSize.normal, preventCloseOnOutsideClick }) => (React.createElement("div", { className: "modal fade", id: id, tabIndex: -1, "aria-labelledby": `${id}-label`, "aria-hidden": "true", "data-bs-backdrop": preventCloseOnOutsideClick ? "static" : "true" },
-    React.createElement("div", { className: `modal-dialog modal-dialog-centered ${modalSize}`, role: "document" },
-        React.createElement("div", { className: "modal-content" },
-            React.createElement("div", { className: "modal-header" },
-                React.createElement("h4", { className: "modal-title", id: `${id}-label` }, header),
-                React.createElement("button", { type: "button", className: "btn-close", "data-bs-dismiss": "modal", "aria-label": "Close" })),
-            children))));
+const Modal = ({ header, children, id, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, animate = true, scrollable = false }) => {
+    return (React.createElement("div", { className: `modal ${animate ? "fade" : ""}`, id: id, tabIndex: -1, "aria-labelledby": `${id}-label`, "aria-hidden": "true", "data-bs-backdrop": preventCloseOnOutsideClick ? "static" : "true" },
+        React.createElement("div", { className: `modal-dialog modal-dialog-centered
+                    ${modalSize} 
+                    ${scrollable ? "modal-dialog-scrollable" : ""}`, role: "document" },
+            React.createElement("div", { className: "modal-content" },
+                React.createElement("div", { className: "modal-header" },
+                    React.createElement("h4", { className: "modal-title", id: `${id}-label` }, header),
+                    React.createElement("button", { type: "button", className: "btn-close", "data-bs-dismiss": "modal", "aria-label": "Close" })),
+                children))));
+};
 export { Modal, ModalBody, ModalFooter, ModalSize };

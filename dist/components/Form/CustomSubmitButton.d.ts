@@ -9,4 +9,4 @@ export interface ICustomSubmitButton extends IChildren {
     buttonType?: CustomSubmitButtonType;
     isLoading?: boolean;
 }
-export declare const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & React.HTMLProps<HTMLButtonElement>>;
+export declare const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & React.ButtonHTMLAttributes<HTMLButtonElement>>;

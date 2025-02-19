@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useRef } from "react";
+import * as bootstrap from "bootstrap";
 import "../../assets/styles/Spinner.scss";
 
 interface IInputSpinnerWrapper {
@@ -7,31 +8,37 @@ interface IInputSpinnerWrapper {
 }
 
 export const InputSpinnerWrapper: React.FunctionComponent<IInputSpinnerWrapper> = ({ isLoading, children }) => {
+    const spinnerRef = useRef<HTMLDivElement>(null);
+    const tooltipInstance = useRef<bootstrap.Tooltip | null>(null);
 
-    React.useEffect(() => {
-        var myWindow: any = window;
-        if(isLoading){
-            myWindow.$('[data-toggle="tooltip"]').tooltip();
+    useEffect(() => {
+        if (!spinnerRef.current) return;
+
+        tooltipInstance.current?.dispose();
+        tooltipInstance.current = null;
+
+        if (isLoading) {
+            tooltipInstance.current = new bootstrap.Tooltip(spinnerRef.current, {
+                title: "Laddar...",
+                placement: "right",
+            });
         }
-        else{
-            myWindow.$('[data-toggle="tooltip"]').tooltip("disable");
-        }
-    }, [isLoading])
+
+        return () => {
+            tooltipInstance.current?.dispose();
+        };
+    }, [isLoading]);
 
     return (
-        <div className={`spinner-wrapper ${isLoading ? "loading" : ""}`} data-toggle="tooltip" data-placement="right" title={isLoading ? "Laddar..." : ""}>
-            {
-                isLoading ?
-                    <div className={`spinner-container d-flex justify-content-center`}>
-                        <div className="spinner-border spinner-border-sm align-self-center" role="status">
-                            <span className="sr-only">Laddar...</span>
-                        </div>
+        <div ref={spinnerRef} className={`spinner-wrapper ${isLoading ? "loading" : ""}`} style={{ cursor: isLoading ? "wait" : "auto" }}>
+            {isLoading && (
+                <div className="spinner-container d-flex justify-content-center">
+                    <div className="spinner-border spinner-border-sm align-self-center" role="status">
+                        <span className="visually-hidden">Laddar...</span>
                     </div>
-                    : null
-            }
-            <div className="spinner-content">
-                {children}
-            </div>
+                </div>
+            )}
+            <div className="spinner-content">{children}</div>
         </div>
-    )
-}
+    );
+};

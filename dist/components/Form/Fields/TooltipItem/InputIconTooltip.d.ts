@@ -1,5 +1,5 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import React from 'react';
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import React from "react";
 import "../../../../assets/styles/TooltipItem.style.scss";
 interface IProps {
     description: string;

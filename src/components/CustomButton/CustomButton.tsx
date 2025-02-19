@@ -28,7 +28,6 @@ export interface ICustomButton {
 export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLProps<HTMLButtonElement>> = (props) => {
 
     const { buttonType, buttonText, isLoading, children, disabled, title = "", ...buttonProps } = props;
-
     const tooltipRef = React.useRef<HTMLSpanElement>(null);
 
     React.useEffect(() => {
@@ -39,7 +38,7 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
 
     const iconMap: { [key in ButtonType]?: React.ReactNode } = {
         [ButtonType.create]: <FontAwesomeIcon icon={faPlus} />,
-        [ButtonType.createAlt]: <FontAwesomeIcon icon={faPlus} />,  // Added for consistency
+        [ButtonType.createAlt]: <FontAwesomeIcon icon={faPlus} />, 
         [ButtonType.edit]: <FontAwesomeIcon icon={faPen} />,
         [ButtonType.editAlt]: <FontAwesomeIcon icon={faPen} />,
         [ButtonType.download]: <FontAwesomeIcon icon={faDownload} />,
@@ -49,9 +48,8 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         [ButtonType.deleteAlt]: <FontAwesomeIcon icon={faTrash} />
     };
 
-    // 🔹 Fallback: If `buttonType` is not in `iconMap`, show a default icon
     const renderIcon = (buttonType: ButtonType) => {
-        return iconMap[buttonType] || null; // ✅ No default icon fallback
+        return iconMap[buttonType] || null;
     };
 
     const defaultTextMap: { [key in ButtonType]?: string } = {

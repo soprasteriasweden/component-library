@@ -1,8 +1,17 @@
-.custom-checkbox{
+﻿.custom-checkbox{
     input, label{
         cursor: pointer;
     }
     input{
         margin-right: 100%;
     }
+}
+
+.form-check-input {
+    border: 1px solid #6c757d;
+}
+
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
 }

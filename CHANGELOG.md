@@ -1,12 +1,15 @@
 # Changelog
 
+## v2.0.3
+* Introduced bootstrap v5.3.3
+
 ## v.2.0.2
 * Small css changes
 
-## v.2.0.1
+## v2.0.1
 * @import is depracated
 
-## v.2.0.0
+## v2.0.0
 * Component library now supports React 18!
 
 ## v.1.0.66

@@ -1,89 +1,134 @@
-import * as React from "react";
-import { IConditionalCheckboxList } from "../../../../models/IFormInput";
-import { Checkbox } from "../Checkbox/Checkbox";
-import { TooltipItem } from "../TooltipItem/TooltipItem";
+﻿import React from "react";
 import { useFormContext } from "react-hook-form";
+import { TooltipItem } from "../TooltipItem/TooltipItem";
+import { IConditionalCheckboxList, ICheckboxListItem } from "../../../../models/IFormInput";
+import "../../../../assets/styles/CheckboxList.style.scss";
 
-export const ConditionalCheckboxList: React.FC<IConditionalCheckboxList> = ({ items, existingItemIds, name, required, inputCol, labelCol, label, onSelect }) => {
-    const { setValue, unregister } = useFormContext();
-    const [selectedItemIds, setSelectedItemIds] = React.useState<string[]>([]);
-    const [disabledItemIds, setDisabledItemIds] = React.useState<string[]>([]);
+export const ConditionalCheckboxList: React.FC<IConditionalCheckboxList> = ({
+  items,
+  existingItemIds,
+  name,
+  required,
+  label,
+  onSelect,
+  inputCol = 8,
+  labelCol = 4
+}) => {
+  const { watch, setValue } = useFormContext();
 
-    const handleItemClick = (itemId: string, invalidItemIds: string[]) => {
-        const isItemSelected = selectedItemIds.includes(itemId);
+  let selected: string[] = watch(name) || [];
+  if (!Array.isArray(selected)) selected = [];
 
-        const updatedSelectedItemIds = isItemSelected
-            ? selectedItemIds.filter((id) => id !== itemId) 
-            : [...selectedItemIds, itemId];
+  const [selectedIds, setSelectedIds] = React.useState<string[]>(selected);
+  const [disabledIds, setDisabledIds] = React.useState<string[]>([]);
 
-        const filteredSelectedItemIds = updatedSelectedItemIds.filter(
-            (id) => !disabledItemIds.includes(id)
-        );
+  React.useEffect(() => {
+    setSelectedIds(selected);
+  }, [selected]);
 
-        setSelectedItemIds(filteredSelectedItemIds);
+  const toggleItem = (itemId: string) => {
+    const isSelected = selectedIds.includes(itemId);
+    let updatedSelected = [...selectedIds];
+    let updatedDisabled = [...disabledIds];
 
-        if (isItemSelected) {
-            setValue(`${name}[${itemId}]`, undefined);
-        } else {
-            setValue(`${name}[${itemId}]`, itemId);
-        }
+    const found = items.find((it) => it.id.toString() === itemId);
+    if (!found) return;
+    const invalidCombos = found.invalidCombinationIds || [];
 
-        [...disabledItemIds, ...invalidItemIds].forEach((id) => {
-            setValue(`${name}[${id}]`, undefined);
-            unregister(`${name}[${id}]`);
-        });
+    if (isSelected) {
+      updatedSelected = updatedSelected.filter((id) => id !== itemId);
+      updatedDisabled = recalcDisabled(updatedSelected, updatedDisabled, items);
+    } else {
+      updatedSelected.push(itemId);
+      updatedSelected = updatedSelected.filter((id) => !invalidCombos.includes(id));
+      updatedDisabled = Array.from(new Set([...updatedDisabled, ...invalidCombos]));
+      updatedSelected = updatedSelected.filter((id) => !updatedDisabled.includes(id));
+      updatedDisabled = recalcDisabled(updatedSelected, updatedDisabled, items);
+    }
 
-        if (onSelect) {
-            onSelect(filteredSelectedItemIds);
-        }
+    setSelectedIds(updatedSelected);
+    setDisabledIds(updatedDisabled);
+    setValue(name, updatedSelected);
+    onSelect?.(updatedSelected);
+  };
 
-        if (isItemSelected) {
-            const itemsToEnable = invalidItemIds.filter(
-                (invalidId) =>
-                    !filteredSelectedItemIds.some((selectedId) =>
-                        items.find((item) => item.id.toString() === selectedId)?.invalidCombinationIds.includes(invalidId)
-                    )
-            );
-            setDisabledItemIds(disabledItemIds.filter((id) => !itemsToEnable.includes(id)));
-        } else {
-            setDisabledItemIds([...new Set([...disabledItemIds, ...invalidItemIds])]);
-            setSelectedItemIds((current) =>
-                current.filter((id) => !invalidItemIds.includes(id))
-            );
-        }
-    };
-
+  if (existingItemIds) {
     return (
-        <fieldset className="checkbox-list">
-            <h6>{`${label}${required ? "*" : ""}`}</h6>
-            {
-                existingItemIds ?
-                    existingItemIds.map((existingItemId) => {
-                        const item = items.find((item) => item.id === existingItemId);
-                        return (
-                            <TooltipItem key={item?.id} title={item!.name} description={item!.description} showDisc />
-                        );
-                    })
-                    : (
-                        items.map((item) => (
-                            <div key={item.id.toString()}>
-                                <Checkbox
-                                    label={item.name}
-                                    tooltipDescription={item.description}
-                                    id={item.id.toString()}
-                                    value={item.id.toString()}
-                                    name={`${name}[${item.id}]`}
-                                    checked={selectedItemIds.includes(item.id.toString())}
-                                    disabled={disabledItemIds.includes(item.id.toString())}
-                                    onChange={() => handleItemClick(item.id.toString(), item.invalidCombinationIds)}
-                                    labelCol={labelCol}
-                                    inputCol={inputCol}
-                                    inlineLabel
-                                />
-                            </div>
-                        ))
-                    )
-            }
-        </fieldset>
+      <fieldset className="checkbox-list">
+        <h6>
+          {label}
+          {required ? "*" : ""}
+        </h6>
+        {existingItemIds.map((eid) => {
+          const found = items.find((it) => it.id === eid);
+          if (!found) return null;
+          return (
+            <TooltipItem
+              key={found.id}
+              title={found.name}
+              description={found.description || ""}
+              showDisc
+            />
+          );
+        })}
+      </fieldset>
     );
+  }
+
+  return (
+    <fieldset className="checkbox-list">
+      <h6>
+        {label}
+        {required ? "*" : ""}
+      </h6>
+
+      {items.map((it) => {
+        const itId = it.id.toString();
+        const isChecked = selectedIds.includes(itId);
+        const isDisabled = disabledIds.includes(itId);
+
+        return (
+          <div className="form-group row" key={itId}>
+            <label
+              htmlFor={itId}
+              className={`col-${labelCol} col-form-label`}
+              style={{ cursor: isDisabled ? "not-allowed" : "pointer" }}
+            >
+              {it.name}
+            </label>
+
+            <div className={`col-${inputCol}`}>
+              <input
+                type="checkbox"
+                id={itId}
+                checked={isChecked}
+                disabled={isDisabled}
+                onChange={() => toggleItem(itId)}
+                style={{ cursor: isDisabled ? "not-allowed" : "pointer" }}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </fieldset>
+  );
 };
+
+function recalcDisabled(
+  selectedIds: string[],
+  prevDisabled: string[],
+  items: ICheckboxListItem[]
+) {
+  let newDisabledSet = new Set<string>();
+
+  selectedIds.forEach((sid) => {
+    const found = items.find((it) => it.id.toString() === sid);
+    if (found?.invalidCombinationIds) {
+      found.invalidCombinationIds.forEach((comboId) => {
+        newDisabledSet.add(comboId);
+      });
+    }
+  });
+
+  return Array.from(newDisabledSet);
+}

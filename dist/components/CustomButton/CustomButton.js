@@ -11,84 +11,56 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import * as React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faDownload, faFilePdf, faFileExcel } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen, faDownload, faFilePdf, faFileExcel, faTrash } from '@fortawesome/free-solid-svg-icons';
+import * as bootstrap from "bootstrap";
 export var ButtonType;
 (function (ButtonType) {
-    ButtonType["create"] = "btn-link";
-    ButtonType["createAlt"] = "btn-success";
-    ButtonType["edit"] = "btn-link ";
-    ButtonType["editAlt"] = " ";
-    ButtonType["credit"] = "btn-warning ";
-    ButtonType["download"] = " btn-link ";
-    ButtonType["pdf"] = "btn-link pdf";
-    ButtonType["excel"] = "btn-link excel";
-    ButtonType["general"] = "";
+    ButtonType["create"] = "btn-primary btn-create";
+    ButtonType["createAlt"] = "btn-outline-primary btn-create-alt";
+    ButtonType["edit"] = "btn-primary btn-edit";
+    ButtonType["editAlt"] = "btn-outline-primary btn-edit-alt";
+    ButtonType["credit"] = "btn-warning";
+    ButtonType["download"] = "btn-primary btn-download";
+    ButtonType["pdf"] = "btn-primary btn-pdf";
+    ButtonType["excel"] = "btn-primary btn-excel";
+    ButtonType["general"] = "btn-outline-dark";
     ButtonType["success"] = "btn-success";
     ButtonType["warning"] = "btn-warning";
     ButtonType["delete"] = "btn-danger";
-    ButtonType["deleteAlt"] = "btn-danger ";
+    ButtonType["deleteAlt"] = "btn-outline-danger";
 })(ButtonType || (ButtonType = {}));
 export const CustomButton = (props) => {
-    const { buttonType, buttonText, isLoading, children, disabled, title } = props, defaultProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title"]);
-    const tooltipId = "a" + Math.floor(Math.random() * Math.floor(100000));
+    const { buttonType, buttonText, isLoading, children, disabled, title = "" } = props, buttonProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title"]);
+    const tooltipRef = React.useRef(null);
     React.useEffect(() => {
-        var myWindow = window;
-        myWindow.$(`#${tooltipId}`).tooltip();
-    }, []);
-    const renderIcon = () => {
-        if (buttonType === ButtonType.create) {
-            return React.createElement("span", null,
-                " ",
-                React.createElement(FontAwesomeIcon, { icon: faPlus }),
-                " ");
+        if (tooltipRef.current) {
+            new bootstrap.Tooltip(tooltipRef.current, { title: isLoading ? "Laddar..." : title });
         }
-        else if (buttonType === ButtonType.edit) {
-            return React.createElement("span", null,
-                " ",
-                React.createElement(FontAwesomeIcon, { icon: faPen }),
-                " ");
-        }
-        else if (buttonType === ButtonType.download) {
-            return React.createElement("span", null,
-                " ",
-                React.createElement(FontAwesomeIcon, { icon: faDownload }),
-                " ");
-        }
-        else if (buttonType === ButtonType.pdf) {
-            return React.createElement("span", null,
-                " ",
-                React.createElement(FontAwesomeIcon, { icon: faFilePdf }),
-                " ");
-        }
-        else if (buttonType === ButtonType.excel) {
-            return React.createElement("span", null,
-                " ",
-                React.createElement(FontAwesomeIcon, { icon: faFileExcel }),
-                " ");
-        }
+    }, [isLoading, title]);
+    const iconMap = {
+        [ButtonType.create]: React.createElement(FontAwesomeIcon, { icon: faPlus }),
+        [ButtonType.createAlt]: React.createElement(FontAwesomeIcon, { icon: faPlus }),
+        [ButtonType.edit]: React.createElement(FontAwesomeIcon, { icon: faPen }),
+        [ButtonType.editAlt]: React.createElement(FontAwesomeIcon, { icon: faPen }),
+        [ButtonType.download]: React.createElement(FontAwesomeIcon, { icon: faDownload }),
+        [ButtonType.pdf]: React.createElement(FontAwesomeIcon, { icon: faFilePdf }),
+        [ButtonType.excel]: React.createElement(FontAwesomeIcon, { icon: faFileExcel }),
+        [ButtonType.delete]: React.createElement(FontAwesomeIcon, { icon: faTrash }),
+        [ButtonType.deleteAlt]: React.createElement(FontAwesomeIcon, { icon: faTrash })
     };
-    const getButtonText = () => {
-        if (buttonText && buttonText !== "") {
-            return buttonText;
-        }
-        else {
-            if (buttonType === ButtonType.editAlt) {
-                return "Ändra";
-            }
-            else if (buttonType === ButtonType.delete) {
-                return "Ta bort";
-            }
-            else if (buttonType === ButtonType.credit) {
-                return "Kreditera";
-            }
-        }
+    const renderIcon = (buttonType) => {
+        return iconMap[buttonType] || null;
     };
-    return (React.createElement(React.Fragment, null,
-        React.createElement("span", { className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, id: tooltipId, style: { cursor: "not-allowed" }, "data-toggle": "tooltip", "data-placement": "right", "data-original-title": isLoading ? "Laddar..." : title },
-            React.createElement("button", Object.assign({}, defaultProps, { type: "button", className: `btn btn-sm ${buttonType}`, disabled: isLoading || disabled, style: { pointerEvents: isLoading || disabled ? "none" : "initial" } }),
-                isLoading ?
-                    React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" })
-                    : null,
-                renderIcon(),
-                getButtonText()))));
+    const defaultTextMap = {
+        [ButtonType.editAlt]: "Ändra",
+        [ButtonType.delete]: "Ta bort",
+        [ButtonType.credit]: "Kreditera",
+    };
+    const resolvedButtonText = buttonText || defaultTextMap[buttonType] || "";
+    return (React.createElement("span", { ref: tooltipRef, className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, "data-bs-toggle": "tooltip", "data-bs-placement": "right" },
+        React.createElement("button", Object.assign({}, buttonProps, { type: "button", className: `btn btn-sm ${buttonType}`, disabled: isLoading || disabled }),
+            isLoading && React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" }),
+            renderIcon(buttonType),
+            " ",
+            resolvedButtonText)));
 };

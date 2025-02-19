@@ -1,7 +1,7 @@
 ﻿import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef } from "react";
-import * as bootstrap from "bootstrap";  // ✅ Import Bootstrap JS API
+import * as bootstrap from "bootstrap";
 import "../../../../assets/styles/TooltipItem.style.scss";
 
 interface IProps {
@@ -16,7 +16,7 @@ export const InputIconTooltip: React.FC<IProps> = ({ description, icon }) => {
     useEffect(() => {
         if (tooltipRef.current) {
             tooltipInstance = new bootstrap.Tooltip(tooltipRef.current, {
-                title: description, // ✅ Bootstrap 5 uses `title`
+                title: description,
                 placement: "right",
                 trigger: "hover",
                 html: true,
@@ -25,7 +25,7 @@ export const InputIconTooltip: React.FC<IProps> = ({ description, icon }) => {
 
         return () => {
             if (tooltipInstance) {
-                tooltipInstance.dispose(); // ✅ Clean up tooltip on unmount
+                tooltipInstance.dispose();
             }
         };
     }, [description]);

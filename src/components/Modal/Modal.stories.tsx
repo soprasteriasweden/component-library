@@ -65,7 +65,7 @@ export const ModalScrollable = () => (
         <OpenModalButton modalId="modalScrollable" text="Open Scrollable Modal" />
         <Modal header="Scrollable Modal" id="modalScrollable" modalSize={ModalSize.normal} scrollable={true}>
             <ModalBody>
-                {Array(25).fill(<p>Rader...</p>)} {/* ✅ Generate 25 rows dynamically */}
+                {Array(25).fill(<p>Rader...</p>)}
             </ModalBody>
             <ModalFooter>Footer Content</ModalFooter>
         </Modal>

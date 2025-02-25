@@ -12,5 +12,5 @@ export const MainNavigation = ({ imagePath, rightContent, children, informationT
             React.createElement("div", { className: "col-6" }, rightContent ? rightContent : null)),
         React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-lg-12" },
-                React.createElement("nav", { className: "navbar navbar-expand-lg navbar-light navbar-main" }, children)))));
+                React.createElement("nav", { className: "navbar navbar-expand-lg bg-light navbar-main" }, children)))));
 };

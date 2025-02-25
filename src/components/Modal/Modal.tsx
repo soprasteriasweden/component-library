@@ -3,6 +3,7 @@ import { IChildren } from "../../models/IChildren";
 import { ModalBody } from "./ModalBody";
 import { ModalFooter } from "./ModalFooter";
 import "../../assets/styles/Modal.style.scss";
+import * as bootstrap from "bootstrap";
 
 interface IModal extends IChildren {
     header: string;
@@ -11,6 +12,7 @@ interface IModal extends IChildren {
     preventCloseOnOutsideClick?: boolean;
     animate?: boolean;
     scrollable?: boolean;
+    closeModal?: () => void;
 }
 
 enum ModalSize {
@@ -32,12 +34,25 @@ const Modal = ({
     modalSize = ModalSize.normal, 
     preventCloseOnOutsideClick = true, 
     animate = true, 
-    scrollable = false
+    scrollable = false,
+    closeModal
 }: IModal) => {
+
+    React.useEffect(() => {
+        const modalElement = document.getElementById(id);
+        if (modalElement) {
+            const bsModal = new bootstrap.Modal(modalElement);
+
+            return () => {
+                bsModal.hide();
+                bsModal.dispose();
+            };
+        }
+    }, [id]);
     
     return (
         <div
-            className={`modal ${animate ? "fade" : ""}`}  // ✅ Enable/disable animation
+            className={`modal ${animate ? "fade" : ""}`}
             id={id}
             tabIndex={-1}
             aria-labelledby={`${id}-label`}
@@ -54,7 +69,7 @@ const Modal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h4 className="modal-title" id={`${id}-label`}>{header}</h4>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeModal ? closeModal : undefined}></button>
                     </div>
                     {children}
                 </div>

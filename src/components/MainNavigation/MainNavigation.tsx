@@ -29,7 +29,7 @@ export const MainNavigation: React.FunctionComponent<IMainNaviagation> = ({ imag
             </div>
             <div className="row">
                 <div className="col-lg-12">
-                    <nav className="navbar navbar-expand-lg navbar-light navbar-main">
+                    <nav className="navbar navbar-expand-lg bg-light navbar-main">
                         {children}
                     </nav>
                 </div>

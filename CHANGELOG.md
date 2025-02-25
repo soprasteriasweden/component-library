@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.6
+* Only run onClick for close modal if provided
+
+## v2.0.5
+* Added a closeModal event to the Modal-component so that the bootstrap built-in close modal press will also call that event
+
+## v2.0.4
+* Bugfixes regarding migration from Bootstrap 4 to Bootstrap 5
+
 ## v2.0.3
 * Introduced bootstrap v5.3.3
 

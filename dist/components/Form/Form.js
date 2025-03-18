@@ -31,6 +31,7 @@ import { FormLink } from "./Fields/FormLink/FormLink";
 import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
 import { InputIconTooltip } from "./Fields/TooltipItem/InputIconTooltip";
 import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
+import { MultiSelectCreatable } from "./Fields/MultiSelect/MultiSelectCreateable";
 import { UnorderedList } from "./Fields/UnorderedList/UnorderedList";
 import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
 import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckboxList";
@@ -39,11 +40,10 @@ import { HsaIdInput } from "./Fields/HsaIdInput/HsaIdInput";
 import { ZipCodeInput } from "./Fields/ZipCodeInput/ZipCodeInput";
 import { PhoneNumberInput } from "./Fields/PhoneNumberInput/PhoneNumberInput";
 import { NameInput } from "./Fields/NameInput/NameInput";
-
 var Form = function (_a) {
     var onSubmit = _a.onSubmit, children = _a.children;
     var methods = useForm({});
     return (React.createElement(FormContext, __assign({}, methods),
         React.createElement("form", { onSubmit: onSubmit ? methods.handleSubmit(onSubmit) : undefined }, children)));
 };
-export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput };
+export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, ClearFormButton, CustomSubmitButtonType, RadioButton, FormLink, TooltipItem, InputIconTooltip, MultiSelect, MultiSelectCreatable, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput };

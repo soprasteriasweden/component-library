@@ -20,6 +20,7 @@ import { FormLink } from "./Fields/FormLink/FormLink";
 import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";
 import { InputIconTooltip } from "./Fields/TooltipItem/InputIconTooltip";
 import { MultiSelect } from "./Fields/MultiSelect/MultiSelect";
+import { MultiSelectCreatable } from "./Fields/MultiSelect/MultiSelectCreateable";
 import { UnorderedList } from "./Fields/UnorderedList/UnorderedList";
 import { SelectGroup } from "./Fields/SelectGroup/SelectGroup";
 import { ConditionalCheckboxList } from "./Fields/CheckboxList/ConditionalCheckboxList";
@@ -71,6 +72,7 @@ export {
     TooltipItem,
     InputIconTooltip,
     MultiSelect,
+    MultiSelectCreatable,
     UnorderedList,
     SelectGroup,
     ConditionalCheckboxList,

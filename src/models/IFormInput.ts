@@ -135,6 +135,10 @@ export interface IMultiSelect extends IColumnPlacement {
     resetValue?: boolean;
 }
 
+export interface IMultiSelectCreatable extends IMultiSelect {
+    onBeforeCreateItem?: (addedValue: string) => string | null | Promise<string | null>;
+}
+
 export interface IUnorderedList extends IColumnPlacement {
     textRows: string[];
     name: string;

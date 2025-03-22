@@ -11,18 +11,21 @@ interface IOption {
     label: string;
 }
 
-export const MultiSelectCreatable: React.FunctionComponent<IMultiSelectCreatable> = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, onBeforeCreateItem, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue }) => {
+export const MultiSelectCreatable: React.FunctionComponent<IMultiSelectCreatable> = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, onBeforeCreateItem, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue, requiredMessage = "Välj/lägg till ett värde" }) => {
     const { register, unregister, setValue, errors } = useFormContext();
     const [selectedValue, setSelectedValue] = React.useState<IOption | IOption[]>();
     const [options, setOptions] = React.useState<IOption[]>([]);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+    const [tryingToCreate, setTryingToCreate] = React.useState<boolean>(false);
     const selectRef = React.useRef<any>();
 
     React.useEffect(() => {
+        setErrorMessage(null);
         register({ name: name }, { required: required });
 
         return () => {
             unregister(name);
+            setTryingToCreate(false);
         };
     }, []);
 
@@ -61,7 +64,6 @@ export const MultiSelectCreatable: React.FunctionComponent<IMultiSelectCreatable
 
     const handleResetValue = () => {
         if (selectRef?.current) {
-            //selectRef.current.select.clearValue();
             setValue(name, undefined);
             setSelectedValue(undefined);
         }
@@ -83,6 +85,9 @@ export const MultiSelectCreatable: React.FunctionComponent<IMultiSelectCreatable
                 onValueChange?.(selectedOption.value);
             }
         } else {
+            if (required) {
+                setErrorMessage(requiredMessage);
+            }
             setValue(name, isMultiple ? [] : undefined);
             setSelectedValue(undefined);
             onValueChange?.(isMultiple ? [] : undefined);
@@ -90,7 +95,11 @@ export const MultiSelectCreatable: React.FunctionComponent<IMultiSelectCreatable
     };
 
     const handleCreate = async (inputValue: string) => {
+        setTryingToCreate(false);
+
         if (!inputValue.trim()) return;
+
+        setTryingToCreate(true);
 
         if (onBeforeCreateItem) {
             const validationResult = await onBeforeCreateItem(inputValue);
@@ -144,7 +153,7 @@ export const MultiSelectCreatable: React.FunctionComponent<IMultiSelectCreatable
                     isDisabled={disabled}
                     formatCreateLabel={(inputValue) => `Lägg till "${inputValue}"`}
                 />
-                {errorType === "required" && <span className="text-danger">Välj minst ett värde</span>}
+                {!tryingToCreate && errorType === "required" && <span className="text-danger">{requiredMessage}</span>}
                 {errorMessage && <span className="text-danger">{errorMessage}</span>}
             </div>
         </div>

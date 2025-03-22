@@ -51,16 +51,19 @@ import { SelectStyles } from "../../../MenuList/MenuList";
 import { getNestedObjectValue } from "../../../../utils/utils";
 export var MultiSelectCreatable = function (_a) {
     var _b;
-    var values = _a.values, defaultValue = _a.defaultValue, labelCol = _a.labelCol, inputCol = _a.inputCol, name = _a.name, onValueChange = _a.onValueChange, onBeforeCreateItem = _a.onBeforeCreateItem, isLoading = _a.isLoading, isMultiple = _a.isMultiple, label = _a.label, required = _a.required, placeholder = _a.placeholder, disabled = _a.disabled, isClearable = _a.isClearable, resetValue = _a.resetValue;
-    var _c = useFormContext(), register = _c.register, unregister = _c.unregister, setValue = _c.setValue, errors = _c.errors;
-    var _d = React.useState(), selectedValue = _d[0], setSelectedValue = _d[1];
-    var _e = React.useState([]), options = _e[0], setOptions = _e[1];
-    var _f = React.useState(null), errorMessage = _f[0], setErrorMessage = _f[1];
+    var values = _a.values, defaultValue = _a.defaultValue, labelCol = _a.labelCol, inputCol = _a.inputCol, name = _a.name, onValueChange = _a.onValueChange, onBeforeCreateItem = _a.onBeforeCreateItem, isLoading = _a.isLoading, isMultiple = _a.isMultiple, label = _a.label, required = _a.required, placeholder = _a.placeholder, disabled = _a.disabled, isClearable = _a.isClearable, resetValue = _a.resetValue, _c = _a.requiredMessage, requiredMessage = _c === void 0 ? "Välj/lägg till ett värde" : _c;
+    var _d = useFormContext(), register = _d.register, unregister = _d.unregister, setValue = _d.setValue, errors = _d.errors;
+    var _e = React.useState(), selectedValue = _e[0], setSelectedValue = _e[1];
+    var _f = React.useState([]), options = _f[0], setOptions = _f[1];
+    var _g = React.useState(null), errorMessage = _g[0], setErrorMessage = _g[1];
+    var _h = React.useState(false), tryingToCreate = _h[0], setTryingToCreate = _h[1];
     var selectRef = React.useRef();
     React.useEffect(function () {
+        setErrorMessage(null);
         register({ name: name }, { required: required });
         return function () {
             unregister(name);
+            setTryingToCreate(false);
         };
     }, []);
     React.useEffect(function () {
@@ -94,7 +97,6 @@ export var MultiSelectCreatable = function (_a) {
     }, [resetValue]);
     var handleResetValue = function () {
         if (selectRef === null || selectRef === void 0 ? void 0 : selectRef.current) {
-            //selectRef.current.select.clearValue();
             setValue(name, undefined);
             setSelectedValue(undefined);
         }
@@ -116,6 +118,9 @@ export var MultiSelectCreatable = function (_a) {
             }
         }
         else {
+            if (required) {
+                setErrorMessage(requiredMessage);
+            }
             setValue(name, isMultiple ? [] : undefined);
             setSelectedValue(undefined);
             onValueChange === null || onValueChange === void 0 ? void 0 : onValueChange(isMultiple ? [] : undefined);
@@ -126,8 +131,10 @@ export var MultiSelectCreatable = function (_a) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    setTryingToCreate(false);
                     if (!inputValue.trim())
                         return [2 /*return*/];
+                    setTryingToCreate(true);
                     if (!onBeforeCreateItem) return [3 /*break*/, 2];
                     return [4 /*yield*/, onBeforeCreateItem(inputValue)];
                 case 1:
@@ -168,6 +175,6 @@ export var MultiSelectCreatable = function (_a) {
                     matchFrom: "any",
                     stringify: function (option) { return "".concat(option.label); },
                 }), styles: SelectStyles, options: options, value: selectedValue, onChange: onChange, onCreateOption: handleCreate, isLoading: isLoading, loadingMessage: function () { return "Laddar"; }, isMulti: isMultiple, isDisabled: disabled, formatCreateLabel: function (inputValue) { return "L\u00E4gg till \"".concat(inputValue, "\""); } }),
-            errorType === "required" && React.createElement("span", { className: "text-danger" }, "V\u00E4lj minst ett v\u00E4rde"),
+            !tryingToCreate && errorType === "required" && React.createElement("span", { className: "text-danger" }, requiredMessage),
             errorMessage && React.createElement("span", { className: "text-danger" }, errorMessage))));
 };

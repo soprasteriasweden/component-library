@@ -76,8 +76,21 @@ MultiSelectCreatableExample.args = {
     label: 'Välj eller skriv eget värde',
     name: "multiSelectCreatableExample",
     placeholder: "Välj eller lägg till eget värde",
+    requiredMessage: "Ange ett värde förutom 'Test123'",
     isMultiple: true,
-    values: mockListItems,
+    values: [],
+    isClearable: true,
+    required: true,
+    onBeforeCreateItem: validateNewItem
+};
+
+export const SingleSelectCreatableExample = Template.bind({});
+SingleSelectCreatableExample.args = {
+    label: 'Välj eller skriv eget värde',
+    name: "multiSelectCreatableExample",
+    placeholder: "Välj eller lägg till eget värde",
+    isMultiple: false,
+    values: [],
     isClearable: true,
     required: true,
     onBeforeCreateItem: validateNewItem

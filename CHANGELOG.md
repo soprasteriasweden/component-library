@@ -1,5 +1,8 @@
 # Changelog
 
+## v.1.0.69
+* Bugfix MultiSelectCreatable. Required message didn't clear
+
 ## v.1.0.68
 * Added MultiSelectCreatable component which behaves like MultiSelect but the user can also add own items. onBeforeCreateItem can validate the inserted value before adding it to the list.
 

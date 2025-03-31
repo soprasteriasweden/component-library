@@ -49,20 +49,20 @@ export const Select: React.FunctionComponent<ISelect> = ({
     }, [options]);
 
     React.useEffect(() => {
-        setCurrentSelectedValue(selectedValue ?? "default");
+        setCurrentSelectedValue(selectedValue ?? undefined);
     }, [selectedValue]);
 
     const resetValue = () => {
         if (typeof setValue !== "string") {
             setValue(name, undefined); 
-            setCurrentSelectedValue("default"); 
+            setCurrentSelectedValue(undefined); 
         }
     };
 
     const clearValue = () => {
         if (typeof setValue !== "string") {
             setValue(name, undefined); 
-            setCurrentSelectedValue("default"); 
+            setCurrentSelectedValue(undefined); 
         }
         if (onChange) {
             onChange(undefined!);
@@ -82,12 +82,12 @@ export const Select: React.FunctionComponent<ISelect> = ({
                 <select
                     id={name}
                     className="form-control form-control-sm"
-                    value={currentSelectedValue ?? "default"}
+                    value={currentSelectedValue}
                     disabled={disabled}
                     {...(typeof register !== "string" ? register(name, { required }) : {})}
                     onChange={handleChange}
                 >
-                    <option value="default" disabled hidden>
+                    <option value={undefined} disabled hidden>
                         {placeholder}
                     </option>
                     {options.map((option, index) => (

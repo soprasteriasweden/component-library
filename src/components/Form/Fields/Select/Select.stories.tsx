@@ -90,3 +90,14 @@ ToolTipWithNestedName.args = {
     isClearable: true,
     required: true
 };
+
+export const SelectNotRequired = Template.bind({});
+SelectNotRequired.args = {
+    label: 'Select not required',
+    name: "test",
+    placeholder: "Välj nåt",
+    inlineLabel: true,
+    options: mockListItems,
+    isClearable: true,
+    required: false
+};

@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.8
+* Fixed bux when clearing the Select-component
+
+## v2.0.7
+* Fixed bux when clearing the Select-component
+
 ## v2.0.6
 * Only run onClick for close modal if provided
 

@@ -30,18 +30,18 @@ export const Select = ({ name, label, required, className, inlineLabel, disabled
         }
     }, [options]);
     React.useEffect(() => {
-        setCurrentSelectedValue(selectedValue !== null && selectedValue !== void 0 ? selectedValue : "default");
+        setCurrentSelectedValue(selectedValue !== null && selectedValue !== void 0 ? selectedValue : undefined);
     }, [selectedValue]);
     const resetValue = () => {
         if (typeof setValue !== "string") {
             setValue(name, undefined);
-            setCurrentSelectedValue("default");
+            setCurrentSelectedValue(undefined);
         }
     };
     const clearValue = () => {
         if (typeof setValue !== "string") {
             setValue(name, undefined);
-            setCurrentSelectedValue("default");
+            setCurrentSelectedValue(undefined);
         }
         if (onChange) {
             onChange(undefined);
@@ -55,8 +55,8 @@ export const Select = ({ name, label, required, className, inlineLabel, disabled
     };
     const renderSelect = () => {
         return (React.createElement("div", { className: "input-group" },
-            React.createElement("select", Object.assign({ id: name, className: "form-control form-control-sm", value: currentSelectedValue !== null && currentSelectedValue !== void 0 ? currentSelectedValue : "default", disabled: disabled }, (typeof register !== "string" ? register(name, { required }) : {}), { onChange: handleChange }),
-                React.createElement("option", { value: "default", disabled: true, hidden: true }, placeholder),
+            React.createElement("select", Object.assign({ id: name, className: "form-control form-control-sm", value: currentSelectedValue, disabled: disabled }, (typeof register !== "string" ? register(name, { required }) : {}), { onChange: handleChange }),
+                React.createElement("option", { value: undefined, disabled: true, hidden: true }, placeholder),
                 options.map((option, index) => (React.createElement("option", { value: option.value, key: index, disabled: option.disabled }, option.text)))),
             tooltipDescription ? (React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })) : null));
     };

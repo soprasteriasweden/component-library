@@ -26,6 +26,7 @@ export const Select: React.FunctionComponent<ISelect> = ({
     isClearable
 }) => {
     const [currentSelectedValue, setCurrentSelectedValue] = React.useState<string | undefined>(selectedValue);
+    
     const readonlyValues = {
         errors: "",
         register: "",
@@ -49,20 +50,20 @@ export const Select: React.FunctionComponent<ISelect> = ({
     }, [options]);
 
     React.useEffect(() => {
-        setCurrentSelectedValue(selectedValue ?? undefined);
+        setCurrentSelectedValue(selectedValue ?? "");
     }, [selectedValue]);
 
     const resetValue = () => {
         if (typeof setValue !== "string") {
-            setValue(name, undefined); 
-            setCurrentSelectedValue(undefined); 
+            setValue(name, ""); 
+            setCurrentSelectedValue(""); 
         }
     };
 
     const clearValue = () => {
         if (typeof setValue !== "string") {
-            setValue(name, undefined); 
-            setCurrentSelectedValue(undefined); 
+            setValue(name, ""); 
+            setCurrentSelectedValue(""); 
         }
         if (onChange) {
             onChange(undefined!);
@@ -82,14 +83,12 @@ export const Select: React.FunctionComponent<ISelect> = ({
                 <select
                     id={name}
                     className="form-control form-control-sm"
-                    value={currentSelectedValue}
+                    value={currentSelectedValue ? currentSelectedValue : ""}
                     disabled={disabled}
                     {...(typeof register !== "string" ? register(name, { required }) : {})}
                     onChange={handleChange}
                 >
-                    <option value={undefined} disabled hidden>
-                        {placeholder}
-                    </option>
+                    <option value={""} disabled hidden>{placeholder}</option>
                     {options.map((option, index) => (
                         <option value={option.value} key={index} disabled={option.disabled}>{option.text}</option>
                     ))}

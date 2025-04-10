@@ -19,7 +19,7 @@ export const NameInput: React.FunctionComponent<INameInput> = ({ name, tooltipDe
                         className="form-control form-control-sm "
                         placeholder={placeholder}
                         defaultValue={defaultValue}
-                        ref={register({ required: required, pattern: /^\p{L}+$/u })}
+                        ref={register({ required: required, pattern: /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/ })}
                         disabled={disabled} />
                     {
                         tooltipDescription ?

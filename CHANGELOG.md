@@ -1,4 +1,6 @@
 # Changelog
+## v.1.0.70
+* Changed validation rules for name input to allow space, hyphen and apostrophe
 
 ## v.1.0.69
 * Bugfix MultiSelectCreatable. Required message didn't clear

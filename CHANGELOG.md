@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.12
+* Fixed bug in InputSpinnerWrapper
+
+## v2.0.11
+* Fixed bug in CustomButton when loading
+
 ## v2.0.10
 * Fixed default value bug in Select-component
 

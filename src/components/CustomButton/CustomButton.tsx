@@ -31,14 +31,23 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
     const tooltipRef = React.useRef<HTMLSpanElement>(null);
 
     React.useEffect(() => {
+        let tooltip: bootstrap.Tooltip | undefined;
+
         if (tooltipRef.current) {
-            new bootstrap.Tooltip(tooltipRef.current, { title: isLoading ? "Laddar..." : title });
+            tooltip = bootstrap.Tooltip.getInstance(tooltipRef.current) || new bootstrap.Tooltip(tooltipRef.current);
+            tooltip.setContent({ '.tooltip-inner': isLoading ? 'Laddar...' : title || '' });
         }
+
+        return () => {
+            if (tooltip) {
+                tooltip.dispose();
+            }
+        };
     }, [isLoading, title]);
 
     const iconMap: { [key in ButtonType]?: React.ReactNode } = {
         [ButtonType.create]: <FontAwesomeIcon icon={faPlus} />,
-        [ButtonType.createAlt]: <FontAwesomeIcon icon={faPlus} />, 
+        [ButtonType.createAlt]: <FontAwesomeIcon icon={faPlus} />,
         [ButtonType.edit]: <FontAwesomeIcon icon={faPen} />,
         [ButtonType.editAlt]: <FontAwesomeIcon icon={faPen} />,
         [ButtonType.download]: <FontAwesomeIcon icon={faDownload} />,

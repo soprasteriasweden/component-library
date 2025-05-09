@@ -33,9 +33,16 @@ export const CustomButton = (props) => {
     const { buttonType, buttonText, isLoading, children, disabled, title = "" } = props, buttonProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title"]);
     const tooltipRef = React.useRef(null);
     React.useEffect(() => {
+        let tooltip;
         if (tooltipRef.current) {
-            new bootstrap.Tooltip(tooltipRef.current, { title: isLoading ? "Laddar..." : title });
+            tooltip = bootstrap.Tooltip.getInstance(tooltipRef.current) || new bootstrap.Tooltip(tooltipRef.current);
+            tooltip.setContent({ '.tooltip-inner': isLoading ? 'Laddar...' : title || '' });
         }
+        return () => {
+            if (tooltip) {
+                tooltip.dispose();
+            }
+        };
     }, [isLoading, title]);
     const iconMap = {
         [ButtonType.create]: React.createElement(FontAwesomeIcon, { icon: faPlus }),

@@ -29,7 +29,7 @@ export const CustomSubmitButton = (_a) => {
                 html: true
             });
             return () => {
-                tooltip.dispose(); // ✅ Cleanup tooltip on unmount
+                tooltip.dispose();
             };
         }
     }, [isLoading, title]);

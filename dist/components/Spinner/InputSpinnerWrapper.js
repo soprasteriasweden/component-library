@@ -5,20 +5,30 @@ export const InputSpinnerWrapper = ({ isLoading, children }) => {
     const spinnerRef = useRef(null);
     const tooltipInstance = useRef(null);
     useEffect(() => {
-        var _a;
-        if (!spinnerRef.current)
-            return;
-        (_a = tooltipInstance.current) === null || _a === void 0 ? void 0 : _a.dispose();
-        tooltipInstance.current = null;
-        if (isLoading) {
-            tooltipInstance.current = new bootstrap.Tooltip(spinnerRef.current, {
+        const currentRef = spinnerRef.current;
+        if (tooltipInstance.current) {
+            try {
+                tooltipInstance.current.dispose();
+            }
+            catch (e) {
+            }
+            tooltipInstance.current = null;
+        }
+        if (isLoading && currentRef) {
+            tooltipInstance.current = new bootstrap.Tooltip(currentRef, {
                 title: "Laddar...",
                 placement: "right",
             });
         }
         return () => {
-            var _a;
-            (_a = tooltipInstance.current) === null || _a === void 0 ? void 0 : _a.dispose();
+            if (tooltipInstance.current) {
+                try {
+                    tooltipInstance.current.dispose();
+                }
+                catch (e) {
+                }
+                tooltipInstance.current = null;
+            }
         };
     }, [isLoading]);
     return (React.createElement("div", { ref: spinnerRef, className: `spinner-wrapper ${isLoading ? "loading" : ""}`, style: { cursor: isLoading ? "wait" : "auto" } },

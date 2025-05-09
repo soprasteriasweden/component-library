@@ -12,20 +12,33 @@ export const InputSpinnerWrapper: React.FunctionComponent<IInputSpinnerWrapper> 
     const tooltipInstance = useRef<bootstrap.Tooltip | null>(null);
 
     useEffect(() => {
-        if (!spinnerRef.current) return;
+        const currentRef = spinnerRef.current;
 
-        tooltipInstance.current?.dispose();
-        tooltipInstance.current = null;
+        if (tooltipInstance.current) {
+            try {
+                tooltipInstance.current.dispose();
+            } catch (e) {
+                
+            }
+            tooltipInstance.current = null;
+        }
 
-        if (isLoading) {
-            tooltipInstance.current = new bootstrap.Tooltip(spinnerRef.current, {
+        if (isLoading && currentRef) {
+            tooltipInstance.current = new bootstrap.Tooltip(currentRef, {
                 title: "Laddar...",
                 placement: "right",
             });
         }
 
         return () => {
-            tooltipInstance.current?.dispose();
+            if (tooltipInstance.current) {
+                try {
+                    tooltipInstance.current.dispose();
+                } catch (e) {
+                    
+                }
+                tooltipInstance.current = null;
+            }
         };
     }, [isLoading]);
 

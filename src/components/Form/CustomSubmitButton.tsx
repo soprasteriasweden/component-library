@@ -35,7 +35,7 @@ export const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & R
             });
 
             return () => {
-                tooltip.dispose();  // ✅ Cleanup tooltip on unmount
+                tooltip.dispose();
             };
         }
     }, [isLoading, title]);
@@ -50,7 +50,7 @@ export const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & R
                 {...buttonProps}
                 type="submit"
                 className={`btn btn-sm ${buttonType}`}
-                onClick={onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined}  // ✅ Properly calls handleSubmit
+                onClick={onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined}
                 disabled={isLoading || disabled}
             >
                 {isLoading ? (

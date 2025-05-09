@@ -218,9 +218,16 @@ export interface IFormInputValidation {
 }
 
 export interface IListItem {
-    value: string,
-    text: string
+    value: string;
+    text: string;
     disabled?: boolean;
+    informationText?: string;
+}
+
+export interface IBooleanListItem {
+    value: string;
+    text: string;
+    required?: boolean;
     informationText?: string;
 }
 
@@ -242,4 +249,9 @@ export interface IFormLink extends IColumnPlacement, IInputPosition {
     to: string;
     className?: string | undefined;
     onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+}
+
+export interface IBooleanQuestionGroup extends IFormInputBaseWithValidation, IColumnPlacement {
+    labelExplanation?: string;
+    options: IBooleanListItem[];
 }

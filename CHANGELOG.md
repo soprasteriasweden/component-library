@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.13
+* Added component BooleanQuestionGroup
+
 ## v2.0.12
 * Fixed bug in InputSpinnerWrapper
 

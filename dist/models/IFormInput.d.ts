@@ -186,6 +186,12 @@ export interface IListItem {
     disabled?: boolean;
     informationText?: string;
 }
+export interface IBooleanListItem {
+    value: string;
+    text: string;
+    required?: boolean;
+    informationText?: string;
+}
 export interface IPlainInput {
     readonly?: boolean;
     minLength?: number;
@@ -202,4 +208,8 @@ export interface IFormLink extends IColumnPlacement, IInputPosition {
     to: string;
     className?: string | undefined;
     onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+}
+export interface IBooleanQuestionGroup extends IFormInputBaseWithValidation, IColumnPlacement {
+    labelExplanation?: string;
+    options: IBooleanListItem[];
 }

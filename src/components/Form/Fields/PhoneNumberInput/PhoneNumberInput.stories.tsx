@@ -43,3 +43,12 @@ SecondExample.args = {
     required: false,
     name: "test"
 };
+
+export const Readonly = Template.bind({});
+Readonly.args = {
+    label: 'Readonly Label',
+    name: 'readonly',
+    inlineLabel: true,
+    defaultValue: "Readonly",
+    readonly: true,
+};

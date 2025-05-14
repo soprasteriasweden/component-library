@@ -1,4 +1,7 @@
 # Changelog
+## v.1.0.71
+* Readonly property on ZipCodeInput and PhoneNumberInput
+
 ## v.1.0.70
 * Changed validation rules for name input to allow space, hyphen and apostrophe
 

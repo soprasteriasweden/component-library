@@ -20,8 +20,33 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
 }) => {
     const {
         register,
-        formState: { errors }
+        setValue,
+        getValues,
+        formState: { errors, isSubmitting }
     } = useFormContext();
+
+    const fieldError = getNestedObjectValue(errors, name);
+
+    React.useEffect(() => {
+        const raw = getValues();
+        const fieldGroup = raw?.[name];
+        if (!fieldGroup || typeof fieldGroup !== "object") return;
+
+        const cleaned = options
+            .map(opt => {
+                const val = fieldGroup?.[opt.value];
+                if (val === true || val === false) {
+                    return {
+                        ifcCodeId: parseInt(opt.value, 10),
+                        answer: val
+                    };
+                }
+                return null;
+            })
+            .filter(Boolean);
+
+        setValue(name, cleaned, { shouldDirty: false, shouldValidate: false });
+    }, [options, getValues, setValue, name]);
 
     return (
         <fieldset className="form-group">
@@ -29,8 +54,7 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
                 <div className={`form-group ${inlineLabel ? "row" : ""} mb-2`}>
                     <div className={inlineLabel ? `col-${labelCol} d-flex align-items-center gap-1` : "d-flex gap-1 mb-1"}>
                         <label className="mb-0">
-                            {label}
-                            {required && " *"}
+                            {label}{required && " *"}
                         </label>
                         {tooltipDescription && (
                             <InputIconTooltip
@@ -49,13 +73,12 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
                 const fieldName = `${name}.${option.value}`;
                 const yesId = `${fieldName}.yes`;
                 const noId = `${fieldName}.no`;
-
-                const fieldError = getNestedObjectValue(errors, fieldName);
+                const error = getNestedObjectValue(errors, fieldName);
 
                 return (
                     <div className={`form-group ${inlineLabel ? "row" : ""} mb-0`} key={option.value}>
                         <label className={`${inlineLabel ? `col-${labelCol}` : ""} col-form-label d-flex align-items-center gap-1`}>
-                            {option.text}{option.text && option.text !== "" ? ":" : ""}{option.required ? "*" : ""}
+                            {option.text}{option.text ? ":" : ""}{option.required ? "*" : ""}
                             {option.informationText && (
                                 <InputIconTooltip
                                     description={option.informationText}
@@ -73,7 +96,7 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
                                     value="true"
                                     {...register(fieldName, {
                                         required: option.required ? requiredValidationMessage ?? `${option.text} måste besvaras` : false,
-                                        setValueAs: v => (v === "true" ? true : v === "false" ? false : undefined)
+                                        setValueAs: v => v === "true"
                                     })}
                                 />
                                 <label className="form-check-label" htmlFor={yesId}>Ja</label>
@@ -87,19 +110,19 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
                                     value="false"
                                     {...register(fieldName, {
                                         required: option.required ? requiredValidationMessage ?? `${option.text} måste besvaras` : false,
-                                        setValueAs: v => (v === "true" ? true : v === "false" ? false : undefined)
+                                        setValueAs: v => v === "true" ? true : v === "false" ? false : undefined
                                     })}
                                 />
                                 <label className="form-check-label" htmlFor={noId}>Nej</label>
                             </div>
 
-                            {fieldError && (
-                                <div className="text-danger">{fieldError.message}</div>
-                            )}
+                            {error && <div className="text-danger">{error.message}</div>}
                         </div>
                     </div>
                 );
             })}
+
+            {fieldError && <div className="text-danger mt-1">{fieldError.message}</div>}
         </fieldset>
     );
 };

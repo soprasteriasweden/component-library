@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.15
+* Fixed bug in BooleanQuestionGroup
+
+## v2.0.14
+* Fixed bug in BooleanQuestionGroup
+
 ## v2.0.13
 * Added component BooleanQuestionGroup
 

@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.17
+* Fixed render bug in AlertMessage
+
 ## v2.0.16
 * Added max-height and overflow-y to modal-dialog-scrollable to fix scrollbar issue in scrollable modal
 

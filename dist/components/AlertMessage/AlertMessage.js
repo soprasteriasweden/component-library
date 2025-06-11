@@ -1,4 +1,5 @@
 import * as React from "react";
+import ReactDOM from 'react-dom';
 import '../../assets/styles/AlertMessage.style.scss';
 export var AlertType;
 (function (AlertType) {
@@ -28,11 +29,11 @@ export const AlertMessage = ({ duration, alertType, alwaysShow, children, render
             }
         };
     }, [children]);
-    return (React.createElement("div", null, showAlert ?
-        React.createElement("div", { className: `alert ${renderOnTopOfPage ? "alert-top-of-page" : ""} alert-${alertType}`, role: "alert" },
+    return showAlert ? (renderOnTopOfPage
+        ? ReactDOM.createPortal(React.createElement("div", { className: `alert alert-top-of-page alert-${alertType}`, role: "alert" },
             children,
-            renderOnTopOfPage ?
-                React.createElement("button", { type: "button", className: "remove-alert", onClick: () => setShowAlert(false) })
-                : null)
-        : ""));
+            React.createElement("button", { type: "button", className: "remove-alert", onClick: () => setShowAlert(false) })), document.body)
+        : (React.createElement("div", { className: `alert alert-${alertType}`, role: "alert" },
+            children,
+            React.createElement("button", { type: "button", className: "remove-alert", onClick: () => setShowAlert(false) })))) : null;
 };

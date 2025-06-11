@@ -1,6 +1,7 @@
 import * as React from "react";
-import { IChildren } from "../../models/IChildren";
+import ReactDOM from 'react-dom';
 import '../../assets/styles/AlertMessage.style.scss';
+import { IChildren } from "../../models/IChildren";
 
 export interface IAlertMessage extends IChildren {
     alertType: AlertType;
@@ -41,20 +42,20 @@ export const AlertMessage: React.FunctionComponent<IAlertMessage> = ({ duration,
         }
     }, [children])
 
-    return (
-        <div>
-            {
-                showAlert ?
-                    <div className={`alert ${renderOnTopOfPage ? "alert-top-of-page" : ""} alert-${alertType}`} role="alert">
-                        {children}
-                        {
-                            renderOnTopOfPage ?
-                                <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>
-                                : null
-                        }
-                    </div>
-                    : ""
-            }
-        </div>
-    )
+    return showAlert ? (
+    renderOnTopOfPage
+        ? ReactDOM.createPortal(
+            <div className={`alert alert-top-of-page alert-${alertType}`} role="alert">
+                {children}
+                <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>
+            </div>,
+            document.body
+        )
+        : (
+            <div className={`alert alert-${alertType}`} role="alert">
+                {children}
+                <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>
+            </div>
+        )
+) : null;
 }

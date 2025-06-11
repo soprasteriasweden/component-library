@@ -8,6 +8,7 @@
     z-index: 1000000 !important;
     opacity: 1;
     animation: 1s ease-out 0s 1 alert-ease-in;
+    transition: opacity 0.5s ease-in-out;
 
     .remove-alert {
         position: absolute;
@@ -26,10 +27,10 @@
 
 @keyframes alert-ease-in {
     0% {
-        transform: opacity 0;
+        opacity: 0;
     }
 
     100% {
-        transform: opacity 1;
+        opacity: 1;
     }
 }

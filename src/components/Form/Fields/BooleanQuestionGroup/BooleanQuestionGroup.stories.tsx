@@ -68,3 +68,34 @@ NotRequired.args = {
     required: false,
     inlineLabel: true
 };
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+    name: "healthQuestionsReadOnly",
+    label: "Hälsofrågor (read-only)",
+    labelExplanation: "Svarade tidigare",
+    tooltipDescription: "Svar från tidigare besök",
+    options: [
+        {
+            value: "allergies",
+            text: "Är du allergisk mot något",
+            required: true,
+            informationText: "T.ex. nötter, pollen",
+            answer: true
+        },
+        {
+            value: "surgery",
+            text: "Har du blivit opererad tidigare",
+            required: true,
+            answer: false
+        },
+        {
+            value: "medications",
+            text: "Tar du några mediciner dagligen",
+            answer: true
+        }
+    ],
+    required: true,
+    inlineLabel: true,
+    readonly: true
+};

@@ -16,7 +16,8 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
     tooltipDescription,
     labelCol = 4,
     inputCol = 8,
-    inlineLabel
+    inlineLabel,
+    readonly = false
 }) => {
     const {
         register,
@@ -28,6 +29,8 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
     const fieldError = getNestedObjectValue(errors, name);
 
     React.useEffect(() => {
+        if (readonly) return;
+
         const raw = getValues();
         const fieldGroup = raw?.[name];
         if (!fieldGroup || typeof fieldGroup !== "object") return;
@@ -46,7 +49,7 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
             .filter(Boolean);
 
         setValue(name, cleaned, { shouldDirty: false, shouldValidate: false });
-    }, [options, getValues, setValue, name]);
+    }, [options, getValues, setValue, name, readonly]);
 
     return (
         <fieldset className="form-group">
@@ -75,6 +78,9 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
                 const noId = `${fieldName}.no`;
                 const error = getNestedObjectValue(errors, fieldName);
 
+                const isChecked = (expected: boolean) =>
+                    readonly ? option.answer === expected : undefined;
+
                 return (
                     <div className={`form-group ${inlineLabel ? "row" : ""} mb-0`} key={option.value}>
                         <label className={`${inlineLabel ? `col-${labelCol}` : ""} col-form-label d-flex align-items-center gap-1`}>
@@ -94,10 +100,12 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
                                     type="radio"
                                     id={yesId}
                                     value="true"
-                                    {...register(fieldName, {
+                                    {...(!readonly && register(fieldName, {
                                         required: option.required ? requiredValidationMessage ?? `${option.text} måste besvaras` : false,
                                         setValueAs: v => v === "true"
-                                    })}
+                                    }))}
+                                    checked={isChecked(true)}
+                                    disabled={readonly}
                                 />
                                 <label className="form-check-label" htmlFor={yesId}>Ja</label>
                             </div>
@@ -108,21 +116,23 @@ export const BooleanQuestionGroup: React.FunctionComponent<IBooleanQuestionGroup
                                     type="radio"
                                     id={noId}
                                     value="false"
-                                    {...register(fieldName, {
+                                    {...(!readonly && register(fieldName, {
                                         required: option.required ? requiredValidationMessage ?? `${option.text} måste besvaras` : false,
                                         setValueAs: v => v === "true" ? true : v === "false" ? false : undefined
-                                    })}
+                                    }))}
+                                    checked={isChecked(false)}
+                                    disabled={readonly}
                                 />
                                 <label className="form-check-label" htmlFor={noId}>Nej</label>
                             </div>
 
-                            {error && <div className="text-danger">{error.message}</div>}
+                            {!readonly && error && <div className="text-danger">{error.message}</div>}
                         </div>
                     </div>
                 );
             })}
 
-            {fieldError && <div className="text-danger mt-1">{fieldError.message}</div>}
+            {!readonly && fieldError && <div className="text-danger mt-1">{fieldError.message}</div>}
         </fieldset>
     );
 };

@@ -229,6 +229,7 @@ export interface IBooleanListItem {
     text: string;
     required?: boolean;
     informationText?: string;
+    answer?: boolean;
 }
 
 export interface IPlainInput {
@@ -254,4 +255,5 @@ export interface IFormLink extends IColumnPlacement, IInputPosition {
 export interface IBooleanQuestionGroup extends IFormInputBaseWithValidation, IColumnPlacement {
     labelExplanation?: string;
     options: IBooleanListItem[];
+    readonly?: boolean;
 }

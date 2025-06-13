@@ -1,5 +1,29 @@
 # Changelog
 
+## v2.0.25
+* Added "answer" to IBooleanListItem and "readonly" to BooleanQuestionGroup for readonly display
+
+## v2.0.24
+* Bugfix Modal..
+
+## v2.0.23
+* Simplified Modal
+
+## v2.0.22
+* Added onSuccess event in Modal
+
+## v2.0.21
+* Fixed render bug in Modal
+
+## v2.0.20
+* Fixed render bug in Modal
+
+## v2.0.19
+* Fixed render bug in Modal
+
+## v2.0.18
+* Refactored Modal component to make it more flexible to use
+
 ## v2.0.17
 * Fixed render bug in AlertMessage
 

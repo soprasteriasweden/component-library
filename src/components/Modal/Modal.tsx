@@ -1,21 +1,12 @@
-﻿import * as React from "react";
+﻿import React, { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import * as bootstrap from "bootstrap";
 import { IChildren } from "../../models/IChildren";
 import { ModalBody } from "./ModalBody";
 import { ModalFooter } from "./ModalFooter";
 import "../../assets/styles/Modal.style.scss";
-import * as bootstrap from "bootstrap";
 
-interface IModal extends IChildren {
-    header: string;
-    id: string;
-    modalSize?: ModalSize;
-    preventCloseOnOutsideClick?: boolean;
-    animate?: boolean;
-    scrollable?: boolean;
-    closeModal?: () => void;
-}
-
-enum ModalSize {
+export enum ModalSize {
     small = "modal-sm",
     normal = "",
     large = "modal-lg",
@@ -27,60 +18,85 @@ enum ModalSize {
     fullXl = "modal-fullscreen-xl-down"
 }
 
-const Modal = ({ 
-    header, 
-    children, 
-    id, 
-    modalSize = ModalSize.normal, 
-    preventCloseOnOutsideClick = true, 
-    animate = true, 
+interface IModal extends IChildren {
+    header: string;
+    modalId: string;
+    isOpen: boolean;
+    onClose?: () => void;
+    modalSize?: ModalSize;
+    preventCloseOnOutsideClick?: boolean;
+    scrollable?: boolean;
+    animate?: boolean;
+}
+
+export const Modal: React.FC<IModal> = ({
+    header,
+    children,
+    modalId,
+    isOpen,
+    onClose,
+    modalSize = ModalSize.normal,
+    preventCloseOnOutsideClick = true,
     scrollable = false,
-    closeModal
-}: IModal) => {
+    animate = true
+}) => {
+    const modalRef = useRef<HTMLDivElement | null>(null);
+    const bsModal = useRef<bootstrap.Modal | null>(null);
 
-    React.useEffect(() => {
-        const modalElement = document.getElementById(id);
-        if (modalElement) {
-            const bsModal = new bootstrap.Modal(modalElement);
+    useEffect(() => {
+        const el = modalRef.current;
+        if (!el) return;
 
-            return () => {
-                bsModal.hide();
-                bsModal.dispose();
-            };
+        bsModal.current = new bootstrap.Modal(el, {
+            backdrop: preventCloseOnOutsideClick ? "static" : true,
+            keyboard: true,
+        });
+
+        el.addEventListener("hidden.bs.modal", () => {
+            onClose?.();
+        });
+
+        return () => {
+            el.removeEventListener("hidden.bs.modal", () => {
+                onClose?.();
+            });
+            bsModal.current?.dispose();
+            bsModal.current = null;
+        };
+    }, []);
+
+    useEffect(() => {
+        const el = modalRef.current;
+        if (!el || !bsModal.current) return;
+
+        if (isOpen) {
+            bsModal.current.show();
+        } else {
+            bsModal.current.hide();
         }
-    }, [id]);
-    
-    return (
+    }, [isOpen]);
+
+    return createPortal(
         <div
             className={`modal ${animate ? "fade" : ""}`}
-            id={id}
             tabIndex={-1}
-            aria-labelledby={`${id}-label`}
+            ref={modalRef}
+            id={modalId}
+            aria-labelledby={`${modalId}-label`}
             aria-hidden="true"
-            data-bs-backdrop={preventCloseOnOutsideClick ? "static" : "true"}
         >
-            <div 
-                className={`modal-dialog modal-dialog-centered
-                    ${modalSize} 
-                    ${scrollable ? "modal-dialog-scrollable" : ""}`
-                }
-                role="document"
-            >
+            <div className={`modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""}`}>
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h4 className="modal-title" id={`${id}-label`}>{header}</h4>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeModal ? closeModal : undefined}></button>
+                        <h4 className="modal-title" id={`${modalId}-label`}>{header}</h4>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {children}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 
-export {
-    Modal,
-    ModalBody,
-    ModalFooter,
-    ModalSize
-};
+export { ModalBody, ModalFooter };

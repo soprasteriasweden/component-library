@@ -1,6 +1,6 @@
 {
   "name": "soprasteria-ui-library",
-  "version": "2.0.25",
+  "version": "2.0.26",
   "main": "dist/index.js",
   "private": false,
   "license": "MIT",
@@ -18,6 +18,7 @@
     "react-dropzone": "^14.3.5",
     "react-hook-form": "^7.54.2",
     "react-select": "^5.9.0",
+    "react-tooltip": "^5.29.1",
     "react-window": "^1.8.11",
     "sass": "^1.85.0"
   },

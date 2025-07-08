@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.26
+* Refactored FileUpload, removed jQuery
+
 ## v2.0.25
 * Added "answer" to IBooleanListItem and "readonly" to BooleanQuestionGroup for readonly display
 

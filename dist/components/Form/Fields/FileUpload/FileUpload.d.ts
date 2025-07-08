@@ -1,4 +1,5 @@
 import React from 'react';
-import { IFileUpload } from '../../../../models/IFormInput';
+import 'react-tooltip/dist/react-tooltip.css';
 import "../../../../assets/styles/FileUpload.style.scss";
-export declare const FileUpload: React.FunctionComponent<IFileUpload>;
+import { IFileUpload } from '../../../../models/IFormInput';
+export declare const FileUpload: React.FC<IFileUpload>;

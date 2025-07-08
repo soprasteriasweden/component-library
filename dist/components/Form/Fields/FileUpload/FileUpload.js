@@ -1,147 +1,109 @@
-import React from 'react';
-import "../../../../assets/styles/FileUpload.style.scss";
+import React, { useEffect, useState } from 'react';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
-import { ButtonType, CustomButton } from '../../../CustomButton/CustomButton';
-export const FileUpload = ({ maxSizeBytes = (5 * Math.pow(2, 20)), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles, maxFiles }) => {
+import { CustomButton, ButtonType } from '../../../CustomButton/CustomButton';
+import "../../../../assets/styles/FileUpload.style.scss";
+export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles, maxFiles }) => {
+    var _a;
     const { formState: { errors }, register, setValue, unregister } = useFormContext();
-    const [selectedFiles, setSelectedFiles] = React.useState([]);
-    const [selectedDocumentTypeIds, setSelectedDocumentTypeIds] = React.useState([]);
-    const [numberOfFiles, setNumberOfFiles] = React.useState(0);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [selectedDocumentTypeIds, setSelectedDocumentTypeIds] = useState([]);
+    const [numberOfFiles, setNumberOfFiles] = useState(0);
     const { getRootProps, getInputProps, acceptedFiles, fileRejections } = useDropzone({
         accept: allowedFileTypes === null || allowedFileTypes === void 0 ? void 0 : allowedFileTypes.reduce((acc, type) => (Object.assign(Object.assign({}, acc), { [type]: [] })), {}),
-        multiple: multiple,
-        disabled: disabled,
+        multiple,
+        disabled,
         maxSize: maxSizeBytes,
-        maxFiles: maxFiles
+        maxFiles
     });
-    React.useEffect(() => {
-        return () => {
-            unregister(name);
-        };
-    }, []);
-    React.useEffect(() => {
-        register(name, { required: required });
-    }, []);
-    React.useEffect(() => {
-        if (acceptedFiles && documentType) {
-            var newIds = [];
-            for (var i = 0; i < acceptedFiles.length; i++) {
-                newIds.push(0);
+    useEffect(() => {
+        register(name, { required: required !== null && required !== void 0 ? required : false });
+        return () => unregister(name);
+    }, [name, register, unregister, required]);
+    useEffect(() => {
+        if (acceptedFiles.length > 0) {
+            const updatedFiles = [...selectedFiles, ...acceptedFiles];
+            setSelectedFiles(updatedFiles);
+            if (documentType) {
+                setSelectedDocumentTypeIds((prev) => [...prev, ...Array(acceptedFiles.length).fill(0)]);
             }
-            setSelectedDocumentTypeIds(selectedDocumentTypeIds.concat(newIds));
+            setValue(name, updatedFiles, { shouldValidate: true });
+            setNumberOfFiles(updatedFiles.length);
         }
-        const newFiles = multiple ?
-            selectedFiles.concat(acceptedFiles)
-            : acceptedFiles;
-        setSelectedFiles(newFiles);
-        if (newFiles.length > 0) {
-            setValue(name, newFiles);
-        }
-        setNumberOfFiles(newFiles.length);
     }, [acceptedFiles]);
-    React.useEffect(() => {
+    useEffect(() => {
         if (numOfFiles) {
             numOfFiles(numberOfFiles);
         }
-    }, [numberOfFiles]);
-    React.useEffect(() => {
-        var myWindow = window;
-        myWindow.$(`.file-tooltip`).tooltip();
-    }, [selectedDocumentTypeIds]);
+    }, [numberOfFiles, numOfFiles]);
     const formatBytes = (bytes) => {
         if (bytes === 0)
             return '0 Bytes';
-        else if (bytes < Math.pow(2, 20))
-            return (bytes / Math.pow(2, 10)).toFixed(1) + " KB";
-        else if (bytes < Math.pow(2, 30))
-            return (bytes / Math.pow(2, 20)).toFixed(1) + " MB";
-        else
-            return (bytes / Math.pow(2, 30)).toFixed(1) + " GB";
+        if (bytes < 1024 * 1024)
+            return (bytes / 1024).toFixed(1) + " KB";
+        if (bytes < 1024 * 1024 * 1024)
+            return (bytes / 1024 / 1024).toFixed(1) + " MB";
+        return (bytes / 1024 / 1024 / 1024).toFixed(1) + " GB";
     };
-    const renderWarning = (index) => {
-        const selectedDocumentTypeId = selectedDocumentTypeIds[index];
-        const selectedDocumentType = documentType === null || documentType === void 0 ? void 0 : documentType.documentTypes.filter(type => type.value === selectedDocumentTypeId.toString())[0];
-        if (selectedDocumentType === null || selectedDocumentType === void 0 ? void 0 : selectedDocumentType.informationText) {
-            return React.createElement("button", { className: "btn btn-warning btn-sm file-tooltip", id: "less", type: "button", "data-toggle": "tooltip", "data-placement": "right", "data-original-title": selectedDocumentType === null || selectedDocumentType === void 0 ? void 0 : selectedDocumentType.informationText },
-                React.createElement(FontAwesomeIcon, { icon: faExclamation }));
+    const clearFiles = () => {
+        setSelectedFiles([]);
+        setSelectedDocumentTypeIds([]);
+        setValue(name, undefined, { shouldValidate: true });
+        if (documentType === null || documentType === void 0 ? void 0 : documentType.documentTypesName) {
+            setValue(documentType.documentTypesName, [], { shouldValidate: true });
         }
-        else {
-            return "";
-        }
+        setNumberOfFiles(0);
     };
     const renderSelectedFiles = selectedFiles.map((file, index) => {
-        var _a;
+        var _a, _b;
+        if (!documentType) {
+            return (React.createElement("div", { key: index, className: "mb-1" },
+                React.createElement("span", null, file.name)));
+        }
+        const fieldName = `${documentType.documentTypesName}[${index}]`;
+        const fieldRegister = register(fieldName, { required: true });
+        const selectedId = selectedDocumentTypeIds[index];
+        const selectedType = documentType.documentTypes.find(type => type.value === (selectedId === null || selectedId === void 0 ? void 0 : selectedId.toString()));
         return (React.createElement("div", { key: index, className: "mb-3" },
             React.createElement("div", { className: "input-group" },
                 React.createElement("input", { type: "text", className: "form-control form-control-sm", value: file.name, readOnly: true }),
-                React.createElement("div", { className: "input-group-append" },
-                    documentType && documentType.documentTypes.length > 0 ?
-                        React.createElement("select", Object.assign({ className: "form-control form-control-sm" }, register(`${documentType.documentTypesName}[${index}]`, { required: true }), { onChange: (e) => setSelectedDocumentTypeIds(selectedDocumentTypeIds.map((id, currentIndex) => {
-                                return currentIndex === index ? parseInt(e.target.value) : id;
-                            })) }),
-                            React.createElement("option", { value: "", disabled: true, selected: selectedDocumentTypeIds[index].toString() === "0", hidden: true }, "V\u00E4lj typ av bilaga*"),
-                            documentType.documentTypes.map((docType, key) => React.createElement("option", { key: key, value: docType.value, selected: selectedDocumentTypeIds[index].toString() === docType.value }, docType.text)))
-                        : null,
-                    documentType ?
-                        renderWarning(index)
-                        : null)),
-            (documentType === null || documentType === void 0 ? void 0 : documentType.documentTypesName) ?
-                React.createElement("span", { className: "text-danger" }, errors ? errors[documentType.documentTypesName] && ((_a = errors[documentType.documentTypesName][index]) === null || _a === void 0 ? void 0 : _a.type) === "required" &&
-                    "En dokumenttyp måste anges" : "")
-                : null));
+                React.createElement("select", { className: "form-control form-control-sm", name: fieldRegister.name, ref: fieldRegister.ref, onBlur: fieldRegister.onBlur, value: (selectedId === null || selectedId === void 0 ? void 0 : selectedId.toString()) || "0", onChange: (e) => {
+                        const updated = [...selectedDocumentTypeIds];
+                        updated[index] = parseInt(e.target.value);
+                        setSelectedDocumentTypeIds(updated);
+                        fieldRegister.onChange(e);
+                    } },
+                    React.createElement("option", { value: "0", disabled: true, hidden: true }, "V\u00E4lj typ av bilaga*"),
+                    documentType.documentTypes.map((docType, key) => (React.createElement("option", { key: key, value: docType.value }, docType.text)))),
+                (selectedType === null || selectedType === void 0 ? void 0 : selectedType.informationText) && (React.createElement(React.Fragment, null,
+                    React.createElement("button", { className: "btn btn-warning btn-sm", type: "button", "data-tooltip-id": `tooltip-${index}`, "data-tooltip-content": selectedType.informationText },
+                        React.createElement(FontAwesomeIcon, { icon: faExclamation })),
+                    React.createElement(ReactTooltip, { id: `tooltip-${index}`, place: "right" })))),
+            errors[documentType.documentTypesName] &&
+                ((_b = (_a = errors[documentType.documentTypesName]) === null || _a === void 0 ? void 0 : _a[index]) === null || _b === void 0 ? void 0 : _b.type) === "required" && (React.createElement("div", { className: "text-danger" }, "En dokumenttyp m\u00E5ste anges"))));
     });
-    const renderInvalidFiles = fileRejections.map((fileRejection, key) => (React.createElement("li", { key: key, className: "text-danger" },
-        fileRejection.file.name,
-        " -  ",
-        formatBytes(fileRejection.file.size))));
-    const renderFileErrorMessage = () => {
-        var _a;
-        if (fileRejections.length <= 0) {
-            return React.createElement("span", { className: "text-danger" }, errors[name] && ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" &&
-                (requiredValidationMessage ? requiredValidationMessage : label + " måste anges"));
-        }
-    };
-    const renderAllowedFileTypes = () => {
-        if (allowedFileTypes && (allowedFileTypes === null || allowedFileTypes === void 0 ? void 0 : allowedFileTypes.length) > 0) {
-            return (React.createElement("p", null,
-                "Till\u00E5tna filtyper \u00E4r ",
-                allowedFileTypes.join(", ")));
-        }
-    };
-    const clearFiles = () => {
-        if (documentType) {
-            setSelectedDocumentTypeIds([]);
-        }
-        setSelectedFiles([]);
-        setValue(name, undefined);
-        setNumberOfFiles(0);
-    };
-    return (React.createElement("div", { className: className + " form-group " + (inlineLabel ? "row" : "") },
+    return (React.createElement("div", { className: `${className} form-group ${inlineLabel ? "row" : ""}` },
         React.createElement("label", { htmlFor: name, className: inlineLabel ? `col-${labelCol} col-form-label` : "" },
             label,
             ":",
             required ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? `col-${inputCol}` : "" },
             React.createElement("div", Object.assign({ className: "file-upload" }, getRootProps()),
-                React.createElement("input", Object.assign({ name: name, id: name, title: "Filuppladdning" }, getInputProps())),
+                React.createElement("input", Object.assign({}, getInputProps(), { id: name, name: name })),
                 React.createElement("p", null,
-                    multiple
-                        ? "Dra filer hit eller klicka här för att välja filer"
-                        : "Dra en fil hit eller klicka här för att välja en fil",
-                    maxSizeBytes ? " (max " + formatBytes(maxSizeBytes) + ")" : ""),
-                renderAllowedFileTypes()),
-            renderFileErrorMessage(),
-            React.createElement("div", null,
-                selectedFiles.length > 0 ?
-                    React.createElement("div", { className: "mb-2" },
-                        React.createElement("label", null, "Valda dokument"),
-                        React.createElement("span", { className: "float-right" },
-                            React.createElement(CustomButton, { buttonType: ButtonType.deleteAlt, buttonText: "Rensa", onClick: clearFiles })))
-                    : "",
-                renderSelectedFiles,
-                fileRejections.length > 0 ? React.createElement("label", null, "Ej giltiga filer (kommer ej att laddas upp)") : "",
-                renderInvalidFiles))));
+                    multiple ? "Dra filer hit eller klicka här för att välja filer" : "Dra en fil hit eller klicka här",
+                    maxSizeBytes && ` (max ${formatBytes(maxSizeBytes)})`),
+                allowedFileTypes && React.createElement("p", null,
+                    "Till\u00E5tna filtyper: ",
+                    allowedFileTypes.join(", ")),
+                ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" && (React.createElement("div", { className: "text-danger mt-1" }, requiredValidationMessage || `${label} måste anges`))),
+            selectedFiles.length > 0 && (React.createElement("div", { className: "ms-2" },
+                React.createElement("div", { className: "d-flex justify-content-between align-items-center mb-1" },
+                    React.createElement("label", { className: "mb-0" }, "Valda dokument"),
+                    React.createElement(CustomButton, { buttonType: ButtonType.deleteAlt, buttonText: "Rensa", onClick: clearFiles })),
+                selectedFiles.map((file) => (React.createElement("input", { key: file.name, type: "text", className: "form-control form-control-sm mb-1", value: file.name, readOnly: true }))))))));
 };

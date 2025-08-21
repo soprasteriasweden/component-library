@@ -28,6 +28,7 @@ interface IModal extends IChildren {
     scrollable?: boolean;
     animate?: boolean;
     resetOnClose?: boolean;
+    hideCloseButton?: boolean;
 }
 
 export const Modal: React.FC<IModal> = ({
@@ -40,7 +41,8 @@ export const Modal: React.FC<IModal> = ({
     preventCloseOnOutsideClick = true,
     scrollable = false,
     animate = true,
-    resetOnClose = true
+    resetOnClose = true,
+    hideCloseButton = false
 }) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
     const bsModal = useRef<bootstrap.Modal | null>(null);
@@ -93,7 +95,7 @@ export const Modal: React.FC<IModal> = ({
                 <div className="modal-content" key={contentKey}>
                     <div className="modal-header">
                         <h4 className="modal-title" id={`${modalId}-label`}>{header}</h4>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                        {!hideCloseButton && <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />}
                     </div>
                     {children}
                 </div>

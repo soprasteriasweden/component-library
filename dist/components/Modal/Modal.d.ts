@@ -24,6 +24,7 @@ interface IModal extends IChildren {
     scrollable?: boolean;
     animate?: boolean;
     resetOnClose?: boolean;
+    hideCloseButton?: boolean;
 }
 export declare const Modal: React.FC<IModal>;
 export { ModalBody, ModalFooter };

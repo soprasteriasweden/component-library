@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.30
+* Added hideCloseButton property for Modal
+
 ## v2.0.29
 * Reset state on Modal when closing
 

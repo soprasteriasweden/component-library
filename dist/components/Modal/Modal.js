@@ -16,7 +16,7 @@ export var ModalSize;
     ModalSize["fullLg"] = "modal-fullscreen-lg-down";
     ModalSize["fullXl"] = "modal-fullscreen-xl-down";
 })(ModalSize || (ModalSize = {}));
-export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true, resetOnClose = true }) => {
+export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true, resetOnClose = true, hideCloseButton = false }) => {
     const modalRef = useRef(null);
     const bsModal = useRef(null);
     const [mounted, setMounted] = useState(false);
@@ -61,7 +61,7 @@ export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = 
             React.createElement("div", { className: "modal-content", key: contentKey },
                 React.createElement("div", { className: "modal-header" },
                     React.createElement("h4", { className: "modal-title", id: `${modalId}-label` }, header),
-                    React.createElement("button", { type: "button", className: "btn-close", "data-bs-dismiss": "modal", "aria-label": "Close" })),
+                    !hideCloseButton && React.createElement("button", { type: "button", className: "btn-close", "data-bs-dismiss": "modal", "aria-label": "Close" })),
                 children))), document.body);
 };
 export { ModalBody, ModalFooter };

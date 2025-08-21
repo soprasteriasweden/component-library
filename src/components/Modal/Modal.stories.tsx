@@ -14,12 +14,14 @@ const ModalExample = ({
     scrollable = false,
     preventCloseOnOutsideClick = true,
     content = "Innehåll...",
+    hideCloseButton = false,
 }: {
     modalId: string;
     modalSize: ModalSize;
     scrollable?: boolean;
     preventCloseOnOutsideClick?: boolean;
     content?: React.ReactNode;
+    hideCloseButton?: boolean
 }) => {
     const [isOpen, setIsOpen] = React.useState(false);
 
@@ -46,6 +48,7 @@ const ModalExample = ({
                 modalSize={modalSize}
                 scrollable={scrollable}
                 preventCloseOnOutsideClick={preventCloseOnOutsideClick}
+                hideCloseButton={hideCloseButton}
                 isOpen={isOpen}
                 onClose={handleClose}
             >
@@ -64,6 +67,10 @@ const ModalExample = ({
 
 export const ModalSmall = () => (
     <ModalExample modalId="modal-small" modalSize={ModalSize.small} />
+);
+
+export const ModalHideCloseButton = () => (
+    <ModalExample modalId="modal-small" modalSize={ModalSize.small} hideCloseButton />
 );
 
 export const ModalNormalPreventCloseOnOutsideClickFalse = () => (

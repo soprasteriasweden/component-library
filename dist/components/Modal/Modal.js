@@ -16,16 +16,22 @@ export var ModalSize;
     ModalSize["fullLg"] = "modal-fullscreen-lg-down";
     ModalSize["fullXl"] = "modal-fullscreen-xl-down";
 })(ModalSize || (ModalSize = {}));
-export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true, resetOnClose = true, hideCloseButton = false }) => {
+export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true, resetOnClose = true, hideCloseButton = false, }) => {
     const modalRef = useRef(null);
     const bsModal = useRef(null);
     const [mounted, setMounted] = useState(false);
     const onCloseRef = useRef(onClose);
-    useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+    useEffect(() => {
+        onCloseRef.current = onClose;
+    }, [onClose]);
     const resetOnCloseRef = useRef(resetOnClose);
-    useEffect(() => { resetOnCloseRef.current = resetOnClose; }, [resetOnClose]);
+    useEffect(() => {
+        resetOnCloseRef.current = resetOnClose;
+    }, [resetOnClose]);
     const [contentKey, setContentKey] = useState(0);
-    useEffect(() => { setMounted(true); }, []);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
     useEffect(() => {
         if (!mounted || !modalRef.current)
             return;
@@ -39,9 +45,15 @@ export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = 
             var _a;
             (_a = onCloseRef.current) === null || _a === void 0 ? void 0 : _a.call(onCloseRef);
             if (resetOnCloseRef.current)
-                setContentKey(k => k + 1);
+                setContentKey((k) => k + 1);
         };
         el.addEventListener("hidden.bs.modal", onHidden);
+        setTimeout(() => {
+            if (isOpen)
+                instance.show();
+            else
+                instance.hide();
+        }, 0);
         return () => {
             el.removeEventListener("hidden.bs.modal", onHidden);
             instance.dispose();
@@ -61,7 +73,7 @@ export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = 
             React.createElement("div", { className: "modal-content", key: contentKey },
                 React.createElement("div", { className: "modal-header" },
                     React.createElement("h4", { className: "modal-title", id: `${modalId}-label` }, header),
-                    !hideCloseButton && React.createElement("button", { type: "button", className: "btn-close", "data-bs-dismiss": "modal", "aria-label": "Close" })),
+                    !hideCloseButton && (React.createElement("button", { type: "button", className: "btn-close", "data-bs-dismiss": "modal", "aria-label": "Close" }))),
                 children))), document.body);
 };
 export { ModalBody, ModalFooter };

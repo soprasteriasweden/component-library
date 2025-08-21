@@ -42,24 +42,31 @@ export const Modal: React.FC<IModal> = ({
     scrollable = false,
     animate = true,
     resetOnClose = true,
-    hideCloseButton = false
+    hideCloseButton = false,
 }) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
     const bsModal = useRef<bootstrap.Modal | null>(null);
     const [mounted, setMounted] = useState(false);
 
     const onCloseRef = useRef(onClose);
-    useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+    useEffect(() => {
+        onCloseRef.current = onClose;
+    }, [onClose]);
 
     const resetOnCloseRef = useRef(resetOnClose);
-    useEffect(() => { resetOnCloseRef.current = resetOnClose; }, [resetOnClose]);
+    useEffect(() => {
+        resetOnCloseRef.current = resetOnClose;
+    }, [resetOnClose]);
 
     const [contentKey, setContentKey] = useState(0);
 
-    useEffect(() => { setMounted(true); }, []);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         if (!mounted || !modalRef.current) return;
+
         const el = modalRef.current;
         const instance = new bootstrap.Modal(el, {
             backdrop: preventCloseOnOutsideClick ? "static" : true,
@@ -69,9 +76,14 @@ export const Modal: React.FC<IModal> = ({
 
         const onHidden = () => {
             onCloseRef.current?.();
-            if (resetOnCloseRef.current) setContentKey(k => k + 1);
+            if (resetOnCloseRef.current) setContentKey((k) => k + 1);
         };
         el.addEventListener("hidden.bs.modal", onHidden);
+
+        setTimeout(() => {
+            if (isOpen) instance.show();
+            else instance.hide();
+        }, 0);
 
         return () => {
             el.removeEventListener("hidden.bs.modal", onHidden);
@@ -89,13 +101,31 @@ export const Modal: React.FC<IModal> = ({
     if (!mounted) return null;
 
     return createPortal(
-        <div className={`modal ${animate ? "fade" : ""}`} tabIndex={-1}
-            ref={modalRef} id={modalId} aria-labelledby={`${modalId}-label`} aria-hidden="true">
-            <div className={`modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""}`}>
+        <div
+            className={`modal ${animate ? "fade" : ""}`}
+            tabIndex={-1}
+            ref={modalRef}
+            id={modalId}
+            aria-labelledby={`${modalId}-label`}
+            aria-hidden="true"
+        >
+            <div
+                className={`modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""
+                    }`}
+            >
                 <div className="modal-content" key={contentKey}>
                     <div className="modal-header">
-                        <h4 className="modal-title" id={`${modalId}-label`}>{header}</h4>
-                        {!hideCloseButton && <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />}
+                        <h4 className="modal-title" id={`${modalId}-label`}>
+                            {header}
+                        </h4>
+                        {!hideCloseButton && (
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            />
+                        )}
                     </div>
                     {children}
                 </div>

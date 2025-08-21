@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.31
+* Show/hide bug in Modal
+
 ## v2.0.30
 * Added hideCloseButton property for Modal
 

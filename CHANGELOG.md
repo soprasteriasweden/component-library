@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.27
+* Added mounted gate to Modal
+
 ## v2.0.26
 * Refactored FileUpload, removed jQuery
 

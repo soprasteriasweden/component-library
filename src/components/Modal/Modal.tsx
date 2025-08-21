@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from "react";
+﻿import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import * as bootstrap from "bootstrap";
 import { IChildren } from "../../models/IChildren";
@@ -42,8 +42,18 @@ export const Modal: React.FC<IModal> = ({
 }) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
     const bsModal = useRef<bootstrap.Modal | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    const handleHidden = useCallback(() => {
+        onClose?.();
+    }, [onClose]);
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
         const el = modalRef.current;
         if (!el) return;
 
@@ -52,29 +62,25 @@ export const Modal: React.FC<IModal> = ({
             keyboard: true,
         });
 
-        el.addEventListener("hidden.bs.modal", () => {
-            onClose?.();
-        });
+        el.addEventListener("hidden.bs.modal", handleHidden);
 
         return () => {
-            el.removeEventListener("hidden.bs.modal", () => {
-                onClose?.();
-            });
+            el.removeEventListener("hidden.bs.modal", handleHidden);
             bsModal.current?.dispose();
             bsModal.current = null;
         };
-    }, []);
+    }, [mounted, preventCloseOnOutsideClick, handleHidden]);
 
     useEffect(() => {
-        const el = modalRef.current;
-        if (!el || !bsModal.current) return;
+        if (!mounted) return;
+        const instance = bsModal.current;
+        if (!instance) return;
 
-        if (isOpen) {
-            bsModal.current.show();
-        } else {
-            bsModal.current.hide();
-        }
-    }, [isOpen]);
+        if (isOpen) instance.show();
+        else instance.hide();
+    }, [isOpen, mounted]);
+
+    if (!mounted) return null;
 
     return createPortal(
         <div
@@ -85,11 +91,21 @@ export const Modal: React.FC<IModal> = ({
             aria-labelledby={`${modalId}-label`}
             aria-hidden="true"
         >
-            <div className={`modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""}`}>
+            <div
+                className={`modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""
+                    }`}
+            >
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h4 className="modal-title" id={`${modalId}-label`}>{header}</h4>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h4 className="modal-title" id={`${modalId}-label`}>
+                            {header}
+                        </h4>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        />
                     </div>
                     {children}
                 </div>

@@ -23,8 +23,15 @@ const ModalExample = ({
 }) => {
     const [isOpen, setIsOpen] = React.useState(false);
 
-    const handleOpen = () => setIsOpen(true);
-    const handleClose = () => setIsOpen(false);
+    const handleOpen = () => {
+        console.log("Open modal");
+        setIsOpen(true);
+    }
+
+    const handleClose = () => {
+        console.log("Close modal");
+        setIsOpen(false);
+    }
 
     return (
         <>
@@ -68,7 +75,9 @@ export const ModalNormalPreventCloseOnOutsideClickFalse = () => (
 );
 
 export const ModalLarge = () => (
-    <ModalExample modalId="modal-large" modalSize={ModalSize.large} />
+    <ModalExample modalId="modal-large" modalSize={ModalSize.large} content={
+        <><input type="text" className="form-control form-control-sm"></input></>
+        }/>
 );
 
 export const ModalFullscreen = () => (

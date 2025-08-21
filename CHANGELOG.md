@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.29
+* Reset state on Modal when closing
+
 ## v2.0.28
 * Added mounted gate to Modal
 

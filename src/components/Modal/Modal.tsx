@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useRef, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import * as bootstrap from "bootstrap";
 import { IChildren } from "../../models/IChildren";
@@ -15,7 +15,7 @@ export enum ModalSize {
     fullSm = "modal-fullscreen-sm-down",
     fullMd = "modal-fullscreen-md-down",
     fullLg = "modal-fullscreen-lg-down",
-    fullXl = "modal-fullscreen-xl-down"
+    fullXl = "modal-fullscreen-xl-down",
 }
 
 interface IModal extends IChildren {
@@ -27,6 +27,7 @@ interface IModal extends IChildren {
     preventCloseOnOutsideClick?: boolean;
     scrollable?: boolean;
     animate?: boolean;
+    resetOnClose?: boolean;
 }
 
 export const Modal: React.FC<IModal> = ({
@@ -38,74 +39,61 @@ export const Modal: React.FC<IModal> = ({
     modalSize = ModalSize.normal,
     preventCloseOnOutsideClick = true,
     scrollable = false,
-    animate = true
+    animate = true,
+    resetOnClose = true
 }) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
     const bsModal = useRef<bootstrap.Modal | null>(null);
     const [mounted, setMounted] = useState(false);
 
-    const handleHidden = useCallback(() => {
-        onClose?.();
-    }, [onClose]);
+    const onCloseRef = useRef(onClose);
+    useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+
+    const resetOnCloseRef = useRef(resetOnClose);
+    useEffect(() => { resetOnCloseRef.current = resetOnClose; }, [resetOnClose]);
+
+    const [contentKey, setContentKey] = useState(0);
+
+    useEffect(() => { setMounted(true); }, []);
 
     useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    useEffect(() => {
-        if (!mounted) return;
+        if (!mounted || !modalRef.current) return;
         const el = modalRef.current;
-        if (!el) return;
-
-        bsModal.current = new bootstrap.Modal(el, {
+        const instance = new bootstrap.Modal(el, {
             backdrop: preventCloseOnOutsideClick ? "static" : true,
             keyboard: true,
         });
+        bsModal.current = instance;
 
-        el.addEventListener("hidden.bs.modal", handleHidden);
+        const onHidden = () => {
+            onCloseRef.current?.();
+            if (resetOnCloseRef.current) setContentKey(k => k + 1);
+        };
+        el.addEventListener("hidden.bs.modal", onHidden);
 
         return () => {
-            el.removeEventListener("hidden.bs.modal", handleHidden);
-            bsModal.current?.dispose();
+            el.removeEventListener("hidden.bs.modal", onHidden);
+            instance.dispose();
             bsModal.current = null;
         };
-    }, [mounted, preventCloseOnOutsideClick, handleHidden]);
+    }, [mounted, preventCloseOnOutsideClick]);
 
     useEffect(() => {
-        if (!mounted) return;
         const instance = bsModal.current;
         if (!instance) return;
-
-        if (isOpen) instance.show();
-        else instance.hide();
-    }, [isOpen, mounted]);
+        isOpen ? instance.show() : instance.hide();
+    }, [isOpen]);
 
     if (!mounted) return null;
 
     return createPortal(
-        <div
-            className={`modal ${animate ? "fade" : ""}`}
-            tabIndex={-1}
-            ref={modalRef}
-            id={modalId}
-            aria-labelledby={`${modalId}-label`}
-            aria-hidden="true"
-        >
-            <div
-                className={`modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""
-                    }`}
-            >
-                <div className="modal-content">
+        <div className={`modal ${animate ? "fade" : ""}`} tabIndex={-1}
+            ref={modalRef} id={modalId} aria-labelledby={`${modalId}-label`} aria-hidden="true">
+            <div className={`modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""}`}>
+                <div className="modal-content" key={contentKey}>
                     <div className="modal-header">
-                        <h4 className="modal-title" id={`${modalId}-label`}>
-                            {header}
-                        </h4>
-                        <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        />
+                        <h4 className="modal-title" id={`${modalId}-label`}>{header}</h4>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                     </div>
                     {children}
                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import * as bootstrap from "bootstrap";
 import { ModalBody } from "./ModalBody";
@@ -16,43 +16,49 @@ export var ModalSize;
     ModalSize["fullLg"] = "modal-fullscreen-lg-down";
     ModalSize["fullXl"] = "modal-fullscreen-xl-down";
 })(ModalSize || (ModalSize = {}));
-export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true }) => {
+export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true, resetOnClose = true }) => {
     const modalRef = useRef(null);
     const bsModal = useRef(null);
+    const [mounted, setMounted] = useState(false);
+    const onCloseRef = useRef(onClose);
+    useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+    const resetOnCloseRef = useRef(resetOnClose);
+    useEffect(() => { resetOnCloseRef.current = resetOnClose; }, [resetOnClose]);
+    const [contentKey, setContentKey] = useState(0);
+    useEffect(() => { setMounted(true); }, []);
     useEffect(() => {
-        const el = modalRef.current;
-        if (!el)
+        if (!mounted || !modalRef.current)
             return;
-        bsModal.current = new bootstrap.Modal(el, {
+        const el = modalRef.current;
+        const instance = new bootstrap.Modal(el, {
             backdrop: preventCloseOnOutsideClick ? "static" : true,
             keyboard: true,
         });
-        el.addEventListener("hidden.bs.modal", () => {
-            onClose === null || onClose === void 0 ? void 0 : onClose();
-        });
-        return () => {
+        bsModal.current = instance;
+        const onHidden = () => {
             var _a;
-            el.removeEventListener("hidden.bs.modal", () => {
-                onClose === null || onClose === void 0 ? void 0 : onClose();
-            });
-            (_a = bsModal.current) === null || _a === void 0 ? void 0 : _a.dispose();
+            (_a = onCloseRef.current) === null || _a === void 0 ? void 0 : _a.call(onCloseRef);
+            if (resetOnCloseRef.current)
+                setContentKey(k => k + 1);
+        };
+        el.addEventListener("hidden.bs.modal", onHidden);
+        return () => {
+            el.removeEventListener("hidden.bs.modal", onHidden);
+            instance.dispose();
             bsModal.current = null;
         };
-    }, []);
+    }, [mounted, preventCloseOnOutsideClick]);
     useEffect(() => {
-        const el = modalRef.current;
-        if (!el || !bsModal.current)
+        const instance = bsModal.current;
+        if (!instance)
             return;
-        if (isOpen) {
-            bsModal.current.show();
-        }
-        else {
-            bsModal.current.hide();
-        }
+        isOpen ? instance.show() : instance.hide();
     }, [isOpen]);
+    if (!mounted)
+        return null;
     return createPortal(React.createElement("div", { className: `modal ${animate ? "fade" : ""}`, tabIndex: -1, ref: modalRef, id: modalId, "aria-labelledby": `${modalId}-label`, "aria-hidden": "true" },
         React.createElement("div", { className: `modal-dialog modal-dialog-centered ${modalSize} ${scrollable ? "modal-dialog-scrollable" : ""}` },
-            React.createElement("div", { className: "modal-content" },
+            React.createElement("div", { className: "modal-content", key: contentKey },
                 React.createElement("div", { className: "modal-header" },
                     React.createElement("h4", { className: "modal-title", id: `${modalId}-label` }, header),
                     React.createElement("button", { type: "button", className: "btn-close", "data-bs-dismiss": "modal", "aria-label": "Close" })),

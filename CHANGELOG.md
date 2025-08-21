@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.27
+* Added "disableDropzoneOnSelect" property to FileUpload to disable the dropzone when a single file has been selected
+
 ## v2.0.26
 * Refactored FileUpload, removed jQuery
 

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { CustomButton, ButtonType } from '../../../CustomButton/CustomButton';
 import "../../../../assets/styles/FileUpload.style.scss";
-export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles, maxFiles }) => {
+export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles, maxFiles, disableDropzoneOnSelect = false }) => {
     var _a;
     const { formState: { errors }, register, setValue, unregister } = useFormContext();
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -16,7 +16,7 @@ export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedF
     const { getRootProps, getInputProps, acceptedFiles, fileRejections } = useDropzone({
         accept: allowedFileTypes === null || allowedFileTypes === void 0 ? void 0 : allowedFileTypes.reduce((acc, type) => (Object.assign(Object.assign({}, acc), { [type]: [] })), {}),
         multiple,
-        disabled,
+        disabled: disabled || (disableDropzoneOnSelect && !multiple && selectedFiles.length > 0),
         maxSize: maxSizeBytes,
         maxFiles
     });
@@ -92,7 +92,7 @@ export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedF
             ":",
             required ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? `col-${inputCol}` : "" },
-            React.createElement("div", Object.assign({ className: "file-upload" }, getRootProps()),
+            React.createElement("div", Object.assign({ className: `file-upload ${disabled || (!multiple && selectedFiles.length > 0) ? 'disabled' : ''}` }, getRootProps()),
                 React.createElement("input", Object.assign({}, getInputProps(), { id: name, name: name })),
                 React.createElement("p", null,
                     multiple ? "Dra filer hit eller klicka här för att välja filer" : "Dra en fil hit eller klicka här",

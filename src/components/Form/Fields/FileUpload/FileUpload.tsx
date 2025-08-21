@@ -24,7 +24,8 @@ export const FileUpload: React.FC<IFileUpload> = ({
   inputCol = 8,
   documentType,
   numOfFiles,
-  maxFiles
+  maxFiles, 
+  disableDropzoneOnSelect = false
 }) => {
   const {
     formState: { errors },
@@ -45,7 +46,7 @@ export const FileUpload: React.FC<IFileUpload> = ({
   } = useDropzone({
     accept: allowedFileTypes?.reduce((acc, type) => ({ ...acc, [type]: [] }), {}),
     multiple,
-    disabled,
+    disabled: disabled || (disableDropzoneOnSelect && !multiple && selectedFiles.length > 0),
     maxSize: maxSizeBytes,
     maxFiles
   });
@@ -161,7 +162,7 @@ export const FileUpload: React.FC<IFileUpload> = ({
         {label}:{required ? "*" : ""}
       </label>
       <div className={inlineLabel ? `col-${inputCol}` : ""}>
-        <div className="file-upload" {...getRootProps()}>
+        <div className={`file-upload ${disabled || (!multiple && selectedFiles.length > 0) ? 'disabled' : ''}`}{...getRootProps()}>
           <input
             {...getInputProps()}
             id={name}

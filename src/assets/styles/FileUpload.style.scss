@@ -16,3 +16,6 @@
     text-align:center;
     cursor:pointer;
 }
+.file-upload.disabled {
+  cursor: not-allowed; 
+}

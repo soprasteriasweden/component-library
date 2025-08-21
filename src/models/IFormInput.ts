@@ -151,6 +151,7 @@ export interface IFileUpload extends IFormInputBaseWithValidation, IFormInputVal
     documentType?: IDocumentType;
     numOfFiles?: (num: number) => void;
     maxFiles?: number;
+    disableDropzoneOnSelect?: boolean
 }
 
 export interface IDocumentType {

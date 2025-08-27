@@ -74,7 +74,14 @@ export const Modal: React.FC<IModal> = ({
         });
         bsModal.current = instance;
 
+        const cleanupBody = () => {
+            document.body.classList.remove("modal-open");
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+        };
+
         const onHidden = () => {
+            cleanupBody();
             onCloseRef.current?.();
             if (resetOnCloseRef.current) setContentKey((k) => k + 1);
         };
@@ -89,6 +96,7 @@ export const Modal: React.FC<IModal> = ({
             el.removeEventListener("hidden.bs.modal", onHidden);
             instance.dispose();
             bsModal.current = null;
+            cleanupBody();
         };
     }, [mounted, preventCloseOnOutsideClick]);
 
@@ -118,7 +126,7 @@ export const Modal: React.FC<IModal> = ({
                         <h4 className="modal-title" id={`${modalId}-label`}>
                             {header}
                         </h4>
-                        {!hideCloseButton && (
+                        {!hideCloseButton && ( 
                             <button
                                 type="button"
                                 className="btn-close"

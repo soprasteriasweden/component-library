@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.32
+* Bugfix: Restored page scrolling after closing modal
+
 ## v2.0.31
 * Show/hide bug in Modal
 

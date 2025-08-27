@@ -41,8 +41,14 @@ export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = 
             keyboard: true,
         });
         bsModal.current = instance;
+        const cleanupBody = () => {
+            document.body.classList.remove("modal-open");
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+        };
         const onHidden = () => {
             var _a;
+            cleanupBody();
             (_a = onCloseRef.current) === null || _a === void 0 ? void 0 : _a.call(onCloseRef);
             if (resetOnCloseRef.current)
                 setContentKey((k) => k + 1);
@@ -58,6 +64,7 @@ export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = 
             el.removeEventListener("hidden.bs.modal", onHidden);
             instance.dispose();
             bsModal.current = null;
+            cleanupBody();
         };
     }, [mounted, preventCloseOnOutsideClick]);
     useEffect(() => {

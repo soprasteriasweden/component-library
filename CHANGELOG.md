@@ -1,4 +1,7 @@
 # Changelog
+## v.1.0.74
+* Added button type primary and primaryAlt
+
 ## v.1.0.71
 * Readonly property on ZipCodeInput and PhoneNumberInput
 

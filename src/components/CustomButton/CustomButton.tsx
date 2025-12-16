@@ -15,7 +15,9 @@ export enum ButtonType {
     success = "btn-success",
     warning = "btn-warning",
     delete = "btn-danger",
-    deleteAlt = "btn-danger "
+    deleteAlt = "btn-danger ",
+    primary = "btn-primary",
+    primaryAlt = "btn-primary"
 }
 
 export interface ICustomButton {
@@ -35,7 +37,7 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
     }, [])
 
     const renderIcon = () => {
-        if (buttonType === ButtonType.create) {
+        if (buttonType === ButtonType.create || ButtonType.primary) {
             return <span> <FontAwesomeIcon icon={faPlus} /> </span>
         }
         else if (buttonType === ButtonType.edit) {

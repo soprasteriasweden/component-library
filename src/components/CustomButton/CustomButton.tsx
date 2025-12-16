@@ -37,7 +37,7 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
     }, [])
 
     const renderIcon = () => {
-        if (buttonType === ButtonType.create || ButtonType.primary) {
+        if (buttonType === ButtonType.create || buttonType === ButtonType.primary) {
             return <span> <FontAwesomeIcon icon={faPlus} /> </span>
         }
         else if (buttonType === ButtonType.edit) {

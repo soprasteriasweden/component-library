@@ -1,5 +1,5 @@
 # Changelog
-## v.1.0.74
+## v.1.0.75
 * Added button type primary and primaryAlt
 
 ## v.1.0.71

@@ -12,7 +12,9 @@ export declare enum ButtonType {
     success = "btn-success",
     warning = "btn-warning",
     delete = "btn-danger",
-    deleteAlt = "btn-danger "
+    deleteAlt = "btn-danger ",
+    primary = "btn-primary",
+    primaryAlt = "btn-primary"
 }
 export interface ICustomButton {
     buttonType: ButtonType;

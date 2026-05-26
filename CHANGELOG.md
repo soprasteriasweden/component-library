@@ -1,4 +1,8 @@
 # Changelog
+
+## v.1.0.76
+* Added onPrimaryDateChange and onSecondaryDateChange events for DatePickerRange
+
 ## v.1.0.75
 * Added button type primary and primaryAlt
 

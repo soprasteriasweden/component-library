@@ -56,3 +56,16 @@ DateRangeWithMinValue.args = {
     tooltipDescription: "Select a date range",
     min: new Date()
 };
+export const DateRangeWithOnChange = Template.bind({});
+DateRangeWithOnChange.args = {
+    name: 'startDate',
+    nameSecondary: 'endDate',
+    label: 'Date Range with onChange',
+    inlineLabel: true,
+    requiredFrom: true,
+    requiredTo: true,
+    value: new Date(),
+    tooltipDescription: "Select a date range",
+    onPrimaryDateChange: (myDate) => { console.log("Primary selected date", myDate); },
+    onSecondaryDateChange: (myDate) => { console.log("Secondary selected date", myDate); }
+};

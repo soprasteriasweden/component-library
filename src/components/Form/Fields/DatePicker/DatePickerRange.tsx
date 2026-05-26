@@ -10,7 +10,7 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { getNestedObjectValue } from "../../../../utils/utils";
 registerLocale('sv-se', { ...svSE, options: { ...svSE.options, weekStartsOn: 1 } });
 
-export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
+export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, onPrimaryDateChange, onSecondaryDateChange, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
 
     const [fromDate, setFromDate] = React.useState<Date | undefined | null>(value);
     const [toDate, setToDate] = React.useState<Date | undefined | null>(valueSecondary);
@@ -69,8 +69,10 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 onChange={date => {
                                     setFromDate(date);
                                     setValue(name, date?.toLocaleDateString("sv-se"));
-                                }
-                                }
+                                    if (onPrimaryDateChange) {
+                                        onPrimaryDateChange(date);
+                                    }
+                                }}
                                 dateFormat="yyyy-MM-dd"
                                 className={"form-control form-control-sm " + (disabledFrom ? "disabled " : "")}
                                 disabled={disabledFrom}
@@ -94,8 +96,10 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 onChange={date => {
                                     setToDate(date);
                                     setValue(nameSecondary, date?.toLocaleDateString("sv-se"));
-                                }
-                                }
+                                    if (onSecondaryDateChange) {
+                                        onSecondaryDateChange(date);
+                                    }
+                                }}
                                 dateFormat="yyyy-MM-dd"
                                 className={"form-control form-control-sm " + (disabledTo ? "disabled " : "")}
                                 disabled={disabledTo}

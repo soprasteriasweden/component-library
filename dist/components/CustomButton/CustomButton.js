@@ -38,6 +38,8 @@ export var ButtonType;
     ButtonType["warning"] = "btn-warning";
     ButtonType["delete"] = "btn-danger";
     ButtonType["deleteAlt"] = "btn-danger ";
+    ButtonType["primary"] = "btn-primary";
+    ButtonType["primaryAlt"] = "btn-primary";
 })(ButtonType || (ButtonType = {}));
 export var CustomButton = function (props) {
     var buttonType = props.buttonType, buttonText = props.buttonText, isLoading = props.isLoading, children = props.children, disabled = props.disabled, title = props.title, defaultProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title"]);
@@ -47,7 +49,7 @@ export var CustomButton = function (props) {
         myWindow.$("#".concat(tooltipId)).tooltip();
     }, []);
     var renderIcon = function () {
-        if (buttonType === ButtonType.create) {
+        if (buttonType === ButtonType.create || buttonType === ButtonType.primary) {
             return React.createElement("span", null,
                 " ",
                 React.createElement(FontAwesomeIcon, { icon: faPlus }),

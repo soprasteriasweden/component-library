@@ -1,8 +1,29 @@
-.date-connector {
-    margin-top: 4px;
-    text-align: center;
+.date-picker-range__wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
 }
 
-.date-picker-range__wrapper {
+.date-picker-range__date {
+    flex: 1 1 0;
+    min-width: 0;
+}
 
+    .date-picker-range__date .react-datepicker-wrapper {
+        width: 100%;
+    }
+
+    .date-picker-range__date .react-datepicker__input-container {
+        width: 100%;
+    }
+
+    .date-picker-range__date input {
+        width: 100%;
+    }
+
+.date-connector {
+    flex: 0 0 auto;
+    align-self: center;
+    margin: 0 0.5rem;
 }

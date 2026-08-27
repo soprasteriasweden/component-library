@@ -55,3 +55,10 @@ DateRangeWithMinValue.args = {
     tooltipDescription: "Select a date range",
     min: new Date()
 };
+export const DateRangeWithoutTooltip = Template.bind({});
+DateRangeWithoutTooltip.args = {
+    name: 'startDate',
+    nameSecondary: 'endDate',
+    label: 'Date Range without tooltip',
+    inlineLabel: true
+};

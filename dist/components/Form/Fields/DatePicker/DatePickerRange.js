@@ -56,15 +56,15 @@ export const DatePickerRange = ({ name, nameSecondary, label, className, inlineL
             requiredFrom || requiredTo ? "*" : ""),
         React.createElement("div", { className: inlineLabel ? `col-${inputCol}` : "" },
             React.createElement("div", { className: "input-group" },
-                React.createElement("div", { className: "row date-picker-range__wrapper" },
-                    React.createElement("div", { className: "col" },
+                React.createElement("div", { className: "date-picker-range__wrapper" },
+                    React.createElement("div", { className: "date-picker-range__date" },
                         React.createElement(DatePicker, { name: name, id: name, selected: fromDate, onChange: date => {
                                 setFromDate(date);
                                 setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));
                             }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabledFrom ? "disabled " : ""), disabled: disabledFrom, minDate: min, maxDate: toDate === null ? undefined : toDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: (e) => e.preventDefault(), isClearable: !disabledFrom }),
                         React.createElement("span", { className: "text-danger" }, errorType === "required" && "Välj ett datum")),
                     React.createElement("span", { className: "date-connector" }, "-"),
-                    React.createElement("div", { className: "col" },
+                    React.createElement("div", { className: "date-picker-range__date" },
                         React.createElement(DatePicker, { name: nameSecondary, id: nameSecondary, selected: toDate, onChange: date => {
                                 setToDate(date);
                                 setValue(nameSecondary, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"));

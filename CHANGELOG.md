@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.33
+* Bugfix: Fixed DatePickerRange layout
+
 ## v2.0.32
 * Bugfix: Restored page scrolling after closing modal
 

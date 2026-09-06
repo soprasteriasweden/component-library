@@ -16,7 +16,7 @@ export var ModalSize;
     ModalSize["fullLg"] = "modal-fullscreen-lg-down";
     ModalSize["fullXl"] = "modal-fullscreen-xl-down";
 })(ModalSize || (ModalSize = {}));
-export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true, resetOnClose = true, hideCloseButton = false, }) => {
+export const Modal = ({ header, children, modalId, isOpen, onClose, modalSize = ModalSize.normal, preventCloseOnOutsideClick = true, scrollable = false, animate = true, resetOnClose = true, hideCloseButton = true }) => {
     const modalRef = useRef(null);
     const bsModal = useRef(null);
     const [mounted, setMounted] = useState(false);

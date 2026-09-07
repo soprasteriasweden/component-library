@@ -14,7 +14,7 @@ const ModalExample = ({
     scrollable = false,
     preventCloseOnOutsideClick = true,
     content = "Innehåll...",
-    hideCloseButton = false,
+    hideCloseButton = true,
 }: {
     modalId: string;
     modalSize: ModalSize;

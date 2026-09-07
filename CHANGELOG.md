@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.34
+* Bugfix: Added hideCloseButton prop support to Modal
+
 ## v2.0.33
 * Bugfix: Fixed DatePickerRange layout
 

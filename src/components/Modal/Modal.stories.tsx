@@ -69,8 +69,8 @@ export const ModalSmall = () => (
     <ModalExample modalId="modal-small" modalSize={ModalSize.small} />
 );
 
-export const ModalHideCloseButton = () => (
-    <ModalExample modalId="modal-small" modalSize={ModalSize.small} hideCloseButton />
+export const ModalShowCloseButton = () => (
+    <ModalExample modalId="modal-small" modalSize={ModalSize.small} hideCloseButton={false} />
 );
 
 export const ModalNormalPreventCloseOnOutsideClickFalse = () => (

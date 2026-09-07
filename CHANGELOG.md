@@ -1,7 +1,7 @@
 # Changelog
 
 ## v2.0.34
-* Bugfix: Added hideCloseButton prop support to Modal
+* Changed default value of `hideCloseButton` to `true` so the close (x) button is now hidden by default in Modal
 
 ## v2.0.33
 * Bugfix: Fixed DatePickerRange layout

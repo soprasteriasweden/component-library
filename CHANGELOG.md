@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.35
+* Hides annoying 'Laddar...' for SpinnerWrapper.
+* Fixed bug in SpinnerWrapper that caused it to always show the spinner with SpinnerSize.large
+* Added stories for both SpinnerWrapper and InputSpinnerWrapper
+
 ## v2.0.34
 * Changed default value of `hideCloseButton` to `true` so the close (x) button is now hidden by default in Modal
 

@@ -15,12 +15,12 @@ interface ISpinnerWrapper {
 export const SpinnerWrapper: React.FunctionComponent<ISpinnerWrapper> = ({ isLoading, spinnerSize = SpinnerSize.large, children }) => {
 
     return (
-        <div className={`spinner-wrapper spinner-wrapper-lg ${isLoading ? "loading" : ""}`}>
+        <div className={`spinner-wrapper spinner-wrapper-${spinnerSize} ${isLoading ? "loading" : ""}`}>
             {
                 isLoading ?
                     <div className={`spinner-container d-flex justify-content-center`}>
                         <div className={`spinner-border spinner-border-${spinnerSize} align-self-center`} role="status">
-                            <span className="sr-only">Laddar...</span>
+                            <span className="visually-hidden">Laddar...</span>
                         </div>
                     </div>
                     : null

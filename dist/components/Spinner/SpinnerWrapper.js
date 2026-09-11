@@ -6,11 +6,11 @@ export var SpinnerSize;
     SpinnerSize["small"] = "sm";
 })(SpinnerSize || (SpinnerSize = {}));
 export const SpinnerWrapper = ({ isLoading, spinnerSize = SpinnerSize.large, children }) => {
-    return (React.createElement("div", { className: `spinner-wrapper spinner-wrapper-lg ${isLoading ? "loading" : ""}` },
+    return (React.createElement("div", { className: `spinner-wrapper spinner-wrapper-${spinnerSize} ${isLoading ? "loading" : ""}` },
         isLoading ?
             React.createElement("div", { className: `spinner-container d-flex justify-content-center` },
                 React.createElement("div", { className: `spinner-border spinner-border-${spinnerSize} align-self-center`, role: "status" },
-                    React.createElement("span", { className: "sr-only" }, "Laddar...")))
+                    React.createElement("span", { className: "visually-hidden" }, "Laddar...")))
             : null,
         React.createElement("div", { className: "spinner-content" }, children)));
 };

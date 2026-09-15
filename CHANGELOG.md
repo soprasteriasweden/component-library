@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.36
+* Added component HyperLink for links with optional icon
+* Added stories for HyperLink and FormLink
+
 ## v2.0.35
 * Hides annoying 'Laddar...' for SpinnerWrapper.
 * Fixed bug in SpinnerWrapper that caused it to always show the spinner with SpinnerSize.large

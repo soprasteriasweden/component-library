@@ -1,0 +1,18 @@
+.hyper-link {
+    color: black;
+    text-decoration: underline;
+}
+
+.hyper-link__icon {
+    margin-right: 0.25rem;
+}
+
+.hyper-link:hover {
+    color: black;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.hyper-link:focus {
+    outline: auto;
+}

@@ -17,6 +17,8 @@ export const Edit = () => <CustomButton buttonText="Edit" buttonType={ButtonType
 export const EditAlt = () => <CustomButton buttonText="Edit" buttonType={ButtonType.editAlt} />;
 export const Excel = () => <CustomButton buttonText="Excel" buttonType={ButtonType.excel} />;
 export const Pdf = () => <CustomButton buttonText="Pdf" buttonType={ButtonType.pdf} />;
+export const Search = () => <CustomButton buttonText="Search" buttonType={ButtonType.search} />;
+export const SearchAlt = () => <CustomButton buttonText="Search" buttonType={ButtonType.searchAlt} />;
 export const Success = () => <CustomButton buttonText="Success" buttonType={ButtonType.success} />;
 export const Warning = () => <CustomButton buttonText="Warning" buttonType={ButtonType.warning} />;
 export const GeneralLoading = () => <CustomButton buttonText="General loading" buttonType={ButtonType.warning} isLoading />;

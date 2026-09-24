@@ -11,7 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import * as React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faDownload, faFilePdf, faFileExcel, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen, faDownload, faFilePdf, faFileExcel, faTrash, faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from "bootstrap";
 export var ButtonType;
 (function (ButtonType) {
@@ -24,13 +24,15 @@ export var ButtonType;
     ButtonType["pdf"] = "btn-primary btn-pdf";
     ButtonType["excel"] = "btn-primary btn-excel";
     ButtonType["general"] = "btn-outline-dark";
+    ButtonType["search"] = "btn-secondary btn-search";
+    ButtonType["searchAlt"] = "btn-outline-secondary btn-search-alt";
     ButtonType["success"] = "btn-success";
     ButtonType["warning"] = "btn-warning";
     ButtonType["delete"] = "btn-danger";
     ButtonType["deleteAlt"] = "btn-outline-danger";
 })(ButtonType || (ButtonType = {}));
 export const CustomButton = (props) => {
-    const { buttonType, buttonText, isLoading, children, disabled, title = "" } = props, buttonProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title"]);
+    const { buttonType, buttonText, isLoading, children, disabled, title = "", type = "button" } = props, buttonProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title", "type"]);
     const tooltipRef = React.useRef(null);
     React.useEffect(() => {
         let tooltip;
@@ -53,7 +55,9 @@ export const CustomButton = (props) => {
         [ButtonType.pdf]: React.createElement(FontAwesomeIcon, { icon: faFilePdf }),
         [ButtonType.excel]: React.createElement(FontAwesomeIcon, { icon: faFileExcel }),
         [ButtonType.delete]: React.createElement(FontAwesomeIcon, { icon: faTrash }),
-        [ButtonType.deleteAlt]: React.createElement(FontAwesomeIcon, { icon: faTrash })
+        [ButtonType.deleteAlt]: React.createElement(FontAwesomeIcon, { icon: faTrash }),
+        [ButtonType.search]: React.createElement(FontAwesomeIcon, { icon: faSearch }),
+        [ButtonType.searchAlt]: React.createElement(FontAwesomeIcon, { icon: faSearch })
     };
     const renderIcon = (buttonType) => {
         return iconMap[buttonType] || null;
@@ -62,10 +66,11 @@ export const CustomButton = (props) => {
         [ButtonType.editAlt]: "Ändra",
         [ButtonType.delete]: "Ta bort",
         [ButtonType.credit]: "Kreditera",
+        [ButtonType.search]: "Sök",
     };
     const resolvedButtonText = buttonText || defaultTextMap[buttonType] || "";
     return (React.createElement("span", { ref: tooltipRef, className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, "data-bs-toggle": "tooltip", "data-bs-placement": "right" },
-        React.createElement("button", Object.assign({}, buttonProps, { type: "button", className: `btn btn-sm ${buttonType}`, disabled: isLoading || disabled }),
+        React.createElement("button", Object.assign({}, buttonProps, { type: type === "submit" || type === "reset" || type === "button" ? type : "button", className: `btn btn-sm ${buttonType}`, disabled: isLoading || disabled }),
             isLoading && React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" }),
             renderIcon(buttonType),
             " ",

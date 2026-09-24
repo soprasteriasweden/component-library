@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faDownload, faFilePdf, faFileExcel, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen, faDownload, faFilePdf, faFileExcel, faTrash, faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from "bootstrap";
 
 export enum ButtonType {
@@ -13,21 +13,23 @@ export enum ButtonType {
     pdf = "btn-primary btn-pdf",
     excel = "btn-primary btn-excel",
     general = "btn-outline-dark",
+    search = "btn-secondary btn-search",
+    searchAlt = "btn-outline-secondary btn-search-alt",
     success = "btn-success",
     warning = "btn-warning",
     delete = "btn-danger",
     deleteAlt = "btn-outline-danger"
 }
 
-export interface ICustomButton {
+export interface ICustomButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     buttonType: ButtonType;
-    buttonText: string;
+    buttonText?: string;
     isLoading?: boolean;
 }
 
-export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLProps<HTMLButtonElement>> = (props) => {
+export const CustomButton: React.FunctionComponent<ICustomButton> = (props) => {
 
-    const { buttonType, buttonText, isLoading, children, disabled, title = "", ...buttonProps } = props;
+    const { buttonType, buttonText, isLoading, children, disabled, title = "", type = "button", ...buttonProps } = props;
     const tooltipRef = React.useRef<HTMLSpanElement>(null);
 
     React.useEffect(() => {
@@ -54,7 +56,9 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         [ButtonType.pdf]: <FontAwesomeIcon icon={faFilePdf} />,
         [ButtonType.excel]: <FontAwesomeIcon icon={faFileExcel} />,
         [ButtonType.delete]: <FontAwesomeIcon icon={faTrash} />,
-        [ButtonType.deleteAlt]: <FontAwesomeIcon icon={faTrash} />
+        [ButtonType.deleteAlt]: <FontAwesomeIcon icon={faTrash} />,
+        [ButtonType.search]: <FontAwesomeIcon icon={faSearch} />,
+        [ButtonType.searchAlt]: <FontAwesomeIcon icon={faSearch} />
     };
 
     const renderIcon = (buttonType: ButtonType) => {
@@ -65,6 +69,7 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         [ButtonType.editAlt]: "Ändra",
         [ButtonType.delete]: "Ta bort",
         [ButtonType.credit]: "Kreditera",
+        [ButtonType.search]: "Sök",
     };
 
     const resolvedButtonText = buttonText || defaultTextMap[buttonType] || "";
@@ -78,7 +83,7 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         >
             <button
                 {...buttonProps}
-                type="button"
+                type={type === "submit" || type === "reset" || type === "button" ? type : "button"}
                 className={`btn btn-sm ${buttonType}`}
                 disabled={isLoading || disabled}
             >

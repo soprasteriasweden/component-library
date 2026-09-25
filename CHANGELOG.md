@@ -1,9 +1,9 @@
 # Changelog
 
 ## v2.0.37
-* Added `ButtonType.search` and `ButtonType.searchAlt` to CustomButton with a search icon and outlined secondary style
-* Allowed `type="submit"` to be passed to CustomButton
-* Added story for Search CustomButton
+* Added a search CustomSubmitButton using `btn-outline-secondary btn-search` with a search icon
+* Added Storybook stories for CustomSubmitButton, with default, alternative, and search
+* Organized CustomSubmitButton in its own component folder and updated the imports
 
 ## v2.0.36
 * Added component HyperLink for links with optional icon

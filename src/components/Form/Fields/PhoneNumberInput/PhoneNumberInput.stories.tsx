@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { PhoneNumberInput } from './PhoneNumberInput';
 import { Form } from '../../../Form/Form';
 import { IPhoneNumberInput } from '../../../../models/IFormInput';
-import { CustomSubmitButton } from '../../CustomSubmitButton'
+import { CustomSubmitButton } from '../../CustomSubmitButton/CustomSubmitButton'
 
 export default {
     title: 'Form/Fields/PhoneNumberInput',

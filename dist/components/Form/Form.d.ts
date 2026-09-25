@@ -13,7 +13,7 @@ import { TextInput } from "./Fields/TextInput/TextInput";
 import { LinkArray } from "./Fields/LinkArray/LinkArray";
 import { HiddenInput } from "./Fields/HiddenInput/HiddenInput";
 import { RadioButton } from "./Fields/RadioButton/RadioButton";
-import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton";
+import { CustomSubmitButton, CustomSubmitButtonType } from "./CustomSubmitButton/CustomSubmitButton";
 import { ClearFormButton } from "./ClearFormButton";
 import { FormLink } from "./Fields/FormLink/FormLink";
 import { TooltipItem } from "./Fields/TooltipItem/TooltipItem";

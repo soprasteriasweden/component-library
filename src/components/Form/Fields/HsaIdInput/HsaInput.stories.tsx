@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { HsaIdInput } from './HsaIdInput';
 import { Form } from '../../../Form/Form';
 import { IHsaIdInput } from '../../../../models/IFormInput';
-import { CustomSubmitButton } from '../../CustomSubmitButton'
+import { CustomSubmitButton } from '../../CustomSubmitButton/CustomSubmitButton'
 
 export default {
     title: 'Form/Fields/HsaIdInput',

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { NameInput } from './NameInput';
 import { Form } from '../../../Form/Form';
 import { INameInput } from '../../../../models/IFormInput';
-import { CustomSubmitButton } from '../../CustomSubmitButton'
+import { CustomSubmitButton } from '../../CustomSubmitButton/CustomSubmitButton'
 
 export default {
     title: 'Form/Fields/NameInput',

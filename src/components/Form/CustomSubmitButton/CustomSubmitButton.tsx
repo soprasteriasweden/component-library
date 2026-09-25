@@ -1,11 +1,14 @@
-﻿import * as React from "react";
-import { IChildren } from "../../models/IChildren";
+import * as React from "react";
+import { IChildren } from "../../../models/IChildren";
 import { useFormContext } from "react-hook-form";
 import * as bootstrap from "bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export enum CustomSubmitButtonType {
     default = "btn-primary",
-    alternative = "btn-link"
+    alternative = "btn-link",
+    search = "btn-outline-secondary btn-search"
 }
 
 export interface ICustomSubmitButton extends IChildren {
@@ -25,6 +28,7 @@ export const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & R
 }) => {
     const { handleSubmit } = useFormContext();
     const tooltipRef = React.useRef<HTMLSpanElement>(null);
+    const icon = buttonType === CustomSubmitButtonType.search ? <FontAwesomeIcon icon={faSearch} /> : null;
 
     React.useEffect(() => {
         if (tooltipRef.current) {
@@ -58,7 +62,7 @@ export const CustomSubmitButton: React.FunctionComponent<ICustomSubmitButton & R
                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {children}
                     </>
                 ) : (
-                    children
+                    <>{icon} {children}</>
                 )}
             </button>
         </span>

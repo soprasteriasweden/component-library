@@ -9,16 +9,14 @@ export declare enum ButtonType {
     pdf = "btn-primary btn-pdf",
     excel = "btn-primary btn-excel",
     general = "btn-outline-dark",
-    search = "btn-secondary btn-search",
-    searchAlt = "btn-outline-secondary btn-search-alt",
     success = "btn-success",
     warning = "btn-warning",
     delete = "btn-danger",
     deleteAlt = "btn-outline-danger"
 }
-export interface ICustomButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ICustomButton {
     buttonType: ButtonType;
-    buttonText?: string;
+    buttonText: string;
     isLoading?: boolean;
 }
-export declare const CustomButton: React.FunctionComponent<ICustomButton>;
+export declare const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLProps<HTMLButtonElement>>;

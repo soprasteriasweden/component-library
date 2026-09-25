@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { ZipCodeInput } from './ZipCodeInput';
 import { Form } from '../../../Form/Form';
 import { IZipCodeInput } from '../../../../models/IFormInput';
-import { CustomSubmitButton } from '../../CustomSubmitButton'
+import { CustomSubmitButton } from '../../CustomSubmitButton/CustomSubmitButton'
 
 export default {
     title: 'Form/Fields/ZipCodeInput',

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { PersonalIdentityInput } from './PersonalIdentityInput';
 import { Form } from '../../../Form/Form';
 import { IPersonalIdentityInput } from '../../../../models/IFormInput';
-import { CustomSubmitButton } from '../../CustomSubmitButton'
+import { CustomSubmitButton } from '../../CustomSubmitButton/CustomSubmitButton'
 
 export default {
     title: 'Form/Fields/PersonalIdentityInput',

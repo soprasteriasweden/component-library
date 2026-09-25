@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.37
+* Added a search CustomSubmitButton using `btn-outline-secondary btn-search` with a search icon
+* Added Storybook stories for CustomSubmitButton, with default, alternative, and search
+* Organized CustomSubmitButton in its own component folder and updated the imports
+
 ## v2.0.36
 * Added component HyperLink for links with optional icon
 * Added stories for HyperLink and FormLink

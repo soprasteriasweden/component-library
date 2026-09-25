@@ -12,15 +12,19 @@ var __rest = (this && this.__rest) || function (s, e) {
 import * as React from "react";
 import { useFormContext } from "react-hook-form";
 import * as bootstrap from "bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export var CustomSubmitButtonType;
 (function (CustomSubmitButtonType) {
     CustomSubmitButtonType["default"] = "btn-primary";
     CustomSubmitButtonType["alternative"] = "btn-link";
+    CustomSubmitButtonType["search"] = "btn-outline-secondary btn-search";
 })(CustomSubmitButtonType || (CustomSubmitButtonType = {}));
 export const CustomSubmitButton = (_a) => {
     var { onButtonSubmit, buttonType = CustomSubmitButtonType.default, isLoading, children, disabled, title = "" } = _a, buttonProps = __rest(_a, ["onButtonSubmit", "buttonType", "isLoading", "children", "disabled", "title"]);
     const { handleSubmit } = useFormContext();
     const tooltipRef = React.useRef(null);
+    const icon = buttonType === CustomSubmitButtonType.search ? React.createElement(FontAwesomeIcon, { icon: faSearch }) : null;
     React.useEffect(() => {
         if (tooltipRef.current) {
             const tooltip = new bootstrap.Tooltip(tooltipRef.current, {
@@ -37,5 +41,8 @@ export const CustomSubmitButton = (_a) => {
         React.createElement("button", Object.assign({}, buttonProps, { type: "submit", className: `btn btn-sm ${buttonType}`, onClick: onButtonSubmit ? handleSubmit(onButtonSubmit) : undefined, disabled: isLoading || disabled }), isLoading ? (React.createElement(React.Fragment, null,
             React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" }),
             " ",
-            children)) : (children))));
+            children)) : (React.createElement(React.Fragment, null,
+            icon,
+            " ",
+            children)))));
 };

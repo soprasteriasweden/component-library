@@ -1,18 +1,24 @@
 .hyper-link {
     color: black;
     text-decoration: underline;
+
+    &:not(&--disabled):hover {
+        color: black;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    &:focus {
+        outline: auto;
+    }
+
+    &--disabled {
+        color: #6c757d;
+        cursor: default;
+        opacity: 0.65;
+    }
 }
 
 .hyper-link__icon {
     margin-right: 0.25rem;
-}
-
-.hyper-link:hover {
-    color: black;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.hyper-link:focus {
-    outline: auto;
 }

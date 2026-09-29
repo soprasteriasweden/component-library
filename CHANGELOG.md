@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.38
+* Added support for external links using `href` in HyperLink
+* Added `openInNewTab` support for internal and external links
+* Updated HyperLink stories
+
 ## v2.0.37
 * Added a search CustomSubmitButton using `btn-outline-secondary btn-search` with a search icon
 * Added Storybook stories for CustomSubmitButton, with default, alternative, and search

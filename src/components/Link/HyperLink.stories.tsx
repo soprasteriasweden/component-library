@@ -47,3 +47,12 @@ export const InternalLinkInNewTab = () =>
     withRouter(
         <HyperLink linkText="Intern länk i ny flik" to="/test/1" openInNewTab />
     );
+
+export const DisabledLink = () =>
+    withRouter(
+        <HyperLink linkText="Inaktiverad länk" to="/test/1" disabled />
+    );
+
+export const DisabledExternalLink = () => (
+    <HyperLink linkText="Inaktiverad länk" href="https://www.example.com" disabled />
+);

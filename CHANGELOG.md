@@ -3,6 +3,7 @@
 ## v2.0.38
 * Added support for external links using `href` in HyperLink
 * Added `openInNewTab` support for internal and external links
+* Added `disabled` attribute for HyperLink
 * Updated HyperLink stories
 
 ## v2.0.37

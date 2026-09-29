@@ -3,6 +3,7 @@ import "../../assets/styles/HyperLink.style.scss";
 interface IHyperLinkCommon {
     linkText: string;
     openInNewTab?: boolean;
+    disabled?: boolean;
     className?: string;
     showIcon?: boolean;
     ariaLabel?: string;

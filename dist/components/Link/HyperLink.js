@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import "../../assets/styles/HyperLink.style.scss";
 export const HyperLink = (_a) => {
-    var { linkText, openInNewTab = false, className = "", showIcon = true, ariaLabel, onClick } = _a, destination = __rest(_a, ["linkText", "openInNewTab", "className", "showIcon", "ariaLabel", "onClick"]);
+    var { linkText, openInNewTab = false, disabled = false, className = "", showIcon = true, ariaLabel, onClick } = _a, destination = __rest(_a, ["linkText", "openInNewTab", "disabled", "className", "showIcon", "ariaLabel", "onClick"]);
     const content = (React.createElement(React.Fragment, null,
         showIcon && (React.createElement("span", { className: "hyper-link__icon", "aria-hidden": true },
             React.createElement(FontAwesomeIcon, { icon: faLink }))),
@@ -27,6 +27,9 @@ export const HyperLink = (_a) => {
         target: openInNewTab ? "_blank" : undefined,
         rel: openInNewTab ? "noopener noreferrer" : undefined
     };
+    if (disabled) {
+        return (React.createElement("span", { className: `hyper-link hyper-link--disabled ${className}`.trim(), "aria-disabled": "true" }, content));
+    }
     if (destination.href !== undefined) {
         return (React.createElement("a", Object.assign({ href: destination.href }, commonProps), content));
     }

@@ -7,6 +7,7 @@ import "../../assets/styles/HyperLink.style.scss";
 interface IHyperLinkCommon {
     linkText: string;
     openInNewTab?: boolean;
+    disabled?: boolean;
     className?: string;
     showIcon?: boolean;
     ariaLabel?: string;
@@ -25,7 +26,7 @@ type HyperLinkDestination =
 
 export type IHyperLink = IHyperLinkCommon & HyperLinkDestination;
 
-export const HyperLink: React.FunctionComponent<IHyperLink> = ({ linkText, openInNewTab = false, className = "", showIcon = true, ariaLabel, onClick, ...destination }) => {
+export const HyperLink: React.FunctionComponent<IHyperLink> = ({ linkText, openInNewTab = false, disabled = false, className = "", showIcon = true, ariaLabel, onClick, ...destination }) => {
     const content = (
         <>
             {showIcon && (
@@ -44,6 +45,17 @@ export const HyperLink: React.FunctionComponent<IHyperLink> = ({ linkText, openI
         target: openInNewTab ? "_blank" : undefined,
         rel: openInNewTab ? "noopener noreferrer" : undefined
     };
+
+    if (disabled) {
+        return (
+            <span
+                className={`hyper-link hyper-link--disabled ${className}`.trim()}
+                aria-disabled="true"
+            >
+                {content}
+            </span>
+        );
+    }
 
     if (destination.href !== undefined) {
         return (

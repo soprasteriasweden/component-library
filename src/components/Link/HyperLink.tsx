@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavLink } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import "../../assets/styles/HyperLink.style.scss";
 
 interface IHyperLinkCommon {
@@ -31,7 +31,7 @@ export const HyperLink: React.FunctionComponent<IHyperLink> = ({ linkText, openI
         <>
             {showIcon && (
                 <span className="hyper-link__icon" aria-hidden={true}>
-                    <FontAwesomeIcon icon={faLink} />
+                    <FontAwesomeIcon icon={openInNewTab ? faExternalLink : faLink} />
                 </span>
             )}
             {linkText}

@@ -56,3 +56,8 @@ export const DisabledLink = () =>
 export const DisabledExternalLink = () => (
     <HyperLink linkText="Inaktiverad länk" href="https://www.example.com" disabled />
 );
+
+export const DisabledLinkInNewTab = () =>
+    withRouter(
+        <HyperLink linkText="Inaktiverad länk i ny flik" to="/test/1" disabled openInNewTab />
+    );

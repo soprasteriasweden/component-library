@@ -12,13 +12,13 @@ var __rest = (this && this.__rest) || function (s, e) {
 import * as React from "react";
 import { NavLink } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import "../../assets/styles/HyperLink.style.scss";
 export const HyperLink = (_a) => {
     var { linkText, openInNewTab = false, disabled = false, className = "", showIcon = true, ariaLabel, onClick } = _a, destination = __rest(_a, ["linkText", "openInNewTab", "disabled", "className", "showIcon", "ariaLabel", "onClick"]);
     const content = (React.createElement(React.Fragment, null,
         showIcon && (React.createElement("span", { className: "hyper-link__icon", "aria-hidden": true },
-            React.createElement(FontAwesomeIcon, { icon: faLink }))),
+            React.createElement(FontAwesomeIcon, { icon: openInNewTab ? faExternalLink : faLink }))),
         linkText));
     const commonProps = {
         className: `hyper-link ${className}`.trim(),

@@ -3,6 +3,8 @@
 ## v2.0.39
 * Fixed form fields rendering without a `react-hook-form` context
 * Preserved validation and change handling when form context is available
+* Added standalone Storybook stories for Checkbox, Select, TextInput, and Textarea
+* Added form-backed Default and Readonly stories for Textarea
 
 ## v2.0.38
 * Added support for external links using `href` in HyperLink

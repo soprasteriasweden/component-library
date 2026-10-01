@@ -5,12 +5,20 @@ import { TooltipItem } from "../TooltipItem/TooltipItem";
 import { getNestedObjectValue } from "../../../../utils/utils";
 export const Checkbox = ({ label, name, tooltipDescription, className = "", disabled, required, checked, value, requiredValidationMessage, id, labelCol = 4, inputCol = 8, onChange, withColumn }) => {
     var _a, _b, _c, _d;
-    const { formState: { errors }, register, watch, setValue } = (_a = useFormContext()) !== null && _a !== void 0 ? _a : { errors: "" };
+    const readonlyValues = {
+        formState: { errors: {} },
+        register: "",
+        watch: "",
+        setValue: ""
+    };
+    const { formState: { errors }, register, watch, setValue } = (_a = useFormContext()) !== null && _a !== void 0 ? _a : readonlyValues;
     // ✅ Get the current checkbox state from react-hook-form
-    const isChecked = (_c = (_b = watch(name)) !== null && _b !== void 0 ? _b : checked) !== null && _c !== void 0 ? _c : false;
+    const isChecked = (_c = (_b = (typeof watch !== "string" ? watch(name) : undefined)) !== null && _b !== void 0 ? _b : checked) !== null && _c !== void 0 ? _c : false;
     const handleChange = (e) => {
         const newValue = e.target.checked;
-        setValue(name, newValue); // ✅ Update react-hook-form state
+        if (typeof setValue !== "string") {
+            setValue(name, newValue); // ✅ Update react-hook-form state
+        }
         if (onChange) {
             onChange(newValue); // ✅ Call external `onChange` if provided
         }
@@ -24,6 +32,8 @@ export const Checkbox = ({ label, name, tooltipDescription, className = "", disa
                 withColumn ? ":" : ""))),
             React.createElement("div", { className: `col-md-${inputCol}` },
                 React.createElement("div", { className: "form-check" },
-                    React.createElement("input", Object.assign({ type: "checkbox", className: "form-check-input", id: id, disabled: disabled, value: value, checked: isChecked }, register(name, { required, onChange: handleChange }))),
+                    React.createElement("input", Object.assign({ type: "checkbox", className: "form-check-input", id: id, disabled: disabled, value: value, checked: isChecked }, (typeof register !== "string"
+                        ? register(name, { required, onChange: handleChange }) // ✅ Let react-hook-form handle `onChange`
+                        : { name, onChange: handleChange }))),
                     React.createElement("span", { className: "text-danger" }, errorType === "required" && (requiredValidationMessage || "Måste kryssas i")))))));
 };

@@ -6,7 +6,7 @@ import { getNestedObjectValue } from '../../../../utils/utils';
 export const TextInput = ({ label, name, className, disabled, inlineLabel, required, placeholder, defaultValue, requiredValidationMessage, readonly, minLength, maxLength, pattern, patternValidationMessage, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
     var _a, _b;
     const readonlyValues = {
-        errors: "",
+        formState: { errors: {} },
         register: "",
         setValue: ""
     };
@@ -38,7 +38,7 @@ export const TextInput = ({ label, name, className, disabled, inlineLabel, requi
                     React.createElement("p", { id: name, className: "form-control-plaintext" }, defaultValue)
                 :
                     React.createElement(React.Fragment, null,
-                        React.createElement("input", Object.assign({ type: "text", id: name, className: "form-control form-control-sm" }, register(name, { required: required, pattern: pattern, validate: required ? (value) => { return !!value.trim(); } : undefined }), { placeholder: placeholder, defaultValue: defaultValue, disabled: disabled, minLength: minLength, maxLength: maxLength })),
+                        React.createElement("input", Object.assign({ type: "text", id: name, className: "form-control form-control-sm" }, (typeof register !== "string" ? register(name, { required: required, pattern: pattern, validate: required ? (value) => { return !!value.trim(); } : undefined }) : { name }), { placeholder: placeholder, defaultValue: defaultValue, disabled: disabled, minLength: minLength, maxLength: maxLength })),
                         tooltipDescription ?
                             React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle })
                             : null)),

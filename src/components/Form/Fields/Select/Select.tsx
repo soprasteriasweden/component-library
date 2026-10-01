@@ -28,7 +28,7 @@ export const Select: React.FunctionComponent<ISelect> = ({
     const [currentSelectedValue, setCurrentSelectedValue] = React.useState<string | undefined>(selectedValue);
     
     const readonlyValues = {
-        errors: "",
+        formState: { errors: {} },
         register: "",
         unregister: "",
         setValue: ""

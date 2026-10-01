@@ -5,7 +5,7 @@ import { ITextarea } from '../../../../models/IFormInput';
 export const Textarea: React.FunctionComponent<ITextarea> = ({ name, label, required, className, inlineLabel, disabled, placeholder, rows, defaultValue, requiredValidationMessage, maxLength, minLength, labelCol = 4, inputCol = 8, readonly, onChange }) => {
 
     const readonlyValues = {
-        errors: "",
+        formState: { errors: {} },
         register: "",
         setValue: ""
     }
@@ -48,11 +48,11 @@ export const Textarea: React.FunctionComponent<ITextarea> = ({ name, label, requ
                             rows={rows}
                             className="form-control form-control-sm "
                             placeholder={placeholder}
-                            {...register(name, {
+                            {...(typeof register !== "string" ? register(name, {
                                 required: required,
                                 validate: required ? (value: any) => !!value.trim() : undefined,
                                 onChange: handleChange
-                            })}
+                            }) : { name })}
                             disabled={disabled}
                             maxLength={maxLength}
                             minLength={minLength}

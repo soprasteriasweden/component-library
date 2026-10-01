@@ -21,19 +21,28 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
     onChange, 
     withColumn 
 }) => {
+    const readonlyValues = {
+        formState: { errors: {} },
+        register: "",
+        watch: "",
+        setValue: ""
+    }
+
     const {
         formState: { errors },
         register,
         watch,
         setValue
-    } = useFormContext() ?? { errors: "" };
+    } = useFormContext() ?? readonlyValues;
 
     // ✅ Get the current checkbox state from react-hook-form
-    const isChecked = watch(name) ?? checked ?? false;
+    const isChecked = (typeof watch !== "string" ? watch(name) : undefined) ?? checked ?? false;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.checked;
-        setValue(name, newValue); // ✅ Update react-hook-form state
+        if (typeof setValue !== "string") {
+            setValue(name, newValue); // ✅ Update react-hook-form state
+        }
         if (onChange) {
             onChange(newValue); // ✅ Call external `onChange` if provided
         }
@@ -62,7 +71,9 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
                             disabled={disabled}
                             value={value}
                             checked={isChecked}  // ✅ Now syncs properly with react-hook-form
-                            {...register(name, { required, onChange: handleChange })} // ✅ Let react-hook-form handle `onChange`
+                            {...(typeof register !== "string"
+                                ? register(name, { required, onChange: handleChange }) // ✅ Let react-hook-form handle `onChange`
+                                : { name, onChange: handleChange })}
                         />
                         <span className="text-danger">
                             {errorType === "required" && (requiredValidationMessage || "Måste kryssas i")}

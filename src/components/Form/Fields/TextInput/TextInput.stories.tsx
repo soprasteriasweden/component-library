@@ -31,6 +31,10 @@ const Template: StoryFn<StorybookITextInput> = (args) => {
     );
 };
 
+const StandaloneTemplate: StoryFn<ITextInput> = (args) => (
+    <TextInput {...args} />
+);
+
 export const Default = Template.bind({});
 Default.args = {
     name: "default",
@@ -69,4 +73,13 @@ RequiredField.args = {
     name: 'required',
     inlineLabel: true,
     required: true
+};
+
+export const ReadonlyWithoutForm = StandaloneTemplate.bind({});
+ReadonlyWithoutForm.args = {
+    name: 'readonlyWithoutForm',
+    label: 'Readonly Without Form',
+    inlineLabel: true,
+    defaultValue: 'Readonly',
+    readonly: true
 };

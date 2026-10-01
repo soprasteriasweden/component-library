@@ -9,7 +9,7 @@ export const Select = ({ name, label, required, className, inlineLabel, disabled
     var _a, _b;
     const [currentSelectedValue, setCurrentSelectedValue] = React.useState(selectedValue);
     const readonlyValues = {
-        errors: "",
+        formState: { errors: {} },
         register: "",
         unregister: "",
         setValue: ""

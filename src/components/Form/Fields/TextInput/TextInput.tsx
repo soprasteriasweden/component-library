@@ -8,7 +8,7 @@ import { getNestedObjectValue } from '../../../../utils/utils';
 export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, className, disabled, inlineLabel, required, placeholder, defaultValue, requiredValidationMessage, readonly, minLength, maxLength, pattern, patternValidationMessage, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
 
     const readonlyValues = {
-        errors: "",
+        formState: { errors: {} },
         register: "",
         setValue: ""
     }
@@ -47,7 +47,7 @@ export const TextInput: React.FunctionComponent<ITextInput> = ({ label, name, cl
                                 <input type="text"
                                     id={name}
                                     className="form-control form-control-sm"
-                                    {...register(name, { required: required, pattern: pattern, validate: required ? (value: string) => { return !!value.trim() } : undefined })}
+                                    {...(typeof register !== "string" ? register(name, { required: required, pattern: pattern, validate: required ? (value: string) => { return !!value.trim() } : undefined }) : { name })}
                                     placeholder={placeholder}
                                     defaultValue={defaultValue}
                                     disabled={disabled}

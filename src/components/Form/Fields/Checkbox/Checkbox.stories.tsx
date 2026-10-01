@@ -34,6 +34,10 @@ const Template: StoryFn<ICheckbox> = (args) => {
     );
 };
 
+const StandaloneTemplate: StoryFn<ICheckbox> = (args) => (
+    <Checkbox {...args} />
+);
+
 // 🟢 Default Checkbox
 export const Default = Template.bind({});
 Default.args = {
@@ -89,4 +93,12 @@ LabelRight.args = {
     label: "Label on Right",
     name: "labelRight",
     className: "d-flex flex-row-reverse align-items-center" // ✅ Moves label to the right
+};
+
+export const CheckedWithoutForm = StandaloneTemplate.bind({});
+CheckedWithoutForm.args = {
+    label: "Checked Without Form",
+    name: "checkedWithoutForm",
+    value: "checkedWithoutForm",
+    checked: true
 };

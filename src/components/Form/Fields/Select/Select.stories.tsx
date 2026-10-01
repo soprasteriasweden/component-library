@@ -33,6 +33,10 @@ const Template: StoryFn<StorybookISelect> = (args) => {
     );
 };
 
+const StandaloneTemplate: StoryFn<ISelect> = (args) => (
+    <Select {...args} />
+);
+
 const mockListItems: IListItem[] = [
     {
         value: "item1",
@@ -98,6 +102,18 @@ SelectNotRequired.args = {
     placeholder: "Välj nåt",
     inlineLabel: true,
     options: mockListItems,
+    isClearable: true,
+    required: false
+};
+
+export const SelectWithoutForm = StandaloneTemplate.bind({});
+SelectWithoutForm.args = {
+    label: 'Select Without Form',
+    name: 'selectWithoutForm',
+    inlineLabel: true,
+    options: mockListItems,
+    selectedValue: 'item1',
+    placeholder: 'Välj nåt',
     isClearable: true,
     required: false
 };

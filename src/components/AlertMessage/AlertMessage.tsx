@@ -7,6 +7,7 @@ export interface IAlertMessage extends IChildren {
     alertType: AlertType;
     duration?: number;
     alwaysShow?: boolean;
+    dismissible?: boolean;
     renderOnTopOfPage?: boolean;
 }
 
@@ -17,7 +18,7 @@ export enum AlertType {
     warning = "warning"
 }
 
-export const AlertMessage: React.FunctionComponent<IAlertMessage> = ({ duration, alertType, alwaysShow, children, renderOnTopOfPage = true }) => {
+export const AlertMessage: React.FunctionComponent<IAlertMessage> = ({ duration, alertType, alwaysShow, dismissible = true, children, renderOnTopOfPage = true }) => {
 
     const [showAlert, setShowAlert] = React.useState<boolean>(false);
 
@@ -47,14 +48,14 @@ export const AlertMessage: React.FunctionComponent<IAlertMessage> = ({ duration,
         ? ReactDOM.createPortal(
             <div className={`alert alert-top-of-page alert-${alertType}`} role="alert">
                 {children}
-                <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>
+                {dismissible && <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>}
             </div>,
             document.body
         )
         : (
             <div className={`alert alert-${alertType}`} role="alert">
                 {children}
-                <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>
+                {dismissible && <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>}
             </div>
         )
 ) : null;

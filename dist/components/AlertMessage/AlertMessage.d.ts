@@ -5,6 +5,7 @@ export interface IAlertMessage extends IChildren {
     alertType: AlertType;
     duration?: number;
     alwaysShow?: boolean;
+    dismissible?: boolean;
     renderOnTopOfPage?: boolean;
 }
 export declare enum AlertType {

@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.40
+* Added optional `dismissible` prop to AlertMessage, defaulting to `true`
+* Setting `dismissible` to `false` hides the dismiss button for inline and top-of-page alerts without changing auto-dismiss timing controlled by `alwaysShow`
+* Applied dismiss-button styling to both inline and top-of-page alerts
+* Added non-dismissible AlertMessage stories for top-of-page, inline, and always-show alerts
+
 ## v2.0.39
 * Fixed form fields rendering without a `react-hook-form` context
 * Preserved validation and change handling when form context is available

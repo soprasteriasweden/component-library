@@ -13,3 +13,6 @@ export const Success = () => <AlertMessage duration={duration} alertType={AlertT
 export const Warning = () => <AlertMessage duration={duration} alertType={AlertType.warning}>Warning</AlertMessage>;
 export const Danger = () => <AlertMessage duration={duration} alertType={AlertType.danger}>Danger</AlertMessage>;
 export const AlwaysShow = () => <AlertMessage alwaysShow={true} alertType={AlertType.primary}>Always show</AlertMessage>;
+export const NonDismissible = () => <AlertMessage duration={duration} dismissible={false} alertType={AlertType.primary}>Non-dismissible</AlertMessage>;
+export const NonDismissibleInline = () => <AlertMessage duration={duration} dismissible={false} renderOnTopOfPage={false} alertType={AlertType.primary}>Non-dismissible inline</AlertMessage>;
+export const AlwaysShowNonDismissible = () => <AlertMessage alwaysShow={true} dismissible={false} alertType={AlertType.primary}>Always show non-dismissible</AlertMessage>;

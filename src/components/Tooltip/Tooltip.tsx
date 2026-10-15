@@ -5,10 +5,11 @@ interface IProps {
     title: string;
     placement?: "top" | "bottom" | "left" | "right";
     customClass?: string;
+    trigger?: "hover focus" | "click" | "hover" | "focus" | "manual" | "click hover" | "click focus" | "click hover focus";
     children: React.ReactNode;
 }
 
-export const Tooltip: React.FC<IProps> = ({ title, placement = "bottom", customClass = "", children }) => {
+export const Tooltip: React.FC<IProps> = ({ title, placement = "bottom", customClass = "", trigger = "hover focus", children }) => {
     const tooltipRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
@@ -21,10 +22,10 @@ export const Tooltip: React.FC<IProps> = ({ title, placement = "bottom", customC
             customClass,
             animation: false,
             html: true,
-            trigger: "hover focus"
+            trigger
         });
         return () => tooltip.dispose();
-    }, [title, placement, customClass]);
+    }, [title, placement, customClass, trigger]);
 
     return (
         <span ref={tooltipRef} tabIndex={title ? 0 : undefined} style={{ cursor: "pointer" }}>

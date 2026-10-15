@@ -8,7 +8,8 @@ export default {
     argTypes: {
         title: { control: "text" },
         placement: { control: "select", options: ["top", "bottom", "left", "right"] },
-        customClass: { control: "text" }
+        customClass: { control: "text" },
+        trigger: { control: "select", options: ["hover focus", "click", "hover", "focus", "manual"] }
     }
 } as Meta;
 

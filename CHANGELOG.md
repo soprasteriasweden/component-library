@@ -1,8 +1,13 @@
 # Changelog
 
 ## v2.0.41
-* Added `Tooltip` component with `title` (HTML supported), `placement` and `customClass`
-* Added Tooltip stories
+* Added `Tooltip` component with `title` (HTML supported), `placement`, `customClass` and `trigger` (defaults to `hover focus`)
+* Added Tooltip stories, including a `trigger` control
+* Refactored `TooltipItem` and `InputIconTooltip` to use the shared `Tooltip` component instead of their own Bootstrap tooltip setup
+* Added optional `showHyphen` prop to `TooltipItem`
+* Changed `showDisc` in `TooltipItem` to render a bullet (•) instead of a hyphen; use `showHyphen` for the previous look
+* Added `WithHyphen` story and `showHyphen` control for `TooltipItem`
+* Rebuilt `dist` output for the Tooltip, `TooltipItem` and `InputIconTooltip` components
 
 ## v2.0.40
 * Added optional `dismissible` prop to AlertMessage, defaulting to `true`

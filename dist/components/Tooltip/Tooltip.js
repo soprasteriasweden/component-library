@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as bootstrap from "bootstrap";
-export const Tooltip = ({ title, placement = "bottom", customClass = "", children }) => {
+export const Tooltip = ({ title, placement = "bottom", customClass = "", trigger = "hover focus", children }) => {
     const tooltipRef = useRef(null);
     useEffect(() => {
         if (!tooltipRef.current || !title) {
@@ -12,9 +12,9 @@ export const Tooltip = ({ title, placement = "bottom", customClass = "", childre
             customClass,
             animation: false,
             html: true,
-            trigger: "hover focus"
+            trigger
         });
         return () => tooltip.dispose();
-    }, [title, placement, customClass]);
+    }, [title, placement, customClass, trigger]);
     return (React.createElement("span", { ref: tooltipRef, tabIndex: title ? 0 : undefined, style: { cursor: "pointer" } }, children));
 };

@@ -4,6 +4,7 @@ interface IProps {
     title: string;
     description: string;
     showDisc?: boolean;
+    showHyphen?: boolean;
 }
 export declare const TooltipItem: React.FC<IProps>;
 export {};

@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.41
+* Added `Tooltip` component with `title` (HTML supported), `placement` and `customClass`
+* Added Tooltip stories
+
 ## v2.0.40
 * Added optional `dismissible` prop to AlertMessage, defaulting to `true`
 * Setting `dismissible` to `false` hides the dismiss button for inline and top-of-page alerts without changing auto-dismiss timing controlled by `alwaysShow`

@@ -1,0 +1,13 @@
+.tabs-custom-styling {
+    .nav-link {
+        color: #000000 !important;
+
+        &:not(:last-child) {
+            border-right: 1px solid #c4c3c3;
+        }
+
+        &:not(.active) {
+            background-color: #f5f5f5;
+        }
+    }
+}

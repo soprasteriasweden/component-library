@@ -5,11 +5,16 @@
         display: block;
     }
 
-    p.show-disc::before {
-        content: '-';
+    p.show-disc::before,
+    p.show-hyphen::before {
+        content: '\2022';
         display: inline-block;
         margin-right: 5px;
         text-align: left;
+    }
+
+    p.show-hyphen::before {
+        content: '-';
     }
 
     p:hover {

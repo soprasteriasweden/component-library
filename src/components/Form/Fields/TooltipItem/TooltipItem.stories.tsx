@@ -8,7 +8,8 @@ export default {
     argTypes: {
         title: { control: "text" },
         description: { control: "text" },
-        showDisc: { control: "boolean" }
+        showDisc: { control: "boolean" },
+        showHyphen: { control: "boolean" }
     }
 } as Meta;
 
@@ -31,6 +32,13 @@ WithDisc.args = {
     title: "Hover with Disc",
     description: "This tooltip has a visible disc",
     showDisc: true
+};
+
+export const WithHyphen = Template.bind({});
+WithHyphen.args = {
+    title: "Hover with Hyphen",
+    description: "This tooltip has a visible hyphen",
+    showHyphen: true
 };
 
 export const LongDescription = Template.bind({});

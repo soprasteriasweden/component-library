@@ -16,6 +16,7 @@ import { SortTableContext, SortTableProvider } from "./components/Table/SortTabl
 import { SortableTableHeader } from "./components/Table/SortableTableHeader";
 import { FormDownloadButton } from "./components/FormDownloadButton/FormDownloadButton";
 import { HyperLink } from "./components/Link/HyperLink";
+import { Tooltip } from "./components/Tooltip/Tooltip";
 import "./assets/styles/Common.scss";
 
 export {
@@ -65,6 +66,7 @@ export {
     ClearFormButton,
     FormDownloadButton,
     HyperLink,
+    Tooltip,
     TooltipItem,
     InputIconTooltip,
     MultiSelect,

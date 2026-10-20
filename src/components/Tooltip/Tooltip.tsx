@@ -28,7 +28,7 @@ export const Tooltip: React.FC<IProps> = ({ title, placement = "bottom", customC
     }, [title, placement, customClass, trigger]);
 
     return (
-        <span ref={tooltipRef} tabIndex={title ? 0 : undefined}>
+        <span ref={tooltipRef} tabIndex={title ? 0 : undefined} style={{ cursor: "default" }}>
             {children}
         </span>
     );

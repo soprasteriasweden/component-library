@@ -16,5 +16,5 @@ export const Tooltip = ({ title, placement = "bottom", customClass = "", trigger
         });
         return () => tooltip.dispose();
     }, [title, placement, customClass, trigger]);
-    return (React.createElement("span", { ref: tooltipRef, tabIndex: title ? 0 : undefined }, children));
+    return (React.createElement("span", { ref: tooltipRef, tabIndex: title ? 0 : undefined, style: { cursor: "default" } }, children));
 };

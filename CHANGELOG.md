@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.42
+* Added optional `tooltipDescription` prop to MultiSelect using the shared `InputIconTooltip` component
+* Added a MultiSelect story with a tooltip
+
 ## v2.0.41
 * Added `Tooltip` component with `title` (HTML supported), `placement`, `customClass` and `trigger` (defaults to `hover focus`)
 * Added Tooltip stories, including a `trigger` control

@@ -75,3 +75,13 @@ MultiSelectExample.args = {
   isClearable: true,
   required: true
 };
+
+export const MultiSelectWithTooltip = Template.bind({});
+MultiSelectWithTooltip.args = {
+  label: 'Välj minst en',
+  name: "multiSelectWithTooltip",
+  isMultiple: true,
+  values: mockListItems,
+  isClearable: true,
+  tooltipDescription: "This is a tooltip description."
+};

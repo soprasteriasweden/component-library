@@ -109,6 +109,7 @@ export interface IMultiSelect extends IColumnPlacement {
     disabled?: boolean;
     isClearable?: boolean;
     resetValue?: boolean;
+    tooltipDescription?: string;
 }
 export interface IUnorderedList extends IColumnPlacement {
     textRows: string[];

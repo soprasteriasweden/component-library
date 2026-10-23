@@ -4,8 +4,10 @@ import { useFormContext } from 'react-hook-form';
 import Select, { createFilter } from 'react-select';
 import { SelectStyles } from "../../../MenuList/MenuList";
 import { getNestedObjectValue } from "../../../../utils/utils";
+import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
-export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue }) => {
+export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue, tooltipDescription }) => {
 
     const { register, unregister, setValue, formState: { errors } } = useFormContext();
     const [selectedValue, setSelectedValue] = React.useState<IOption | IOption[]>();
@@ -103,23 +105,33 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
         <div className="form-group row">
             <label className={`col-${labelCol ?? 4} col-form-label`}>{label}:{required ? "*" : ""}</label>
             <div className={`col-${inputCol ?? 8}`}>
-                <Select
-                    ref={selectRef}
-                    placeholder={placeholder}
-                    filterOption={createFilter({
-                        ignoreAccents: false,
-                        matchFrom: 'any',
-                        stringify: (option: { label: any; }) => `${option.label}`
-                    })}
-                    styles={SelectStyles}
-                    options={options}
-                    value={selectedValue}
-                    onChange={(selectedOption: any) => onChange(selectedOption)}
-                    isLoading={isLoading}
-                    loadingMessage={() => "Laddar"}
-                    isMulti={isMultiple}
-                    isDisabled={disabled === true}
-                />
+                <div className="input-group flex-nowrap">
+                    <div className="flex-grow-1" style={{ minWidth: 0 }}>
+                        <Select
+                            ref={selectRef}
+                            placeholder={placeholder}
+                            filterOption={createFilter({
+                                ignoreAccents: false,
+                                matchFrom: 'any',
+                                stringify: (option: { label: any; }) => `${option.label}`
+                            })}
+                            styles={SelectStyles}
+                            options={options}
+                            value={selectedValue}
+                            onChange={(selectedOption: any) => onChange(selectedOption)}
+                            isLoading={isLoading}
+                            loadingMessage={() => "Laddar"}
+                            isMulti={isMultiple}
+                            isDisabled={disabled === true}
+                        />
+                    </div>
+                    {tooltipDescription && (
+                        <InputIconTooltip
+                            description={tooltipDescription}
+                            icon={faQuestionCircle}
+                        />
+                    )}
+                </div>
                 <span className="text-danger">{errorType === "required" && "Välj minst ett värde"}</span>
             </div>
         </div>

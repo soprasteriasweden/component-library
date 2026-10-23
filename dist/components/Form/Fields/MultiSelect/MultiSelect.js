@@ -3,7 +3,9 @@ import { useFormContext } from 'react-hook-form';
 import Select, { createFilter } from 'react-select';
 import { SelectStyles } from "../../../MenuList/MenuList";
 import { getNestedObjectValue } from "../../../../utils/utils";
-export const MultiSelect = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue }) => {
+import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+export const MultiSelect = ({ values, defaultValue, labelCol, inputCol, name, onValueChange, isLoading, isMultiple, label, required, placeholder, disabled, isClearable, resetValue, tooltipDescription }) => {
     var _a;
     const { register, unregister, setValue, formState: { errors } } = useFormContext();
     const [selectedValue, setSelectedValue] = React.useState();
@@ -87,10 +89,13 @@ export const MultiSelect = ({ values, defaultValue, labelCol, inputCol, name, on
             ":",
             required ? "*" : ""),
         React.createElement("div", { className: `col-${inputCol !== null && inputCol !== void 0 ? inputCol : 8}` },
-            React.createElement(Select, { ref: selectRef, placeholder: placeholder, filterOption: createFilter({
-                    ignoreAccents: false,
-                    matchFrom: 'any',
-                    stringify: (option) => `${option.label}`
-                }), styles: SelectStyles, options: options, value: selectedValue, onChange: (selectedOption) => onChange(selectedOption), isLoading: isLoading, loadingMessage: () => "Laddar", isMulti: isMultiple, isDisabled: disabled === true }),
+            React.createElement("div", { className: "input-group flex-nowrap" },
+                React.createElement("div", { className: "flex-grow-1", style: { minWidth: 0 } },
+                    React.createElement(Select, { ref: selectRef, placeholder: placeholder, filterOption: createFilter({
+                            ignoreAccents: false,
+                            matchFrom: 'any',
+                            stringify: (option) => `${option.label}`
+                        }), styles: SelectStyles, options: options, value: selectedValue, onChange: (selectedOption) => onChange(selectedOption), isLoading: isLoading, loadingMessage: () => "Laddar", isMulti: isMultiple, isDisabled: disabled === true })),
+                tooltipDescription && (React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle }))),
             React.createElement("span", { className: "text-danger" }, errorType === "required" && "Välj minst ett värde"))));
 };

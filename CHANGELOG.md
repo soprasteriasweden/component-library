@@ -2,7 +2,6 @@
 
 ## v2.0.42
 * Added optional `tooltipDescription` prop to MultiSelect using the shared `InputIconTooltip` component
-* Updated MultiSelect layout to keep the tooltip beside the select control
 * Added a MultiSelect story with a tooltip
 
 ## v2.0.41

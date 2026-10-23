@@ -105,7 +105,7 @@ export const MultiSelect: React.FunctionComponent<IMultiSelect> = ({ values, def
         <div className="form-group row">
             <label className={`col-${labelCol ?? 4} col-form-label`}>{label}:{required ? "*" : ""}</label>
             <div className={`col-${inputCol ?? 8}`}>
-                <div className="input-group flex-nowrap">
+                <div className="input-group">
                     <div className="flex-grow-1" style={{ minWidth: 0 }}>
                         <Select
                             ref={selectRef}

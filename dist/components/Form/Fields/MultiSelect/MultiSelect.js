@@ -89,7 +89,7 @@ export const MultiSelect = ({ values, defaultValue, labelCol, inputCol, name, on
             ":",
             required ? "*" : ""),
         React.createElement("div", { className: `col-${inputCol !== null && inputCol !== void 0 ? inputCol : 8}` },
-            React.createElement("div", { className: "input-group flex-nowrap" },
+            React.createElement("div", { className: "input-group" },
                 React.createElement("div", { className: "flex-grow-1", style: { minWidth: 0 } },
                     React.createElement(Select, { ref: selectRef, placeholder: placeholder, filterOption: createFilter({
                             ignoreAccents: false,

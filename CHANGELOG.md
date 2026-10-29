@@ -3,6 +3,8 @@
 ## v2.0.43
 * Added TableLinkCell to be used in table. It uses the HyperLink-component for external and internal links. Use onClick to trigger functions, e.g. opening a modal.
 * Added TableLink stories for external link, internal link, onClick.
+* Added CustomNavLink to use logos with navlinks
+* Added CustomNavLink stories
 
 ## v2.0.42
 * Added optional `tooltipDescription` prop to MultiSelect using the shared `InputIconTooltip` component

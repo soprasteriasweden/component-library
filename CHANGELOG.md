@@ -5,6 +5,7 @@
 * Added TableLink stories for external link, internal link, onClick.
 * Added CustomNavLink to use logos with navlinks
 * Added CustomNavLink stories
+* Changed `opacity: 0.7` for class `.top-right-information`
 
 ## v2.0.42
 * Added optional `tooltipDescription` prop to MultiSelect using the shared `InputIconTooltip` component

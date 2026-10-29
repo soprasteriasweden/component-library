@@ -23,3 +23,16 @@
 .sortable-column {
     cursor: pointer;
 }
+
+.table-link-button {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    text-align: inherit;
+}
+
+.table tbody tr:hover > *,
+.table tbody tr:focus-within > * {
+    background-color: #edf2f7;//#f4f8fb;
+}

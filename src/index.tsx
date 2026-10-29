@@ -1,6 +1,7 @@
 ﻿import { Form, Dropdown, ConditionalCheckboxList, HsaIdInput, SelectGroup, UnorderedList, TooltipItem, InputIconTooltip, MultiSelect, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, EmailInput, FileUpload, NumberInput, PersonalIdentityInput, ZipCodeInput, PhoneNumberInput, NameInput, Select, Textarea, TextInput, LinkArray, HiddenInput, CustomSubmitButton, CustomSubmitButtonType, RadioButton, FormLink, ClearFormButton, BooleanQuestionGroup } from "./components/Form/Form";
 import { Modal, ModalBody, ModalFooter, ModalSize } from "./components/Modal/Modal";
 import { Table } from "./components/Table/Table";
+import { TableLinkCell, ITableLinkCell } from "./components/Table/TableLinkCell";
 import { MainNavigation } from "./components/MainNavigation/MainNavigation";
 import { Tabs, TabContent, TabLink, TabPanel } from "./components/Tabs/Tabs";
 import { AlertMessage, AlertType } from "./components/AlertMessage/AlertMessage";
@@ -38,6 +39,7 @@ export {
     ModalFooter,
     ModalSize,
     Table,
+    TableLinkCell,
     Tabs,
     TabContent,
     TabLink,
@@ -80,3 +82,5 @@ export {
     NameInput,
     BooleanQuestionGroup
 }
+
+export type { ITableLinkCell };

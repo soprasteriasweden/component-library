@@ -1,5 +1,7 @@
 import * as React from "react";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
+import { CustomNavLink } from "../CustomNavLink/CustomNavLink";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 
 interface ILoginLogoutButton {
     AuthConsumer: React.Consumer<any>;
@@ -11,7 +13,7 @@ export const LoginLogoutButton: React.FunctionComponent<ILoginLogoutButton> = ({
             {
                 ({ isAuthenticated, login, logout }) => {
                     if (isAuthenticated) {
-                        return <NavLink to="Logga ut" className="nav-link" onClick={logout}>Logga ut</NavLink>
+                        return <CustomNavLink icon={faPowerOff} to="Logga ut" className="nav-link" onClick={logout}>Logga ut</CustomNavLink>
                     }
 
                     return <NavLink to="Logga in" className="nav-link" onClick={login}>Logga in</NavLink>

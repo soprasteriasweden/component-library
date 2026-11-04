@@ -1,6 +1,9 @@
 # Changelog
 
 ## v2.0.44
+* Removed `margin-top: 50px` from class `.navigation-container` for `MainNavigation.tsx`  
+
+## v2.0.44
 * Added optional `homeLink` and `menuItems` props to MainNavigation. They render the Bootstrap navbar home link, collapse toggle and dropdowns, so consumers no longer need to supply that markup as `children`. `children` still works as before.
 * Added MainNavigation stories
 * Fixed typo in MainNavigation props interface name

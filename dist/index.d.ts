@@ -2,7 +2,7 @@ import { Form, Dropdown, ConditionalCheckboxList, HsaIdInput, SelectGroup, Unord
 import { Modal, ModalBody, ModalFooter, ModalSize } from "./components/Modal/Modal";
 import { Table } from "./components/Table/Table";
 import { TableLinkCell, ITableLinkCell } from "./components/Table/TableLinkCell";
-import { MainNavigation } from "./components/MainNavigation/MainNavigation";
+import { MainNavigation, IMainNavigationLink, IMainNavigationMenu } from "./components/MainNavigation/MainNavigation";
 import { Tabs, TabContent, TabLink, TabPanel } from "./components/Tabs/Tabs";
 import { AlertMessage, AlertType } from "./components/AlertMessage/AlertMessage";
 import { PaginationNavigation } from "./components/Pagination/PaginationNavigation";
@@ -20,4 +20,4 @@ import { HyperLink } from "./components/Link/HyperLink";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import "./assets/styles/Common.scss";
 export { Form, Checkbox, CheckboxList, CustomDatePicker, DatePickerRange, FileUpload, EmailInput, NumberInput, PersonalIdentityInput, Select, Textarea, TextInput, FormLink, Modal, ModalBody, ModalFooter, ModalSize, Table, TableLinkCell, Tabs, TabContent, TabLink, TabPanel, LinkArray, MainNavigation, HiddenInput, AlertMessage, AlertType, CustomSubmitButton, CustomSubmitButtonType, RadioButton, PaginationNavigation, MenuList, SelectStyles, CustomButton, ButtonType, LoginLogoutButton, SpinnerWrapper, InputSpinnerWrapper, ClearableInput, EventLog, SortTableContext, SortableTableHeader, SortTableProvider, ClearFormButton, FormDownloadButton, HyperLink, Tooltip, TooltipItem, InputIconTooltip, MultiSelect, UnorderedList, SelectGroup, ConditionalCheckboxList, Dropdown, HsaIdInput, ZipCodeInput, PhoneNumberInput, NameInput, BooleanQuestionGroup };
-export type { ITableLinkCell };
+export type { ITableLinkCell, IMainNavigationLink, IMainNavigationMenu };

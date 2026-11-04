@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.44
+* Removed `margin-top: 50px` from class `.navigation-container` for `MainNavigation.tsx`  
+
 ## v2.0.43
 * Added TableLinkCell to be used in table. It uses the HyperLink-component for external and internal links. Use onClick to trigger functions, e.g. opening a modal.
 * Added TableLink stories for external link, internal link, onClick.

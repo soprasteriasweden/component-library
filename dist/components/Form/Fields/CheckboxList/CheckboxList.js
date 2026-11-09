@@ -1,12 +1,19 @@
 import * as React from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import "../../../../assets/styles/CheckboxList.style.scss";
 export const CheckboxList = ({ initialCheckboxes, toggleAll, toggleAllLabel = "Välj alla", name, inputCol = 8, labelCol = 4, }) => {
-    const { watch, setValue } = useFormContext();
-    let selectedValues = watch(name) || [];
+    const { setValue } = useFormContext();
+    const initiallyCheckedValues = initialCheckboxes.filter((cb) => cb.checked).map((cb) => cb.value);
+    const initiallyCheckedValuesKey = initiallyCheckedValues.join(",");
+    let selectedValues = useWatch({ name, defaultValue: initiallyCheckedValues }) || [];
     if (!Array.isArray(selectedValues)) {
         selectedValues = [];
     }
+    React.useEffect(() => {
+        if (initiallyCheckedValues.length > 0) {
+            setValue(name, initiallyCheckedValues);
+        }
+    }, [name, initiallyCheckedValuesKey]);
     const toggleSingleCheckbox = (checkboxValue) => {
         const isAlreadyChecked = selectedValues.includes(checkboxValue);
         const updatedValues = isAlreadyChecked
@@ -24,15 +31,17 @@ export const CheckboxList = ({ initialCheckboxes, toggleAll, toggleAllLabel = "V
         }
     };
     return (React.createElement("fieldset", { className: "checkbox-list" },
-        toggleAll && (React.createElement("div", { className: "form-group row checkbox-item mb-2" },
-            React.createElement("label", { className: `col-${labelCol} col-form-label`, htmlFor: `${name}-toggleAll` }, toggleAllLabel),
-            React.createElement("div", { className: `col-${inputCol}` },
-                React.createElement("input", { type: "checkbox", id: `${name}-toggleAll`, checked: selectedValues.length === initialCheckboxes.length, onChange: toggleAllCheckboxes })))),
+        toggleAll && (React.createElement(React.Fragment, null,
+            React.createElement("legend", { className: "visually-hidden" }, toggleAllLabel),
+            React.createElement("div", { className: "form-group row align-items-center checkbox-item mb-1" },
+                React.createElement("label", { className: `col-${labelCol} col-form-label fw-semibold`, htmlFor: `${name}-toggleAll` }, toggleAllLabel),
+                React.createElement("div", { className: `col-${inputCol} d-flex align-items-center` },
+                    React.createElement("input", { type: "checkbox", className: "form-check-input m-0", id: `${name}-toggleAll`, checked: selectedValues.length === initialCheckboxes.length, onChange: toggleAllCheckboxes }))))),
         initialCheckboxes.map((checkbox) => {
             const isChecked = selectedValues.includes(checkbox.value);
-            return (React.createElement("div", { className: "form-group row checkbox-item", key: checkbox.id },
-                React.createElement("label", { className: `col-${labelCol} col-form-label`, htmlFor: `${name}-${checkbox.id}` }, checkbox.label),
-                React.createElement("div", { className: `col-${inputCol}` },
-                    React.createElement("input", { type: "checkbox", id: `${name}-${checkbox.id}`, checked: isChecked, onChange: () => toggleSingleCheckbox(checkbox.value) }))));
+            return (React.createElement("div", { className: "form-group row align-items-center checkbox-item", key: checkbox.id },
+                React.createElement("label", { className: `col-${labelCol} col-form-label ${toggleAll ? "ps-4" : ""}`, htmlFor: `${name}-${checkbox.id}` }, checkbox.label),
+                React.createElement("div", { className: `col-${inputCol} d-flex align-items-center` },
+                    React.createElement("input", { type: "checkbox", className: "form-check-input m-0", id: `${name}-${checkbox.id}`, checked: isChecked, onChange: () => toggleSingleCheckbox(checkbox.value) }))));
         })));
 };

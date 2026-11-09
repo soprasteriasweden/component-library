@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 interface IHiddenInput {
     name: string;
-    value: string;
+    value: string | number;
 }
 export const HiddenInput: React.FunctionComponent<IHiddenInput> = ({ name, value }) => {
 

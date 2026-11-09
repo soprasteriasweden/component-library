@@ -12,28 +12,26 @@ export const Checkbox = ({ label, name, tooltipDescription, className = "", disa
         setValue: ""
     };
     const { formState: { errors }, register, watch, setValue } = (_a = useFormContext()) !== null && _a !== void 0 ? _a : readonlyValues;
-    // ✅ Get the current checkbox state from react-hook-form
     const isChecked = (_c = (_b = (typeof watch !== "string" ? watch(name) : undefined)) !== null && _b !== void 0 ? _b : checked) !== null && _c !== void 0 ? _c : false;
     const handleChange = (e) => {
         const newValue = e.target.checked;
         if (typeof setValue !== "string") {
-            setValue(name, newValue); // ✅ Update react-hook-form state
+            setValue(name, newValue);
         }
         if (onChange) {
-            onChange(newValue); // ✅ Call external `onChange` if provided
+            onChange(newValue);
         }
     };
     const errorType = (_d = getNestedObjectValue(errors, name)) === null || _d === void 0 ? void 0 : _d.type;
     return (React.createElement("div", { className: `form-group ${className}` },
-        React.createElement("div", { className: "row" },
+        React.createElement("div", { className: "row align-items-center" },
             React.createElement("label", { className: `col-md-${labelCol} col-form-label`, htmlFor: id }, tooltipDescription ? (React.createElement(TooltipItem, { key: id, title: label, description: tooltipDescription })) : (React.createElement(React.Fragment, null,
                 label,
-                " ",
                 withColumn ? ":" : ""))),
             React.createElement("div", { className: `col-md-${inputCol}` },
-                React.createElement("div", { className: "form-check" },
-                    React.createElement("input", Object.assign({ type: "checkbox", className: "form-check-input", id: id, disabled: disabled, value: value, checked: isChecked }, (typeof register !== "string"
-                        ? register(name, { required, onChange: handleChange }) // ✅ Let react-hook-form handle `onChange`
+                React.createElement("div", { className: "form-check d-flex align-items-center gap-2 mb-0 ps-0" },
+                    React.createElement("input", Object.assign({ type: "checkbox", className: "form-check-input m-0 float-none", id: id, disabled: disabled, value: value, checked: isChecked }, (typeof register !== "string"
+                        ? register(name, { required, onChange: handleChange })
                         : { name, onChange: handleChange }))),
                     React.createElement("span", { className: "text-danger" }, errorType === "required" && (requiredValidationMessage || "Måste kryssas i")))))));
 };

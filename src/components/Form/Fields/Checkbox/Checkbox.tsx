@@ -5,21 +5,21 @@ import "../../../../assets/styles/Checkbox.style.scss";
 import { TooltipItem } from "../TooltipItem/TooltipItem";
 import { getNestedObjectValue } from "../../../../utils/utils";
 
-export const Checkbox: React.FunctionComponent<ICheckbox> = ({ 
-    label, 
-    name, 
-    tooltipDescription, 
-    className = "", 
-    disabled, 
-    required, 
-    checked, 
-    value, 
-    requiredValidationMessage, 
-    id, 
-    labelCol = 4, 
-    inputCol = 8, 
-    onChange, 
-    withColumn 
+export const Checkbox: React.FunctionComponent<ICheckbox> = ({
+    label,
+    name,
+    tooltipDescription,
+    className = "",
+    disabled,
+    required,
+    checked,
+    value,
+    requiredValidationMessage,
+    id,
+    labelCol = 4,
+    inputCol = 8,
+    onChange,
+    withColumn
 }) => {
     const readonlyValues = {
         formState: { errors: {} },
@@ -35,16 +35,15 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
         setValue
     } = useFormContext() ?? readonlyValues;
 
-    // ✅ Get the current checkbox state from react-hook-form
     const isChecked = (typeof watch !== "string" ? watch(name) : undefined) ?? checked ?? false;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.checked;
         if (typeof setValue !== "string") {
-            setValue(name, newValue); // ✅ Update react-hook-form state
+            setValue(name, newValue);
         }
         if (onChange) {
-            onChange(newValue); // ✅ Call external `onChange` if provided
+            onChange(newValue);
         }
     };
 
@@ -52,27 +51,27 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
 
     return (
         <div className={`form-group ${className}`}>
-            <div className="row">
+            <div className="row align-items-center">
                 <label className={`col-md-${labelCol} col-form-label`} htmlFor={id}>
                     {tooltipDescription ? (
                         <TooltipItem key={id} title={label} description={tooltipDescription} />
                     ) : (
                         <>
-                            {label} {withColumn ? ":" : ""}
+                            {label}{withColumn ? ":" : ""}
                         </>
                     )}
                 </label>
                 <div className={`col-md-${inputCol}`}>
-                    <div className="form-check">
+                    <div className="form-check d-flex align-items-center gap-2 mb-0 ps-0">
                         <input
                             type="checkbox"
-                            className="form-check-input"
+                            className="form-check-input m-0 float-none"
                             id={id}
                             disabled={disabled}
                             value={value}
-                            checked={isChecked}  // ✅ Now syncs properly with react-hook-form
+                            checked={isChecked}
                             {...(typeof register !== "string"
-                                ? register(name, { required, onChange: handleChange }) // ✅ Let react-hook-form handle `onChange`
+                                ? register(name, { required, onChange: handleChange })
                                 : { name, onChange: handleChange })}
                         />
                         <span className="text-danger">

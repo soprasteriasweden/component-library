@@ -8,22 +8,22 @@
 .date-picker-range__date {
     flex: 1 1 0;
     min-width: 0;
+
+    .react-datepicker-wrapper,
+    .react-datepicker__input-container {
+        width: 100%;
+    }
+
+    input {
+        width: 100%;
+    }
 }
 
-    .date-picker-range__date .react-datepicker-wrapper {
-        width: 100%;
-    }
-
-    .date-picker-range__date .react-datepicker__input-container {
-        width: 100%;
-    }
-
-    .date-picker-range__date input {
-        width: 100%;
-    }
-
-.date-connector {
+// The extra class in the selector makes this win over Bootstrap's
+// .form-control-plaintext (width: 100%) regardless of CSS load order.
+.date-picker-range__wrapper .date-connector {
     flex: 0 0 auto;
-    align-self: center;
+    align-self: flex-start; // was "center", which followed the error message height
+    width: auto;
     margin: 0 0.5rem;
 }

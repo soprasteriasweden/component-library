@@ -70,3 +70,11 @@ ExampleWithToggle.args = {
     initialCheckboxes: mockListItems,
     toggleAll: true
 };
+
+export const ExampleWithInitiallyChecked = Template.bind({});
+ExampleWithInitiallyChecked.args = {
+    name: 'exampleWithInitiallyChecked',
+    initialCheckboxes: mockListItems.map(item => ({ ...item, checked: true })),
+    toggleAll: true,
+    toggleAllLabel: "Välj alla"
+};

@@ -1,9 +1,19 @@
 # Changelog
 
 ## v2.0.45
+* DatePickerRange now revalidates each field when a date is selected or cleared, so required-field errors reflect the current value.
+* DatePickerRange calendars now stay visible inside overflow-clipped containers, and the range separator stays aligned beside validation messages.
+* Fixed LinkArray removal using React Hook Form's field-array API. Submitted arrays now contain only remaining rows in order, including an empty array when all rows are removed; removed validation errors are cleared. Props are unchanged, and consumers can submit form values directly instead of reading links from the DOM.
+* LinkArray input names and IDs now use dot paths (for example, `links.0.url`) so validation messages work with the shared nested-error lookup.
+* Added a LinkArray Storybook story.
+* HiddenInput now accepts string or numeric values, fixing numeric LinkArray IDs without changing form registration or submission behavior.
+* FileUpload's `allowedFileTypes` now accepts React Dropzone `Accept` objects with file extensions, while preserving the existing `string[]` format.
 * Added optional `homeLink` and `menuItems` props to MainNavigation. They render the Bootstrap navbar home link, collapse toggle and dropdowns, so consumers no longer need to supply that markup as `children`. `children` still works as before.
 * Added MainNavigation stories
 * Fixed typo in MainNavigation props interface name
+* CheckboxList now uses the `checked` prop of `initialCheckboxes` as the initially selected values, e.g. when editing existing data
+* Added CheckboxList story with initially checked checkboxes
+* Improved Checkbox alignment and spacing.
 
 ## v2.0.44
 * Removed `margin-top: 50px` from class `.navigation-container` for `MainNavigation.tsx`  

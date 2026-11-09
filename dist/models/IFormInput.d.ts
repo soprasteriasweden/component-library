@@ -1,3 +1,4 @@
+import { Accept } from "react-dropzone";
 export interface IFormInputBase {
     name: string;
     disabled?: boolean;
@@ -120,7 +121,7 @@ export interface IUnorderedList extends IColumnPlacement {
 }
 export interface IFileUpload extends IFormInputBaseWithValidation, IFormInputValidation, IColumnPlacement {
     multiple?: boolean;
-    allowedFileTypes?: string[];
+    allowedFileTypes?: string[] | Accept;
     maxSizeBytes?: number;
     initialFiles?: File[];
     documentType?: IDocumentType;

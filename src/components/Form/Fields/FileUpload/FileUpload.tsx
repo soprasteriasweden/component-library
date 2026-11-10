@@ -1,13 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, Accept } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { CustomButton, ButtonType } from '../../../CustomButton/CustomButton';
 import "../../../../assets/styles/FileUpload.style.scss";
 import { IFileUpload } from '../../../../models/IFormInput';
+
+/**
+ * Builds the react-dropzone `accept` object.
+ * - string[]  -> { [type]: [] }   (existing behavior, unchanged)
+ * - Accept    -> passed through   (e.g. { "application/pdf": [".pdf"] })
+ */
+const toAccept = (types?: string[] | Accept): Accept | undefined => {
+  if (!types) return undefined;
+  return Array.isArray(types)
+    ? types.reduce<Accept>((acc, type) => ({ ...acc, [type]: [] }), {})
+    : types;
+};
+
+/**
+ * Builds the list shown in the "Tillåtna filtyper" hint.
+ * - string[]  -> as is (existing behavior, unchanged)
+ * - Accept    -> extensions if present, otherwise the MIME type
+ */
+const toHintTypes = (types?: string[] | Accept): string[] => {
+  if (!types) return [];
+  return Array.isArray(types)
+    ? types
+    : Object.entries(types).flatMap(([mime, exts]) => (exts.length ? exts : [mime]));
+};
 
 export const FileUpload: React.FC<IFileUpload> = ({
   maxSizeBytes = 5 * Math.pow(2, 20),
@@ -24,7 +48,7 @@ export const FileUpload: React.FC<IFileUpload> = ({
   inputCol = 8,
   documentType,
   numOfFiles,
-  maxFiles, 
+  maxFiles,
   disableDropzoneOnSelect = false
 }) => {
   const {
@@ -38,13 +62,15 @@ export const FileUpload: React.FC<IFileUpload> = ({
   const [selectedDocumentTypeIds, setSelectedDocumentTypeIds] = useState<number[]>([]);
   const [numberOfFiles, setNumberOfFiles] = useState<number>(0);
 
+  const hintTypes = toHintTypes(allowedFileTypes);
+
   const {
     getRootProps,
     getInputProps,
     acceptedFiles,
     fileRejections
   } = useDropzone({
-    accept: allowedFileTypes?.reduce((acc, type) => ({ ...acc, [type]: [] }), {}),
+    accept: toAccept(allowedFileTypes),
     multiple,
     disabled: disabled || (disableDropzoneOnSelect && !multiple && selectedFiles.length > 0),
     maxSize: maxSizeBytes,
@@ -94,9 +120,13 @@ export const FileUpload: React.FC<IFileUpload> = ({
   const renderSelectedFiles = selectedFiles.map((file, index) => {
     if (!documentType) {
       return (
-        <div key={index} className="mb-1">
-          <span>{file.name}</span>
-        </div>
+        <input
+          key={index}
+          type="text"
+          className="form-control form-control-sm mb-1"
+          value={file.name}
+          readOnly
+        />
       );
     }
 
@@ -151,7 +181,7 @@ export const FileUpload: React.FC<IFileUpload> = ({
         {errors[documentType.documentTypesName] &&
           (errors[documentType.documentTypesName] as any)?.[index]?.type === "required" && (
             <div className="text-danger">En dokumenttyp måste anges</div>
-        )}
+          )}
       </div>
     );
   });
@@ -162,7 +192,7 @@ export const FileUpload: React.FC<IFileUpload> = ({
         {label}:{required ? "*" : ""}
       </label>
       <div className={inlineLabel ? `col-${inputCol}` : ""}>
-        <div className={`file-upload ${disabled || (!multiple && selectedFiles.length > 0) ? 'disabled' : ''}`}{...getRootProps()}>
+        <div className={`file-upload ${disabled || (!multiple && selectedFiles.length > 0) ? 'disabled' : ''}`} {...getRootProps()}>
           <input
             {...getInputProps()}
             id={name}
@@ -172,7 +202,7 @@ export const FileUpload: React.FC<IFileUpload> = ({
             {multiple ? "Dra filer hit eller klicka här för att välja filer" : "Dra en fil hit eller klicka här"}
             {maxSizeBytes && ` (max ${formatBytes(maxSizeBytes)})`}
           </p>
-          {allowedFileTypes && <p>Tillåtna filtyper: {allowedFileTypes.join(", ")}</p>}
+          {hintTypes.length > 0 && <p>Tillåtna filtyper: {hintTypes.join(", ")}</p>}
           {errors[name]?.type === "required" && (
             <div className="text-danger mt-1">
               {requiredValidationMessage || `${label} måste anges`}
@@ -187,13 +217,7 @@ export const FileUpload: React.FC<IFileUpload> = ({
               <CustomButton buttonType={ButtonType.deleteAlt} buttonText="Rensa" onClick={clearFiles} />
             </div>
 
-            {selectedFiles.map((file) => (
-              <input key={file.name} type="text"
-                className="form-control form-control-sm mb-1"
-                value={file.name}
-                readOnly
-              />
-            ))}
+            {renderSelectedFiles}
           </div>
         )}
       </div>

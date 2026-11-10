@@ -14,7 +14,8 @@ const popperSettings = {
     popperPlacement: "bottom-start",
     popperProps: { strategy: "fixed" }
 };
-export const DatePickerRange = ({ name, nameSecondary, label, className = "", inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
+const requiredMark = (required) => (required ? "*" : "");
+export const DatePickerRange = ({ name, nameSecondary, label, labelSecondary, className = "", inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
     var _a, _b;
     const [fromDate, setFromDate] = React.useState(value);
     const [toDate, setToDate] = React.useState(valueSecondary);
@@ -57,11 +58,24 @@ export const DatePickerRange = ({ name, nameSecondary, label, className = "", in
     };
     const errorType = (_a = getNestedObjectValue(errors, name)) === null || _a === void 0 ? void 0 : _a.type;
     const errorTypeSecondary = (_b = getNestedObjectValue(errors, nameSecondary)) === null || _b === void 0 ? void 0 : _b.type;
+    const labelClassName = inlineLabel ? `col-${labelCol} col-form-label` : "";
     return (React.createElement("div", { className: `${className} form-group ${inlineLabel ? "row" : ""}` },
-        React.createElement("label", { htmlFor: name, className: inlineLabel ? `col-${labelCol} col-form-label` : "" },
+        labelSecondary ? (
+        // Two labels: one per input, so each date field is individually labelled
+        React.createElement("div", { className: labelClassName },
+            React.createElement("label", { htmlFor: name },
+                label,
+                requiredMark(requiredFrom)),
+            " - ",
+            React.createElement("label", { htmlFor: nameSecondary },
+                labelSecondary,
+                requiredMark(requiredTo)),
+            ":")) : (
+        // One label describing the whole range
+        React.createElement("label", { htmlFor: name, className: labelClassName },
             label,
             ":",
-            requiredFrom || requiredTo ? "*" : ""),
+            requiredMark(requiredFrom || requiredTo))),
         React.createElement("div", { className: inlineLabel ? `col-${inputCol}` : "" },
             React.createElement("div", { className: "input-group" },
                 React.createElement("div", { className: "date-picker-range__wrapper" },

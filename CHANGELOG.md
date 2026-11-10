@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.45
+* Added optional `stripedRows` prop to Table, defaulting to `true`
+* Fixed Table hover and focus highlighting to respect `hoverableRows`
+* Added Table stories for hoverable and striped rows
+
 ## v2.0.44
 * Removed `margin-top: 50px` from class `.navigation-container` for `MainNavigation.tsx`  
 

@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.46
+* DatePickerRange: added optional `labelSecondary` prop. When set, the from and to dates get their own labels, and the required asterisk is shown beside the corresponding date (`requiredFrom` marks the first, `requiredTo` the second). Without `labelSecondary`, the component behaves as before.
+
 ## v2.0.45
 * DatePickerRange now revalidates each field when a date is selected or cleared, so required-field errors reflect the current value.
 * DatePickerRange calendars now stay visible inside overflow-clipped containers, and the range separator stays aligned beside validation messages.

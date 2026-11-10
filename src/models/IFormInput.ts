@@ -54,6 +54,7 @@ export interface IDatePicker extends IFormInputBase, IFormInputValidation, IInpu
 
 export interface IDatePickerRange extends IDatePicker {
     nameSecondary: string;
+    labelSecondary?: string;
     valueSecondary?: Date;
     requiredFrom?: boolean;
     requiredTo?: boolean;

@@ -72,3 +72,21 @@ RequiredDateValidation.args = {
     requiredFrom: true,
     requiredTo: true
 };
+
+export const RequiredFromDateValidation = Template.bind({});
+RequiredFromDateValidation.args = {
+    name: 'startDate',
+    nameSecondary: 'endDate',
+    label: 'Fr.o.m.',
+    labelSecondary: 'T.o.m.',
+    requiredFrom: true
+};
+
+export const RequiredToDateValidation = Template.bind({});
+RequiredToDateValidation.args = {
+    name: 'startDate',
+    nameSecondary: 'endDate',
+    label: 'Fr.o.m.',
+    labelSecondary: 'T.o.m.',
+    requiredTo: true
+};

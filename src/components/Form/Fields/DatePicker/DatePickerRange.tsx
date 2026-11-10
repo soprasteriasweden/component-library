@@ -18,10 +18,13 @@ const popperSettings = {
     popperProps: { strategy: "fixed" }
 } as const;
 
+const requiredMark = (required?: boolean) => (required ? "*" : "");
+
 export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({
     name,
     nameSecondary,
     label,
+    labelSecondary,
     className = "",
     inlineLabel,
     disabledFrom,
@@ -83,11 +86,23 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({
     const errorType = getNestedObjectValue(errors, name)?.type;
     const errorTypeSecondary = getNestedObjectValue(errors, nameSecondary)?.type;
 
+    const labelClassName = inlineLabel ? `col-${labelCol} col-form-label` : "";
+
     return (
         <div className={`${className} form-group ${inlineLabel ? "row" : ""}`}>
-            <label htmlFor={name} className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>
-                {label}:{requiredFrom || requiredTo ? "*" : ""}
-            </label>
+            {labelSecondary ? (
+                // Two labels: one per input, so each date field is individually labelled
+                <div className={labelClassName}>
+                    <label htmlFor={name}>{label}{requiredMark(requiredFrom)}</label>
+                    {" - "}
+                    <label htmlFor={nameSecondary}>{labelSecondary}{requiredMark(requiredTo)}</label>:
+                </div>
+            ) : (
+                // One label describing the whole range
+                <label htmlFor={name} className={labelClassName}>
+                    {label}:{requiredMark(requiredFrom || requiredTo)}
+                </label>
+            )}
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     <div className="date-picker-range__wrapper">

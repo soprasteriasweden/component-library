@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.47
+* Added optional `stripedRows` prop to Table, defaulting to `true`
+* Fixed Table hover and focus highlighting to respect `hoverableRows`
+* Added Table stories for hoverable and striped rows
+
 ## v2.0.46
 * DatePickerRange: added optional `labelSecondary` prop. When set, the from and to dates get their own labels, and the required asterisk is shown beside the corresponding date (`requiredFrom` marks the first, `requiredTo` the second). Without `labelSecondary`, the component behaves as before.
 

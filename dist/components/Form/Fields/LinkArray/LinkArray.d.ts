@@ -4,6 +4,7 @@ interface ILinkFieldArray {
     name: string;
     required: boolean;
     label?: string;
+    groupLabel?: string;
 }
 interface ILink {
     id: number;

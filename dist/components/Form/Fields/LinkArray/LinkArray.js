@@ -4,7 +4,7 @@ import { TextInput } from "../TextInput/TextInput";
 import { HiddenInput } from "../HiddenInput/HiddenInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
-export const LinkArray = ({ existingLinks, name, required, label = "Webbadress" }) => {
+export const LinkArray = ({ existingLinks, name, required, label = "Webbadress", groupLabel }) => {
     const { control } = useFormContext();
     const { fields, append, remove, replace } = useFieldArray({
         control,
@@ -16,7 +16,9 @@ export const LinkArray = ({ existingLinks, name, required, label = "Webbadress" 
             replace(existingLinks);
         }
     }, [existingLinks, replace]);
-    return (React.createElement("div", null,
+    const Container = groupLabel ? "fieldset" : "div";
+    return (React.createElement(Container, null,
+        groupLabel && React.createElement("legend", { className: "fw-bold", style: { fontSize: "inherit" } }, groupLabel),
         fields.map((link, index) => (React.createElement("fieldset", { key: link.fieldId, className: "border rounded p-3 mb-3" },
             React.createElement("legend", { className: "visually-hidden" },
                 "L\u00E4nk ",

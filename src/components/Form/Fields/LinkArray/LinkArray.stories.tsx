@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { Form } from "../../Form";
 import { LinkArray } from "./LinkArray";
@@ -21,3 +21,20 @@ export const Default = () => (
         />
     </Form>
 );
+
+export const WithGroupLabel: StoryObj<typeof LinkArray> = {
+    args: {
+        name: "links",
+        required: false,
+        label: "Url",
+        groupLabel: "Länkar",
+        existingLinks: [
+            { id: 1, url: "https://example.com", description: "Example website" },
+        ],
+    },
+    render: (args) => (
+        <Form>
+            <LinkArray {...args} />
+        </Form>
+    ),
+};

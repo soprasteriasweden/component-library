@@ -44,19 +44,19 @@ export const AlertMessage: React.FunctionComponent<IAlertMessage> = ({ duration,
     }, [children])
 
     return showAlert ? (
-    renderOnTopOfPage
-        ? ReactDOM.createPortal(
-            <div className={`alert alert-top-of-page alert-${alertType}`} role="alert">
-                {children}
-                {dismissible && <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>}
-            </div>,
-            document.body
-        )
-        : (
-            <div className={`alert alert-${alertType}`} role="alert">
-                {children}
-                {dismissible && <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>}
-            </div>
-        )
-) : null;
+        renderOnTopOfPage
+            ? ReactDOM.createPortal(
+                <div className={`alert alert-top-of-page alert-${alertType}`} role="alert">
+                    {children}
+                    {dismissible && <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>}
+                </div>,
+                document.body
+            )
+            : (
+                <div className={`alert alert-${alertType}`} role="alert">
+                    {children}
+                    {dismissible && <button type="button" className="remove-alert" onClick={() => setShowAlert(false)}></button>}
+                </div>
+            )
+    ) : null;
 }

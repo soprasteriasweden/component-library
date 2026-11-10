@@ -2,7 +2,7 @@
 import { Modal, ModalBody, ModalFooter, ModalSize } from "./components/Modal/Modal";
 import { Table } from "./components/Table/Table";
 import { TableLinkCell, ITableLinkCell } from "./components/Table/TableLinkCell";
-import { MainNavigation } from "./components/MainNavigation/MainNavigation";
+import { MainNavigation, IMainNavigationLink, IMainNavigationMenu } from "./components/MainNavigation/MainNavigation";
 import { Tabs, TabContent, TabLink, TabPanel } from "./components/Tabs/Tabs";
 import { AlertMessage, AlertType } from "./components/AlertMessage/AlertMessage";
 import { PaginationNavigation } from "./components/Pagination/PaginationNavigation";
@@ -83,4 +83,4 @@ export {
     BooleanQuestionGroup
 }
 
-export type { ITableLinkCell };
+export type { ITableLinkCell, IMainNavigationLink, IMainNavigationMenu };

@@ -2,7 +2,7 @@ import * as React from "react";
 import '../../../../assets/styles/DatePicker.scss';
 import '../../../../assets/styles/DatePickerRange.style.scss';
 import { IDatePickerRange } from '../../../../models/IFormInput';
-import { useFormContext } from 'react-hook-form'; // Updated hook usage
+import { useFormContext } from 'react-hook-form';
 import { sv } from 'date-fns/locale/sv';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { InputIconTooltip } from "../TooltipItem/InputIconTooltip";
@@ -11,7 +11,34 @@ import { getNestedObjectValue } from "../../../../utils/utils";
 
 registerLocale('sv-se', sv);
 
-export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ name, nameSecondary, label, className, inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
+// Anchor the calendar to the input's left edge and position it with "fixed",
+// so it isn't clipped by an overflowing parent such as a scrollable modal body.
+const popperSettings = {
+    popperPlacement: "bottom-start",
+    popperProps: { strategy: "fixed" }
+} as const;
+
+const requiredMark = (required?: boolean) => (required ? "*" : "");
+
+export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({
+    name,
+    nameSecondary,
+    label,
+    labelSecondary,
+    className = "",
+    inlineLabel,
+    disabledFrom,
+    disabledTo,
+    requiredFrom,
+    requiredTo,
+    value,
+    valueSecondary,
+    min,
+    minSecondary,
+    tooltipDescription,
+    labelCol = 4,
+    inputCol = 8
+}) => {
 
     const [fromDate, setFromDate] = React.useState<Date | undefined | null>(value);
     const [toDate, setToDate] = React.useState<Date | undefined | null>(valueSecondary);
@@ -28,7 +55,9 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
 
         return () => {
             clearErrors(name);
+            clearErrors(nameSecondary);
             unregister(name);
+            unregister(nameSecondary);
             document.getElementById("clear-form")?.removeEventListener("click", resetValue);
         }
     }, []);
@@ -57,22 +86,35 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
     const errorType = getNestedObjectValue(errors, name)?.type;
     const errorTypeSecondary = getNestedObjectValue(errors, nameSecondary)?.type;
 
+    const labelClassName = inlineLabel ? `col-${labelCol} col-form-label` : "";
+
     return (
         <div className={`${className} form-group ${inlineLabel ? "row" : ""}`}>
-            <label className={inlineLabel ? `col-${labelCol} col-form-label` : ""}>
-                {label}:{requiredFrom || requiredTo ? "*" : ""}
-            </label>
+            {labelSecondary ? (
+                // Two labels: one per input, so each date field is individually labelled
+                <div className={labelClassName}>
+                    <label htmlFor={name}>{label}{requiredMark(requiredFrom)}</label>
+                    {" - "}
+                    <label htmlFor={nameSecondary}>{labelSecondary}{requiredMark(requiredTo)}</label>:
+                </div>
+            ) : (
+                // One label describing the whole range
+                <label htmlFor={name} className={labelClassName}>
+                    {label}:{requiredMark(requiredFrom || requiredTo)}
+                </label>
+            )}
             <div className={inlineLabel ? `col-${inputCol}` : ""}>
                 <div className="input-group">
                     <div className="date-picker-range__wrapper">
                         <div className="date-picker-range__date">
                             <DatePicker
+                                {...popperSettings}
                                 name={name}
                                 id={name}
                                 selected={fromDate}
                                 onChange={date => {
                                     setFromDate(date);
-                                    setValue(name, date?.toLocaleDateString("sv-se"));
+                                    setValue(name, date?.toLocaleDateString("sv-se"), { shouldValidate: true });
                                 }}
                                 dateFormat="yyyy-MM-dd"
                                 className={"form-control form-control-sm " + (disabledFrom ? "disabled " : "")}
@@ -86,22 +128,24 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 onChangeRaw={(e: any) => e.preventDefault()}
                                 isClearable={!disabledFrom}
                             />
-
-                            <span className="text-danger">
-                                {errorType === "required" && "Välj ett datum"}
-                            </span>
+                            {errorType === "required" && (
+                                <span className="text-danger d-block">Välj ett datum</span>
+                            )}
                         </div>
-
-                        <span className="date-connector">-</span>
+                        <span
+                            className="date-connector form-control-plaintext form-control-sm"
+                            aria-hidden="true"> –
+                        </span>
 
                         <div className="date-picker-range__date">
                             <DatePicker
+                                {...popperSettings}
                                 name={nameSecondary}
                                 id={nameSecondary}
                                 selected={toDate}
                                 onChange={date => {
                                     setToDate(date);
-                                    setValue(nameSecondary, date?.toLocaleDateString("sv-se"));
+                                    setValue(nameSecondary, date?.toLocaleDateString("sv-se"), { shouldValidate: true });
                                 }}
                                 dateFormat="yyyy-MM-dd"
                                 className={"form-control form-control-sm " + (disabledTo ? "disabled " : "")}
@@ -114,10 +158,9 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({ nam
                                 onChangeRaw={(e: any) => e.preventDefault()}
                                 isClearable={!disabledTo}
                             />
-
-                            <span className="text-danger">
-                                {errorTypeSecondary === "required" && "Välj ett datum"}
-                            </span>
+                            {errorTypeSecondary === "required" && (
+                                <span className="text-danger d-block">Välj ett datum</span>
+                            )}
                         </div>
                     </div>
 

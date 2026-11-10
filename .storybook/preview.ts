@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap";
 import "../src/assets/styles/Text.scss";
 
 const preview: Preview = {

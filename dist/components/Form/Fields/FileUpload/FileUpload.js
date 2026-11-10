@@ -7,14 +7,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { CustomButton, ButtonType } from '../../../CustomButton/CustomButton';
 import "../../../../assets/styles/FileUpload.style.scss";
+/**
+ * Builds the react-dropzone `accept` object.
+ * - string[]  -> { [type]: [] }   (existing behavior, unchanged)
+ * - Accept    -> passed through   (e.g. { "application/pdf": [".pdf"] })
+ */
+const toAccept = (types) => {
+    if (!types)
+        return undefined;
+    return Array.isArray(types)
+        ? types.reduce((acc, type) => (Object.assign(Object.assign({}, acc), { [type]: [] })), {})
+        : types;
+};
+/**
+ * Builds the list shown in the "Tillåtna filtyper" hint.
+ * - string[]  -> as is (existing behavior, unchanged)
+ * - Accept    -> extensions if present, otherwise the MIME type
+ */
+const toHintTypes = (types) => {
+    if (!types)
+        return [];
+    return Array.isArray(types)
+        ? types
+        : Object.entries(types).flatMap(([mime, exts]) => (exts.length ? exts : [mime]));
+};
 export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedFileTypes, name, disabled, multiple = false, inlineLabel, className, required, requiredValidationMessage, labelCol = 4, inputCol = 8, documentType, numOfFiles, maxFiles, disableDropzoneOnSelect = false }) => {
     var _a;
     const { formState: { errors }, register, setValue, unregister } = useFormContext();
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [selectedDocumentTypeIds, setSelectedDocumentTypeIds] = useState([]);
     const [numberOfFiles, setNumberOfFiles] = useState(0);
+    const hintTypes = toHintTypes(allowedFileTypes);
     const { getRootProps, getInputProps, acceptedFiles, fileRejections } = useDropzone({
-        accept: allowedFileTypes === null || allowedFileTypes === void 0 ? void 0 : allowedFileTypes.reduce((acc, type) => (Object.assign(Object.assign({}, acc), { [type]: [] })), {}),
+        accept: toAccept(allowedFileTypes),
         multiple,
         disabled: disabled || (disableDropzoneOnSelect && !multiple && selectedFiles.length > 0),
         maxSize: maxSizeBytes,
@@ -61,8 +86,7 @@ export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedF
     const renderSelectedFiles = selectedFiles.map((file, index) => {
         var _a, _b;
         if (!documentType) {
-            return (React.createElement("div", { key: index, className: "mb-1" },
-                React.createElement("span", null, file.name)));
+            return (React.createElement("input", { key: index, type: "text", className: "form-control form-control-sm mb-1", value: file.name, readOnly: true }));
         }
         const fieldName = `${documentType.documentTypesName}[${index}]`;
         const fieldRegister = register(fieldName, { required: true });
@@ -97,13 +121,13 @@ export const FileUpload = ({ maxSizeBytes = 5 * Math.pow(2, 20), label, allowedF
                 React.createElement("p", null,
                     multiple ? "Dra filer hit eller klicka här för att välja filer" : "Dra en fil hit eller klicka här",
                     maxSizeBytes && ` (max ${formatBytes(maxSizeBytes)})`),
-                allowedFileTypes && React.createElement("p", null,
+                hintTypes.length > 0 && React.createElement("p", null,
                     "Till\u00E5tna filtyper: ",
-                    allowedFileTypes.join(", ")),
+                    hintTypes.join(", ")),
                 ((_a = errors[name]) === null || _a === void 0 ? void 0 : _a.type) === "required" && (React.createElement("div", { className: "text-danger mt-1" }, requiredValidationMessage || `${label} måste anges`))),
             selectedFiles.length > 0 && (React.createElement("div", { className: "ms-2" },
                 React.createElement("div", { className: "d-flex justify-content-between align-items-center mb-1" },
                     React.createElement("label", { className: "mb-0" }, "Valda dokument"),
                     React.createElement(CustomButton, { buttonType: ButtonType.deleteAlt, buttonText: "Rensa", onClick: clearFiles })),
-                selectedFiles.map((file) => (React.createElement("input", { key: file.name, type: "text", className: "form-control form-control-sm mb-1", value: file.name, readOnly: true }))))))));
+                renderSelectedFiles)))));
 };

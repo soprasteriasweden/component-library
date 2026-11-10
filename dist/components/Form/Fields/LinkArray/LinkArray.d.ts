@@ -3,6 +3,7 @@ interface ILinkFieldArray {
     existingLinks: ILink[] | undefined;
     name: string;
     required: boolean;
+    label?: string;
 }
 interface ILink {
     id: number;

@@ -1,3 +1,4 @@
+import { Accept } from "react-dropzone";
 export interface IFormInputBase {
     name: string;
     disabled?: boolean;
@@ -35,6 +36,7 @@ export interface IDatePicker extends IFormInputBase, IFormInputValidation, IInpu
 }
 export interface IDatePickerRange extends IDatePicker {
     nameSecondary: string;
+    labelSecondary?: string;
     valueSecondary?: Date;
     requiredFrom?: boolean;
     requiredTo?: boolean;
@@ -120,7 +122,7 @@ export interface IUnorderedList extends IColumnPlacement {
 }
 export interface IFileUpload extends IFormInputBaseWithValidation, IFormInputValidation, IColumnPlacement {
     multiple?: boolean;
-    allowedFileTypes?: string[];
+    allowedFileTypes?: string[] | Accept;
     maxSizeBytes?: number;
     initialFiles?: File[];
     documentType?: IDocumentType;

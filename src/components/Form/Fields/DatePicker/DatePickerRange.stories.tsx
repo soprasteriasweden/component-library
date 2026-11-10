@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import { expect, userEvent, waitFor, within } from '@storybook/test';
 import { useForm } from 'react-hook-form';
 import { DatePickerRange } from './DatePickerRange';
 import { IDatePickerRange } from '../../../../models/IFormInput';
@@ -61,4 +62,31 @@ DateRangeWithoutTooltip.args = {
     nameSecondary: 'endDate',
     label: 'Date Range without tooltip',
     inlineLabel: true
+};
+
+export const RequiredDateValidation = Template.bind({});
+RequiredDateValidation.args = {
+    name: 'startDate',
+    nameSecondary: 'endDate',
+    label: 'Required date range',
+    requiredFrom: true,
+    requiredTo: true
+};
+
+export const RequiredFromDateValidation = Template.bind({});
+RequiredFromDateValidation.args = {
+    name: 'startDate',
+    nameSecondary: 'endDate',
+    label: 'Fr.o.m.',
+    labelSecondary: 'T.o.m.',
+    requiredFrom: true
+};
+
+export const RequiredToDateValidation = Template.bind({});
+RequiredToDateValidation.args = {
+    name: 'startDate',
+    nameSecondary: 'endDate',
+    label: 'Fr.o.m.',
+    labelSecondary: 'T.o.m.',
+    requiredTo: true
 };

@@ -32,7 +32,7 @@
     text-align: inherit;
 }
 
-.table tbody tr:hover > *,
-.table tbody tr:focus-within > * {
+.table-hover tbody tr:hover > *,
+.table-hover tbody tr:focus-within > * {
     background-color: #edf2f7;//#f4f8fb;
 }

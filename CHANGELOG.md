@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.48
+* Added optional `groupLabel` prop that wraps the array in a `fieldset` with an accessible, bold `legend`. The legend inherits the surrounding font size instead of Bootstrap's default legend size. 
+* Rendering is unchanged when the prop is omitted. 
+* Added a `WithGroupLabel` story.
+
 ## v2.0.47
 * Added optional `stripedRows` prop to Table, defaulting to `true`
 * Fixed Table hover and focus highlighting to respect `hoverableRows`

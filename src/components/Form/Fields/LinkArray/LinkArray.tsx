@@ -10,6 +10,7 @@ interface ILinkFieldArray {
     name: string;
     required: boolean;
     label?: string;
+    groupLabel?: string;
 }
 
 interface ILink {
@@ -18,7 +19,7 @@ interface ILink {
     description: string;
 }
 
-export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLinks, name, required, label = "Webbadress" }) => {
+export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLinks, name, required, label = "Webbadress", groupLabel }) => {
     const { control } = useFormContext<Record<string, ILink[]>>();
     const { fields, append, remove, replace } = useFieldArray({
         control,
@@ -32,8 +33,11 @@ export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLi
         }
     }, [existingLinks, replace]);
 
+    const Container = groupLabel ? "fieldset" : "div";
+
     return (
-        <div>
+        <Container>
+            {groupLabel && <legend className="fw-bold" style={{ fontSize: "inherit" }}>{groupLabel}</legend>}
             {fields.map((link, index) => (
                 <fieldset key={link.fieldId} className="border rounded p-3 mb-3">
                     <legend className="visually-hidden">Länk {index + 1}</legend>
@@ -81,6 +85,6 @@ export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLi
                     Lägg till
                 </button>
             </div>
-        </div>
+        </Container>
     );
 };

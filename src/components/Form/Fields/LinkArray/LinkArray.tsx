@@ -9,6 +9,7 @@ interface ILinkFieldArray {
     existingLinks: ILink[] | undefined;
     name: string;
     required: boolean;
+    label?: string;
 }
 
 interface ILink {
@@ -17,7 +18,7 @@ interface ILink {
     description: string;
 }
 
-export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLinks, name, required }) => {
+export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLinks, name, required, label = "Webbadress" }) => {
     const { control } = useFormContext<Record<string, ILink[]>>();
     const { fields, append, remove, replace } = useFieldArray({
         control,
@@ -42,7 +43,7 @@ export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLi
 
                         <TextInput
                             name={`${name}.${index}.url`}
-                            label="Webbadress"
+                            label={label}
                             defaultValue={link.url}
                             className="col-12 col-md"
                             required={required}
@@ -52,7 +53,7 @@ export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLi
                             label="Beskrivning"
                             defaultValue={link.description}
                             className="col-12 col-md"
-                            required={required}
+                            required={false}
                         />
 
                         <div className="col-12 col-md-auto">

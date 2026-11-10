@@ -16,8 +16,6 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
     value,
     requiredValidationMessage,
     id,
-    labelCol = 4,
-    inputCol = 8,
     onChange,
     withColumn
 }) => {
@@ -26,7 +24,7 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
         register: "",
         watch: "",
         setValue: ""
-    }
+    };
 
     const {
         formState: { errors },
@@ -34,6 +32,9 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
         watch,
         setValue
     } = useFormContext() ?? readonlyValues;
+
+    // Fall back to the field name so the label's htmlFor always points at the input
+    const inputId = id ?? name;
 
     const isChecked = (typeof watch !== "string" ? watch(name) : undefined) ?? checked ?? false;
 
@@ -51,34 +52,30 @@ export const Checkbox: React.FunctionComponent<ICheckbox> = ({
 
     return (
         <div className={`form-group ${className}`}>
-            <div className="row align-items-center">
-                <label className={`col-md-${labelCol} col-form-label`} htmlFor={id}>
+            <div className="form-check d-flex align-items-center gap-2 mb-0 ps-0">
+                <label className="col-form-label p-0" htmlFor={inputId}>
                     {tooltipDescription ? (
-                        <TooltipItem key={id} title={label} description={tooltipDescription} />
+                        <TooltipItem key={inputId} title={label} description={tooltipDescription} />
                     ) : (
                         <>
                             {label}{withColumn ? ":" : ""}
                         </>
                     )}
                 </label>
-                <div className={`col-md-${inputCol}`}>
-                    <div className="form-check d-flex align-items-center gap-2 mb-0 ps-0">
-                        <input
-                            type="checkbox"
-                            className="form-check-input m-0 float-none"
-                            id={id}
-                            disabled={disabled}
-                            value={value}
-                            checked={isChecked}
-                            {...(typeof register !== "string"
-                                ? register(name, { required, onChange: handleChange })
-                                : { name, onChange: handleChange })}
-                        />
-                        <span className="text-danger">
-                            {errorType === "required" && (requiredValidationMessage || "Måste kryssas i")}
-                        </span>
-                    </div>
-                </div>
+                <input
+                    type="checkbox"
+                    className="form-check-input m-0 float-none"
+                    id={inputId}
+                    disabled={disabled}
+                    value={value}
+                    checked={isChecked}
+                    {...(typeof register !== "string"
+                        ? register(name, { required, onChange: handleChange })
+                        : { name, onChange: handleChange })}
+                />
+                <span className="text-danger">
+                    {errorType === "required" && (requiredValidationMessage || "Måste kryssas i")}
+                </span>
             </div>
         </div>
     );

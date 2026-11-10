@@ -8,8 +8,6 @@ export const CheckboxList: React.FunctionComponent<ICheckboxList> = ({
     toggleAll,
     toggleAllLabel = "Välj alla",
     name,
-    inputCol = 8,
-    labelCol = 4,
 }) => {
     const { setValue } = useFormContext();
 
@@ -50,22 +48,20 @@ export const CheckboxList: React.FunctionComponent<ICheckboxList> = ({
             {toggleAll && (
                 <>
                     <legend className="visually-hidden">{toggleAllLabel}</legend>
-                    <div className="form-group row align-items-center checkbox-item mb-1">
+                    <div className="d-flex align-items-center gap-2 checkbox-item mb-1">
+                        <input
+                            type="checkbox"
+                            className="form-check-input m-0"
+                            id={`${name}-toggleAll`}
+                            checked={selectedValues.length === initialCheckboxes.length}
+                            onChange={toggleAllCheckboxes}
+                        />
                         <label
-                            className={`col-${labelCol} col-form-label fw-semibold`}
+                            className="mb-0 fw-semibold"
                             htmlFor={`${name}-toggleAll`}
                         >
                             {toggleAllLabel}
                         </label>
-                        <div className={`col-${inputCol} d-flex align-items-center`}>
-                            <input
-                                type="checkbox"
-                                className="form-check-input m-0"
-                                id={`${name}-toggleAll`}
-                                checked={selectedValues.length === initialCheckboxes.length}
-                                onChange={toggleAllCheckboxes}
-                            />
-                        </div>
                     </div>
                 </>
             )}
@@ -75,24 +71,22 @@ export const CheckboxList: React.FunctionComponent<ICheckboxList> = ({
 
                 return (
                     <div
-                        className="form-group row align-items-center checkbox-item"
+                        className={`d-flex align-items-center gap-2 checkbox-item mb-1 ${toggleAll ? "ps-4" : ""}`}
                         key={checkbox.id}
                     >
+                        <input
+                            type="checkbox"
+                            className="form-check-input m-0"
+                            id={`${name}-${checkbox.id}`}
+                            checked={isChecked}
+                            onChange={() => toggleSingleCheckbox(checkbox.value)}
+                        />
                         <label
-                            className={`col-${labelCol} col-form-label ${toggleAll ? "ps-4" : ""}`}
+                            className="mb-0"
                             htmlFor={`${name}-${checkbox.id}`}
                         >
                             {checkbox.label}
                         </label>
-                        <div className={`col-${inputCol} d-flex align-items-center`}>
-                            <input
-                                type="checkbox"
-                                className="form-check-input m-0"
-                                id={`${name}-${checkbox.id}`}
-                                checked={isChecked}
-                                onChange={() => toggleSingleCheckbox(checkbox.value)}
-                            />
-                        </div>
                     </div>
                 );
             })}

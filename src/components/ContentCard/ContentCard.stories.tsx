@@ -52,6 +52,11 @@ const meta = {
         date: { control: "text" },
         message: { control: "text" },
         highlighted: { control: "boolean" },
+        highlightedStripe: {
+            control: "boolean",
+            description: "Thicker left edge on highlighted cards.",
+            table: { defaultValue: { summary: "true" } },
+        },
         headingLevel: {
             control: { type: "radio" },
             options: [1, 2, 3, 4, 5],
@@ -74,6 +79,7 @@ const meta = {
         message:
             "The system will be unavailable on Saturday between 02:00 and 06:00 while we perform scheduled maintenance. " +
             "No action is required from you.",
+        highlightedStripe: true,
     },
 } satisfies Meta<typeof ContentCard>;
 
@@ -85,6 +91,20 @@ export const Default: Story = {};
 export const Highlighted: Story = {
     args: {
         highlighted: true,
+    },
+};
+
+export const HighlightedWithAccent: Story = {
+    args: {
+        highlighted: true,
+        colors: { accent: "#add8e6" },
+    },
+};
+
+export const HighlightedWithoutStripe: Story = {
+    args: {
+        highlighted: true,
+        highlightedStripe: false,
     },
 };
 

@@ -12,7 +12,7 @@ export interface ContentCardLink {
     description?: string | null;
 }
 export interface ContentCardColors {
-    /** Border of the highlighted card */
+    /** Border color of a highlighted card. Defaults to `border`, so there is no color difference unless this is set */
     accent?: string;
     /** Secondary text (date, file size) */
     mutedText?: string;
@@ -28,6 +28,8 @@ export interface ContentCardProps {
     message?: React.ReactNode;
     /** Applies the highlighted style (accent border) */
     highlighted?: boolean;
+    /** Show the thicker left edge on highlighted cards. Set to false for a card identical to a normal one. Default true */
+    highlightedStripe?: boolean;
     documents?: ContentCardDocument[];
     links?: ContentCardLink[];
     /** Heading and aria-label of the documents section */

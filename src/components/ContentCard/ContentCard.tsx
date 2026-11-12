@@ -16,7 +16,7 @@ export interface ContentCardLink {
 }
 
 export interface ContentCardColors {
-    /** Border of the highlighted card (replaces `border` when `highlighted` is true) */
+    /** Border color of a highlighted card. Defaults to `border`, so there is no color difference unless this is set */
     accent?: string;
     /** Secondary text (date, file size) */
     mutedText?: string;
@@ -33,6 +33,8 @@ export interface ContentCardProps {
     message?: React.ReactNode;
     /** Applies the highlighted style (accent border) */
     highlighted?: boolean;
+    /** Show the thicker left edge on highlighted cards. Set to false for a card identical to a normal one. Default true */
+    highlightedStripe?: boolean;
 
     documents?: ContentCardDocument[];
     links?: ContentCardLink[];
@@ -84,6 +86,7 @@ export const ContentCard: React.FunctionComponent<ContentCardProps> = ({
     date,
     message,
     highlighted = false,
+    highlightedStripe = true,
     documents = [],
     links = [],
     documentsLabel,
@@ -109,10 +112,9 @@ export const ContentCard: React.FunctionComponent<ContentCardProps> = ({
     const classNames = [
         "content-card",
         highlighted ? "content-card--highlighted" : "",
+        highlighted && !highlightedStripe ? "content-card--no-stripe" : "",
         className ?? "",
-    ]
-        .filter(Boolean)
-        .join(" ");
+    ].filter(Boolean).join(" ");
 
     return (
         <article

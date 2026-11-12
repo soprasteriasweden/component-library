@@ -19,7 +19,7 @@ const colorsToCssVars = (colors) => {
     };
     return Object.fromEntries(Object.entries(vars).filter(([, value]) => value !== undefined));
 };
-export const ContentCard = ({ title, date, message, highlighted = false, documents = [], links = [], documentsLabel, linksLabel, downloadIcon, getDownloadTitle, formatFileSize = defaultFormatFileSize, headingLevel = 2, id, colors, className, style, }) => {
+export const ContentCard = ({ title, date, message, highlighted = false, highlightedStripe = true, documents = [], links = [], documentsLabel, linksLabel, downloadIcon, getDownloadTitle, formatFileSize = defaultFormatFileSize, headingLevel = 2, id, colors, className, style, }) => {
     const generatedId = React.useId();
     const headingId = `${id !== null && id !== void 0 ? id : generatedId}-heading`;
     const TitleTag = `h${headingLevel}`;
@@ -29,10 +29,9 @@ export const ContentCard = ({ title, date, message, highlighted = false, documen
     const classNames = [
         "content-card",
         highlighted ? "content-card--highlighted" : "",
+        highlighted && !highlightedStripe ? "content-card--no-stripe" : "",
         className !== null && className !== void 0 ? className : "",
-    ]
-        .filter(Boolean)
-        .join(" ");
+    ].filter(Boolean).join(" ");
     return (React.createElement("article", { className: classNames, style: Object.assign(Object.assign({}, colorsToCssVars(colors)), style), "aria-labelledby": headingId },
         React.createElement(TitleTag, { id: headingId, className: "content-card__title" }, title),
         date && React.createElement("p", { className: "content-card__date" }, date),

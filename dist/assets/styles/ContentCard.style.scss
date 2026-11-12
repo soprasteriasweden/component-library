@@ -1,11 +1,9 @@
-.content-card {
-    --content-card-accent: #add8e6;
-    --content-card-muted-text: #6c757d;
-    --content-card-border: #dee2e6;
-    --content-card-download-text: #000;
+$content-card-border-default: #dee2e6;
+$content-card-muted-default: #6c757d;
 
+.content-card {
     background-color: #fff;
-    border: 1px solid var(--content-card-border, #dee2e6);
+    border: 1px solid var(--content-card-border, $content-card-border-default);
     border-radius: 0.25rem;
     padding: 1.25rem;
 
@@ -15,7 +13,7 @@
     }
 
     &__date {
-        color: var(--content-card-muted-text, #6c757d);
+        color: var(--content-card-muted-text, $content-card-muted-default);
         font-size: 14px;
         margin-bottom: 12px;
     }
@@ -26,9 +24,13 @@
     }
 
     &__attachments {
-        border-top: 1px solid var(--content-card-border, #dee2e6);
+        border-top: 1px solid var(--content-card-border, $content-card-border-default);
         margin-top: 16px;
         padding-top: 12px;
+
+        > section:last-child .content-card__list {
+            margin-bottom: 0;
+        }
     }
 
     &__attachments-title {
@@ -51,9 +53,11 @@
         background: none;
         border: 0;
         color: var(--content-card-download-text, #000);
+        overflow-wrap: anywhere;
         padding: 0;
         text-align: left;
         text-decoration: underline;
+        text-decoration-skip-ink: none;
 
         &:hover {
             cursor: pointer;
@@ -64,19 +68,24 @@
         }
     }
 
+    &__download-icon {
+        display: inline-block;
+        margin-right: 0.4em;
+    }
+
     &__file-size {
-        color: var(--content-card-muted-text, #6c757d);
+        color: var(--content-card-muted-text, $content-card-muted-default);
         font-size: 14px;
         white-space: nowrap;
     }
 
+    // Color falls back to the normal border color
     &--highlighted {
-        border: 1px solid var(--content-card-accent, #add8e6);
+        border-color: var(--content-card-accent, var(--content-card-border, $content-card-border-default));
         border-left-width: 8px;
     }
 
-    &__download-icon {
-        display: inline-block; // inline-block children aren't underlined by the parent
-        margin-right: 0.4em;
+    &--no-stripe {
+        border-left-width: 1px;
     }
 }

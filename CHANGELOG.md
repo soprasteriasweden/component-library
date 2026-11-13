@@ -1,5 +1,9 @@
 # Changelog
 
+
+## v2.0.49
+* DatePickerRange: Added optional `onChangeFrom` and `onChangeTo` callbacks to notify parent components when the respective date changes or is cleared. Each callback receives a Date object or null. Existing implementations remain unaffected.
+
 ## v2.0.48
 * Added optional `groupLabel` prop that wraps the array in a `fieldset` with an accessible, bold `legend`. The legend inherits the surrounding font size instead of Bootstrap's default legend size. 
 * Rendering is unchanged when the prop is omitted. 

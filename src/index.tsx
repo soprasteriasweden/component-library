@@ -17,6 +17,7 @@ import { SortTableContext, SortTableProvider } from "./components/Table/SortTabl
 import { SortableTableHeader } from "./components/Table/SortableTableHeader";
 import { FormDownloadButton } from "./components/FormDownloadButton/FormDownloadButton";
 import { HyperLink } from "./components/Link/HyperLink";
+import { ContentCard, defaultFormatFileSize, type ContentCardProps, type ContentCardDocument, type ContentCardLink, type ContentCardColors } from "./components/ContentCard/ContentCard";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import "./assets/styles/Common.scss";
 
@@ -68,6 +69,8 @@ export {
     ClearFormButton,
     FormDownloadButton,
     HyperLink,
+    ContentCard,
+    defaultFormatFileSize,
     Tooltip,
     TooltipItem,
     InputIconTooltip,
@@ -83,4 +86,4 @@ export {
     BooleanQuestionGroup
 }
 
-export type { ITableLinkCell, IMainNavigationLink, IMainNavigationMenu };
+export type { ITableLinkCell, IMainNavigationLink, IMainNavigationMenu, ContentCardProps, ContentCardDocument, ContentCardLink, ContentCardColors };

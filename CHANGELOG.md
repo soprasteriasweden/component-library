@@ -1,4 +1,6 @@
 # Changelog
+## v2.0.50
+* Added alternative excel button 
 
 ## v2.0.49
 * LinkArray's add button now uses the small button size to match other buttons.

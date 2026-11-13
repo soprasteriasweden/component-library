@@ -80,7 +80,7 @@ export const LinkArray: React.FunctionComponent<ILinkFieldArray> = ({ existingLi
             ))}
 
             <div className="text-end">
-                <button type="button" className="btn btn-outline-primary" onClick={() => append({ description: "", url: "", id: 0 })}>
+                <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => append({ description: "", url: "", id: 0 })}>
                     <FontAwesomeIcon icon={faPlus} className="me-2" />
                     Lägg till
                 </button>

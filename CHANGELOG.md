@@ -1,6 +1,7 @@
 # Changelog
 
 ## v2.0.49
+* LinkArray's add button now uses the small button size to match other buttons.
 * `ContentCard` is a card for content with a title date, message and optional attachments (downloadable documents and links).
 * Labels, icons, date and file size formatting are provided by the consumer through props.
 * Colors can be set with the `colors` prop or the `--content-card-*` css variables.

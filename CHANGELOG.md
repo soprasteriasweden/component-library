@@ -1,5 +1,5 @@
 # Changelog
-## v2.0.50
+## v2.0.51
 * Added alternative excel button 
 
 ## v2.0.49

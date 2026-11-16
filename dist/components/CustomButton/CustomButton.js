@@ -23,6 +23,7 @@ export var ButtonType;
     ButtonType["download"] = "btn-primary btn-download";
     ButtonType["pdf"] = "btn-primary btn-pdf";
     ButtonType["excel"] = "btn-primary btn-excel";
+    ButtonType["excelAlt"] = "btn-outline-primary btn-excel-alt";
     ButtonType["general"] = "btn-outline-dark";
     ButtonType["success"] = "btn-success";
     ButtonType["warning"] = "btn-warning";
@@ -52,6 +53,7 @@ export const CustomButton = (props) => {
         [ButtonType.download]: React.createElement(FontAwesomeIcon, { icon: faDownload }),
         [ButtonType.pdf]: React.createElement(FontAwesomeIcon, { icon: faFilePdf }),
         [ButtonType.excel]: React.createElement(FontAwesomeIcon, { icon: faFileExcel }),
+        [ButtonType.excelAlt]: React.createElement(FontAwesomeIcon, { icon: faFileExcel }),
         [ButtonType.delete]: React.createElement(FontAwesomeIcon, { icon: faTrash }),
         [ButtonType.deleteAlt]: React.createElement(FontAwesomeIcon, { icon: faTrash })
     };

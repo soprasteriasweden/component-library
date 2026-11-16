@@ -16,6 +16,7 @@ export const Download = () => <CustomButton buttonText="Download" buttonType={Bu
 export const Edit = () => <CustomButton buttonText="Edit" buttonType={ButtonType.edit} />;
 export const EditAlt = () => <CustomButton buttonText="Edit" buttonType={ButtonType.editAlt} />;
 export const Excel = () => <CustomButton buttonText="Excel" buttonType={ButtonType.excel} />;
+export const ExcelAlt = () => <CustomButton buttonText="Excel" buttonType={ButtonType.excelAlt} />;
 export const Pdf = () => <CustomButton buttonText="Pdf" buttonType={ButtonType.pdf} />;
 export const Success = () => <CustomButton buttonText="Success" buttonType={ButtonType.success} />;
 export const Warning = () => <CustomButton buttonText="Warning" buttonType={ButtonType.warning} />;

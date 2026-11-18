@@ -43,6 +43,8 @@ export interface IDatePickerRange extends IDatePicker {
     disabledFrom?: boolean;
     disabledTo?: boolean;
     minSecondary?: Date;
+    onChangeFrom?: (val: Date | null) => void;
+    onChangeTo?: (val: Date | null) => void;
     tooltipDescription?: string;
 }
 export interface ISelect extends IFormInputBase, IFormInputBaseWithValidation, IColumnPlacement {

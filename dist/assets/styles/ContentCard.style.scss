@@ -1,0 +1,91 @@
+$content-card-border-default: #dee2e6;
+$content-card-muted-default: #6c757d;
+
+.content-card {
+    background-color: #fff;
+    border: 1px solid var(--content-card-border, $content-card-border-default);
+    border-radius: 0.25rem;
+    padding: 1.25rem;
+
+    &__title {
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+
+    &__date {
+        color: var(--content-card-muted-text, $content-card-muted-default);
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    &__message {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
+    &__attachments {
+        border-top: 1px solid var(--content-card-border, $content-card-border-default);
+        margin-top: 16px;
+        padding-top: 12px;
+
+        > section:last-child .content-card__list {
+            margin-bottom: 0;
+        }
+    }
+
+    &__attachments-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    &__list {
+        list-style: none;
+        margin: 0 0 12px;
+        padding: 0;
+
+        li {
+            margin-bottom: 4px;
+        }
+    }
+
+    &__download {
+        background: none;
+        border: 0;
+        color: var(--content-card-download-text, #000);
+        overflow-wrap: anywhere;
+        padding: 0;
+        text-align: left;
+        text-decoration: underline;
+        text-decoration-skip-ink: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: auto;
+        }
+    }
+
+    &__download-icon {
+        display: inline-block;
+        margin-right: 0.4em;
+    }
+
+    &__file-size {
+        color: var(--content-card-muted-text, $content-card-muted-default);
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    // Color falls back to the normal border color
+    &--highlighted {
+        border-color: var(--content-card-accent, var(--content-card-border, $content-card-border-default));
+        border-left-width: 8px;
+    }
+
+    &--no-stripe {
+        border-left-width: 1px;
+    }
+}

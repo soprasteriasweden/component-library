@@ -8,6 +8,7 @@ export declare enum ButtonType {
     download = "btn-primary btn-download",
     pdf = "btn-primary btn-pdf",
     excel = "btn-primary btn-excel",
+    excelAlt = "btn-outline-primary btn-excel-alt",
     general = "btn-outline-dark",
     success = "btn-success",
     warning = "btn-warning",

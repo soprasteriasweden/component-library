@@ -15,7 +15,7 @@ const withRouter = (component: React.ReactNode) => (
 
 export const InternalLink = () =>
     withRouter(
-        <HyperLink linkText="Intern länk" to="/test/1" />
+        <HyperLink linkText="Ej prio" to="/test/1" />
     );
 
 export const ExternalLink = () => (

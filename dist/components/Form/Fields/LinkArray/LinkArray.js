@@ -32,7 +32,7 @@ export const LinkArray = ({ existingLinks, name, required, label = "Webbadress",
                     React.createElement("button", { type: "button", className: "btn btn-sm btn-outline-danger", onClick: () => remove(index), "aria-label": `Ta bort länk ${index + 1}`, title: "Ta bort" },
                         React.createElement(FontAwesomeIcon, { icon: faTrashAlt }))))))),
         React.createElement("div", { className: "text-end" },
-            React.createElement("button", { type: "button", className: "btn btn-outline-primary", onClick: () => append({ description: "", url: "", id: 0 }) },
+            React.createElement("button", { type: "button", className: "btn btn-sm btn-outline-primary", onClick: () => append({ description: "", url: "", id: 0 }) },
                 React.createElement(FontAwesomeIcon, { icon: faPlus, className: "me-2" }),
                 "L\u00E4gg till"))));
 };

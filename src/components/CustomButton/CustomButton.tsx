@@ -12,6 +12,7 @@ export enum ButtonType {
     download = "btn-primary btn-download",
     pdf = "btn-primary btn-pdf",
     excel = "btn-primary btn-excel",
+    excelAlt = "btn-outline-primary btn-excel-alt",
     general = "btn-outline-dark",
     success = "btn-success",
     warning = "btn-warning",
@@ -53,6 +54,7 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         [ButtonType.download]: <FontAwesomeIcon icon={faDownload} />,
         [ButtonType.pdf]: <FontAwesomeIcon icon={faFilePdf} />,
         [ButtonType.excel]: <FontAwesomeIcon icon={faFileExcel} />,
+        [ButtonType.excelAlt]: <FontAwesomeIcon icon={faFileExcel} />,
         [ButtonType.delete]: <FontAwesomeIcon icon={faTrash} />,
         [ButtonType.deleteAlt]: <FontAwesomeIcon icon={faTrash} />
     };

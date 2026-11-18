@@ -35,6 +35,8 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({
     valueSecondary,
     min,
     minSecondary,
+    onChangeFrom,
+    onChangeTo,
     tooltipDescription,
     labelCol = 4,
     inputCol = 8
@@ -79,8 +81,10 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({
     const resetValue = () => {
         setValue(name, undefined);
         setFromDate(undefined);
+        onChangeFrom?.(null);
         setValue(nameSecondary, undefined);
         setToDate(undefined);
+        onChangeTo?.(null);
     }
 
     const errorType = getNestedObjectValue(errors, name)?.type;
@@ -115,6 +119,7 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({
                                 onChange={date => {
                                     setFromDate(date);
                                     setValue(name, date?.toLocaleDateString("sv-se"), { shouldValidate: true });
+                                    onChangeFrom?.(date);
                                 }}
                                 dateFormat="yyyy-MM-dd"
                                 className={"form-control form-control-sm " + (disabledFrom ? "disabled " : "")}
@@ -146,6 +151,7 @@ export const DatePickerRange: React.FunctionComponent<IDatePickerRange> = ({
                                 onChange={date => {
                                     setToDate(date);
                                     setValue(nameSecondary, date?.toLocaleDateString("sv-se"), { shouldValidate: true });
+                                    onChangeTo?.(date);
                                 }}
                                 dateFormat="yyyy-MM-dd"
                                 className={"form-control form-control-sm " + (disabledTo ? "disabled " : "")}

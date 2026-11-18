@@ -1,4 +1,8 @@
 # Changelog
+
+## v2.0.52
+* DatePickerRange: Added optional `onChangeFrom` and `onChangeTo` callbacks to notify parent components when the respective date changes or is cleared. Each callback receives a Date object or null. Existing implementations remain unaffected.
+
 ## v2.0.51
 * Added alternative excel button 
 

@@ -15,7 +15,7 @@ const popperSettings = {
     popperProps: { strategy: "fixed" }
 };
 const requiredMark = (required) => (required ? "*" : "");
-export const DatePickerRange = ({ name, nameSecondary, label, labelSecondary, className = "", inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
+export const DatePickerRange = ({ name, nameSecondary, label, labelSecondary, className = "", inlineLabel, disabledFrom, disabledTo, requiredFrom, requiredTo, value, valueSecondary, min, minSecondary, onChangeFrom, onChangeTo, tooltipDescription, labelCol = 4, inputCol = 8 }) => {
     var _a, _b;
     const [fromDate, setFromDate] = React.useState(value);
     const [toDate, setToDate] = React.useState(valueSecondary);
@@ -53,8 +53,10 @@ export const DatePickerRange = ({ name, nameSecondary, label, labelSecondary, cl
     const resetValue = () => {
         setValue(name, undefined);
         setFromDate(undefined);
+        onChangeFrom === null || onChangeFrom === void 0 ? void 0 : onChangeFrom(null);
         setValue(nameSecondary, undefined);
         setToDate(undefined);
+        onChangeTo === null || onChangeTo === void 0 ? void 0 : onChangeTo(null);
     };
     const errorType = (_a = getNestedObjectValue(errors, name)) === null || _a === void 0 ? void 0 : _a.type;
     const errorTypeSecondary = (_b = getNestedObjectValue(errors, nameSecondary)) === null || _b === void 0 ? void 0 : _b.type;
@@ -83,6 +85,7 @@ export const DatePickerRange = ({ name, nameSecondary, label, labelSecondary, cl
                         React.createElement(DatePicker, Object.assign({}, popperSettings, { name: name, id: name, selected: fromDate, onChange: date => {
                                 setFromDate(date);
                                 setValue(name, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"), { shouldValidate: true });
+                                onChangeFrom === null || onChangeFrom === void 0 ? void 0 : onChangeFrom(date);
                             }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabledFrom ? "disabled " : ""), disabled: disabledFrom, minDate: min, maxDate: toDate === null ? undefined : toDate, autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: (e) => e.preventDefault(), isClearable: !disabledFrom })),
                         errorType === "required" && (React.createElement("span", { className: "text-danger d-block" }, "V\u00E4lj ett datum"))),
                     React.createElement("span", { className: "date-connector form-control-plaintext form-control-sm", "aria-hidden": "true" }, " \u2013"),
@@ -90,6 +93,7 @@ export const DatePickerRange = ({ name, nameSecondary, label, labelSecondary, cl
                         React.createElement(DatePicker, Object.assign({}, popperSettings, { name: nameSecondary, id: nameSecondary, selected: toDate, onChange: date => {
                                 setToDate(date);
                                 setValue(nameSecondary, date === null || date === void 0 ? void 0 : date.toLocaleDateString("sv-se"), { shouldValidate: true });
+                                onChangeTo === null || onChangeTo === void 0 ? void 0 : onChangeTo(date);
                             }, dateFormat: "yyyy-MM-dd", className: "form-control form-control-sm " + (disabledTo ? "disabled " : ""), disabled: disabledTo, minDate: minSecondary ? minSecondary : fromDate !== null && fromDate !== void 0 ? fromDate : new Date(), autoComplete: "off", locale: "sv-se", showYearDropdown: true, showMonthDropdown: true, onChangeRaw: (e) => e.preventDefault(), isClearable: !disabledTo })),
                         errorTypeSecondary === "required" && (React.createElement("span", { className: "text-danger d-block" }, "V\u00E4lj ett datum")))),
                 tooltipDescription && (React.createElement(InputIconTooltip, { description: tooltipDescription, icon: faQuestionCircle }))))));

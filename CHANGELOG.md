@@ -1,5 +1,8 @@
 # Changelog
 
+## v2.0.53 
+* CustomButton: Added tooltip placement
+
 ## v2.0.52
 * DatePickerRange: Added optional `onChangeFrom` and `onChangeTo` callbacks to notify parent components when the respective date changes or is cleared. Each callback receives a Date object or null. Existing implementations remain unaffected.
 

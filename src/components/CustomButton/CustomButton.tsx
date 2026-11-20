@@ -24,25 +24,28 @@ export interface ICustomButton {
     buttonType: ButtonType;
     buttonText: string;
     isLoading?: boolean;
+    tooltipPlacement?: "top" | "bottom" | "left" | "right";
 }
 
 export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLProps<HTMLButtonElement>> = (props) => {
 
-    const { buttonType, buttonText, isLoading, children, disabled, title = "", ...buttonProps } = props;
+    const { buttonType, buttonText, isLoading, children, disabled, title = "", tooltipPlacement = "right", ...buttonProps } = props;
     const tooltipRef = React.useRef<HTMLSpanElement>(null);
 
     React.useEffect(() => {
-        let tooltip: bootstrap.Tooltip | undefined;
+        const tooltipTitle = isLoading ? "Laddar..." : title;
 
-        if (tooltipRef.current) {
-            tooltip = bootstrap.Tooltip.getInstance(tooltipRef.current) || new bootstrap.Tooltip(tooltipRef.current);
-            tooltip.setContent({ '.tooltip-inner': isLoading ? 'Laddar...' : title || '' });
+        if (!tooltipRef.current || !tooltipTitle) {
+            return;
         }
 
+        const tooltip = new bootstrap.Tooltip(tooltipRef.current, {
+            title: tooltipTitle,
+            placement: tooltipPlacement
+        });
+
         return () => {
-            if (tooltip) {
-                tooltip.dispose();
-            }
+            tooltip.dispose();
         };
     }, [isLoading, title]);
 
@@ -75,8 +78,8 @@ export const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLPro
         <span
             ref={tooltipRef}
             className={`d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`}
-            data-bs-toggle="tooltip"
-            data-bs-placement="right"
+                data-bs-toggle="tooltip"
+            data-bs-placement={tooltipPlacement}
         >
             <button
                 {...buttonProps}

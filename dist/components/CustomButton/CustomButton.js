@@ -31,18 +31,19 @@ export var ButtonType;
     ButtonType["deleteAlt"] = "btn-outline-danger";
 })(ButtonType || (ButtonType = {}));
 export const CustomButton = (props) => {
-    const { buttonType, buttonText, isLoading, children, disabled, title = "" } = props, buttonProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title"]);
+    const { buttonType, buttonText, isLoading, children, disabled, title = "", tooltipPlacement = "right" } = props, buttonProps = __rest(props, ["buttonType", "buttonText", "isLoading", "children", "disabled", "title", "tooltipPlacement"]);
     const tooltipRef = React.useRef(null);
     React.useEffect(() => {
-        let tooltip;
-        if (tooltipRef.current) {
-            tooltip = bootstrap.Tooltip.getInstance(tooltipRef.current) || new bootstrap.Tooltip(tooltipRef.current);
-            tooltip.setContent({ '.tooltip-inner': isLoading ? 'Laddar...' : title || '' });
+        const tooltipTitle = isLoading ? "Laddar..." : title;
+        if (!tooltipRef.current || !tooltipTitle) {
+            return;
         }
+        const tooltip = new bootstrap.Tooltip(tooltipRef.current, {
+            title: tooltipTitle,
+            placement: tooltipPlacement
+        });
         return () => {
-            if (tooltip) {
-                tooltip.dispose();
-            }
+            tooltip.dispose();
         };
     }, [isLoading, title]);
     const iconMap = {
@@ -66,7 +67,7 @@ export const CustomButton = (props) => {
         [ButtonType.credit]: "Kreditera",
     };
     const resolvedButtonText = buttonText || defaultTextMap[buttonType] || "";
-    return (React.createElement("span", { ref: tooltipRef, className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, "data-bs-toggle": "tooltip", "data-bs-placement": "right" },
+    return (React.createElement("span", { ref: tooltipRef, className: `d-inline-block ${isLoading || disabled ? "cursor-not-allowed" : ""}`, "data-bs-toggle": "tooltip", "data-bs-placement": tooltipPlacement },
         React.createElement("button", Object.assign({}, buttonProps, { type: "button", className: `btn btn-sm ${buttonType}`, disabled: isLoading || disabled }),
             isLoading && React.createElement("span", { className: "spinner-border spinner-border-sm", role: "status", "aria-hidden": "true" }),
             renderIcon(buttonType),

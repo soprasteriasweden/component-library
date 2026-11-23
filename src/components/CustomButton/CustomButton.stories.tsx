@@ -21,3 +21,22 @@ export const Pdf = () => <CustomButton buttonText="Pdf" buttonType={ButtonType.p
 export const Success = () => <CustomButton buttonText="Success" buttonType={ButtonType.success} />;
 export const Warning = () => <CustomButton buttonText="Warning" buttonType={ButtonType.warning} />;
 export const GeneralLoading = () => <CustomButton buttonText="General loading" buttonType={ButtonType.warning} isLoading />;
+
+
+export const WithTooltip = () => (
+  <CustomButton
+    buttonText="Hover me"
+    buttonType={ButtonType.general}
+    title="This is a tooltip"
+    tooltipPlacement="bottom"
+  />
+);
+
+export const DisabledWithTooltip = () => (
+  <CustomButton
+    buttonText="Disabled"
+    buttonType={ButtonType.general}
+    title="This action is currently unavailable"
+    disabled
+  />
+);

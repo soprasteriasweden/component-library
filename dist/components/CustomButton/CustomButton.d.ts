@@ -19,5 +19,6 @@ export interface ICustomButton {
     buttonType: ButtonType;
     buttonText: string;
     isLoading?: boolean;
+    tooltipPlacement?: "top" | "bottom" | "left" | "right";
 }
 export declare const CustomButton: React.FunctionComponent<ICustomButton & React.HTMLProps<HTMLButtonElement>>;
